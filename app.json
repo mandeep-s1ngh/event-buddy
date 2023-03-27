@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "event-buddy",
+    "owner": "mandeep-s1ngh",
     "slug": "event-buddy",
     "version": "1.0.0",
     "orientation": "portrait",
