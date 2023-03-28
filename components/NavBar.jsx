@@ -1,12 +1,17 @@
-import { Header } from '@rneui/base';
+import { Header, Icon } from '@rneui/themed';
+import { Text, View } from 'react-native';
+import styles from '../styles';
 
 function NavBar() {
   return (
-    <Header
-      leftComponent={{ icon: 'home', color: '#fff' }}
-      centerComponent={{ text: 'Event Buddy', style: { color: '#fff' } }}
-      rightComponent={{ icon: 'menu', color: '#fff' }}
-    />
+    <View style={styles.NavBar_View}>
+      <Icon name="home" color="#fff" />
+      <Text style={styles.NavBar_Text}>Event Buddy</Text>
+      <View style={styles.NavBar_RightButtons}>
+        <Icon name="account-circle" color="#fff" />
+        <Icon name="menu" color="#fff" />
+      </View>
+    </View>
   );
 }
 
