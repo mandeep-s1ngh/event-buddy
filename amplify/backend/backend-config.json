@@ -1,20 +1,28 @@
 {
-  "api": {
-    "eventbuddy": {
-      "dependsOn": [],
-      "output": {
-        "authConfig": {
-          "additionalAuthenticationProviders": [],
-          "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
-            },
-            "authenticationType": "API_KEY"
-          }
-        }
-      },
+  "api": {},
+  "function": {
+    "patchUsersUsername": {
+      "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "AppSync"
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_patchUsersUsername_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "patchUsersUsername"
+        }
+      ]
+    },
+    "AMPLIFY_function_patchUsersUsername_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "patchUsersUsername"
+        }
+      ]
     }
   }
 }
