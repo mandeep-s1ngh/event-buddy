@@ -1,5 +1,0 @@
-{
-  "AppSyncApiName": "eventbuddy",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
-}

@@ -12,8 +12,11 @@
       "AmplifyAppId": "dtxwma3ila5yt"
     },
     "categories": {
-      "api": {
-        "eventbuddy": {}
+      "function": {
+        "patchUsersUsername": {
+          "deploymentBucketName": "amplify-eventbuddy-dev-155306-deployment",
+          "s3Key": "amplify-builds/patchUsersUsername-456734734e3069367349-build.zip"
+        }
       }
     }
   }
