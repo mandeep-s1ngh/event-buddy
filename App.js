@@ -1,14 +1,16 @@
 // import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { View, StatusBar } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ThemeProvider } from '@rneui/themed';
-import NavBar from './components/NavBar';
-import theme from './theme.js';
-import styles from './styles.js';
+import { useState } from "react";
+import { View, StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ThemeProvider } from "@rneui/themed";
+import NavBar from "./components/NavBar";
+import theme from "./theme.js";
+import styles from "./styles.js";
+import LocationRequest from "./components/LocationRequest";
 
 export default function App() {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
+  const [userLocation, setUserLocation] = useState("");
 
   return (
     <SafeAreaProvider>
@@ -16,7 +18,12 @@ export default function App() {
         <View style={styles.AppView}>
           <StatusBar />
           <NavBar />
-          {/* conditionally render other pages here*/}
+          {page === 2 ? (
+            <LocationRequest
+              setUserLocation={setUserLocation}
+              userLocation={userLocation}
+            />
+          ) : null}
         </View>
       </ThemeProvider>
     </SafeAreaProvider>

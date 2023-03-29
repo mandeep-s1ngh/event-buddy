@@ -46,6 +46,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 15,
   },
+
+  // ------------- LocationRequest styling ------------- //
+  Location_Request: {
+    alignItems: 'center',
+    paddingTop: 200
+    },
+    
+  // Location_TextInfo: {
+  //   paddingBottom: 50
+  //   },
+    
+  // Location_TextInput: {
+  //   height: 40,
+  //   backgroundColor: 'lightgrey', 
+  //   fontSize: 20,
+  //   },
+    
+  // Location_SubmitButton: {
+  //   color: 'orange'
+  //   }
 });
 
 export default styles;
