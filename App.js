@@ -29,6 +29,7 @@ export default function App() {
                 backgroundColor: "#c9c9c9",
               },
               headerTitleAlign: "center",
+              headerShown: false,
             }}
           >
             <Stack.Screen name="Home">
