@@ -1,31 +1,42 @@
 // import { StatusBar } from 'expo-status-bar';
-import { useState } from "react";
-import { View, StatusBar } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { ThemeProvider } from "@rneui/themed";
-import NavBar from "./components/NavBar";
-import LandingPage from "./components/LandingPage";
-import theme from "./theme.js";
-import styles from "./styles.js";
-import LocationRequest from "./components/LocationRequest";
+import { useState } from 'react';
+import { View, StatusBar } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider } from '@rneui/themed';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import NavBar from './components/NavBar';
+import LandingPage from './components/LandingPage';
+import theme from './theme.js';
+import styles from './styles.js';
+import LocationRequest from './components/LocationRequest';
 
 export default function App() {
-  const [page, setPage] = useState(2);
-  const [userLocation, setUserLocation] = useState("");
+  const [userLocation, setUserLocation] = useState('');
+  const Stack = createNativeStackNavigator();
 
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
-        <View style={styles.AppView}>
-          <StatusBar />
-          <NavBar />
-          {page === 2 ? (
-            <LocationRequest
-              setUserLocation={setUserLocation}
-              userLocation={userLocation}
+        <StatusBar />
+        <NavBar />
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#c9c9c9',
+              },
+              headerTitleAlign: 'center',
+            }}
+          >
+            <Stack.Screen name="Home" component={LandingPage} />
+            <Stack.Screen
+              name="Location"
+              component={LocationRequest}
+              initialParams={{ userLocation, setUserLocation }}
             />
-          ) : null}
-        </View>
+          </Stack.Navigator>
+        </NavigationContainer>
       </ThemeProvider>
     </SafeAreaProvider>
   );
