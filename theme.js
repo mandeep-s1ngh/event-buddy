@@ -1,10 +1,15 @@
-import { createTheme } from '@rneui/themed';
+import { createTheme } from "@rneui/themed";
 
 export default theme = createTheme({
   components: {
-    Icon: {
-      iconStyle: {
-        // color: 'red',
+    Button: {
+      titleStyle: {
+        fontWeight: "bold",
+        fontSize: 16,
+      },
+
+      buttonStyle: {
+        borderRadius: 20,
       },
     },
   },
