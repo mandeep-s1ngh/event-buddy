@@ -15,9 +15,7 @@ const LandingPage = (props) => {
     <View style={styles.LandingPageButtons}>
       <Button title={"Enter event name"} onPress={handleButtonClick} />
       <TextInput
-        // placeholder text
         placeholder="enter text here"
-        // reads the user input
         onChangeText={(text) => setUserInput(text)}
         value={userInput}
       />
@@ -25,16 +23,5 @@ const LandingPage = (props) => {
     </View>
   );
 };
-
-// function LandingPage() {
-//   return (
-//     <>
-//       <View style={styles.LandingPageButtons}>
-//         <Button title={"Enter event name"} />
-//         <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} />
-//       </View>
-//     </>
-//   );
-// }
 
 export default LandingPage;

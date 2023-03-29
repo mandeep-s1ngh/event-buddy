@@ -21,16 +21,16 @@ const styles = StyleSheet.create({
   },
   // ------------- NavBar styling ------------- //
   NavBar: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    // flex: 1,
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    height: 10,
   },
   NavBar_View: {
     backgroundColor: navBarBackground,
-    flex: 1,
+    flex: 0,
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
     gap: 10,
     padding: 15,
