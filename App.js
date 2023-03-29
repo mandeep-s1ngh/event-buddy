@@ -10,15 +10,19 @@ import styles from "./styles.js";
 import LocationRequest from "./components/LocationRequest";
 
 export default function App() {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   const [userLocation, setUserLocation] = useState("");
+  const [eventName, setEventName] = useState("");
 
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
+        <NavBar />
         <View style={styles.AppView}>
           <StatusBar />
-          <NavBar />
+          {page === 1 ? (
+            <LandingPage setEventName={setEventName} eventName={eventName} />
+          ) : null}
           {page === 2 ? (
             <LocationRequest
               setUserLocation={setUserLocation}

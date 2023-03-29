@@ -66,6 +66,12 @@ const styles = StyleSheet.create({
   // Location_SubmitButton: {
   //   color: 'orange'
   //   }
+
+  // ------------- Landing page styling ------------- //
+  LandingPageButtons: {
+    // marginTop: 250,
+    width: 250,
+  },
 });
 
 export default styles;
