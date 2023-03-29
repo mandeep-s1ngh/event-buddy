@@ -1,9 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import NavBar from './components/NavBar';
-import theme from './theme.js';
+// import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ThemeProvider } from "@rneui/themed";
+import NavBar from "./components/NavBar";
+import LandingPage from "./components/LandingPage";
+import theme from "./theme";
+import styles from "./styles";
 
 export default function App() {
   const [page, setPage] = useState(1);
@@ -11,15 +14,14 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
-        <View style={styles.container}>
-          <StatusBar style="auto" />
-          <NavBar />
+        <NavBar />
+        <View style={styles.AppView}>
+          {/* <StatusBar style="auto" /> */}
+          <LandingPage />
         </View>
       </ThemeProvider>
     </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({});
-
-// testing testing 123 - Farishta
+// const styles = StyleSheet.create({});
