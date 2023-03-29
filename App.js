@@ -13,6 +13,7 @@ import LocationRequest from './components/LocationRequest';
 
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
+  const [eventName, setEventName] = useState('');
   const Stack = createNativeStackNavigator();
 
   return (
@@ -28,10 +29,13 @@ export default function App() {
                 backgroundColor: '#c9c9c9',
               },
               headerTitleAlign: 'center',
-              headerShown: false,
             }}
           >
-            <Stack.Screen name="Home" component={LandingPage} />
+            <Stack.Screen name="Home">
+              {(props) => (
+                <LandingPage {...props} setEventName={setEventName} />
+              )}
+            </Stack.Screen>
             <Stack.Screen name="Location">
               {(props) => (
                 <LocationRequest
