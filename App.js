@@ -22,11 +22,13 @@ export default function App() {
         <NavBar />
         <NavigationContainer>
           <Stack.Navigator
+            initialRouteName="Home"
             screenOptions={{
               headerStyle: {
                 backgroundColor: '#c9c9c9',
               },
               headerTitleAlign: 'center',
+              headerShown: false,
             }}
           >
             <Stack.Screen name="Home" component={LandingPage} />
