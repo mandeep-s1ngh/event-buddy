@@ -22,7 +22,7 @@ export default function App() {
         <NavBar />
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Location"
             screenOptions={{
               headerStyle: {
                 backgroundColor: '#c9c9c9',
@@ -32,11 +32,14 @@ export default function App() {
             }}
           >
             <Stack.Screen name="Home" component={LandingPage} />
-            <Stack.Screen
-              name="Location"
-              component={LocationRequest}
-              initialParams={{ userLocation, setUserLocation }}
-            />
+            <Stack.Screen name="Location">
+              {(props) => (
+                <LocationRequest
+                  userLocation={userLocation}
+                  setUserLocation={setUserLocation}
+                />
+              )}
+            </Stack.Screen>
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>
