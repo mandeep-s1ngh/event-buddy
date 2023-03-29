@@ -1,19 +1,19 @@
 // import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from "react";
-import { View, StatusBar } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { ThemeProvider } from "@rneui/themed";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import NavBar from "./components/NavBar";
-import LandingPage from "./components/LandingPage";
-import theme from "./theme.js";
-import styles from "./styles.js";
-import LocationRequest from "./components/LocationRequest";
+import { useEffect, useState } from 'react';
+import { View, StatusBar } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider } from '@rneui/themed';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import NavBar from './components/NavBar';
+import LandingPage from './components/LandingPage';
+import theme from './theme.js';
+import styles from './styles.js';
+import LocationRequest from './components/LocationRequest';
 
 export default function App() {
-  const [userLocation, setUserLocation] = useState("");
-  const [eventName, setEventName] = useState("");
+  const [userLocation, setUserLocation] = useState('');
+  const [eventName, setEventName] = useState('');
   const Stack = createNativeStackNavigator();
 
   return (
@@ -26,10 +26,9 @@ export default function App() {
             initialRouteName="Home"
             screenOptions={{
               headerStyle: {
-                backgroundColor: "#c9c9c9",
+                backgroundColor: '#c9c9c9',
               },
-              headerTitleAlign: "center",
-              headerShown: false,
+              headerTitleAlign: 'center',
             }}
           >
             <Stack.Screen name="Home">
