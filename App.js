@@ -1,5 +1,5 @@
 // import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import { View, StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from '@rneui/themed';
@@ -22,7 +22,7 @@ export default function App() {
         <NavBar />
         <NavigationContainer>
           <Stack.Navigator 
-          initialRouteName='Location'
+          initialRouteName='Home'
             screenOptions={{
               headerStyle: {
                 backgroundColor: '#c9c9c9',
