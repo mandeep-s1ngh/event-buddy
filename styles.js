@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  // ------------- App styling ------------- //
   AppView: {
     backgroundColor: appBackground,
     flex: 1,
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, // make sure the content doesn't overlay the StatusBar, only needed if using expo-status-bar instead of react-native one
   },
+  // ------------- NavBar styling ------------- //
   NavBar: {
     flex: 1,
     flexDirection: 'row',
