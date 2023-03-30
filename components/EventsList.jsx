@@ -30,43 +30,44 @@ export default function EventsList() {
 
     console.log(eventsList);
 
-  return(
-    <ListItem>
-    <Text>
-        {eventsList.map((event) => {
-            return (
-                <EventCard
-                event_name={event.short_title}
-                event_place={event.venue.display_location}
-                />
-            )
-        })} 
-    </Text>
-    </ListItem>
-  )
+//-----Main : Thing works, but ListItem is deprecated, cannot get genres and imgs from seatgeek, playgrounds below------------
+
+//   return(
+//     <ListItem>
+//     <Text>
+//         {eventsList.map((event) => {
+//             return (
+//                 <EventCard
+//                 event_name={event.short_title}
+//                 event_place={event.venue.display_location}
+//                 />
+//             )
+//         })} 
+//     </Text>
+//     </ListItem>
+//   )
 
    //what we need:
-    //event short title
+    //event short title   
     //event short place
-    //const event_genre = eventsList[0].performers.genres.slice(0,3).map((genre) => genre.slug) ?
-    // event_img_URL_preview={event_img_URL_preview}   //event.performers.image ?
-    // event_users_signed={event_users_signed}      //from our 'users' DB
-    // messages_list_length={messages_list_length}  //from our 'messages' DB
+    //event genre(s)      const event_genre = eventsList[0].performers.genres.slice(0,3).map((genre) => genre.slug) ?
+    // event picture      event_img_URL_preview={event_img_URL_preview}   //event.performers.image ?
+    // users number       event_users_signed={event_users_signed}      //from our 'users' DB
+    // messages number    messages_list_length={messages_list_length}  //from our 'messages' DB
 
 
   //all events geekseat:
   // - list of locations - 
   //eventsList.map((event)=>event.venue.display_location);
 
-
   //single event geekseat:
   //- list of performers - 
   //eventsList.map((event)=>event.performers.map((performer)=>performer.name)); 
 
-    //const list = eventsList.map((event)=>event.performers.map((performer)=>performer.name)); 
-    //console.log('31,',list)
+  //const list = eventsList.map((event)=>event.performers.map((performer)=>performer.name)); 
+  //console.log('list',list)
 
-//-------------------ONE------------------------------
+//-------------------1: Thing works, but ListItem is deprecated, cannot get genres and imgs------------
 // return (
 //     <ListItem>
 //         <Text>
@@ -92,30 +93,33 @@ export default function EventsList() {
 //     </ListItem>
 //     )
 
-//-------------------------------TWO------------------------------
+//----------------2: FlatList is swag, yet not working ------------------------------
+// ---------warning - asks for unique key prop for each child
+//--------------- different extraction of properties!!! -----------------
+
 // const list = eventsList.map((event)=>event.venue.display_location);
 // return(
 // <SafeAreaProvider>
 //     <FlatList 
 //         data={list} 
 //         renderItem={(place)=> {
-//             console.log(list);
-//             console.log(place);     //WTF
-//             console.log(place.index);
-//             console.log(place.item);
-//             <Text>Hello</Text>
+//                     console.log(list);
+//                     console.log(place);     //WTF
+//                     console.log(place.index);
+//                     console.log(place.item);
+//             <Text keyExtractor={(place) => place.index}>Hello</Text>
 //             // <EventCard 
 //             // //event_place={place.item} 
 //             // />
 //             }
 //         } 
-//         keyExtractor={(place) => place.index} 
+//         // keyExtractor={(place) => place.index} everybody has it here, mine causes problems
 //     />
 //     </SafeAreaProvider>
 // )
 
-//----------------------THREE---------------------------
-//const list = eventsList.map((event)=>event.venue.display_location);
+//--------3: Not working, warning about unique keys ---------------------------
+// const list = eventsList.map((event)=>event.venue.display_location);
 // return (
 // <View>
 //       <ScrollView>
@@ -131,28 +135,32 @@ export default function EventsList() {
 //       </ScrollView>
 // </View>
 //  )
-//-------------------------LAST ONE--------------------
-// return(
-//     <SafeAreaProvider>
-//         <FlatList 
-//             data={list} 
-//             keyExtractor={(place) => place.index} 
-//             renderItem={(place)=> {
-//                 console.log('list:', list);
-//                 console.log('place:',place);     //WTF
-//                 // console.log(place.index);
-//                 console.log(place.item);
+//----------LAST ONE--------------------
 
-//                 <Text>Hello {place.item = [ place.item ]}</Text>
-//                 // <EventCard 
-//                 // //event_place={place.item} 
-//                 // />
-//                 }
-//             } 
+//const list = eventsList.map((event)=>event.venue.display_location);
+//const list = eventsList.map((event)=>event.performers.map((performer)=>performer.name)); 
+
+return(
+    <SafeAreaProvider>
+        <FlatList 
+            data={list} 
+            keyExtractor={(place) => place.index} 
+            renderItem={(place)=> {
+                console.log('list:', list);
+                console.log('place:',place);     //WTF
+                // console.log(place.index);
+                console.log(place.item);
+
+                <Text>Hello {place.item = [ place.item ]}</Text>
+                // <EventCard 
+                // //event_place={place.item} 
+                // />
+                }
+            } 
             
-//         />
-//         </SafeAreaProvider>
-//     )
+        />
+        </SafeAreaProvider>
+    )
 
 
 }
