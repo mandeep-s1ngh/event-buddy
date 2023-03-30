@@ -6,6 +6,12 @@ import { Icon, ThemeProvider } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Amplify, API, Auth } from 'aws-amplify';
+import {
+  useAuthenticator,
+  withAuthenticator,
+} from '@aws-amplify/ui-react-native';
+import awsconfig from './src/aws-exports';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import theme from './theme.js';
@@ -15,12 +21,17 @@ import LocationRequest from './components/LocationRequest';
 import NavBar from './components/NavBar';
 import LandingPage from './components/LandingPage';
 
+Amplify.configure(awsconfig);
+Auth.configure(awsconfig);
+
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
   const [eventName, setEventName] = useState('');
 
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
+
+  const { signOut } = useAuthenticator();
 
   return (
     <SafeAreaProvider>
