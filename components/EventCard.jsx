@@ -43,15 +43,11 @@ function EventCard ({        //EventPreviewCard ?
                 Drop in!
             </Button>
         </Text>
-           {/* <Card.Image
+           <Card.Image
             source={{
-            uri:
-            // {event_img_URL_preview ||
-                'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg'
-            // }
-            
-            }}/> */}
-            <Button title="VIEW MORE" />
+            uri: event_img_URL_preview 
+            }}/>
+            {/* <Button title="VIEW MORE" /> */} 
         </Card>
     );
 }

@@ -15,9 +15,12 @@ export default function EventsList() {
     const [eventsList, setEventsList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    const getEvents = 
-                        //getSeatGeekEvents;
-                        getTicketMasterEvents;
+
+    const [source, setSource] = useState ({"api": getTicketMasterEvents})
+    const getEvents = source.api ;                           
+                      
+    // var seatgeek_list = [];      //refactor with States as well if we want to switch between APIs
+    // var ticketmaster_list = [];
 
     useEffect(() => {
         setIsLoading(true);
@@ -34,39 +37,37 @@ export default function EventsList() {
         });  
     }, []) 
 
-    console.log (eventsList);
-
-    //what we need:
+    //what we need fo preview card:
     
     //event short title   
     //event short place
-    //event genre(s)      const event_genre = eventsList[0].performers.genres.slice(0,3).map((genre) => genre.slug) ?
-    // event picture      event_img_URL_preview={event_img_URL_preview}   //event.performers.image ?
-    // users number       event_users_signed={event_users_signed}      //from our 'users' DB
-    // messages number    messages_list_length={messages_list_length}  //from our 'messages' DB
+    //event genre(s)      
+    // event picture      
+    // users number       //from our 'users' DB
+    // messages number    //from our 'messages' DB
+
     
-    
-    // const seatgeek_list = eventsList.map((event)=> {
+    // seatgeek_list = eventsList.map((event)=> {
     //     return {
     //         "title": event.short_title, 
     //         "location": event.venue.display_location, 
-    //         "genre": "hello", 
-    //         "img": "https://cdn-icons-png.flaticon.com/512/3844/3844724.png",
+    //         "genre": "seatgeek" || eventsList[0].performers.genres.slice(0,3).map((genre) => genre.slug), //?
+    //         "img": "https://cdn-icons-png.flaticon.com/512/3844/3844724.png", //fix img display
     //         "key": event.id}
     // });
 
     const ticketmaster_list = eventsList.map((event)=> { 
     return {
-        "title": event.short_title, 
-        "location": event.venue.display_location, 
-        "genre": "hello", 
-        "img": "https://cdn-icons-png.flaticon.com/512/3844/3844724.png",
+        "title": event.name, 
+        "location": event._embedded.venues[0].city.name 
+        //+ ', ' + event._embedded.venues[0].state.name //how to concatenate?
+        ,
+        "genre": event.classifications[0].genre.name, //get rid of 'Undefined'
+        "img": event.images[0].url, //placeholder if undefined?
         "key": event.id}
     });
 
-    const events_list = 
-        //seatgeek_list;
-        ticketmaster_list;
+    const events_list = ticketmaster_list;
 
     const renderItem = ({ item }) => (
     <View >
@@ -74,6 +75,7 @@ export default function EventsList() {
       event_title={item.title} 
       event_place={item.location}
       event_genre={item.genre}
+      event_img_URL_preview={item.img}
        />
     </View>
   );

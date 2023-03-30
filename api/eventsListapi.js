@@ -9,8 +9,7 @@ export const getSeatGeekEvents = () => {
     return response.data.events;
   })
 }
-      //
-      //event.venue.display_location
+      //https://api.seatgeek.com/2/events?client_id=MzI2NjYwMjJ8MTY3OTkxMzYyNS43MzI4MTAz&type=concert
 
 const ticketMasterApi = axios.create({baseURL: "https://app.ticketmaster.com/discovery/v2"});
 
@@ -21,13 +20,8 @@ export const getTicketMasterEvents = () => {
     return response.data._embedded.events;
   })
   }
-
-      // const eventName = response.data._embedded.events[0].name;
-
-      // const eventCity = response.data._embedded.events[0]._embedded.venues[0].city.name
-      // const eventCountry = response.data._embedded.events[0]._embedded.venues[0].country.name
-   
-      // const eventImage = response.data._embedded.events[0].images[4].url
+      // https://app.ticketmaster.com/discovery/v2/events.json?keyword=festival&classificationName=Music&apikey=bP1t2OXaOv6BYhMGG65SCwVnoAGRd3zJ
+ 
 
 
 
