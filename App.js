@@ -2,19 +2,25 @@
 import { useEffect, useState } from 'react';
 import { View, StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ThemeProvider } from '@rneui/themed';
+import { Icon, ThemeProvider } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import NavBar from './components/NavBar';
-import LandingPage from './components/LandingPage';
+
+import Ionicons from '@expo/vector-icons/Ionicons';
 import theme from './theme.js';
 import styles from './styles.js';
+
 import LocationRequest from './components/LocationRequest';
+import NavBar from './components/NavBar';
+import LandingPage from './components/LandingPage';
 
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
   const [eventName, setEventName] = useState('');
+
   const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
 
   return (
     <SafeAreaProvider>
@@ -22,7 +28,7 @@ export default function App() {
         <StatusBar />
         <NavBar />
         <NavigationContainer>
-          <Stack.Navigator
+          <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
               headerStyle: {
@@ -31,20 +37,34 @@ export default function App() {
               headerTitleAlign: 'center',
             }}
           >
-            <Stack.Screen name="Home">
+            <Tab.Screen
+              name="Home"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="home" color={color} size={size} />
+                ),
+              }}
+            >
               {(props) => (
                 <LandingPage {...props} setEventName={setEventName} />
               )}
-            </Stack.Screen>
-            <Stack.Screen name="Location">
+            </Tab.Screen>
+            <Tab.Screen
+              name="Location"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="location-pin" color={color} size={size} />
+                ),
+              }}
+            >
               {(props) => (
                 <LocationRequest
                   userLocation={userLocation}
                   setUserLocation={setUserLocation}
                 />
               )}
-            </Stack.Screen>
-          </Stack.Navigator>
+            </Tab.Screen>
+          </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
     </SafeAreaProvider>
