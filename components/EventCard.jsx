@@ -20,6 +20,12 @@ function EventCard ({        //EventPreviewCard ?
     
         <Card style={styles.container}>  
             <Card.Title>{event_title || 'Bestival'} | {event_place || 'Glasgow, TN'}</Card.Title>
+            <Card.Image
+            style={styles.image}
+            resizeMode="cover"
+            source={{
+            uri: event_img_URL_preview 
+            }}/>
         <Text> 
             event genre:&nbsp;
             {event_genre || ['polka', 'yodeling']} 
@@ -42,12 +48,7 @@ function EventCard ({        //EventPreviewCard ?
                 Drop in!
             </Button>
         </Text>
-           <Card.Image
-            style={styles.image}
-            resizeMode="cover"
-            source={{
-            uri: event_img_URL_preview 
-            }}/>
+           
             {/* <Button title="VIEW MORE" /> */} 
         </Card>
         

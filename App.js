@@ -1,75 +1,124 @@
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ThemeProvider } from '@rneui/themed';
+import { Icon, ThemeProvider } from "@rneui/themed";
 import theme from './theme.js';
 //import styles from './styles.js'
 //import { makeStyles } from '@rneui/themed';
 
 import {StatusBar } from "react-native";
+// import { View, Text, StatusBar } from "react-native";
 //import { StatusBar } from "expo-status-bar";
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import NavBar from "./components/NavBar";
+import Menu from "./components/Menu";
 import LandingPage from "./components/LandingPage";
 import LocationRequest from "./components/LocationRequest";
+import BuddyList from "./components/BuddyCard.jsx";
 import EventsList from "./components/EventsList";
 
 import {useState } from "react";
-
-// // import { StatusBar } from 'expo-status-bar';
-// import { useEffect, useState } from 'react';
-// import { View, StatusBar } from 'react-native';
-// import { SafeAreaProvider } from 'react-native-safe-area-context';
-// import { ThemeProvider } from '@rneui/themed';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import NavBar from './components/NavBar';
-// import LandingPage from './components/LandingPage';
-// import theme from './theme.js';
-// import styles from './styles.js';
-// import LocationRequest from './components/LocationRequest';
+// import { useEffect, useState } from "react";
 
 export default function App() {
-  const [userLocation, setUserLocation] = useState('');
-  //const [eventName, setEventName] = useState('');
+  const [userLocation, setUserLocation] = useState("");
+  const [eventName, setEventName] = useState("");
+  const [menuShown, setMenuShown] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState("Theo");
+
   const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
 
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
-        <StatusBar />
-        <NavBar />
         <NavigationContainer>
+{/* 
+          // <Stack.Navigator
+          //   initialRouteName=
+          //   //'Home'
+          //   //'Location'
+          //   'EventsList' */}
 
-          <Stack.Navigator
-            initialRouteName=
-            //'Home'
-            //'Location'
-            'EventsList'
+          {/* //   </Stack.Screen>
 
+          //   <Stack.Screen name="EventsList" component={EventsList} />
+          // </Stack.Navigator> */}
+
+          <StatusBar />
+          <NavBar menuShown={menuShown} setMenuShown={setMenuShown} />
+
+          {menuShown ? (
+            <Menu loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
+          ) : null}
+
+          <Tab.Navigator
+            initialRouteName="Home"
             screenOptions={{
               headerStyle: {
-                backgroundColor: '#c9c9c9',
+                backgroundColor: "#c9c9c9",
               },
-              headerTitleAlign: 'center',
+              headerTitleAlign: "center",
+              headerShown: false,
             }}
           >
-            <Stack.Screen name="Home">
+
+            <Tab.Screen
+              name="Home"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="home" color={color} size={size} />
+                ),
+              }}
+            >
               {(props) => (
                 <LandingPage {...props} setEventName={setEventName} />
               )}
-            </Stack.Screen>
-            <Stack.Screen name="Location">
+            </Tab.Screen>
+
+            <Tab.Screen
+              name="Location"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="location-pin" color={color} size={size} />
+                ),
+              }}
+            >
               {(props) => (
                 <LocationRequest
                   userLocation={userLocation}
                   setUserLocation={setUserLocation}
                 />
               )}
-            </Stack.Screen>
-            <Stack.Screen name="EventsList" component={EventsList} />
-          </Stack.Navigator>
+            </Tab.Screen>
+
+            <Tab.Screen
+              name="Buddy List"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="face" color={color} size={size} />
+                ),
+              }}
+            >
+              {() => <BuddyList />}
+            </Tab.Screen>
+
+            <Tab.Screen
+              name="EventsList"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="festival" color={color} size={size} />
+                ),
+              }}
+            >
+              {() => <EventsList />}
+            </Tab.Screen>
+
+          </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
     </SafeAreaProvider>

@@ -19,7 +19,7 @@ const LandingPage = (props) => {
         onChangeText={(text) => setUserInput(text)}
         value={userInput}
       />
-      <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} />
+      <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} onPress={() => {console.log('aye')}}/>
     </View>
   );
 };
