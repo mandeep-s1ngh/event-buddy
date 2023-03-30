@@ -1,9 +1,9 @@
 //import * as React from "react"; // is it in use?
-//import { Badge } from "react-native-elements";
+//import { Badge, View } from "react-native-elements";
 //import styles from "../styles";
 
-import { Text } from "react-native";
-import { Card, Badge, Button, Icon } from '@rneui/themed';
+import { Text, StyleSheet } from "react-native";
+import { Card, Badge, Button, Icon, View } from '@rneui/themed';
 
 function EventCard ({        //EventPreviewCard ? 
                              // /api.seatgeek.com/2/events - sorted by date ascending by default?
@@ -16,11 +16,10 @@ function EventCard ({        //EventPreviewCard ?
     //event_type,              //event.type - always 'concert' - not needed ?
     })  {
    
-    return ( //refacture to RN
-        <Card>  
-        <Text style = {{}}>
-            {event_title || 'Bestival'} | {event_place || 'Glasgow, TN'}
-        </Text>
+    return (
+    
+        <Card style={styles.container}>  
+            <Card.Title>{event_title || 'Bestival'} | {event_place || 'Glasgow, TN'}</Card.Title>
         <Text> 
             event genre:&nbsp;
             {event_genre || ['polka', 'yodeling']} 
@@ -31,7 +30,7 @@ function EventCard ({        //EventPreviewCard ?
             buddies going:&nbsp;
             <Badge value={event_users_signed || "37"}>
             </Badge>
-            <Button>
+            <Button style={styles.button}>
                 Join!
             </Button>
         </Text>
@@ -44,12 +43,40 @@ function EventCard ({        //EventPreviewCard ?
             </Button>
         </Text>
            <Card.Image
+            style={styles.image}
+            resizeMode="cover"
             source={{
             uri: event_img_URL_preview 
             }}/>
             {/* <Button title="VIEW MORE" /> */} 
         </Card>
+        
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+        marginRight: 10,
+    },
+    // fonts: {
+    //   marginBottom: 8,
+    // },
+    
+    button: {
+       // flexDirection: 'row',
+        borderRadius: 1,
+        marginLeft: 10,
+      },
+    image: {
+      width: 70,
+      height: 70,
+      marginRight: 10,
+    },
+   
+    });
 
 export default EventCard;

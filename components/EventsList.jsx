@@ -70,7 +70,7 @@ export default function EventsList() {
     const events_list = ticketmaster_list;
 
     const renderItem = ({ item }) => (
-    <View >
+    <View>
       <EventCard
       event_title={item.title} 
       event_place={item.location}
