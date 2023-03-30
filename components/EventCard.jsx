@@ -7,7 +7,7 @@ import { Card, Badge, Button, Icon } from '@rneui/themed';
 
 function EventCard ({        //EventPreviewCard ? 
                              // /api.seatgeek.com/2/events - sorted by date ascending by default?
-    event_name,              //event.performers.name
+    event_title,              //event.performers.name
     event_place,             //event.venue.city || event.venue.display_location
     event_genre,             //event.performers.genres.slice(0,3).map((genre) => genre.slug)
     event_img_URL_preview,   //event.performers.image
@@ -16,10 +16,10 @@ function EventCard ({        //EventPreviewCard ?
     //event_type,              //event.type - always 'concert' - not needed ?
     })  {
    
-    return (
+    return ( //refacture to RN
         <Card>  
         <Text style = {{}}>
-            {event_name || 'Bestival'} | {event_place || 'Glasgow, TN'}
+            {event_title || 'Bestival'} | {event_place || 'Glasgow, TN'}
         </Text>
         <Text> 
             event genre:&nbsp;
