@@ -1,19 +1,38 @@
-// import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { View, StatusBar } from 'react-native';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from '@rneui/themed';
+import theme from './theme.js';
+//import styles from './styles.js'
+//import { makeStyles } from '@rneui/themed';
+
+import {StatusBar } from "react-native";
+//import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import NavBar from './components/NavBar';
-import LandingPage from './components/LandingPage';
-import theme from './theme.js';
-import styles from './styles.js';
-import LocationRequest from './components/LocationRequest';
+
+import NavBar from "./components/NavBar";
+import LandingPage from "./components/LandingPage";
+import LocationRequest from "./components/LocationRequest";
+import EventsList from "./components/EventsList";
+
+import {useState } from "react";
+
+// // import { StatusBar } from 'expo-status-bar';
+// import { useEffect, useState } from 'react';
+// import { View, StatusBar } from 'react-native';
+// import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { ThemeProvider } from '@rneui/themed';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import NavBar from './components/NavBar';
+// import LandingPage from './components/LandingPage';
+// import theme from './theme.js';
+// import styles from './styles.js';
+// import LocationRequest from './components/LocationRequest';
 
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
-  const [eventName, setEventName] = useState('');
+  //const [eventName, setEventName] = useState('');
   const Stack = createNativeStackNavigator();
 
   return (
@@ -22,8 +41,13 @@ export default function App() {
         <StatusBar />
         <NavBar />
         <NavigationContainer>
+
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName=
+            //'Home'
+            //'Location'
+            'EventsList'
+
             screenOptions={{
               headerStyle: {
                 backgroundColor: '#c9c9c9',
@@ -44,6 +68,7 @@ export default function App() {
                 />
               )}
             </Stack.Screen>
+            <Stack.Screen name="EventsList" component={EventsList} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>
