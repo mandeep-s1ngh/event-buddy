@@ -1,24 +1,27 @@
 // import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from "react";
-import { View, StatusBar } from "react-native";
+import { View, Text, StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Icon, ThemeProvider } from "@rneui/themed";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
 import theme from "./theme.js";
 import styles from "./styles.js";
 
 import LocationRequest from "./components/LocationRequest";
 import NavBar from "./components/NavBar";
+import Menu from "./components/Menu";
 import LandingPage from "./components/LandingPage";
-import BuddyList from "./components/BuddyList.jsx";
+import BuddyList from "./components/BuddyCard.jsx";
 
 export default function App() {
   const [userLocation, setUserLocation] = useState("");
   const [eventName, setEventName] = useState("");
+  const [menuShown, setMenuShown] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState("Theo");
 
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -26,9 +29,12 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
-        <StatusBar />
-        <NavBar />
         <NavigationContainer>
+          <StatusBar />
+          <NavBar menuShown={menuShown} setMenuShown={setMenuShown} />
+          {menuShown ? (
+            <Menu loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
+          ) : null}
           <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
