@@ -1,9 +1,9 @@
-import * as React from "react"; // is it in use?
+//import * as React from "react"; // is it in use?
+//import { Badge } from "react-native-elements";
+//import styles from "../styles";
 
 import { Text } from "react-native";
 import { Card, Badge, Button, Icon } from '@rneui/themed';
-//import { Badge } from "react-native-elements";
-import styles from "../styles";
 
 function EventCard ({        //EventPreviewCard ? 
                              // /api.seatgeek.com/2/events - sorted by date ascending by default?
@@ -16,7 +16,6 @@ function EventCard ({        //EventPreviewCard ?
     //event_type,              //event.type - always 'concert' - not needed ?
     })  {
    
-
     return (
         <Card>  
         <Text style = {{}}>

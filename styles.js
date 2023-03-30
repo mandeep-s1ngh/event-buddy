@@ -72,6 +72,34 @@ const styles = StyleSheet.create({
     // marginTop: 250,
     width: 250,
   },
+
+  // ------------- T4&5 EventPreviewCardsList styling ------------- //
+
+  EventCard: {  // seems like not doing anything
+    fontSize: 20,
+    //fontWeight: "bold",
+    marginLeft: "50%",
+    marginRight: "auto",
+  },
+
+  // largeHeaderText:{  // playground!
+  //   fontSize: 16
+  // },
+  // mediumHeaderText: {
+  //   fontSize: 14,
+  //   color:'blue'
+  // },
+  // largeButtonText: {
+  //   fontSize: theme.FONT_SIZE_LARGE,
+  //   fontWeight: theme.FONT_WEIGHT_HEAVY
+  // },
+  // largeHeaderText:{
+  //   fontSize: theme.FONT_SIZE_LARGE
+  // },
+  // mediumHeaderText: {
+  //   fontSize: theme.FONT_SIZE_MEDIUM,
+  //   color:theme.PRIMARY_COLOR
+  // }
 });
 
 export default styles;
