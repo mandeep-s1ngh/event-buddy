@@ -1,26 +1,27 @@
 // import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { View, Text, StatusBar } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Icon, ThemeProvider } from '@rneui/themed';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useEffect, useState } from "react";
+import { View, Text, StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Icon, ThemeProvider } from "@rneui/themed";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import theme from './theme.js';
-import styles from './styles.js';
+import theme from "./theme.js";
+import styles from "./styles.js";
 
-import LocationRequest from './components/LocationRequest';
-import NavBar from './components/NavBar';
-import Menu from './components/Menu';
-import LandingPage from './components/LandingPage';
+import LocationRequest from "./components/LocationRequest";
+import NavBar from "./components/NavBar";
+import Menu from "./components/Menu";
+import LandingPage from "./components/LandingPage";
+import BuddyList from "./components/BuddyCard.jsx";
 
 export default function App() {
-  const [userLocation, setUserLocation] = useState('');
-  const [eventName, setEventName] = useState('');
+  const [userLocation, setUserLocation] = useState("");
+  const [eventName, setEventName] = useState("");
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState('Theo');
+  const [user, setUser] = useState("Theo");
 
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -38,9 +39,9 @@ export default function App() {
             initialRouteName="Home"
             screenOptions={{
               headerStyle: {
-                backgroundColor: '#c9c9c9',
+                backgroundColor: "#c9c9c9",
               },
-              headerTitleAlign: 'center',
+              headerTitleAlign: "center",
               headerShown: false,
             }}
           >
@@ -70,6 +71,16 @@ export default function App() {
                   setUserLocation={setUserLocation}
                 />
               )}
+            </Tab.Screen>
+            <Tab.Screen
+              name="Buddy List"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="face" color={color} size={size} />
+                ),
+              }}
+            >
+              {() => <BuddyList />}
             </Tab.Screen>
           </Tab.Navigator>
         </NavigationContainer>

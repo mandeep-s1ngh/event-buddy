@@ -93,6 +93,8 @@ const styles = StyleSheet.create({
     // marginTop: 250,
     width: 250,
   },
+
+  // ------------- Buddy card styling ------------- //
 });
 
 export default styles;
