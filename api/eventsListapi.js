@@ -9,3 +9,4 @@ export const getEvents = () => {
     return response.data.events;
   })
 }
+console.log(getEvents())

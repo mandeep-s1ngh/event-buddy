@@ -54,12 +54,12 @@ export default function EventsList() {
     // messages_list_length={messages_list_length}  //from our 'messages' DB
 
 
-  //all events:
+  //all events geekseat:
   // - list of locations - 
   //eventsList.map((event)=>event.venue.display_location);
 
 
-  //single event:
+  //single event geekseat:
   //- list of performers - 
   //eventsList.map((event)=>event.performers.map((performer)=>performer.name)); 
 
