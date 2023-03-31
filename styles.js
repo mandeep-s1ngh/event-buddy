@@ -74,25 +74,84 @@ const styles = StyleSheet.create({
     paddingTop: 200,
   },
 
-  // Location_TextInfo: {
-  //   paddingBottom: 50
-  //   },
+  Location_TextInfo: {
+    paddingBottom: 50
+    },
 
-  // Location_TextInput: {
-  //   height: 40,
-  //   backgroundColor: 'lightgrey',
-  //   fontSize: 20,
-  //   },
+  Location_TextInput: {
+    height: 40,
+    backgroundColor: 'lightgrey',
+    fontSize: 20,
+    },
 
-  // Location_SubmitButton: {
-  //   color: 'orange'
-  //   }
+  Location_SubmitButton: {
+    color: 'orange'
+    },
 
   // ------------- Landing page styling ------------- //
   LandingPageButtons: {
     // marginTop: 250,
     width: 250,
   },
+
+
+  // ------------- Profile page styling ------------- //
+  Profile_Page: {
+    // textAlign: 'center',
+    // color: '#000000',
+    // alignSelf: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    textAlignVertical: 'center',
+    alignContent: 'center',
+    flex: 0.8,
+    justifyContent: 'space-between',
+    // backgroundColor: '#b4d1db',
+    padding: 20,
+    margin: 10,
+  },
+  Profile_Page_Image: {
+    // resizeMode: 'cover',
+    height: 150,
+    width: 300,
+    borderRadius: 8,
+  },
+  Profile_Page_username: {
+    fontWeight: 'bold',
+    fontSize: 20 
+  },
+  Profile_Tag_TextInput: {
+    height: 30,
+    backgroundColor: '#f7e0c9',
+    fontSize: 12,
+    paddingLeft: 10,
+    width: 300,
+    },
+  Profile_Buttons: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 9,
+    // paddingHorizontal: 25,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#ec8e2f',
+    width: 130
+  },
+  Profile_Buttons_Text: {
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+  },
+  Profile_Buttons_Click: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+  }
+  
+
+  
+
 });
 
 export default styles;
