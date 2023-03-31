@@ -1,22 +1,22 @@
-import { Button } from '@rneui/themed';
-import { useState } from 'react';
-import { TextInput, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import styles from '../styles.js';
+import { Button } from "@rneui/themed";
+import { useState } from "react";
+import { TextInput, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import styles from "../styles.js";
 
 const LandingPage = (props) => {
   const { eventName, setEventName } = props;
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState("");
 
   const navigation = useNavigation();
 
   const searchEventByName = () => {
     setEventName(userInput);
-    navigation.navigate('Events');
+    navigation.navigate("Events");
   };
 
   function navigateToLocation() {
-    navigation.navigate('Location');
+    navigation.navigate("Location");
   }
 
   return (
@@ -29,12 +29,12 @@ const LandingPage = (props) => {
       />
       <Button
         style={styles.LandingPage_Button}
-        title={'Search for events'}
+        title={"Search for events"}
         onPress={searchEventByName}
       />
       <Button
         style={styles.LandingPage_Button}
-        title={'...or see events near you'}
+        title={"...or see events near you"}
         buttonStyle={{ marginTop: 50 }}
         onPress={navigateToLocation}
       />
