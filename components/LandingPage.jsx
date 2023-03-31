@@ -8,34 +8,35 @@ const LandingPage = (props) => {
   const { eventName, setEventName } = props;
   const [userInput, setUserInput] = useState('');
 
+  const navigation = useNavigation();
+
   const searchEventByName = () => {
     setEventName(userInput);
     navigation.navigate('EventsList');
   };
 
-  const navigation = useNavigation();
-  function navigateToEventsList() {
-    navigation.navigate('EventsList');
+  function navigateToLocation() {
+    navigation.navigate('Location');
   }
 
   return (
     <View style={styles.LandingPage_View}>
       <TextInput
         style={styles.LandingPage_Input}
-        placeholder="Enter event name..."
+        placeholder="Enter event name, music genre etc...."
         onChangeText={(text) => setUserInput(text)}
         value={userInput}
       />
       <Button
         style={styles.LandingPage_Button}
-        title={'Submit'}
+        title={'Search for events'}
         onPress={searchEventByName}
       />
       <Button
         style={styles.LandingPage_Button}
-        title={'See events near you'}
+        title={'...or see events near you'}
         buttonStyle={{ marginTop: 50 }}
-        onPress={navigateToEventsList}
+        onPress={navigateToLocation}
       />
     </View>
   );

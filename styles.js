@@ -92,40 +92,22 @@ const styles = StyleSheet.create({
   },
 
   // ------------- Landing page styling ------------- //
-  LandingPageButtons: {
+  LandingPage_View: {
+    marginTop: '25%',
+    marginLeft: '19%',
+    width: 250,
+    flex: 1,
+    alignContent: 'center',
+  },
+  LandingPage_Button: {
     // marginTop: 250,
     width: 250,
+    flex: 1,
+    alignContent: 'center',
   },
-
-  // ------------- T4&5 EventPreviewCardsList styling ------------- //
-
-  EventCard: {
-    // seems like not doing anything
-    fontSize: 20,
-    //fontWeight: "bold",
-    marginLeft: '50%',
-    marginRight: 'auto',
+  LandingPage_Input: {
+    textAlign: 'center',
   },
-
-  // largeHeaderText:{  // playground!
-  //   fontSize: 16
-  // },
-  // mediumHeaderText: {
-  //   fontSize: 14,
-  //   color:'blue'
-  // },
-  // largeButtonText: {
-  //   fontSize: theme.FONT_SIZE_LARGE,
-  //   fontWeight: theme.FONT_WEIGHT_HEAVY
-  // },
-  // largeHeaderText:{
-  //   fontSize: theme.FONT_SIZE_LARGE
-  // },
-  // mediumHeaderText: {
-  //   fontSize: theme.FONT_SIZE_MEDIUM,
-  //   color:theme.PRIMARY_COLOR
-  // }
-
   // ------------- Profile page styling ------------- //
   Profile_Page: {
     // textAlign: 'center',
