@@ -152,6 +152,8 @@ const styles = StyleSheet.create({
 
   
 
+
+  // ------------- Buddy card styling ------------- //
 });
 
 export default styles;
