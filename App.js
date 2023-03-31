@@ -1,34 +1,37 @@
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Icon, ThemeProvider } from '@rneui/themed';
-import theme from './theme.js';
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Icon, ThemeProvider } from "@rneui/themed";
+import theme from "./theme.js";
 //import styles from './styles.js'
 //import { makeStyles } from '@rneui/themed';
 
-import { StatusBar } from 'react-native';
+import { StatusBar } from "react-native";
 // import { View, Text, StatusBar } from "react-native";
 //import { StatusBar } from "expo-status-bar";
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import NavBar from './components/NavBar';
-import Menu from './components/Menu';
-import LandingPage from './components/LandingPage';
-import LocationRequest from './components/LocationRequest';
-import BuddyList from './components/BuddyCard.jsx';
-import EventsList from './components/EventsList';
+import NavBar from "./components/NavBar";
+import Menu from "./components/Menu";
+import LandingPage from "./components/LandingPage";
+import LocationRequest from "./components/LocationRequest";
+import BuddyList from "./components/BuddyCard.jsx";
+import EventsList from "./components/EventsList";
+import MessageBoard from "./components/MessageBoard.jsx";
 
-import { useState } from 'react';
+import { useState } from "react";
 // import { useEffect, useState } from "react";
-import Profile from './components/Profile';
+import Profile from "./components/Profile";
+
+//import { StatusBar } from "expo-status-bar";
 
 export default function App() {
-  const [userLocation, setUserLocation] = useState('');
-  const [eventName, setEventName] = useState('');
+  const [userLocation, setUserLocation] = useState("");
+  const [eventName, setEventName] = useState("");
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState('Theo');
+  const [user, setUser] = useState("Theo");
 
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -48,9 +51,9 @@ export default function App() {
             initialRouteName="Home"
             screenOptions={{
               headerStyle: {
-                backgroundColor: '#c9c9c9',
+                backgroundColor: "#c9c9c9",
               },
-              headerTitleAlign: 'center',
+              headerTitleAlign: "center",
               headerShown: false,
             }}
           >
@@ -108,7 +111,19 @@ export default function App() {
             >
               {() => <EventsList />}
             </Tab.Screen>
-            {/* <Tab.Screen
+
+            <Tab.Screen
+              name="MessageBoard"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="email" color={color} size={size} />
+                ),
+              }}
+            >
+              {() => <MessageBoard />}
+            </Tab.Screen>
+
+            <Tab.Screen
               name="Profile"
               options={{
                 tabBarIcon: ({ color, size }) => (
@@ -117,7 +132,7 @@ export default function App() {
               }}
             >
               {(props) => <Profile {...props} setEventName={setEventName} />}
-            </Tab.Screen> */}
+            </Tab.Screen>
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
