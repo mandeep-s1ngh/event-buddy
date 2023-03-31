@@ -49,13 +49,13 @@ function EventCard({  //sorted by date ascending by default?
         <View style={styles.buddiesContainer}>
           <Text style={styles.genreLabel}>Buddies going: {event_buddies}</Text>
           {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
-          <Button style={styles.button}>Join the event</Button>
+          <Button style={styles.button} color="#ec8e2f">Join the event</Button>
         </View>      
 
         <View style={styles.buddiesContainer}>
           <Text style={styles.genreLabel}>Talks about event: {event_talks}</Text>
           {/* <Text style={styles.genre}>{event_talks}</Text>  */}
-          <Button style={styles.button}>Message board</Button>
+          <Button style={styles.button} color="#ec8e2f">Message board</Button>
         </View>
       </View>
     </View> 
