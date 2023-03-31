@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
 })
 
---------------2-----------------
+// --------------2-----------------
 //   mainContainer: {
 //     flexDirection: 'column',
 //     flex: 1,
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
 //     marginRight: 5,
 //   },
 
------------1----------
+// -----------1----------
 // //     container: {
 // //       flex: 1,
 // //     flexDirection: 'row',

@@ -22,6 +22,7 @@ import EventsList from "./components/EventsList";
 
 import {useState } from "react";
 // import { useEffect, useState } from "react";
+import Profile from './components/Profile'
 
 export default function App() {
   const [userLocation, setUserLocation] = useState("");
@@ -37,18 +38,6 @@ export default function App() {
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-{/* 
-          // <Stack.Navigator
-          //   initialRouteName=
-          //   //'Home'
-          //   //'Location'
-          //   'EventsList' */}
-
-          {/* //   </Stack.Screen>
-
-          //   <Stack.Screen name="EventsList" component={EventsList} />
-          // </Stack.Navigator> */}
-
           <StatusBar />
           <NavBar menuShown={menuShown} setMenuShown={setMenuShown} />
 
@@ -115,9 +104,20 @@ export default function App() {
                 ),
               }}
             >
-              {() => <EventsList />}
+            {() => <EventsList />}
             </Tab.Screen>
-
+            <Tab.Screen
+              name="Profile"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="account-circle" color={color} size={size} />
+                ),
+              }}
+              >
+              {(props) => (
+                <Profile {...props} setEventName={setEventName} />
+              )}
+            </Tab.Screen>
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
