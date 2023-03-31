@@ -1,10 +1,10 @@
 // //import * as React from "react"; // is it in use?
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import { Avatar, Card, Badge, Button, Icon } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 // import MessageBoard from "./MessageBoard";
 
-//import { Card, Badge, Button, Icon, View } from '@rneui/themed';
+// import { Card, Badge, Button, Icon, View } from '@rneui/themed';
 // //import { Badge, View } from "react-native-elements";
 // //import styles from "../styles";
 
@@ -20,7 +20,7 @@ function EventCard({
 }) {
   const navigation = useNavigation();
 
-  const goToNewPage = () => {
+  const goToMessageBoard = () => {
     navigation.navigate("MessageBoard");
   };
 
@@ -64,10 +64,13 @@ function EventCard({
               <Text style={styles.genreLabel}>
                 Talks about event: {event_talks}
               </Text>
-              {/* <Text style={styles.genre}>{event_talks}</Text>  */}
-              <Button style={styles.button} onPress={goToNewPage}>
+              {/* <Text style={styles.genre}>{event_talks}</Text> */}
+              <Button style={styles.button} onPress={goToMessageBoard}>
                 Message board
               </Button>
+              {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
+            <Text >Message board</Text>
+          </TouchableHighlight> */}
             </View>
           </View>
         </View>
@@ -116,6 +119,16 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
   },
+  // button: {
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   paddingVertical: 9,
+  //   // paddingHorizontal: 25,
+  //   borderRadius: 3,
+  //   elevation: 3,
+  //   backgroundColor: '#ec8e2f',
+  //   width: 130
+  // },
 });
 
 // --------------2-----------------

@@ -1,4 +1,4 @@
-import { Card, Button } from "@rneui/themed";
+import { Card } from "@rneui/themed";
 import { View } from "react-native";
 
 const MessageBoard = () => {

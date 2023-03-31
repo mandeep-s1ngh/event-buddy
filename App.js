@@ -24,6 +24,8 @@ import { useState } from "react";
 // import { useEffect, useState } from "react";
 import Profile from "./components/Profile";
 
+//import { StatusBar } from "expo-status-bar";
+
 export default function App() {
   const [userLocation, setUserLocation] = useState("");
   const [eventName, setEventName] = useState("");
@@ -64,11 +66,15 @@ export default function App() {
               }}
             >
               {(props) => (
-                <LandingPage {...props} setEventName={setEventName} />
+                <LandingPage
+                  {...props}
+                  setEventName={setEventName}
+                  setUserLocation={setUserLocation}
+                />
               )}
             </Tab.Screen>
 
-            <Tab.Screen
+            {/* <Tab.Screen
               name="Location"
               options={{
                 tabBarIcon: ({ color, size }) => (
@@ -82,10 +88,10 @@ export default function App() {
                   setUserLocation={setUserLocation}
                 />
               )}
-            </Tab.Screen>
+            </Tab.Screen> */}
 
             <Tab.Screen
-              name="Buddy List"
+              name="Buddies"
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="face" color={color} size={size} />
@@ -96,10 +102,10 @@ export default function App() {
             </Tab.Screen>
 
             <Tab.Screen
-              name="EventsList"
+              name="Events"
               options={{
                 tabBarIcon: ({ color, size }) => (
-                  <Icon name="festival" color={color} size={size} />
+                  <Icon name="event" color={color} size={size} />
                 ),
               }}
             >
