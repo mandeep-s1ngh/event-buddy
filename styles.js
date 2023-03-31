@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     color: navBarText,
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: '33%',
+    marginLeft: '45%', //use 33% when there is a left navbar icon e.g. home
     marginRight: 'auto',
   },
   NavBar_RightButtons: {
@@ -53,13 +53,16 @@ const styles = StyleSheet.create({
     right: 0,
     top: '7.3%',
     zIndex: 5,
-    height: '22%',
+    height: '11%',
     width: '50%',
     flex: 0,
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
     paddingTop: 15,
+  },
+  Menu_ViewLoggedIn: {
+    height: '26%',
   },
   Menu_Text: {
     color: navBarText,
@@ -75,18 +78,18 @@ const styles = StyleSheet.create({
   },
 
   Location_TextInfo: {
-    paddingBottom: 50
-    },
+    paddingBottom: 50,
+  },
 
   Location_TextInput: {
     height: 40,
     backgroundColor: 'lightgrey',
     fontSize: 20,
-    },
+  },
 
   Location_SubmitButton: {
-    color: 'orange'
-    },
+    color: 'orange',
+  },
 
   // ------------- Landing page styling ------------- //
   LandingPageButtons: {
@@ -96,11 +99,12 @@ const styles = StyleSheet.create({
 
   // ------------- T4&5 EventPreviewCardsList styling ------------- //
 
-  EventCard: {  // seems like not doing anything
+  EventCard: {
+    // seems like not doing anything
     fontSize: 20,
     //fontWeight: "bold",
-    marginLeft: "50%",
-    marginRight: "auto",
+    marginLeft: '50%',
+    marginRight: 'auto',
   },
 
   // largeHeaderText:{  // playground!
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
   },
   Profile_Page_username: {
     fontWeight: 'bold',
-    fontSize: 20 
+    fontSize: 20,
   },
   Profile_Tag_TextInput: {
     height: 30,
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingLeft: 10,
     width: 300,
-    },
+  },
   Profile_Buttons: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -162,7 +166,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     elevation: 3,
     backgroundColor: '#ec8e2f',
-    width: 130
+    width: 130,
   },
   Profile_Buttons_Text: {
     fontSize: 13,
@@ -174,11 +178,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-  }
-  
-
-  
-
+  },
 
   // ------------- Buddy card styling ------------- //
 });

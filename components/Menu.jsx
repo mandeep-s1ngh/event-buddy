@@ -7,9 +7,16 @@ function Menu({ loggedIn, setLoggedIn, user }) {
   function toggleLoggedIn() {
     setLoggedIn(!loggedIn);
   }
+  console.log(loggedIn);
 
   return (
-    <View style={styles.Menu_View}>
+    <View
+      style={
+        loggedIn
+          ? [styles.Menu_View, styles.Menu_ViewLoggedIn]
+          : styles.Menu_View
+      }
+    >
       {loggedIn ? (
         <Text style={styles.Menu_Text}>{loggedInText}</Text>
       ) : (
@@ -17,14 +24,15 @@ function Menu({ loggedIn, setLoggedIn, user }) {
           <Text style={styles.Menu_Text}>Log in</Text>
         </TouchableHighlight>
       )}
+      {loggedIn ? <Text style={styles.Menu_Text}>My events</Text> : null}
+      {loggedIn ? <Text style={styles.Menu_Text}>My messages</Text> : null}
+      {loggedIn ? <Text style={styles.Menu_Text}>My profile</Text> : null}
+      <Text style={styles.Menu_Text}>Settings</Text>
       {loggedIn ? (
         <TouchableHighlight onPress={toggleLoggedIn}>
           <Text style={styles.Menu_Text}>Log out</Text>
         </TouchableHighlight>
       ) : null}
-      <Text style={styles.Menu_Text}>My events</Text>
-      <Text style={styles.Menu_Text}>Events near me</Text>
-      <Text style={styles.Menu_Text}>My profile</Text>
     </View>
   );
 }

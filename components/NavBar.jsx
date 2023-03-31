@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Button, Text, TouchableHighlight, View } from 'react-native';
 import styles from '../styles';
 
-function NavBar({ menuShown, setMenuShown }) {  
+function NavBar({ menuShown, setMenuShown }) {
   const navigation = useNavigation();
   function toggleMenu() {
     setMenuShown(!menuShown);
@@ -18,18 +18,24 @@ function NavBar({ menuShown, setMenuShown }) {
     navigation.navigate('Home');
   }
 
+  function navigateToProfile() {
+    navigation.navigate('Profile');
+  }
+
   return (
     <View style={styles.NavBar_View}>
-      <TouchableHighlight onPress={navigateToHome}>
+      {/* <TouchableHighlight onPress={navigateToHome}>
         <Icon name="home" color="#fff" />
-      </TouchableHighlight>
+      </TouchableHighlight> */}
 
       <TouchableHighlight onPress={navigateToHome}>
         <Text style={styles.NavBar_Text}>Event Buddy</Text>
       </TouchableHighlight>
 
       <View style={styles.NavBar_RightButtons}>
-        <Icon name="account-circle" color="#fff" />
+        <TouchableHighlight onPress={navigateToProfile}>
+          <Icon name="account-circle" color="#fff" />
+        </TouchableHighlight>
         <TouchableHighlight onPress={toggleMenu}>
           <Icon name="menu" color="#fff" />
         </TouchableHighlight>
