@@ -14,6 +14,7 @@ import LocationRequest from './components/LocationRequest';
 import NavBar from './components/NavBar';
 import Menu from './components/Menu';
 import LandingPage from './components/LandingPage';
+import Profile from './components/Profile'
 
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
@@ -69,6 +70,19 @@ export default function App() {
                   userLocation={userLocation}
                   setUserLocation={setUserLocation}
                 />
+              )}
+            </Tab.Screen>
+
+            <Tab.Screen
+              name="Profile"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="account-circle" color={color} size={size} />
+                ),
+              }}
+            >
+              {(props) => (
+                <Profile {...props} setEventName={setEventName} />
               )}
             </Tab.Screen>
           </Tab.Navigator>
