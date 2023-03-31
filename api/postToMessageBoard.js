@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-export const postToMessageBoard = (eventName, username, timestamp, message) => {
+export const postToMessageBoard = (
+  eventName,
+  username,
+  timestamp,
+  message,
+  replyTo
+) => {
   const createMessageBoardTableIfNotExistsURL =
     'https://v3hwpflxic45xlpl43t5ldeywa0tacgr.lambda-url.us-east-1.on.aws/';
   const postToMessageBoardURL =
@@ -21,6 +27,7 @@ export const postToMessageBoard = (eventName, username, timestamp, message) => {
         username,
         timestamp,
         message,
+        replyTo,
       });
     })
     .then((response) => {
