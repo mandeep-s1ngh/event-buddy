@@ -1,6 +1,7 @@
 import { Button } from "@rneui/themed";
 import { useState } from "react";
 import { TextInput, View } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import styles from "../styles.js";
 
 const LandingPage = (props) => {
@@ -10,6 +11,11 @@ const LandingPage = (props) => {
   const handleButtonClick = () => {
     setEventName(userInput);
   };
+  
+  const navigation = useNavigation();
+  function navigateToEventsList() {
+    navigation.navigate('EventsList');
+  }
 
   return (
     <View style={styles.LandingPageButtons}>
@@ -19,7 +25,7 @@ const LandingPage = (props) => {
         onChangeText={(text) => setUserInput(text)}
         value={userInput}
       />
-      <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} onPress={() => {console.log('aye')}}/>
+      <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} onPress={navigateToEventsList}/>
     </View>
   );
 };
