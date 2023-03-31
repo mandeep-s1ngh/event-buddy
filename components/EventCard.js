@@ -17,12 +17,12 @@ function EventCard({  //sorted by date ascending by default?
       }) {
 
   const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
-  let joined = 0;
-
+  const [joined, setJoined] = useState(0);
+  
   const updateBuddies = () =>{
     setBuddiesDisplay((number) => {
-    if (!joined) {joined = 1; return number + 1;}
-      else {joined = 0; return number - 1;}})
+    if (!joined) {setJoined(1); return number + 1;}
+      else {setJoined(0); return number - 1;}})
   }     
 
   return (
@@ -30,8 +30,8 @@ function EventCard({  //sorted by date ascending by default?
   <View style={styles.mainContainer}>
 
      <View style={styles.titleContainer}>
-      <Text style={styles.title}>{event_title}</Text>
-      <Text style={styles.location}>{event_place}</Text>
+      <Text style={styles.title}>&nbsp;{event_date}  |  {event_place}</Text>
+      <Text style={styles.location}>{event_title}</Text>
      </View>
 
     <View style={styles.bodyContainer}>
@@ -44,22 +44,22 @@ function EventCard({  //sorted by date ascending by default?
       </View>
 
       <View style={styles.detailsContainer}>
-        <View style={styles.buddiesContainer}>
+        {/* <View style={styles.buddiesContainer}>
           <Text style={styles.genreLabel}>Starts:&nbsp;</Text>
           <Text style={styles.genre}>{event_date}</Text> 
-        </View>
+        </View> */}
 
-        <View style={styles.buddiesContainer}>
-          <Text style={styles.genreLabel}>Event genre: </Text>
-          <Text style={styles.genre}>{event_genre}</Text> 
+        <View style={styles.textContainer}>
+          <Text style={styles.genreLabel}>Event genre: {event_genre}</Text>
+          {/* <Text style={styles.genre}>{event_genre}</Text>  */}
         </View>
     <View>
 
     </View>
         <View style={styles.buddiesContainer}>
-          <Text style={styles.genreLabel}>Buddies going: {event_buddies}</Text>
+          <Text style={styles.genreLabel}>Buddies going: {buddiesDisplay}</Text>
           {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
-          <Button style={styles.button} onPress={updateBuddies}>Join the event</Button>
+          <Button style={styles.button} onPress={updateBuddies} title={(!joined) ? 'Join the event' : 'Not in the mood'}></Button>
         </View>      
 
         <View style={styles.buddiesContainer}>
@@ -82,188 +82,144 @@ function EventCard({  //sorted by date ascending by default?
 // position: "absolute" ?
 
 const styles = StyleSheet.create({
+
   mainContainer: {
     flexDirection: 'column',
-    paddingHorizontal: 10,
+    flex: 1,
+    borderRadius: 10,
+    //fontWeight: 'bold',
+    //margin: 10,
+    // overflow: 'hidden',
+    // flexDirection: 'row-reverse',
+    // justifyContent: 'space-between',
+    // paddingHorizontal: 10,
     //paddingVertical: 15,
-    justifyContent: 'space-between',
   },
   titleContainer: {
+     //flexDirection: 'row',
+    //   justifyContent: 'space-between',
+    //   alignItems: 'center',
+    //   marginBottom: 5,
+    fontWeight: 'bold',
+    // fontSize: 14,
+    //marginBottom: 1,
+    },
+   bodyContainer: {
     //flexDirection: 'row',
+    flex: 1,
+    //margin: 10,
+    borderRadius: 10,
+    // overflow: 'hidden',
+    // flexDirection: 'row-reverse',
+    // justifyContent: 'space-between',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 5,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 14,
+     //   fontSize: 16,
   },
   location: {
-    fontSize: 16,
-    color: 'gray',
-  },
-  bodyContainer: {
-    flexDirection: 'row',
+    fontSize: 14,
+    //   color: 'gray',
+   // fontWeight: 'bold',
+    marginBottom: 10,
   },
   imageContainer: {
-    width: '30%',
-    marginRight: 10,
+    width: '100%',
+   // flexDirection: 'row',
+    //justifyContent: 'space-between',
+   // marginRight: 10,
+    
   },
   image: {
     width: '100%',
-    height: undefined,
-    aspectRatio: 1,
+    height: 150,
+    marginBottom: 5,
+     //   height: undefined,
+    //   aspectRatio: 1,
+    
   },
-  detailsContainer: {
-    flex: 1,
-    flexDirection: 'column',
+  textContainer: {
+    flexDirection: 'row',
+    marginTop: 5,
+    alignItems: 'left',
+   // width:  'auto',
+    //flex: 1,
+   // padding: 10,
+    //flexDirection: 'row-reverse',
     justifyContent: 'space-between',
+    alignItems: 'left',
+  },
+    buddiesContainer: {
+    flexDirection: 'row',
+    alignItems: 'left',
+    fontWeight: 'bold',
+    margin: 5,
+    justifyContent: 'space-between',
+    // fontSize: 14,
+   },
+
+  location: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  genreContainer: {
+    flexDirection: 'row',
+    alignItems: 'left',
+    marginBottom: 5,
+  },
+  genreLabel: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  genre: {
+    fontSize: 16,
+  },
+  attendeesContainer: {
+    flexDirection: 'row-reverse',
+    alignItems: 'left',
+    marginBottom: 5,
+  },
+  attendeesLabel: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+
+  // detailsContainer: {
+  //   flex: 1,
+  //   flexDirection: 'column',
+  //   justifyContent: 'space-between',
+  // },
+  detailsButton: {
+    margin: 10,
+   // flexDirection: 'row-reverse',
+   //alignItems: 'left',
   },
   button: {
-    //alignItems: 'center',
+    marginLeft: 10,
+    alignItems: 'center',
     justifyContent: 'center',
-    // paddingVertical: 9,
-    // // paddingHorizontal: 25,
+    //flexDirection: 'row-reverse',
+    //alignItems: 'left',
+   // paddingVertical: 9,
+    // paddingHorizontal: 25,
     // borderRadius: 3,
     // elevation: 3,
     // backgroundColor: '#ec8e2f',
     // width: 130
   },
-})
+  messagesContainer: {
+    flexDirection: 'row',
+    alignItems: 'left',
+    marginBottom: 5,
+  },
+  messagesLabel: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
 
-// --------------2-----------------
-//   mainContainer: {
-//     flexDirection: 'column',
-//     flex: 1,
-//     //margin: 10,
-//     borderRadius: 10,
-//     // overflow: 'hidden',
-//     // flexDirection: 'row-reverse',
-//     // justifyContent: 'space-between',
-//   },
-//   titleContainer: {
-//    // fontSize: 14,
-//     fontWeight: 'bold',
-//     //marginBottom: 1,
-//   },
-//   bodyContainer: {
-//     flexDirection: 'row',
-//     flex: 1,
-//     //margin: 10,
-//     borderRadius: 10,
-//     // overflow: 'hidden',
-//     // flexDirection: 'row-reverse',
-//     // justifyContent: 'space-between',
-//     justifyContent: 'space-between',
-//   },
-//   title: {
-//     fontSize: 14,
-//    // fontWeight: 'bold',
-//     //marginBottom: 10,
-//   },
-//   location: {
-//     fontSize: 14,
-//    // fontWeight: 'bold',
-//     marginBottom: 10,
-//   },
-//   imageContainer: {
-//     //width: '40%',
-//    // flexDirection: 'row',
-//     justifyContent: 'space-between',
-    
-//   },
-//   image: {
-//     width: '30%',
-//     height: 150,
-    
-//   },
-//   textContainer: {
-//     width:  'auto',
-//     flex: 1,
-//     padding: 10,
-//     flexDirection: 'row-reverse',
-//     justifyContent: 'space-between',
-//     alignItems: 'left',
-//   },
-//     buddiesContainer: {
-//     // fontSize: 14,
-//      fontWeight: 'bold',
-//      //marginBottom: 1,
-    
-//    },
-
-//   location: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     marginBottom: 10,
-//   },
-//   genreContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'left',
-//     marginBottom: 5,
-//   },
-//   genreLabel: {
-//     fontWeight: 'bold',
-//     marginRight: 5,
-//   },
-//   genre: {
-//     fontSize: 16,
-//   },
-//   attendeesContainer: {
-//     flexDirection: 'row-reverse',
-//     alignItems: 'left',
-//     marginBottom: 5,
-//   },
-//   attendeesLabel: {
-//     fontWeight: 'bold',
-//     marginRight: 5,
-//   },
-
-//   detailsButton: {
-//     margin: 10,
-//    // flexDirection: 'row-reverse',
-//    //alignItems: 'left',
-//   },
-
-//   button: {
-//     marginLeft: 10,
-//     flexDirection: 'row-reverse',
-//     alignItems: 'left',
-//   },
-//   messagesContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'left',
-//     marginBottom: 5,
-//   },
-//   messagesLabel: {
-//     fontWeight: 'bold',
-//     marginRight: 5,
-//   },
-
-// -----------1----------
-// //     container: {
-// //       flex: 1,
-// //     flexDirection: 'row',
-// //         justifyContent: 'center',
-// //         alignItems: 'stretch',
-// //         marginRight: 10,
-// //     },
-// //     // fonts: {
-// //     //   marginBottom: 8,
-// //     // },
-
-// //     button: {
-// //        // flexDirection: 'row',
-// //         borderRadius: 1,
-// //         marginLeft: 10,
-// //       },
-// //     image: {
-// //       width: 70,
-// //       height: 70,
-// //       marginRight: 10,
-// //     },
-
-// //     });
+});
 
 
 

@@ -1,35 +1,34 @@
-
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Icon, ThemeProvider } from "@rneui/themed";
+import { Icon, ThemeProvider } from '@rneui/themed';
 import theme from './theme.js';
 //import styles from './styles.js'
 //import { makeStyles } from '@rneui/themed';
 
-import {StatusBar } from "react-native";
+import { StatusBar } from 'react-native';
 // import { View, Text, StatusBar } from "react-native";
 //import { StatusBar } from "expo-status-bar";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import NavBar from "./components/NavBar";
-import Menu from "./components/Menu";
-import LandingPage from "./components/LandingPage";
-import LocationRequest from "./components/LocationRequest";
-import BuddyList from "./components/BuddyCard.jsx";
-import EventsList from "./components/EventsList";
+import NavBar from './components/NavBar';
+import Menu from './components/Menu';
+import LandingPage from './components/LandingPage';
+import LocationRequest from './components/LocationRequest';
+import BuddyList from './components/BuddyCard.jsx';
+import EventsList from './components/EventsList';
 
-import {useState } from "react";
+import { useState } from 'react';
 // import { useEffect, useState } from "react";
-import Profile from './components/Profile'
+import Profile from './components/Profile';
 
 export default function App() {
-  const [userLocation, setUserLocation] = useState("");
-  const [eventName, setEventName] = useState("");
+  const [userLocation, setUserLocation] = useState('');
+  const [eventName, setEventName] = useState('');
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState("Theo");
+  const [user, setUser] = useState('Theo');
 
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -49,13 +48,12 @@ export default function App() {
             initialRouteName="Home"
             screenOptions={{
               headerStyle: {
-                backgroundColor: "#c9c9c9",
+                backgroundColor: '#c9c9c9',
               },
-              headerTitleAlign: "center",
+              headerTitleAlign: 'center',
               headerShown: false,
             }}
           >
-
             <Tab.Screen
               name="Home"
               options={{
@@ -65,11 +63,15 @@ export default function App() {
               }}
             >
               {(props) => (
-                <LandingPage {...props} setEventName={setEventName} />
+                <LandingPage
+                  {...props}
+                  setEventName={setEventName}
+                  setUserLocation={setUserLocation}
+                />
               )}
             </Tab.Screen>
 
-            <Tab.Screen
+            {/* <Tab.Screen
               name="Location"
               options={{
                 tabBarIcon: ({ color, size }) => (
@@ -83,10 +85,10 @@ export default function App() {
                   setUserLocation={setUserLocation}
                 />
               )}
-            </Tab.Screen>
+            </Tab.Screen> */}
 
             <Tab.Screen
-              name="Buddy List"
+              name="Buddies"
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="face" color={color} size={size} />
@@ -97,27 +99,25 @@ export default function App() {
             </Tab.Screen>
 
             <Tab.Screen
-              name="EventsList"
+              name="Events"
               options={{
                 tabBarIcon: ({ color, size }) => (
-                  <Icon name="festival" color={color} size={size} />
+                  <Icon name="event" color={color} size={size} />
                 ),
               }}
             >
-            {() => <EventsList />}
+              {() => <EventsList />}
             </Tab.Screen>
-            <Tab.Screen
+            {/* <Tab.Screen
               name="Profile"
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="account-circle" color={color} size={size} />
                 ),
               }}
-              >
-              {(props) => (
-                <Profile {...props} setEventName={setEventName} />
-              )}
-            </Tab.Screen>
+            >
+              {(props) => <Profile {...props} setEventName={setEventName} />}
+            </Tab.Screen> */}
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
