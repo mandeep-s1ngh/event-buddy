@@ -1,20 +1,27 @@
-// import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from "react";
-import { View, Text, StatusBar } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon, ThemeProvider } from "@rneui/themed";
-import { NavigationContainer } from "@react-navigation/native";
+import theme from './theme.js';
+//import styles from './styles.js'
+//import { makeStyles } from '@rneui/themed';
+
+import {StatusBar } from "react-native";
+// import { View, Text, StatusBar } from "react-native";
+//import { StatusBar } from "expo-status-bar";
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import theme from "./theme.js";
-import styles from "./styles.js";
-
-import LocationRequest from "./components/LocationRequest";
 import NavBar from "./components/NavBar";
 import Menu from "./components/Menu";
 import LandingPage from "./components/LandingPage";
+import LocationRequest from "./components/LocationRequest";
 import BuddyList from "./components/BuddyCard.jsx";
+import EventsList from "./components/EventsList";
+
+import {useState } from "react";
+// import { useEffect, useState } from "react";
 import Profile from './components/Profile'
 
 export default function App() {
@@ -33,9 +40,11 @@ export default function App() {
         <NavigationContainer>
           <StatusBar />
           <NavBar menuShown={menuShown} setMenuShown={setMenuShown} />
+
           {menuShown ? (
             <Menu loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
           ) : null}
+
           <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
@@ -46,6 +55,7 @@ export default function App() {
               headerShown: false,
             }}
           >
+
             <Tab.Screen
               name="Home"
               options={{
@@ -58,6 +68,7 @@ export default function App() {
                 <LandingPage {...props} setEventName={setEventName} />
               )}
             </Tab.Screen>
+
             <Tab.Screen
               name="Location"
               options={{
@@ -73,6 +84,7 @@ export default function App() {
                 />
               )}
             </Tab.Screen>
+
             <Tab.Screen
               name="Buddy List"
               options={{
@@ -85,13 +97,23 @@ export default function App() {
             </Tab.Screen>
 
             <Tab.Screen
+              name="EventsList"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="festival" color={color} size={size} />
+                ),
+              }}
+            >
+            {() => <EventsList />}
+            </Tab.Screen>
+            <Tab.Screen
               name="Profile"
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="account-circle" color={color} size={size} />
                 ),
               }}
-            >
+              >
               {(props) => (
                 <Profile {...props} setEventName={setEventName} />
               )}
