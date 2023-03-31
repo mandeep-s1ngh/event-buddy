@@ -84,6 +84,7 @@ export default function EventsList() {
         event_talks={item.talks}
          />		 
       </View>
+      
     );
 
     return( 

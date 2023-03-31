@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 14,
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     flexDirection: 'row-reverse',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'left',
   },
   location: {
