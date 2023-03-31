@@ -1,33 +1,44 @@
-import { Button } from "@rneui/themed";
-import { useState } from "react";
-import { TextInput, View } from "react-native";
+import { Button } from '@rneui/themed';
+import { useState } from 'react';
+import { TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import styles from "../styles.js";
+import styles from '../styles.js';
 
 const LandingPage = (props) => {
   const { eventName, setEventName } = props;
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState('');
 
-  const handleButtonClick = () => {
-    setEventName(userInput);
-  };
-  
   const navigation = useNavigation();
 
-  function navigateToEventsList() {
+  const searchEventByName = () => {
+    setEventName(userInput);
     navigation.navigate('EventsList');
+  };
+
+  function navigateToLocation() {
+    navigation.navigate('Location');
   }
 
   return (
-    <View style={styles.LandingPageButtons} >
-      <Button title={"Enter event name"} onPress={handleButtonClick} color="#ec8e2f"/>
+    <View style={styles.LandingPage_View}>
       <TextInput
-        placeholder="enter text here"
+        style={styles.LandingPage_Input}
+        placeholder="Enter event name, music genre etc...."
         onChangeText={(text) => setUserInput(text)}
         value={userInput}
-        style={styles.Profile_Tag_TextInput}
+        // style={styles.Profile_Tag_TextInput}
       />
-      <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} onPress={navigateToEventsList} color="#ec8e2f"/>
+      <Button
+        style={styles.LandingPage_Button}
+        title={'Search for events'}
+        onPress={searchEventByName}
+      />
+      <Button
+        style={styles.LandingPage_Button}
+        title={'...or see events near you'}
+        buttonStyle={{ marginTop: 50 }}
+        onPress={navigateToLocation}
+      />
     </View>
   );
 };
