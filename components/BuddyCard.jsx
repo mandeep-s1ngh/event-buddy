@@ -9,6 +9,7 @@ const BuddyCard = () => {
         <Button
           title={"Connect"}
           containerStyle={{ position: "absolute", top: 10, right: 10 }}
+          color="#ec8e2f"
         />
         <Avatar
           size="large"
@@ -23,6 +24,7 @@ const BuddyCard = () => {
         <Button
           title={"Connect"}
           containerStyle={{ position: "absolute", top: 10, right: 10 }}
+          color="#ec8e2f"
         />
         <Avatar
           size="large"
@@ -36,6 +38,7 @@ const BuddyCard = () => {
         <Button
           title={"Connect"}
           containerStyle={{ position: "absolute", top: 10, right: 10 }}
+          color="#ec8e2f"
         />
         <Avatar
           size="large"
