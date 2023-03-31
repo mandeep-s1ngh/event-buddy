@@ -71,22 +71,42 @@ const styles = StyleSheet.create({
   // ------------- LocationRequest styling ------------- //
   Location_Request: {
     alignItems: 'center',
-    paddingTop: 200,
+    paddingTop: 100,
   },
 
   Location_TextInfo: {
-    paddingBottom: 50
+    paddingBottom: 15
     },
 
   Location_TextInput: {
-    height: 40,
-    backgroundColor: 'lightgrey',
-    fontSize: 20,
-    },
+    height: 30,
+    backgroundColor: '#f7e0c9',
+    fontSize: 12,
+    paddingLeft: 10,
+    width: 300,
+  },
 
   Location_SubmitButton: {
     color: 'orange'
     },
+
+  Location_Buttons: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 9,
+    // paddingHorizontal: 25,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#ec8e2f',
+    width: 130
+  },
+
+  Location_Buttons_Text: {
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+  },
 
   // ------------- Landing page styling ------------- //
   LandingPageButtons: {
