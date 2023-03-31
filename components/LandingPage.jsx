@@ -11,21 +11,20 @@ const LandingPage = (props) => {
   const handleButtonClick = () => {
     setEventName(userInput);
   };
-  
   const navigation = useNavigation();
-  function navigateToEventsList() {
-    navigation.navigate('EventsList');
-  }
+   function navigateToLocation() {
+     navigation.navigate('Location');
+   }
 
   return (
     <View style={styles.LandingPageButtons}>
-      <Button title={"Enter event name"} onPress={handleButtonClick} />
+      <Button title={"Search for festival events"} onPress={handleButtonClick} />
       <TextInput
-        placeholder="enter text here"
+        placeholder="enter city, music genre, event's name "
         onChangeText={(text) => setUserInput(text)}
         value={userInput}
       />
-      <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} onPress={navigateToEventsList}/>
+      <Button title={"or see events near you"} buttonStyle={{ marginTop: 50 }} onPress={navigateToLocation}/>
     </View>
   );
 };
