@@ -12,7 +12,7 @@ const LandingPage = (props) => {
 
   const searchEventByName = () => {
     setEventName(userInput);
-    navigation.navigate("EventsList");
+    navigation.navigate("Events");
   };
 
   function navigateToLocation() {
