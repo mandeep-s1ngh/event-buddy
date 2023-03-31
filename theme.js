@@ -29,7 +29,7 @@ export default theme = createTheme({
       },
 
       buttonStyle: {
-        borderRadius: 20,
+        borderRadius: 3,
       },
     },
     Card: {
