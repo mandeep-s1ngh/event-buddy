@@ -1,16 +1,15 @@
-
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Icon, ThemeProvider } from "@rneui/themed";
-import theme from './theme.js';
+import theme from "./theme.js";
 //import styles from './styles.js'
 //import { makeStyles } from '@rneui/themed';
 
-import {StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 // import { View, Text, StatusBar } from "react-native";
 //import { StatusBar } from "expo-status-bar";
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import NavBar from "./components/NavBar";
@@ -19,10 +18,11 @@ import LandingPage from "./components/LandingPage";
 import LocationRequest from "./components/LocationRequest";
 import BuddyList from "./components/BuddyCard.jsx";
 import EventsList from "./components/EventsList";
+import MessageBoard from "./components/MessageBoard.jsx";
 
-import {useState } from "react";
+import { useState } from "react";
 // import { useEffect, useState } from "react";
-import Profile from './components/Profile'
+import Profile from "./components/Profile";
 
 export default function App() {
   const [userLocation, setUserLocation] = useState("");
@@ -55,7 +55,6 @@ export default function App() {
               headerShown: false,
             }}
           >
-
             <Tab.Screen
               name="Home"
               options={{
@@ -104,8 +103,20 @@ export default function App() {
                 ),
               }}
             >
-            {() => <EventsList />}
+              {() => <EventsList />}
             </Tab.Screen>
+
+            <Tab.Screen
+              name="MessageBoard"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="email" color={color} size={size} />
+                ),
+              }}
+            >
+              {() => <MessageBoard />}
+            </Tab.Screen>
+
             <Tab.Screen
               name="Profile"
               options={{
@@ -113,10 +124,8 @@ export default function App() {
                   <Icon name="account-circle" color={color} size={size} />
                 ),
               }}
-              >
-              {(props) => (
-                <Profile {...props} setEventName={setEventName} />
-              )}
+            >
+              {(props) => <Profile {...props} setEventName={setEventName} />}
             </Tab.Screen>
           </Tab.Navigator>
         </NavigationContainer>
