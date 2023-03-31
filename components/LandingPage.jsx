@@ -13,19 +13,21 @@ const LandingPage = (props) => {
   };
   
   const navigation = useNavigation();
+
   function navigateToEventsList() {
     navigation.navigate('EventsList');
   }
 
   return (
-    <View style={styles.LandingPageButtons}>
-      <Button title={"Enter event name"} onPress={handleButtonClick} />
+    <View style={styles.LandingPageButtons} >
+      <Button title={"Enter event name"} onPress={handleButtonClick} color="#ec8e2f"/>
       <TextInput
         placeholder="enter text here"
         onChangeText={(text) => setUserInput(text)}
         value={userInput}
+        style={styles.Profile_Tag_TextInput}
       />
-      <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} onPress={navigateToEventsList}/>
+      <Button title={"See events near you"} buttonStyle={{ marginTop: 50 }} onPress={navigateToEventsList} color="#ec8e2f"/>
     </View>
   );
 };
