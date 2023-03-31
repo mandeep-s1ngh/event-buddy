@@ -1,4 +1,5 @@
 // //import * as React from "react"; // is it in use?
+import { useState} from "react";
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import { Avatar, Card, Badge, Button, Icon} from '@rneui/themed';
 //import { Card, Badge, Button, Icon, View } from '@rneui/themed';
@@ -14,6 +15,15 @@ function EventCard({  //sorted by date ascending by default?
       event_buddies,      //from our 'users' DB
       event_talks     //from our 'messages' DB
       }) {
+
+  const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
+  let joined = 0;
+
+  const updateBuddies = () =>{
+    setBuddiesDisplay((number) => {
+    if (!joined) {joined = 1; return number + 1;}
+      else {joined = 0; return number - 1;}})
+  }     
 
   return (
     <Card>
@@ -49,7 +59,7 @@ function EventCard({  //sorted by date ascending by default?
         <View style={styles.buddiesContainer}>
           <Text style={styles.genreLabel}>Buddies going: {event_buddies}</Text>
           {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
-          <Button style={styles.button}>Join the event</Button>
+          <Button style={styles.button} onPress={updateBuddies}>Join the event</Button>
         </View>      
 
         <View style={styles.buddiesContainer}>
@@ -109,16 +119,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  // button: {
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   paddingVertical: 9,
-  //   // paddingHorizontal: 25,
-  //   borderRadius: 3,
-  //   elevation: 3,
-  //   backgroundColor: '#ec8e2f',
-  //   width: 130
-  // },
+  button: {
+    //alignItems: 'center',
+    justifyContent: 'center',
+    // paddingVertical: 9,
+    // // paddingHorizontal: 25,
+    // borderRadius: 3,
+    // elevation: 3,
+    // backgroundColor: '#ec8e2f',
+    // width: 130
+  },
 })
 
 // --------------2-----------------
