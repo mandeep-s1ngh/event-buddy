@@ -1,6 +1,6 @@
 // //import * as React from "react"; // is it in use?
 import { useState} from "react";
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from "react-native";
 import { Avatar, Card, Badge, Button, Icon } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 // import MessageBoard from "./MessageBoard";
@@ -35,6 +35,8 @@ function EventCard({
   }     
 
   return (
+    // <View>
+    <ScrollView>
     <Card>
   <View style={styles.mainContainer}>
 
@@ -87,6 +89,8 @@ function EventCard({
         </View>
       </View>
     </Card>
+    </ScrollView> 
+    // </View> 
   );
 }
 // to highlight changes: //, {{backgroundColor: 'red', margin: 50}}
@@ -95,6 +99,7 @@ function EventCard({
 const styles = StyleSheet.create({
 
   mainContainer: {
+    width: '100%',
     flexDirection: 'column',
     flex: 1,
     borderRadius: 10,
@@ -153,17 +158,17 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: 'row',
     marginTop: 5,
-    alignItems: 'left',
+    //alignItems: 'left',
    // width:  'auto',
     //flex: 1,
    // padding: 10,
     //flexDirection: 'row-reverse',
     justifyContent: 'space-between',
-    alignItems: 'left',
+    //alignItems: 'left',
   },
     buddiesContainer: {
     flexDirection: 'row',
-    alignItems: 'left',
+    //alignItems: 'left',
     fontWeight: 'bold',
     margin: 5,
     justifyContent: 'space-between',
@@ -177,7 +182,7 @@ const styles = StyleSheet.create({
   },
   genreContainer: {
     flexDirection: 'row',
-    alignItems: 'left',
+    //alignItems: 'left',
     marginBottom: 5,
   },
   genreLabel: {
@@ -189,7 +194,7 @@ const styles = StyleSheet.create({
   },
   attendeesContainer: {
     flexDirection: 'row-reverse',
-    alignItems: 'left',
+    //alignItems: 'left',
     marginBottom: 5,
   },
   attendeesLabel: {
@@ -209,7 +214,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginLeft: 10,
-    alignItems: 'center',
+    //alignItems: 'center',
     justifyContent: 'center',
     //flexDirection: 'row-reverse',
     //alignItems: 'left',
@@ -222,7 +227,7 @@ const styles = StyleSheet.create({
   },
   messagesContainer: {
     flexDirection: 'row',
-    alignItems: 'left',
+    //alignItems: 'left',
     marginBottom: 5,
   },
   messagesLabel: {
