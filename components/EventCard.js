@@ -1,20 +1,29 @@
 // //import * as React from "react"; // is it in use?
 import { useState} from "react";
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
-import { Avatar, Card, Badge, Button, Icon} from '@rneui/themed';
-//import { Card, Badge, Button, Icon, View } from '@rneui/themed';
+import { Avatar, Card, Badge, Button, Icon } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
+// import MessageBoard from "./MessageBoard";
+
+// import { Card, Badge, Button, Icon, View } from '@rneui/themed';
 // //import { Badge, View } from "react-native-elements";
 // //import styles from "../styles";
 
-function EventCard({  //sorted by date ascending by default?
-      event_title,
-      event_place,
-      event_genre,
-      event_date,
-      event_img_URL_preview,
-      event_buddies,      //from our 'users' DB
-      event_talks     //from our 'messages' DB
-      }) {
+function EventCard({
+  //sorted by date ascending by default?
+  event_title,
+  event_place,
+  event_genre,
+  event_date,
+  event_img_URL_preview,
+  event_buddies, //from our 'users' DB
+  event_talks, //from our 'messages' DB
+}) {
+  const navigation = useNavigation();
+
+  const goToMessageBoard = () => {
+    navigation.navigate("MessageBoard");
+  };
 
   const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
   const [joined, setJoined] = useState(0);
@@ -62,20 +71,22 @@ function EventCard({  //sorted by date ascending by default?
           <Button style={styles.button} onPress={updateBuddies} title={(!joined) ? 'Join the event' : 'Not in the mood'}></Button>
         </View>      
 
-        <View style={styles.buddiesContainer}>
-          <Text style={styles.genreLabel}>Talks about event: {event_talks}</Text>
-          {/* <Text style={styles.genre}>{event_talks}</Text> */}
-          <Button style={styles.button}>Message board</Button>
-          {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
+            <View style={styles.buddiesContainer}>
+              <Text style={styles.genreLabel}>
+                Talks about event: {event_talks}
+              </Text>
+              {/* <Text style={styles.genre}>{event_talks}</Text> */}
+              <Button style={styles.button} onPress={goToMessageBoard}>
+                Message board
+              </Button>
+              {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
             <Text >Message board</Text>
           </TouchableHighlight> */}
+            </View>
+          </View>
         </View>
       </View>
-    </View> 
-
-  </View>
-  </Card>
-   
+    </Card>
   );
 }
 // to highlight changes: //, {{backgroundColor: 'red', margin: 50}}
@@ -220,8 +231,5 @@ const styles = StyleSheet.create({
   },
 
 });
-
-
-
 
 export default EventCard;

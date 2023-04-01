@@ -18,10 +18,13 @@ import LandingPage from './components/LandingPage';
 import LocationRequest from './components/LocationRequest';
 import BuddyList from './components/BuddyCard.jsx';
 import EventsList from './components/EventsList';
+import MessageBoard from './components/MessageBoard.jsx';
 
 import { useState } from 'react';
 // import { useEffect, useState } from "react";
 import Profile from './components/Profile';
+
+//import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
@@ -108,6 +111,18 @@ export default function App() {
             >
               {() => <EventsList />}
             </Tab.Screen>
+
+            <Tab.Screen
+              name="MessageBoard"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="email" color={color} size={size} />
+                ),
+              }}
+            >
+              {() => <MessageBoard />}
+            </Tab.Screen>
+
             {/* <Tab.Screen
               name="Profile"
               options={{
