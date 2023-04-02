@@ -1,30 +1,18 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon, ThemeProvider } from '@rneui/themed';
-import theme from './theme.js';
-//import styles from './styles.js'
-//import { makeStyles } from '@rneui/themed';
-
+import { useState } from 'react';
 import { StatusBar } from 'react-native';
-// import { View, Text, StatusBar } from "react-native";
 //import { StatusBar } from "expo-status-bar";
-
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import theme from './theme.js';
 
 import NavBar from './components/NavBar';
 import Menu from './components/Menu';
-import LandingPage from './components/LandingPage';
-import LocationRequest from './components/LocationRequest';
-import BuddyList from './components/BuddyCard.jsx';
-import EventsList from './components/EventsList';
-import MessageBoard from './components/MessageBoard.jsx';
-
-import { useState } from 'react';
-// import { useEffect, useState } from "react";
-import Profile from './components/Profile';
-
-//import { StatusBar } from "expo-status-bar";
+import HomeStack from './components/navigation-stacks/HomeStack.jsx';
+import BuddiesStack from './components/navigation-stacks/BuddiesStack.jsx';
+import EventsStack from './components/navigation-stacks/EventsStack.jsx';
+import MessagesStack from './components/navigation-stacks/MessagesStack.jsx';
 
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
@@ -33,7 +21,6 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState('Theo');
 
-  const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
 
   return (
@@ -50,10 +37,6 @@ export default function App() {
           <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
-              headerStyle: {
-                backgroundColor: '#c9c9c9',
-              },
-              headerTitleAlign: 'center',
               headerShown: false,
             }}
           >
@@ -66,29 +49,13 @@ export default function App() {
               }}
             >
               {(props) => (
-                <LandingPage
+                <HomeStack
                   {...props}
                   setEventName={setEventName}
                   setUserLocation={setUserLocation}
                 />
               )}
             </Tab.Screen>
-
-            {/* <Tab.Screen
-              name="Location"
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="location-pin" color={color} size={size} />
-                ),
-              }}
-            >
-              {(props) => (
-                <LocationRequest
-                  userLocation={userLocation}
-                  setUserLocation={setUserLocation}
-                />
-              )}
-            </Tab.Screen> */}
 
             <Tab.Screen
               name="Buddies"
@@ -98,7 +65,12 @@ export default function App() {
                 ),
               }}
             >
-              {() => <BuddyList />}
+              {(props) => (
+                <BuddiesStack
+                  {...props}
+                  //exampleProp={exampleVariable}
+                />
+              )}
             </Tab.Screen>
 
             <Tab.Screen
@@ -109,37 +81,35 @@ export default function App() {
                 ),
               }}
             >
-              {() => <EventsList />}
+              {(props) => (
+                <EventsStack
+                  {...props}
+                  eventName={eventName}
+                  userLocation={userLocation}
+                />
+              )}
             </Tab.Screen>
 
             <Tab.Screen
-              name="MessageBoard"
+              name="Messages"
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="email" color={color} size={size} />
                 ),
               }}
             >
-              {() => <MessageBoard />}
+              {(props) => (
+                <MessagesStack
+                  {...props}
+                  //exampleProp={exampleVariable}
+                />
+              )}
             </Tab.Screen>
-
-            {/* <Tab.Screen
-              name="Profile"
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="account-circle" color={color} size={size} />
-                ),
-              }}
-            >
-              {(props) => <Profile {...props} setEventName={setEventName} />}
-            </Tab.Screen> */}
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
     </SafeAreaProvider>
   );
 }
-
-// N.B to set style add this attribute: style={styles.xxxx}
 
 // Set StatusBar colour - done through a direct prop, not style: <StatusBar backgroundColor="#2403fc" />
