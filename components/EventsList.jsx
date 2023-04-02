@@ -1,23 +1,13 @@
-//import { ListItem } from '@rneui/themed';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Text, Card, Badge, Button} from '@rneui/themed';
-import { FlatList, View, 
-    StyleSheet, 
-    ScrollView, 
-    SafeAreaView , 
-    ListItem 
-        } from 'react-native'
+import {View, ScrollView} from 'react-native'
 import { useEffect, useState } from "react";
-import { 
-        //getEvents, 
-        getSeatGeekEvents, getTicketMasterEvents } from '../api/eventsListapi'
+import { getTicketMasterEvents } from '../api/eventsListapi'
 import  EventCard  from "./EventCard";
 
 export default function EventsList() {
 
     const [eventsList, setEventsList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [isError, setIsError] = useState(false);
 
     const [source, setSource] = useState ({"api": getTicketMasterEvents})
     const getEvents = source.api ;                           
@@ -77,25 +67,8 @@ export default function EventsList() {
 
     const events_list = ticketmaster_list;
 
-    const renderItem = ({ item }) => (
-        // <View>
-        <EventCard		
-        event_title={item.title} 		 
-        event_place={item.location}	
-        event_date={item.date}	 
-        event_genre={item.genre}		 
-        event_img_URL_preview={item.img}	
-        event_buddies={item.buddies}
-        event_talks={item.talks}
-        />		 
-    //   </View>
-      
-    );
-
     return( 
-        <View 
-        //style={styles.container}
-        >
+        <View>
         <ScrollView>
           <View>
             {events_list.map((event) => {
@@ -116,14 +89,6 @@ export default function EventsList() {
         </View>
       </ScrollView>
     </View>
-
-    //     <SafeAreaProvider>
-    //     <Text>
-       
-    //         <FlatList data={events_list} renderItem={renderItem} />;
-      
-    //   </Text>
-    //     </SafeAreaProvider>
     )
 }
 

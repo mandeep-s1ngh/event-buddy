@@ -1,13 +1,13 @@
 // //import * as React from "react"; // is it in use?
-import { useState} from "react";
-import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from "react-native";
-import { Avatar, Card, Badge, Button, Icon } from "@rneui/themed";
-import { useNavigation } from "@react-navigation/native";
 // import MessageBoard from "./MessageBoard";
-
 // import { Card, Badge, Button, Icon, View } from '@rneui/themed';
 // //import { Badge, View } from "react-native-elements";
 // //import styles from "../styles";
+import { useState} from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { Card, Button} from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
+
 
 function EventCard({
   //sorted by date ascending by default?
@@ -35,7 +35,6 @@ function EventCard({
   }     
 
   return (
-    // <View>
     <ScrollView>
     <Card>
   <View style={styles.mainContainer}>
@@ -90,7 +89,6 @@ function EventCard({
       </View>
     </Card>
     </ScrollView> 
-    // </View> 
   );
 }
 // to highlight changes: //, {{backgroundColor: 'red', margin: 50}}
