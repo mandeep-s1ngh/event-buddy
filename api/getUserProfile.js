@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getUserProfile = (userName) => {
   const getProfileOfUser = `https://i4plxtujywyfxov6ot4jbkzpxu0ohjwp.lambda-url.us-east-1.on.aws/?username=${userName}`;
@@ -6,8 +6,6 @@ export const getUserProfile = (userName) => {
   return axios
     .get(getProfileOfUser)
     .then((response) => {
-      console.log(response.data, "<<<<RES");
-
       return response.data;
     })
     .catch((err) => {

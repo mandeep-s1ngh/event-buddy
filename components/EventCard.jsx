@@ -1,7 +1,7 @@
 // //import * as React from "react"; // is it in use?
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
-import { Avatar, Card, Badge, Button, Icon } from "@rneui/themed";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { Avatar, Card, Badge, Button, Icon } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
 // import MessageBoard from "./MessageBoard";
 
 // import { Card, Badge, Button, Icon, View } from '@rneui/themed';
@@ -17,11 +17,17 @@ function EventCard({
   event_img_URL_preview,
   event_buddies, //from our 'users' DB
   event_talks, //from our 'messages' DB
+  setEventNameForBuddies,
 }) {
   const navigation = useNavigation();
 
+  const goToBuddyList = () => {
+    setEventNameForBuddies(event_title);
+    navigation.navigate('Buddies');
+  };
+
   const goToMessageBoard = () => {
-    navigation.navigate("MessageBoard");
+    navigation.navigate('MessageBoard');
   };
 
   return (
@@ -57,7 +63,9 @@ function EventCard({
                 Buddies going: {event_buddies}
               </Text>
               {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
-              <Button style={styles.button}>Join the event</Button>
+              <Button style={styles.button} onPress={goToBuddyList}>
+                Join the event
+              </Button>
             </View>
 
             <View style={styles.buddiesContainer}>
@@ -83,41 +91,41 @@ function EventCard({
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
     paddingHorizontal: 10,
     //paddingVertical: 15,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   titleContainer: {
     //flexDirection: 'row',
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 5,
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   location: {
     fontSize: 16,
-    color: "gray",
+    color: 'gray',
   },
   bodyContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   imageContainer: {
-    width: "30%",
+    width: '30%',
     marginRight: 10,
   },
   image: {
-    width: "100%",
+    width: '100%',
     height: undefined,
     aspectRatio: 1,
   },
   detailsContainer: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between",
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   // button: {
   //   alignItems: 'center',
