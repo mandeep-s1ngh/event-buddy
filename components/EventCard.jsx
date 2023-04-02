@@ -1,8 +1,8 @@
 // //import * as React from "react"; // is it in use?
 // import MessageBoard from "./MessageBoard";
 // import { Card, Badge, Button, Icon, View } from '@rneui/themed';
-// //import { Badge, View } from "react-native-elements";
-// //import styles from "../styles";
+//import { Badge, View } from "react-native-elements";
+//import styles from "../styles";
 import { useState} from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Card, Button} from "@rneui/themed";
@@ -68,7 +68,6 @@ function EventCard({
           {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
           <Button style={styles.button} onPress={updateBuddies} title={(!joined) ? 'Join the event' : 'Not in the mood'}></Button>
         </View>      
-
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
                 Talks about event: {event_talks}
@@ -173,7 +172,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginRight: 5,
   },
-
 });
 
 export default EventCard;

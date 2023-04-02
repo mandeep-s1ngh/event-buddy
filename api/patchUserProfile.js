@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-export const postUserProfile = (username, name, age, gender, interests) => {
-  const postUserProfileURL =
-    'https://nxufe32o2vmfqobfm7loolewaa0vpfnb.lambda-url.us-east-1.on.aws/';
+export const patchUserProfile = (username, name, age, gender, interests) => {
+  const patchUserProfileURL =
+    'https://vnfl72ter74lxtd43wglopvlju0xqmst.lambda-url.us-east-1.on.aws/';
 
   const interestsString = !interests ? null : interests.toString();
 
   return axios
-    .post(postUserProfileURL, {
+    .post(patchUserProfileURL, {
       username,
       name,
       age,
