@@ -68,13 +68,12 @@ export default function EventsList() {
     const events_list = ticketmaster_list;
 
     return( 
-        <View>
         <ScrollView>
           <View>
             {events_list.map((event) => {
               return (
-                <View>
-        <EventCard		
+                <View key={event.key}>
+        <EventCard 	
         event_title={event.title} 		 
         event_place={event.location}	
         event_date={event.date}	 
@@ -88,7 +87,6 @@ export default function EventsList() {
           })}
         </View>
       </ScrollView>
-    </View>
     )
 }
 
