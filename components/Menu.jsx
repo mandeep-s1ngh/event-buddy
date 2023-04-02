@@ -1,5 +1,6 @@
 import { Text, TouchableHighlight, View } from 'react-native';
 import styles from '../styles';
+import { getAddressFromGeolocation } from '../api/getAddressFromGeolocation';
 
 function Menu({ loggedIn, setLoggedIn, user }) {
   const loggedInText = `Logged in as ${user}`;
@@ -7,7 +8,12 @@ function Menu({ loggedIn, setLoggedIn, user }) {
   function toggleLoggedIn() {
     setLoggedIn(!loggedIn);
   }
-  console.log(loggedIn);
+
+  function testGeocoding() {
+    getAddressFromGeolocation('51.4364191', '-2.5883809').then((res) => {
+      console.log(res, '<< final');
+    });
+  }
 
   return (
     <View
@@ -24,7 +30,11 @@ function Menu({ loggedIn, setLoggedIn, user }) {
           <Text style={styles.Menu_Text}>Log in</Text>
         </TouchableHighlight>
       )}
-      {loggedIn ? <Text style={styles.Menu_Text}>My events</Text> : null}
+      {loggedIn ? (
+        <TouchableHighlight onPress={testGeocoding}>
+          <Text style={styles.Menu_Text}>My events</Text>
+        </TouchableHighlight>
+      ) : null}
       {loggedIn ? <Text style={styles.Menu_Text}>My messages</Text> : null}
       {loggedIn ? <Text style={styles.Menu_Text}>My profile</Text> : null}
       <Text style={styles.Menu_Text}>Settings</Text>
