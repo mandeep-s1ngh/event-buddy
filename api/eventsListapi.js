@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const seatgeekapi = axios.create({baseURL: "https://api.seatgeek.com/2"});
+const seateekapi = axios.create({baseURL: "https://api.seatgeek.com/2"});
 
 export const getSeatGeekEvents = () => {
   return seatgeekapi

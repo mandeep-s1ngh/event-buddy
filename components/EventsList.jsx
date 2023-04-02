@@ -1,18 +1,6 @@
-//import { ListItem } from '@rneui/themed';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Text, Card, Badge, Button } from '@rneui/themed';
-import {
-  FlatList,
-  View,
-  StyleSheet,
-  // ScrollView, SafeAreaView , ListItem
-} from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
-import {
-  //getEvents,
-  getSeatGeekEvents,
-  getTicketMasterEvents,
-} from '../api/eventsListapi';
+import { getTicketMasterEvents } from '../api/eventsListapi';
 import EventCard from './EventCard';
 
 export default function EventsList({ setEventNameForBuddies }) {
@@ -81,26 +69,25 @@ export default function EventsList({ setEventNameForBuddies }) {
 
   const events_list = ticketmaster_list;
 
-  const renderItem = ({ item }) => (
-    <View>
-      <EventCard
-        event_title={item.title}
-        event_place={item.location}
-        event_date={item.date}
-        event_genre={item.genre}
-        event_img_URL_preview={item.img}
-        event_buddies={item.buddies}
-        event_talks={item.talks}
-        setEventNameForBuddies={setEventNameForBuddies}
-      />
-    </View>
-  );
-
   return (
-    <SafeAreaProvider>
-      <Text>
-        <FlatList data={events_list} renderItem={renderItem} />;
-      </Text>
-    </SafeAreaProvider>
+    <ScrollView>
+      <View>
+        {events_list.map((event) => {
+          return (
+            <View key={event.key}>
+              <EventCard
+                event_title={event.title}
+                event_place={event.location}
+                event_date={event.date}
+                event_genre={event.genre}
+                event_img_URL_preview={event.img}
+                event_buddies={event.buddies}
+                event_talks={event.talks}
+              />
+            </View>
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 }

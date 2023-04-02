@@ -1,12 +1,12 @@
 // //import * as React from "react"; // is it in use?
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
-import { Avatar, Card, Badge, Button, Icon } from '@rneui/themed';
-import { useNavigation } from '@react-navigation/native';
 // import MessageBoard from "./MessageBoard";
-
 // import { Card, Badge, Button, Icon, View } from '@rneui/themed';
-// //import { Badge, View } from "react-native-elements";
-// //import styles from "../styles";
+//import { Badge, View } from "react-native-elements";
+//import styles from "../styles";
+import { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Card, Button } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
 
 function EventCard({
   //sorted by date ascending by default?
@@ -30,12 +30,29 @@ function EventCard({
     navigation.navigate('MessageBoard');
   };
 
+  const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
+  const [joined, setJoined] = useState(0);
+
+  const updateBuddies = () => {
+    setBuddiesDisplay((number) => {
+      if (!joined) {
+        setJoined(1);
+        return number + 1;
+      } else {
+        setJoined(0);
+        return number - 1;
+      }
+    });
+  };
+
   return (
     <Card>
       <View style={styles.mainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{event_title}</Text>
-          <Text style={styles.location}>{event_place}</Text>
+          <Text style={styles.title}>
+            &nbsp;{event_date} | {event_place}
+          </Text>
+          <Text style={styles.location}>{event_title}</Text>
         </View>
 
         <View style={styles.bodyContainer}>
@@ -48,26 +65,27 @@ function EventCard({
           </View>
 
           <View style={styles.detailsContainer}>
-            <View style={styles.buddiesContainer}>
-              <Text style={styles.genreLabel}>Starts:&nbsp;</Text>
-              <Text style={styles.genre}>{event_date}</Text>
+            {/* <View style={styles.buddiesContainer}>
+          <Text style={styles.genreLabel}>Starts:&nbsp;</Text>
+          <Text style={styles.genre}>{event_date}</Text> 
+        </View> */}
+
+            <View style={styles.textContainer}>
+              <Text style={styles.genreLabel}>Event genre: {event_genre}</Text>
+              {/* <Text style={styles.genre}>{event_genre}</Text>  */}
             </View>
 
-            <View style={styles.buddiesContainer}>
-              <Text style={styles.genreLabel}>Event genre: </Text>
-              <Text style={styles.genre}>{event_genre}</Text>
-            </View>
-            <View></View>
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
-                Buddies going: {event_buddies}
+                Buddies going: {buddiesDisplay}
               </Text>
               {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
-              <Button style={styles.button} onPress={goToBuddyList}>
-                Join the event
-              </Button>
+              <Button
+                style={styles.button}
+                onPress={updateBuddies}
+                title={!joined ? 'Join the event' : 'Not in the mood'}
+              ></Button>
             </View>
-
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
                 Talks about event: {event_talks}
@@ -91,186 +109,86 @@ function EventCard({
 
 const styles = StyleSheet.create({
   mainContainer: {
+    width: '100%',
     flexDirection: 'column',
-    paddingHorizontal: 10,
-    //paddingVertical: 15,
-    justifyContent: 'space-between',
+    flex: 1,
+    borderRadius: 10,
   },
   titleContainer: {
-    //flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 5,
-  },
-  title: {
-    fontSize: 20,
     fontWeight: 'bold',
   },
-  location: {
-    fontSize: 16,
-    color: 'gray',
-  },
   bodyContainer: {
-    flexDirection: 'row',
+    flex: 1,
+    borderRadius: 10,
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: 14,
+  },
+  location: {
+    fontSize: 14,
+    marginBottom: 10,
   },
   imageContainer: {
-    width: '30%',
-    marginRight: 10,
+    width: '100%',
   },
   image: {
     width: '100%',
-    height: undefined,
-    aspectRatio: 1,
+    height: 150,
+    marginBottom: 5,
   },
-  detailsContainer: {
-    flex: 1,
-    flexDirection: 'column',
+  textContainer: {
+    flexDirection: 'row',
+    marginTop: 5,
     justifyContent: 'space-between',
   },
-  // button: {
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   paddingVertical: 9,
-  //   // paddingHorizontal: 25,
-  //   borderRadius: 3,
-  //   elevation: 3,
-  //   backgroundColor: '#ec8e2f',
-  //   width: 130
-  // },
+  buddiesContainer: {
+    flexDirection: 'row',
+    fontWeight: 'bold',
+    margin: 5,
+    justifyContent: 'space-between',
+  },
+
+  location: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  genreContainer: {
+    flexDirection: 'row',
+    //alignItems: 'left',
+    marginBottom: 5,
+  },
+  genreLabel: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  genre: {
+    fontSize: 16,
+  },
+  attendeesContainer: {
+    flexDirection: 'row-reverse',
+    marginBottom: 5,
+  },
+  attendeesLabel: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  detailsButton: {
+    margin: 10,
+  },
+  button: {
+    marginLeft: 10,
+    justifyContent: 'center',
+  },
+  messagesContainer: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  messagesLabel: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
 });
-
-// --------------2-----------------
-//   mainContainer: {
-//     flexDirection: 'column',
-//     flex: 1,
-//     //margin: 10,
-//     borderRadius: 10,
-//     // overflow: 'hidden',
-//     // flexDirection: 'row-reverse',
-//     // justifyContent: 'space-between',
-//   },
-//   titleContainer: {
-//    // fontSize: 14,
-//     fontWeight: 'bold',
-//     //marginBottom: 1,
-//   },
-//   bodyContainer: {
-//     flexDirection: 'row',
-//     flex: 1,
-//     //margin: 10,
-//     borderRadius: 10,
-//     // overflow: 'hidden',
-//     // flexDirection: 'row-reverse',
-//     // justifyContent: 'space-between',
-//     justifyContent: 'space-between',
-//   },
-//   title: {
-//     fontSize: 14,
-//    // fontWeight: 'bold',
-//     //marginBottom: 10,
-//   },
-//   location: {
-//     fontSize: 14,
-//    // fontWeight: 'bold',
-//     marginBottom: 10,
-//   },
-//   imageContainer: {
-//     //width: '40%',
-//    // flexDirection: 'row',
-//     justifyContent: 'space-between',
-
-//   },
-//   image: {
-//     width: '30%',
-//     height: 150,
-
-//   },
-//   textContainer: {
-//     width:  'auto',
-//     flex: 1,
-//     padding: 10,
-//     flexDirection: 'row-reverse',
-//     justifyContent: 'space-between',
-//     alignItems: 'left',
-//   },
-//     buddiesContainer: {
-//     // fontSize: 14,
-//      fontWeight: 'bold',
-//      //marginBottom: 1,
-
-//    },
-
-//   location: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     marginBottom: 10,
-//   },
-//   genreContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'left',
-//     marginBottom: 5,
-//   },
-//   genreLabel: {
-//     fontWeight: 'bold',
-//     marginRight: 5,
-//   },
-//   genre: {
-//     fontSize: 16,
-//   },
-//   attendeesContainer: {
-//     flexDirection: 'row-reverse',
-//     alignItems: 'left',
-//     marginBottom: 5,
-//   },
-//   attendeesLabel: {
-//     fontWeight: 'bold',
-//     marginRight: 5,
-//   },
-
-//   detailsButton: {
-//     margin: 10,
-//    // flexDirection: 'row-reverse',
-//    //alignItems: 'left',
-//   },
-
-//   button: {
-//     marginLeft: 10,
-//     flexDirection: 'row-reverse',
-//     alignItems: 'left',
-//   },
-//   messagesContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'left',
-//     marginBottom: 5,
-//   },
-//   messagesLabel: {
-//     fontWeight: 'bold',
-//     marginRight: 5,
-//   },
-
-// -----------1----------
-// //     container: {
-// //       flex: 1,
-// //     flexDirection: 'row',
-// //         justifyContent: 'center',
-// //         alignItems: 'stretch',
-// //         marginRight: 10,
-// //     },
-// //     // fonts: {
-// //     //   marginBottom: 8,
-// //     // },
-
-// //     button: {
-// //        // flexDirection: 'row',
-// //         borderRadius: 1,
-// //         marginLeft: 10,
-// //       },
-// //     image: {
-// //       width: 70,
-// //       height: 70,
-// //       marginRight: 10,
-// //     },
-
-// //     });
 
 export default EventCard;
