@@ -6,8 +6,8 @@ import  EventCard  from "./EventCard";
 export default function EventsList() {
 
     const [eventsList, setEventsList] = useState([]);
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     const [source, setSource] = useState ({"api": getTicketMasterEvents})
     const getEvents = source.api ;                           
