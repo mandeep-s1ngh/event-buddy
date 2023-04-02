@@ -113,3 +113,4 @@ export default function App() {
 }
 
 // Set StatusBar colour - done through a direct prop, not style: <StatusBar backgroundColor="#2403fc" />
+
