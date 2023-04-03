@@ -1,7 +1,7 @@
-import { View, ScrollView } from "react-native";
-import { useEffect, useState } from "react";
-import { getTicketMasterEvents } from "../api/eventsListapi";
-import EventCard from "./EventCard";
+import { View, ScrollView } from 'react-native';
+import { useEffect, useState } from 'react';
+import { getTicketMasterEvents } from '../api/eventsListapi';
+import EventCard from './EventCard';
 
 export default function EventsList({
   setEventNameForBuddies,
@@ -31,20 +31,20 @@ export default function EventsList({
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
     if (event._embedded.venues[0].state) {
-      location += ", " + event._embedded.venues[0].state.name;
+      location += ', ' + event._embedded.venues[0].state.name;
     } else {
-      location += ", " + event._embedded.venues[0].country.name;
+      location += ', ' + event._embedded.venues[0].country.name;
     }
-    let genre = "";
-    if (event.classifications[0].genre.name !== "Undefined") {
+    let genre = '';
+    if (event.classifications[0].genre.name !== 'Undefined') {
       genre += event.classifications[0].genre.name;
       if (
         event.classifications[1] &&
-        event.classifications[1].genre.name !== "Undefined"
+        event.classifications[1].genre.name !== 'Undefined'
       )
-        genre += ", " + event.classifications[1].genre.name;
+        genre += ', ' + event.classifications[1].genre.name;
     } else {
-      genre += "Various";
+      genre += 'Various';
     }
     let buddies = Math.floor(Math.random() * 18 + 3);
     let talks = Math.floor(Math.random() * 9 + 1);
@@ -61,7 +61,7 @@ export default function EventsList({
   });
 
   const filtered_ticket_options = ticketmaster_list.filter(
-    (event) => !event.title.includes("Ticket" || "ticket")
+    (event) => !event.title.includes('Ticket')
   );
 
   const uniqueNames = new Set();

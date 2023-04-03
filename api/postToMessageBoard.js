@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const postToMessageBoard = (
   eventName,
@@ -8,17 +8,16 @@ export const postToMessageBoard = (
   replyTo
 ) => {
   const createMessageBoardTableIfNotExistsURL =
-    "https://v3hwpflxic45xlpl43t5ldeywa0tacgr.lambda-url.us-east-1.on.aws/";
+    'https://v3hwpflxic45xlpl43t5ldeywa0tacgr.lambda-url.us-east-1.on.aws/';
   const postToMessageBoardURL =
-    "https://errc6j276lrp5jeqb6rmhom4bi0hgdmw.lambda-url.us-east-1.on.aws/";
+    'https://errc6j276lrp5jeqb6rmhom4bi0hgdmw.lambda-url.us-east-1.on.aws/';
 
-  console.log(eventName, "post api");
-  console.log({ eventName });
+  eventName = eventName.replaceAll(' ', '_');
   return axios
     .post(createMessageBoardTableIfNotExistsURL, { eventName })
     .then((response) => {
-      console.log(response, "post api response");
-      return response.data.endsWith("already exists.")
+      console.log(response, 'post api response');
+      return response.data.endsWith('already exists.')
         ? Promise.resolve()
         : new Promise((resolve) => setTimeout(resolve, 10000));
     })
@@ -32,7 +31,7 @@ export const postToMessageBoard = (
       });
     })
     .then((response) => {
-      console.log("finished");
+      console.log('finished');
       return response.data;
     })
     .catch((err) => {
