@@ -1,7 +1,10 @@
-import {View, ScrollView} from 'react-native'
 import { useEffect, useState } from "react";
+import {View, ScrollView, StyleSheet} from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { getTicketMasterEvents } from '../api/eventsListapi'
+import StickyHeader from './StickyHeader';
 import  EventCard  from "./EventCard";
+
 
 export default function EventsList() {
 
@@ -68,27 +71,57 @@ export default function EventsList() {
     const events_list = ticketmaster_list;
 
     return( 
-        <ScrollView>
-          <View>
+        <SafeAreaProvider>
+    <View style={styles.mainView}>
+        <StickyHeader style={styles.stickyHeader}/>
+        <View style={styles.listView}>
+        <ScrollView >
+            <View >
             {events_list.map((event) => {
               return (
                 <View key={event.key}>
-        <EventCard 	
-        event_title={event.title} 		 
-        event_place={event.location}	
-        event_date={event.date}	 
-        event_genre={event.genre}		 
-        event_img_URL_preview={event.img}	
-        event_buddies={event.buddies}
-        event_talks={event.talks}
-         />	
-         </View>
+                    <EventCard 	
+                    event_title={event.title} 		 
+                    event_place={event.location}	
+                    event_date={event.date}	 
+                    event_genre={event.genre}		 
+                    event_img_URL_preview={event.img}	
+                    event_buddies={event.buddies}
+                    event_talks={event.talks}
+                    />	
+               </View>
             );
-          })}
+            })}
+            </View>
+        </ScrollView>
         </View>
-      </ScrollView>
+    </View>
+    </SafeAreaProvider>
     )
 }
 
+const styles = StyleSheet.create({
 
-
+    mainView: {
+      height: '100%',
+      flexDirection: 'column',
+      flex: 1,
+      borderRadius: 80,
+      //flexWrap: 'wrap',
+      //rowGap: 10,
+    },
+    stickyHeader: {
+        minheight: 50,
+       // height: '100%',
+        // flexDirection: 'column',
+       flex: 2,
+        // borderRadius: 80,
+    },
+    listView: {
+        height: '90%',
+       // height: '30%',
+        // flexDirection: 'column',
+        flex: 3,
+        // borderRadius: 80,
+    },
+});
