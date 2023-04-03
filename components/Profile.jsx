@@ -53,7 +53,7 @@ const Profile = () => {
             setCurrentUserTags(`${currentUserTags} #${NewUserTag} `);
           }}
         >
-          <Text style={styles.Profile_ButtonsText}>Submit</Text>
+          <Text style={styles.Profile_Buttons_Text}>Submit</Text>
         </TouchableHighlight>
       </View>
     </View>
