@@ -15,8 +15,6 @@ export const postUserProfile = (username, name, age, gender, interests) => {
       interests: interestsString,
     })
     .then((response) => {
-      console.log(response.data, '<<<<RES');
-
       return response.data;
     })
     .catch((err) => {

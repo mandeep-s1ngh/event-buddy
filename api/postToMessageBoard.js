@@ -15,8 +15,6 @@ export const postToMessageBoard = (
   return axios
     .post(createMessageBoardTableIfNotExistsURL, { eventName })
     .then((response) => {
-      console.log(response.data, '<<<<RES');
-
       return response.data.endsWith('already exists.')
         ? Promise.resolve()
         : new Promise((resolve) => setTimeout(resolve, 10000));

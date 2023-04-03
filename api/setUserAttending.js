@@ -9,8 +9,6 @@ export const setUserAttending = (username, eventName) => {
   return axios
     .post(createEventTableIfNotExistsURL, { eventName })
     .then((response) => {
-      console.log(response.data, '<<<<RES');
-
       return response.data.endsWith('already exists.')
         ? Promise.resolve()
         : new Promise((resolve) => setTimeout(resolve, 10000));
@@ -19,7 +17,6 @@ export const setUserAttending = (username, eventName) => {
       return axios.post(postUserToEventURL, { username, eventName });
     })
     .then((response) => {
-      console.log('finished');
       return response.data;
     })
     .catch((err) => {

@@ -172,7 +172,15 @@ const styles = StyleSheet.create({
   //   padding: 10,
   // },
 
-  // ------------- Buddy card styling ------------- //
+  // ------------- BuddyList styling ------------- //
+  BuddyList_Text: {
+    textAlign: 'center',
+    marginVertical: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  // ------------- BuddyCard styling ------------- //
   Connect_Buttons: {
     position: 'absolute',
     top: 10,
