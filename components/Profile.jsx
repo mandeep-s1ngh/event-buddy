@@ -22,7 +22,7 @@ const Profile = () => {
         now!
       </Text>
       <Image
-        source={require('./michael-jackson.jpg')}
+        source={require('../images/michael-jackson.jpg')}
         style={styles.Profile_Image}
       />
       <Text style={styles.Profile_username}>MJackson58</Text>
