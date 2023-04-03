@@ -68,17 +68,17 @@ export default function EventsList({
       };
     });
 
-    const filtered_ticket_options = ticketmaster_list.filter(event => !event.title.includes('Ticket'))
-    
-    const uniqueNames = new Set();
-    const events_list = filtered_ticket_options.filter(event => {
-      if (uniqueNames.has(event.title)) {
-        return false;
-      } else {
-        uniqueNames.add(event.title);
-        return true;
-      }
-    });
+  const filtered_ticket_options = ticketmaster_list.filter(event => !event.title.includes('Ticket' || 'ticket'))
+  
+  const uniqueNames = new Set();
+  const events_list = filtered_ticket_options.filter(event => {
+    if (uniqueNames.has(event.title)) {
+      return false;
+    } else {
+      uniqueNames.add(event.title);
+      return true;
+    }
+  });
 
   return (
     <ScrollView>

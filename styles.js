@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     height: 10,
   },
   NavBar_View: {
-    backgroundColor: navBarBackground,
+    backgroundColor: '#8a766f',
+    // backgroundColor: navBarBackground,
     flex: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
     color: navBarText,
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: '45%', //use 33% when there is a left navbar icon e.g. home
-    marginRight: 'auto',
+    marginRight: '10%', //use 33% when there is a left navbar icon e.g. home
+    // marginRight: 'auto',
   },
   NavBar_RightButtons: {
     flexDirection: 'row',
@@ -77,64 +78,86 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 100,
   },
-
   Location_TextInfo: {
-    paddingBottom: 15
-    },
-
+    fontSize: 15,
+    paddingBottom: 15,
+    width: 250,
+  },
   Location_TextInput: {
     height: 30,
     backgroundColor: '#f7e0c9',
     fontSize: 12,
     paddingLeft: 10,
-    width: 300,
+    width: 250,
   },
-
   Location_Buttons: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 9,
-    // paddingHorizontal: 25,
     borderRadius: 3,
     elevation: 3,
     backgroundColor: '#ec8e2f',
-    width: 130,
-    },
+    width: 250,
+  },
+
+  Location_Buttons_Text: {
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 
   // ------------- Landing page styling ------------- //
   LandingPage_View: {
-    marginTop: '25%',
-    marginLeft: '19%',
+    alignItems: 'center',
+  },
+  LandingPage_Image: {
+    height: 200,
+    width: 370,
+    marginTop: 20,
+  },
+  LandingPage_Buttons: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 20,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#ec8e2f',
     width: 250,
-    flex: 1,
+  },
+  Landing_Page_Buttons_Text: {
+    fontSize: 15,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-medium',
+  },
+  LandingPage_TextInfo: {
+    fontSize: 15,
+    paddingBottom: 15,
+    width: 250,
     alignContent: 'center',
   },
-  LandingPage_Button: {
-    // marginTop: 250,
+  LandingPage_TextInput: {
+    height: 35,
+    backgroundColor: '#f7e0c9',
+    fontSize: 13,
+    paddingLeft: 10,
     width: 250,
-    flex: 1,
-    alignContent: 'center',
-  },
-  LandingPage_Input: {
-    textAlign: 'center',
+    fontFamily: 'sans-serif-medium',
   },
   // ------------- Profile styling ------------- //
   Profile_View: {
-    // textAlign: 'center',
-    // color: '#000000',
-    // alignSelf: 'center',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     textAlignVertical: 'center',
     alignContent: 'center',
     flex: 0.8,
     justifyContent: 'space-between',
-    // backgroundColor: '#b4d1db',
     padding: 20,
     margin: 10,
   },
   Profile_Image: {
-    // resizeMode: 'cover',
     height: 150,
     width: 300,
     borderRadius: 8,
@@ -158,19 +181,15 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     elevation: 3,
     backgroundColor: '#ec8e2f',
-    width: 130,
+    width: 300,
   },
-  Profile_ButtonsText: {
+  Profile_Buttons_Text: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
     color: 'white',
+    fontWeight: 'bold',
   },
-  // Profile_Buttons_Click: {
-  //   alignItems: 'center',
-  //   backgroundColor: '#DDDDDD',
-  //   padding: 10,
-  // },
 
   // ------------- BuddyList styling ------------- //
   BuddyList_Text: {
@@ -181,16 +200,58 @@ const styles = StyleSheet.create({
   },
 
   // ------------- BuddyCard styling ------------- //
-  Connect_Buttons: {
+
+  BuddyCard: {
+    minHeight: 175,
+  },
+
+  BuddyCard_Button: {
     position: 'absolute',
     top: 10,
     right: 10,
+    marginLeft: 30,
   },
 
-  Avatar_Image: {
+  BuddyCard_ProfileButton: {
+    top: 70,
+    right: -2,
+  },
+
+  BuddyCard_Username: {
+    fontWeight: 'bold',
+  },
+
+  BuddyCard_TextView: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-end',
+    marginHorizontal: '5%',
+  },
+
+  BuddyCard_CategoryText: {
+    fontWeight: 'bold',
+    marginLeft: '25%',
+  },
+
+  BuddyCard_Text: {
+    marginLeft: 5,
+  },
+
+  BuddyCard_Interests: {
     position: 'absolute',
-    top: 10,
+    top: '60%',
+    left: '25%',
+  },
+
+  BuddyCard_Image: {
+    position: 'absolute',
+    top: '28%',
     left: 10,
+    borderColor: '#aba9a9',
+    borderWidth: 1,
+    borderRadius: 5,
+    overflow: 'hidden',
   },
 });
 
