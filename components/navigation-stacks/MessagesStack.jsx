@@ -1,11 +1,11 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MessageBoard from '../MessageBoard';
-import getCommonScreens from './getCommonScreens';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import MessageBoard from "../MessageBoard";
+import getCommonScreens from "./getCommonScreens";
 
 const Stack = createNativeStackNavigator();
 const commonScreens = getCommonScreens(Stack);
 
-function MessagesStack() {
+function MessagesStack({ eventNameForMessages }) {
   return (
     <Stack.Navigator
       initialRouteName="MessageBoard"
@@ -18,6 +18,7 @@ function MessagesStack() {
           <MessageBoard
             {...props}
             //exampleProp={exampleVariable}
+            eventNameForMessages={eventNameForMessages}
           />
         )}
       </Stack.Screen>

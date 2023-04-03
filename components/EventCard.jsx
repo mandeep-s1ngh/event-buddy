@@ -3,10 +3,10 @@
 // import { Card, Badge, Button, Icon, View } from '@rneui/themed';
 //import { Badge, View } from "react-native-elements";
 //import styles from "../styles";
-import { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { Card, Button } from '@rneui/themed';
-import { useNavigation } from '@react-navigation/native';
+import { useState } from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { Card, Button } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
 
 function EventCard({
   //sorted by date ascending by default?
@@ -18,16 +18,18 @@ function EventCard({
   event_buddies, //from our 'users' DB
   event_talks, //from our 'messages' DB
   setEventNameForBuddies,
+  setEventNameForMessages,
 }) {
   const navigation = useNavigation();
 
   const goToBuddyList = () => {
     setEventNameForBuddies(event_title);
-    navigation.navigate('Buddies');
+    navigation.navigate("Buddies");
   };
 
   const goToMessageBoard = () => {
-    navigation.navigate('MessageBoard');
+    setEventNameForMessages(event_title);
+    navigation.navigate("Messages");
   };
 
   const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
@@ -77,13 +79,13 @@ function EventCard({
 
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
-                Buddies going: {buddiesDisplay}{' '}
+                Buddies going: {buddiesDisplay}{" "}
               </Text>
               {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
               <Button
                 style={styles.button}
                 onPress={updateBuddies}
-                title={!joined ? 'Join the event' : 'Not in the mood'}
+                title={!joined ? "Join the event" : "Not in the mood"}
               ></Button>
             </View>
 
@@ -95,7 +97,7 @@ function EventCard({
               <Button
                 style={styles.button}
                 onPress={goToMessageBoard}
-                title={'Message board'}
+                title={"Message board"}
               ></Button>
               {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
                   <Text >Message board</Text>
@@ -112,29 +114,29 @@ function EventCard({
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: '100%',
-    flexDirection: 'column',
+    width: "100%",
+    flexDirection: "column",
     flex: 1,
     borderRadius: 80,
   },
   titleContainer: {
-    width: '100%',
-    flexDirection: 'column',
+    width: "100%",
+    flexDirection: "column",
     flex: 1,
     borderRadius: 80,
   },
   date: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontWeight: "bold",
   },
   title: {
     fontSize: 14,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   location: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 14,
     marginBottom: 10,
   },
@@ -144,32 +146,32 @@ const styles = StyleSheet.create({
     //justifyContent: 'space-between',
   },
   imageContainer: {
-    width: '100%',
+    width: "100%",
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 150,
     marginBottom: 5,
   },
   textContainer: {
     //backgroundColor: 'red',
-    flexDirection: 'column',
+    flexDirection: "column",
     marginTop: 5,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   genreContainer: {
     //flexDirection: 'row',
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   buddiesContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     margin: 5,
-    justifyContent: 'space-between',
-    fontWeight: 'bold',
+    justifyContent: "space-between",
+    fontWeight: "bold",
   },
   genreLabel: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginRight: 5,
   },
   button: {

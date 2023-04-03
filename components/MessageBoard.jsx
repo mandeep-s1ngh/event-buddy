@@ -1,8 +1,42 @@
+import { useEffect, useState } from "react";
 import { Card, ListItem, Avatar } from "@rneui/themed";
-import { ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView } from "react-native";
+import { getMessageBoardMessages } from "../api/getMessageBoardMessages.js";
+import { postToMessageBoard } from "../api/postToMessageBoard";
 import styles from "../styles.js";
 
-const MessageBoard = () => {
+const MessageBoard = ({ eventNameForMessages }) => {
+  console.log(eventNameForMessages, "messageboard component");
+  const [event, setEvent] = useState("");
+
+  useEffect(() => {
+    postToMessageBoard(eventNameForMessages)
+      .then((result) => {
+        console.log(result, "when does this get logged?");
+        if (!result) return Promise.resolve(false);
+        const eventTitle = result.Items;
+        return Promise.all(eventTitle);
+      })
+      .then((nameOfEvent) => {
+        setEvent(nameOfEvent);
+      });
+  }, []);
+
+  // useEffect(() => {
+  //   getMessageBoardMessages(eventNameForMessages)
+  //     .then((result) => {
+  //       console.log(result);
+  //       if (!result) return Promise.resolve(false);
+  //       const eventName = result.Item;
+  //       return Promise.all(eventName);
+  //     })
+  //     .then((nameOfEvent) => {
+  //       setEvent(nameOfEvent);
+  //     });
+  // }, []);
+
+  if (!event) return <ActivityIndicator />;
+
   return (
     <>
       <ScrollView>
