@@ -9,6 +9,15 @@ function Menu({ loggedIn, setLoggedIn, user }) {
     setLoggedIn(!loggedIn);
   }
 
+  function testPatchProfile() {
+    patchUserProfile('Carces', null, null, null, [
+      'climbing',
+      'swimming',
+      'hip-hop',
+      '-cooking',
+    ]).then((res) => console.log(res, '<< final res'));
+  }
+
   return (
     <View
       style={
@@ -26,7 +35,11 @@ function Menu({ loggedIn, setLoggedIn, user }) {
       )}
       {loggedIn ? <Text style={styles.Menu_Text}>My events</Text> : null}
       {loggedIn ? <Text style={styles.Menu_Text}>My messages</Text> : null}
-      {loggedIn ? <Text style={styles.Menu_Text}>My profile</Text> : null}
+      {loggedIn ? (
+        <TouchableHighlight onPress={testPatchProfile}>
+          <Text style={styles.Menu_Text}>My profile</Text>
+        </TouchableHighlight>
+      ) : null}
       <Text style={styles.Menu_Text}>Settings</Text>
       {loggedIn ? (
         <TouchableHighlight onPress={toggleLoggedIn}>
