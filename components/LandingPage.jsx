@@ -26,6 +26,7 @@ const LandingPage = (props) => {
         placeholder="Enter event name, music genre etc...."
         onChangeText={(text) => setUserInput(text)}
         value={userInput}
+        // style={styles.Profile_Tag_TextInput}
       />
       <Button
         style={styles.LandingPage_Button}

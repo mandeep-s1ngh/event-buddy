@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getTicketMasterEvents } from '../api/eventsListapi';
 import EventCard from './EventCard';
 
-export default function EventsList({ setEventNameForBuddies }) {
+export default function EventsList({ setEventNameForBuddies, setEventNameForMessages }) {
   const [eventsList, setEventsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -24,16 +24,6 @@ export default function EventsList({ setEventNameForBuddies }) {
         setIsError(true);
       });
   }, []);
-
-  //what we need fo preview card:
-
-  //event short title
-  //event short place
-  //event genre(s)
-  // event picture
-  // event date
-  // users number       //from our 'users' DB or generated
-  // messages number    //from our 'messages' DB generated
 
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
@@ -59,7 +49,7 @@ export default function EventsList({ setEventNameForBuddies }) {
       title: event.name,
       location: location,
       genre: genre,
-      date: event.dates.start.localDate || '01.01.01', // add date!
+      date: event.dates.start.localDate,
       img: event.images[3].url,
       buddies: buddies,
       talks: talks,
@@ -83,6 +73,8 @@ export default function EventsList({ setEventNameForBuddies }) {
                 event_img_URL_preview={event.img}
                 event_buddies={event.buddies}
                 event_talks={event.talks}
+                setEventNameForBuddies = { setEventNameForBuddies }
+                setEventNameForMessages = {setEventNameForMessages}
               />
             </View>
           );
