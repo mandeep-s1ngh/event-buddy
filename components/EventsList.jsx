@@ -30,7 +30,7 @@ export default function EventsList({
         setIsError(true);
         setErrorMessage(err);
       });
-  }, []);
+  }, [eventName, userLocation]);
   console.log ('isLoading ->', isLoading);
   console.log ('isError ->', isError)
   console.log ('error ->', errorMessage)
