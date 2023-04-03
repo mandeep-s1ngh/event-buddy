@@ -7,7 +7,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 
 const LandingPage = (props) => {
-  const { eventName, setEventName } = props;
+  const { eventName, setEventName} = props;
   const [userInput, setUserInput] = useState("");
 
   const navigation = useNavigation();
