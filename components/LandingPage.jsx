@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "../styles.js";
 
 const LandingPage = (props) => {
-  const { eventName, setEventName } = props;
+  const { eventName, setEventName} = props;
   const [userInput, setUserInput] = useState("");
 
   const navigation = useNavigation();
