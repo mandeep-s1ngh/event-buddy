@@ -2,12 +2,20 @@ import axios from 'axios';
 
 const ticketMasterApi = axios.create({baseURL: "https://app.ticketmaster.com/discovery/v2"});
 
-export const getTicketMasterEvents = (eventName, userLocation) => {
+export const getTicketMasterEvents = (eventName, geohash) => {
   let path='/events.json?apikey=bP1t2OXaOv6BYhMGG65SCwVnoAGRd3zJ'
 
   if (eventName) {  
   
     path += `&keyword=${eventName+' festival'}&classificationName=Music`;
+
+  } else {
+    path +='/&keyword=festival&classificationName=Music';
+  }
+
+  if (geohash) {  
+  
+    path += ``;
 
   } else {
     path +='/&keyword=festival&classificationName=Music';
