@@ -9,18 +9,14 @@ export const getTicketMasterEvents = (eventName, geohash) => {
   
     path += `&keyword=${eventName+' festival'}&classificationName=Music`;
 
-  } else {
-    path +='/&keyword=festival&classificationName=Music';
-  }
-
-  if (geohash) {  
+  } if (geohash) {  
   
-    path += ``;
+    path += `&geoPoint=${geohash}&keyword=festival&classificationName=Music`;
 
   } else {
     path +='/&keyword=festival&classificationName=Music';
   }
- 
+
   return ticketMasterApi
   .get(path)
   .then((response) => {

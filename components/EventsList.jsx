@@ -15,14 +15,14 @@ export default function EventsList({
   let geohash = '';
   if (userLocation) {
   console.log (userLocation);
-  const precision = 4;
-   // #   (maximum X axis error, in km)     
-  // 4   ± 20
-  // 5   ± 2.4
+  const precision = 9;
+  // precision is maximum X axis error index:     
+  // 4   ± 20 km - not true! gives Leeds for 'London'
+  // 5   ± 2.4 km - still gives Leeds
+  // 9 - still Leeds, 10 - nothing
   
   geohash = Geohash.encode(userLocation.geolocation.latitude, userLocation.geolocation.longitude, precision); 
   console.log(geohash);
-  console.log(typeof geohash);
   }
 
   const [eventsList, setEventsList] = useState([]);
@@ -47,7 +47,7 @@ export default function EventsList({
         setIsError(true);
         setErrorMessage(err);
       });
-  }, [eventName, userLocation]);
+  }, [eventName, userLocation]); //not updating with changes ?
   // console.log ('isLoading ->', isLoading);
   // console.log ('isError ->', isError)
   // console.log ('error ->', errorMessage)
