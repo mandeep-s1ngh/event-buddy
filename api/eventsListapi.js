@@ -10,7 +10,7 @@ export const getTicketMasterEvents = (eventName, userLocation) => {
     path += `&keyword=${eventName+' festival'}&classificationName=Music`;
 
   } else {
-    path +='&classificationName=Music'
+    path ='/events.json?keyword=festival&classificationName=Music&apikey=bP1t2OXaOv6BYhMGG65SCwVnoAGRd3zJ';
   }
   console.log(path);
   return ticketMasterApi
