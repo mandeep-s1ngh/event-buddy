@@ -5,7 +5,7 @@ import getCommonScreens from './getCommonScreens';
 const Stack = createNativeStackNavigator();
 const commonScreens = getCommonScreens(Stack);
 
-function MessagesStack() {
+function MessagesStack({eventNameForMessages}) {
   return (
     <Stack.Navigator
       initialRouteName="MessageBoard"
@@ -17,6 +17,7 @@ function MessagesStack() {
         {(props) => (
           <MessageBoard
             {...props}
+            eventNameForMessages = {eventNameForMessages}
             //exampleProp={exampleVariable}
           />
         )}

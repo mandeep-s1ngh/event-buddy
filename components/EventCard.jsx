@@ -18,6 +18,7 @@ function EventCard({
   event_buddies, //from our 'users' DB
   event_talks, //from our 'messages' DB
   setEventNameForBuddies,
+  setEventNameForMessages
 }) {
   const navigation = useNavigation();
 
@@ -27,6 +28,7 @@ function EventCard({
   };
 
   const goToMessageBoard = () => {
+    setEventNameForMessages(event_title);
     navigation.navigate('Messages');
   };
 
