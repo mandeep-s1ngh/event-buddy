@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
   },
 
   Location_TextInfo: {
-    paddingBottom: 15
-    },
+    paddingBottom: 15,
+  },
 
   Location_TextInput: {
     height: 30,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: '#ec8e2f',
     width: 130,
-    },
+  },
 
   // ------------- Landing page styling ------------- //
   LandingPage_View: {
@@ -181,16 +181,58 @@ const styles = StyleSheet.create({
   },
 
   // ------------- BuddyCard styling ------------- //
-  Connect_Buttons: {
+
+  BuddyCard: {
+    minHeight: 175,
+  },
+
+  BuddyCard_Button: {
     position: 'absolute',
     top: 10,
     right: 10,
+    marginLeft: 30,
   },
 
-  Avatar_Image: {
+  BuddyCard_ProfileButton: {
+    top: 70,
+    right: -2,
+  },
+
+  BuddyCard_Username: {
+    fontWeight: 'bold',
+  },
+
+  BuddyCard_TextView: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-end',
+    marginHorizontal: '5%',
+  },
+
+  BuddyCard_CategoryText: {
+    fontWeight: 'bold',
+    marginLeft: '25%',
+  },
+
+  BuddyCard_Text: {
+    marginLeft: 10,
+  },
+
+  BuddyCard_Interests: {
     position: 'absolute',
-    top: 10,
+    top: '60%',
+    left: '25%',
+  },
+
+  BuddyCard_Image: {
+    position: 'absolute',
+    top: '28%',
     left: 10,
+    borderColor: '#aba9a9',
+    borderWidth: 1,
+    borderRadius: 5,
+    overflow: 'hidden',
   },
 });
 
