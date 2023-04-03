@@ -5,7 +5,7 @@ import { getAttendees } from '../api/getAttendees';
 import { getUserProfile } from '../api/getUserProfile';
 import styles from '../styles';
 
-const BuddyList = ({ eventNameForBuddies }) => {
+const BuddyList = ({ eventNameForBuddies, setUsernameForProfile }) => {
   const [attendees, setAttendees] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,6 +43,7 @@ const BuddyList = ({ eventNameForBuddies }) => {
         age={ageValue}
         gender={genderValue}
         interests={interestsValue}
+        setUsernameForProfile={setUsernameForProfile}
       />
     );
   });
