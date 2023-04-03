@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     color: navBarText,
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: '1%', //use 33% when there is a left navbar icon e.g. home
+    marginRight: '10%', //use 33% when there is a left navbar icon e.g. home
     // marginRight: 'auto',
   },
   NavBar_RightButtons: {
@@ -134,7 +134,10 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif-medium'
   },
   LandingPage_TextInfo: {
-    paddingBottom: 15
+    fontSize:15,
+    paddingBottom: 15,
+    width: 250,
+    alignContent: 'center' 
   },
   LandingPage_TextInput: {
     height: 35,
