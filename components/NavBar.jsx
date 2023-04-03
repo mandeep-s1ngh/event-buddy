@@ -29,7 +29,7 @@ function NavBar({ menuShown, setMenuShown }) {
       </TouchableHighlight> */}
 
     <Image
-        source={require('./two_white_icons.png')}
+        source={require('../images/two_white_icons.png')}
         style={{width: 30, height: 30, marginLeft: '20%'}}
       />
       <TouchableHighlight onPress={navigateToHome}>
