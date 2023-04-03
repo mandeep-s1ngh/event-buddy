@@ -135,7 +135,10 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif-medium',
   },
   LandingPage_TextInfo: {
+    fontSize: 15,
     paddingBottom: 15,
+    width: 250,
+    alignContent: 'center',
   },
   LandingPage_TextInput: {
     height: 35,

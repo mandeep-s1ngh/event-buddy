@@ -58,7 +58,7 @@ const Profile = ({ usernameForProfile = 'Carces' }) => {
         now!
       </Text>
       <Image
-        source={require('./michael-jackson.jpg')}
+        source={require('../images/michael-jackson.jpg')}
         style={styles.Profile_Image}
       />
       <Text style={styles.Profile_username}>{usernameForProfile}</Text>
