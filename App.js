@@ -71,7 +71,7 @@ export default function App() {
               )}
             </Tab.Screen>
 
-            {/* <Tab.Screen
+            <Tab.Screen
               name="Location"
               options={{
                 tabBarIcon: ({ color, size }) => (
@@ -85,7 +85,7 @@ export default function App() {
                   setUserLocation={setUserLocation}
                 />
               )}
-            </Tab.Screen> */}
+            </Tab.Screen>
 
             <Tab.Screen
               name="Buddies"
@@ -108,7 +108,7 @@ export default function App() {
             >
               {() => <EventsList />}
             </Tab.Screen>
-            {/* <Tab.Screen
+            <Tab.Screen
               name="Profile"
               options={{
                 tabBarIcon: ({ color, size }) => (
@@ -117,7 +117,7 @@ export default function App() {
               }}
             >
               {(props) => <Profile {...props} setEventName={setEventName} />}
-            </Tab.Screen> */}
+            </Tab.Screen>
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
