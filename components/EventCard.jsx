@@ -49,10 +49,9 @@ function EventCard({
     <Card>
       <View style={styles.mainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>
-            &nbsp;{event_date} | {event_place}
-          </Text>
-          <Text style={styles.location}>{event_title}</Text>
+          <Text style={styles.date}>&nbsp;{event_date}</Text>
+          <Text style={styles.title}>{event_title}</Text>
+          <Text style={styles.location}>{event_place}</Text>
         </View>
 
         <View style={styles.bodyContainer}>
@@ -64,20 +63,21 @@ function EventCard({
             />
           </View>
 
-          <View style={styles.detailsContainer}>
-            {/* <View style={styles.buddiesContainer}>
+          {/* <View style={styles.detailsContainer}> */}
+          {/* <View style={styles.buddiesContainer}>
           <Text style={styles.genreLabel}>Starts:&nbsp;</Text>
           <Text style={styles.genre}>{event_date}</Text> 
         </View> */}
 
-            <View style={styles.textContainer}>
-              <Text style={styles.genreLabel}>Event genre: {event_genre}</Text>
-              {/* <Text style={styles.genre}>{event_genre}</Text>  */}
-            </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.buddiesContainer}>
+              Event genre: {event_genre}
+            </Text>
+            {/* <Text style={styles.genre}>{event_genre}</Text>  */}
 
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
-                Buddies going: {buddiesDisplay}
+                Buddies going: {buddiesDisplay}{' '}
               </Text>
               {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
               <Button
@@ -86,17 +86,20 @@ function EventCard({
                 title={!joined ? 'Join the event' : 'Not in the mood'}
               ></Button>
             </View>
+
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
                 Talks about event: {event_talks}
               </Text>
               {/* <Text style={styles.genre}>{event_talks}</Text> */}
-              <Button style={styles.button} onPress={goToMessageBoard}>
-                Message board
-              </Button>
+              <Button
+                style={styles.button}
+                onPress={goToMessageBoard}
+                title={'Message board'}
+              ></Button>
               {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
-            <Text >Message board</Text>
-          </TouchableHighlight> */}
+                  <Text >Message board</Text>
+                </TouchableHighlight> */}
             </View>
           </View>
         </View>
@@ -104,7 +107,7 @@ function EventCard({
     </Card>
   );
 }
-// to highlight changes: //, {{backgroundColor: 'red', margin: 50}}
+// to highlight changes: //, {{backgroundColor: 'red',}}
 // position: "absolute" ?
 
 const styles = StyleSheet.create({
@@ -112,22 +115,33 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'column',
     flex: 1,
-    borderRadius: 10,
+    borderRadius: 80,
   },
   titleContainer: {
-    fontWeight: 'bold',
-  },
-  bodyContainer: {
+    width: '100%',
+    flexDirection: 'column',
     flex: 1,
-    borderRadius: 10,
-    justifyContent: 'space-between',
+    borderRadius: 80,
+  },
+  date: {
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   title: {
     fontSize: 14,
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
   location: {
+    textAlign: 'center',
     fontSize: 14,
     marginBottom: 10,
+  },
+  bodyContainer: {
+    //flex: 1,
+    //borderRadius: 80,
+    //justifyContent: 'space-between',
   },
   imageContainer: {
     width: '100%',
@@ -138,56 +152,29 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   textContainer: {
-    flexDirection: 'row',
+    //backgroundColor: 'red',
+    flexDirection: 'column',
     marginTop: 5,
     justifyContent: 'space-between',
   },
+  genreContainer: {
+    //flexDirection: 'row',
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
   buddiesContainer: {
     flexDirection: 'row',
-    fontWeight: 'bold',
     margin: 5,
     justifyContent: 'space-between',
-  },
-
-  location: {
-    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  genreContainer: {
-    flexDirection: 'row',
-    //alignItems: 'left',
-    marginBottom: 5,
   },
   genreLabel: {
     fontWeight: 'bold',
     marginRight: 5,
   },
-  genre: {
-    fontSize: 16,
-  },
-  attendeesContainer: {
-    flexDirection: 'row-reverse',
-    marginBottom: 5,
-  },
-  attendeesLabel: {
-    fontWeight: 'bold',
-    marginRight: 5,
-  },
-  detailsButton: {
-    margin: 10,
-  },
   button: {
-    marginLeft: 10,
-    justifyContent: 'center',
-  },
-  messagesContainer: {
-    flexDirection: 'row',
-    marginBottom: 5,
-  },
-  messagesLabel: {
-    fontWeight: 'bold',
-    marginRight: 5,
+    //marginLeft: 10,
+    //justifyContent: 'center',
   },
 });
 
