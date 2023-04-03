@@ -18,6 +18,7 @@ export default function App() {
   const [userLocation, setUserLocation] = useState('');
   const [eventName, setEventName] = useState('');
   const [eventNameForBuddies, setEventNameForBuddies] = useState('');
+  const [eventNameForMessages, setEventNameForMessages] = useState('');
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState('Theo');
@@ -88,6 +89,7 @@ export default function App() {
                   eventName={eventName}
                   userLocation={userLocation}
                   setEventNameForBuddies={setEventNameForBuddies}
+                  setEventNameForMessages={setEventNameForMessages}
                 />
               )}
             </Tab.Screen>
@@ -103,7 +105,8 @@ export default function App() {
               {(props) => (
                 <MessagesStack
                   {...props}
-                  //exampleProp={exampleVariable}
+                  eventNameForMessages={eventNameForMessages}
+          
                 />
               )}
             </Tab.Screen>

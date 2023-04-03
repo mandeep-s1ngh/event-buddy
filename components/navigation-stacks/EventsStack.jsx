@@ -5,7 +5,7 @@ import getCommonScreens from './getCommonScreens';
 const Stack = createNativeStackNavigator();
 const commonScreens = getCommonScreens(Stack);
 
-function EventsStack({ eventName, userLocation, setEventNameForBuddies }) {
+function EventsStack({ eventName, userLocation, setEventNameForBuddies, setEventNameForMessages }) {
   return (
     <Stack.Navigator
       initialRouteName="EventsList"
@@ -20,6 +20,7 @@ function EventsStack({ eventName, userLocation, setEventNameForBuddies }) {
             eventName={eventName}
             userLocation={userLocation}
             setEventNameForBuddies={setEventNameForBuddies}
+            setEventNameForMessages={setEventNameForMessages}
           />
         )}
       </Stack.Screen>
