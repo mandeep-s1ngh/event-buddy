@@ -1,5 +1,7 @@
 import { View, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
+import Geohash from 'latlon-geohash';
+
 import { getTicketMasterEvents } from '../api/eventsListapi';
 import EventCard from './EventCard';
 
@@ -9,6 +11,20 @@ export default function EventsList({
   setEventNameForBuddies, 
   setEventNameForMessages
  }) {
+
+  let geohash = '';
+  if (userLocation) {
+  console.log (userLocation);
+  const precision = 4;
+   // #   (maximum X axis error, in km)     
+  // 4   ± 20
+  // 5   ± 2.4
+  
+  geohash = Geohash.encode(userLocation.geolocation.latitude, userLocation.geolocation.longitude, precision); 
+  console.log(geohash);
+  console.log(typeof geohash);
+  }
+
   const [eventsList, setEventsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -20,7 +36,8 @@ export default function EventsList({
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    getEvents(eventName, userLocation)
+    getEvents(eventName, geohash) //crushes the app, geohash does not exist at start - but so is with userLocation and eventName
+    //getEvents(eventName, userLocation)
       .then((events) => {
         setEventsList(events);
         setIsLoading(false);
