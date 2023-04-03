@@ -51,10 +51,11 @@ const styles = StyleSheet.create({
     backgroundColor: navBarBackground,
     position: 'absolute',
     right: 0,
-    top: '7.3%',
+    top: 55,
     zIndex: 5,
-    height: '11%',
+    height: '10%',
     width: '50%',
+    maxWidth: 150,
     flex: 0,
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -62,13 +63,13 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   Menu_ViewLoggedIn: {
-    height: '26%',
+    height: '25%',
   },
   Menu_Text: {
     color: navBarText,
     fontSize: 14,
     fontWeight: 'bold',
-    marginHorizontal: '15%',
+    marginHorizontal: '10%',
     marginVertical: 0,
   },
   // ------------- LocationRequest styling ------------- //
@@ -117,8 +118,8 @@ const styles = StyleSheet.create({
   LandingPage_Input: {
     textAlign: 'center',
   },
-  // ------------- Profile page styling ------------- //
-  Profile_Page: {
+  // ------------- Profile styling ------------- //
+  Profile_View: {
     // textAlign: 'center',
     // color: '#000000',
     // alignSelf: 'center',
@@ -132,17 +133,17 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 10,
   },
-  Profile_Page_Image: {
+  Profile_Image: {
     // resizeMode: 'cover',
     height: 150,
     width: 300,
     borderRadius: 8,
   },
-  Profile_Page_username: {
+  Profile_username: {
     fontWeight: 'bold',
     fontSize: 20,
   },
-  Profile_Tag_TextInput: {
+  Profile_TextInput: {
     height: 30,
     backgroundColor: '#f7e0c9',
     fontSize: 12,
@@ -159,19 +160,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#ec8e2f',
     width: 130,
   },
-  Profile_Buttons_Text: {
+  Profile_ButtonsText: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
     color: 'white',
   },
-  Profile_Buttons_Click: {
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-  },
+  // Profile_Buttons_Click: {
+  //   alignItems: 'center',
+  //   backgroundColor: '#DDDDDD',
+  //   padding: 10,
+  // },
 
   // ------------- Buddy card styling ------------- //
+  Connect_Buttons: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+
+  Avatar_Image: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+  },
 });
 
 export default styles;

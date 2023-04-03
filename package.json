@@ -28,7 +28,9 @@
     "expo-location": "~15.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "metro": "^0.76.0",
+    "metro-core": "^0.76.0"
   },
   "private": true
 }

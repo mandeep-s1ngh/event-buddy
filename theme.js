@@ -12,15 +12,6 @@ export default theme = createTheme({
       //'dark',
     'light',
 
-    // container: {      //shouldn't it be in theme rather than in styles? does it do anything?
-    //     flex: 1,
-    //     flexDirection: "row",
-    //     alignItems: "center",
-    //     justifyContent: "space-between",
-    //     gap: 10,
-    //     padding: 90,
-    // },
-
   components: {
     Button: {
       titleStyle: {

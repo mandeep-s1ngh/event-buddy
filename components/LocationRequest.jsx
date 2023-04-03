@@ -1,16 +1,16 @@
 import { Button } from "@rneui/base";
 import { Text, TextInput, View, TouchableHighlight } from "react-native";
 import styles from "../styles";
-
 import { useState, useEffect } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
-
 import * as Location from 'expo-location';
+import { getGeolocationFromAddress } from "../api/getGeolocationFromAddress";
+import {getAddressFromGeolocation} from '../api/getAddressFromGeolocation'
 
 const LocationRequest = (props) => {
-  const [location, setLocation] = useState(null);
+  const { setUserLocation } = props;
   const [errorMsg, setErrorMsg] = useState(null);
+  const [locationInput, setLocationInput] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -22,26 +22,21 @@ const LocationRequest = (props) => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+
+      const latitude = location["coords"]["latitude"]
+      const longitude = location["coords"]["longitude"]
+
+      const address = await getAddressFromGeolocation(latitude, longitude)
+      setUserLocation({geolocation: {latitude, longitude}, address: address});
     })();
   }, []);
 
-  let text = 'Waiting..';
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
-  
-  console.log(text)
-  
-
   // ----------------------------------------------------------------------------
-  const { userLocation, setUserLocation } = props;
-
   const navigation = useNavigation();
 
-  function navigateToEventsList() {
+  async function navigateToEventsList()  {
+    let geolocationFromLocationInput = await getGeolocationFromAddress(locationInput)
+    setUserLocation({geolocation: geolocationFromLocationInput, address: locationInput})
     navigation.navigate('Events');
   }
 
@@ -57,12 +52,12 @@ const LocationRequest = (props) => {
       </View>
 
       <Text style={styles.Location_TextInfo}>Alternatively, enter your location below:</Text>
-      <TextInput value={userLocation} onChangeText={(userLocation) => {setUserLocation(userLocation);}} style={styles.Location_TextInput}
+      <TextInput value={locationInput} onChangeText={(locationInput) => {setLocationInput(locationInput);}} style={styles.Location_TextInput}
         placeholder="Venue, city, zip code"
       />
 
       <View style={{paddingTop: 10, paddingBottom: 10} }>
-        <TouchableHighlight  style={styles.Location_Buttons} onPress={navigateToEventsList}>
+        <TouchableHighlight  style={styles.Location_Buttons} onPress={navigateToEventsList} >
           <Text style={styles.Location_Buttons_Text}>Submit</Text>
         </TouchableHighlight>
       </View>

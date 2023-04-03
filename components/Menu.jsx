@@ -1,4 +1,5 @@
 import { Text, TouchableHighlight, View } from 'react-native';
+import { patchUserProfile } from '../api/patchUserProfile';
 import styles from '../styles';
 
 function Menu({ loggedIn, setLoggedIn, user }) {
@@ -7,7 +8,6 @@ function Menu({ loggedIn, setLoggedIn, user }) {
   function toggleLoggedIn() {
     setLoggedIn(!loggedIn);
   }
-  console.log(loggedIn);
 
   return (
     <View
