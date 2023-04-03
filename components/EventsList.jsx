@@ -28,16 +28,6 @@ export default function EventsList({
       });
   }, []);
 
-  //what we need fo preview card:
-
-  //event short title
-  //event short place
-  //event genre(s)
-  // event picture
-  // event date
-  // users number       //from our 'users' DB or generated
-  // messages number    //from our 'messages' DB generated
-
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
     if (event._embedded.venues[0].state) {
@@ -62,7 +52,7 @@ export default function EventsList({
       title: event.name,
       location: location,
       genre: genre,
-      date: event.dates.start.localDate || "01.01.01", // add date!
+      date: event.dates.start.localDate,
       img: event.images[3].url,
       buddies: buddies,
       talks: talks,
@@ -70,7 +60,19 @@ export default function EventsList({
     };
   });
 
-  const events_list = ticketmaster_list;
+  const filtered_ticket_options = ticketmaster_list.filter(
+    (event) => !event.title.includes("Ticket" || "ticket")
+  );
+
+  const uniqueNames = new Set();
+  const events_list = filtered_ticket_options.filter((event) => {
+    if (uniqueNames.has(event.title)) {
+      return false;
+    } else {
+      uniqueNames.add(event.title);
+      return true;
+    }
+  });
 
   return (
     <ScrollView>
@@ -86,6 +88,7 @@ export default function EventsList({
                 event_img_URL_preview={event.img}
                 event_buddies={event.buddies}
                 event_talks={event.talks}
+                setEventNameForBuddies={setEventNameForBuddies}
                 setEventNameForMessages={setEventNameForMessages}
               />
             </View>

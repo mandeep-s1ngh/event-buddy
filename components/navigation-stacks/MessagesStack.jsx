@@ -17,6 +17,7 @@ function MessagesStack({ eventNameForMessages }) {
         {(props) => (
           <MessageBoard
             {...props}
+            eventNameForMessages={eventNameForMessages}
             //exampleProp={exampleVariable}
             eventNameForMessages={eventNameForMessages}
           />

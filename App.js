@@ -19,11 +19,14 @@ export default function App() {
   const [eventName, setEventName] = useState("");
   const [eventNameForBuddies, setEventNameForBuddies] = useState("");
   const [eventNameForMessages, setEventNameForMessages] = useState("");
+  const [usernameForProfile, setUsernameForProfile] = useState("");
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState("Theo");
 
   const Tab = createBottomTabNavigator();
+
+  console.log(usernameForProfile, "<<< un prof");
 
   return (
     <SafeAreaProvider>
@@ -40,6 +43,7 @@ export default function App() {
             initialRouteName="Home"
             screenOptions={{
               headerShown: false,
+              tabBarActiveTintColor: "orange",
             }}
           >
             <Tab.Screen
@@ -71,6 +75,8 @@ export default function App() {
                 <BuddiesStack
                   {...props}
                   eventNameForBuddies={eventNameForBuddies}
+                  usernameForProfile={usernameForProfile}
+                  setUsernameForProfile={setUsernameForProfile}
                 />
               )}
             </Tab.Screen>
@@ -105,7 +111,6 @@ export default function App() {
               {(props) => (
                 <MessagesStack
                   {...props}
-                  //exampleProp={exampleVariable}
                   eventNameForMessages={eventNameForMessages}
                 />
               )}

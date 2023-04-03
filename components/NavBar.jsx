@@ -1,7 +1,7 @@
 import { Header, Icon } from '@rneui/themed';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Button, Text, TouchableHighlight, View } from 'react-native';
+import { Button, Text, TouchableHighlight, View, Image } from 'react-native';
 import styles from '../styles';
 
 function NavBar({ menuShown, setMenuShown }) {
@@ -28,9 +28,14 @@ function NavBar({ menuShown, setMenuShown }) {
         <Icon name="home" color="#fff" />
       </TouchableHighlight> */}
 
+    <Image
+        source={require('../images/two_white_icons.png')}
+        style={{width: 30, height: 30, marginLeft: '20%'}}
+      />
       <TouchableHighlight onPress={navigateToHome}>
         <Text style={styles.NavBar_Text}>Event Buddy</Text>
       </TouchableHighlight>
+      
 
       <View style={styles.NavBar_RightButtons}>
         <TouchableHighlight onPress={navigateToProfile}>

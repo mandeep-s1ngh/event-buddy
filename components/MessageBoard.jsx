@@ -5,7 +5,7 @@ import { getMessageBoardMessages } from "../api/getMessageBoardMessages.js";
 import { postToMessageBoard } from "../api/postToMessageBoard";
 import styles from "../styles.js";
 
-const MessageBoard = ({ eventNameForMessages }) => {
+const MessageBoard = ({eventNameForMessages}{ eventNameForMessages }) => {
   console.log(eventNameForMessages, "messageboard component");
   const [event, setEvent] = useState("");
 

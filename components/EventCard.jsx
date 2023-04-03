@@ -4,7 +4,13 @@
 //import { Badge, View } from "react-native-elements";
 //import styles from "../styles";
 import { useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableHighlight,
+} from "react-native";
 import { Card, Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
@@ -65,27 +71,31 @@ function EventCard({
             />
           </View>
 
-          {/* <View style={styles.detailsContainer}> */}
-          {/* <View style={styles.buddiesContainer}>
-          <Text style={styles.genreLabel}>Starts:&nbsp;</Text>
-          <Text style={styles.genre}>{event_date}</Text> 
-        </View> */}
-
           <View style={styles.textContainer}>
-            <Text style={styles.buddiesContainer}>
-              Event genre: {event_genre}
-            </Text>
-            {/* <Text style={styles.genre}>{event_genre}</Text>  */}
-
+            <View style={styles.buddiesContainer}>
+              <Text style={styles.genreLabel}>Event genre: {event_genre}</Text>
+              {/* <Text style={styles.genre}>{event_genre}</Text>  */}
+            </View>
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
                 Buddies going: {buddiesDisplay}{" "}
               </Text>
-              {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
+
               <Button
                 style={styles.button}
                 onPress={updateBuddies}
+                color="#ec8e2f"
                 title={!joined ? "Join the event" : "Not in the mood"}
+              ></Button>
+            </View>
+
+            <View style={styles.buddiesContainer}>
+              <Text style={styles.genreLabel}> </Text>
+
+              <Button
+                onPress={goToBuddyList}
+                title={"See who is going"}
+                color="#ec8e2f"
               ></Button>
             </View>
 
@@ -98,6 +108,7 @@ function EventCard({
                 style={styles.button}
                 onPress={goToMessageBoard}
                 title={"Message board"}
+                color="#ec8e2f"
               ></Button>
               {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
                   <Text >Message board</Text>
@@ -118,6 +129,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     borderRadius: 80,
+    fontSize: 18,
   },
   titleContainer: {
     width: "100%",
@@ -130,7 +142,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   title: {
-    fontSize: 14,
     textAlign: "center",
     fontSize: 24,
     fontWeight: "bold",
@@ -152,8 +163,10 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 150,
     marginBottom: 5,
+    borderRadius: 11,
   },
   textContainer: {
+    fontSize: 18,
     //backgroundColor: 'red',
     flexDirection: "column",
     marginTop: 5,
@@ -171,12 +184,30 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   genreLabel: {
+    fontSize: 18,
     fontWeight: "bold",
     marginRight: 5,
   },
   button: {
     //marginLeft: 10,
     //justifyContent: 'center',
+  },
+  Event_Card_Buttons: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 9,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: "#ec8e2f",
+    width: 110,
+  },
+
+  Event_Card_Buttons_Text: {
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: "white",
+    fontWeight: "bold",
   },
 });
 
