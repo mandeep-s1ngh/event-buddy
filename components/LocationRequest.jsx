@@ -2,15 +2,47 @@ import { Button } from "@rneui/base";
 import { Text, TextInput, View, TouchableHighlight } from "react-native";
 import styles from "../styles";
 
+import { useState, useEffect } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
+import * as Location from 'expo-location';
+
 const LocationRequest = (props) => {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+  
+  console.log(text)
+  
+
+  // ----------------------------------------------------------------------------
   const { userLocation, setUserLocation } = props;
 
   const navigation = useNavigation();
 
   function navigateToEventsList() {
-    navigation.navigate('EventsList');
+    navigation.navigate('Events');
   }
 
   return (
