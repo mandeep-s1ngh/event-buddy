@@ -4,7 +4,7 @@
 //import { Badge, View } from "react-native-elements";
 //import styles from "../styles";
 import { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 import { Card, Button } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 
@@ -76,21 +76,27 @@ function EventCard({
               <Text style={styles.genreLabel}>
                 Buddies going: {buddiesDisplay}{' '}
               </Text>
+
               <Button
                 style={styles.button}
                 onPress={updateBuddies}
+                color='#ec8e2f'
                 title={!joined ? 'Join the event' : 'Not in the mood'}
               ></Button>
             </View>
 
             <View style={styles.buddiesContainer}>
+
               <Text style={styles.genreLabel}>
               {' '}
               </Text>
+              
               <Button
                 onPress={goToBuddyList}
                 title={'See who is going'}
+                color='#ec8e2f'
               ></Button>
+
             </View>
 
             <View style={styles.buddiesContainer}>
@@ -102,6 +108,7 @@ function EventCard({
                 style={styles.button}
                 onPress={goToMessageBoard}
                 title={'Message board'}
+                color='#ec8e2f'
               ></Button>
               {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
                   <Text >Message board</Text>
@@ -157,6 +164,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 150,
     marginBottom: 5,
+    borderRadius: 11,
   },
   textContainer: {
      fontSize: 18,
@@ -185,7 +193,25 @@ const styles = StyleSheet.create({
   button: {
     //marginLeft: 10,
     //justifyContent: 'center',
+    
   },
+  Event_Card_Buttons: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 9,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#ec8e2f',
+    width: 110,
+    },
+
+  Event_Card_Buttons_Text: {
+      fontSize: 13,
+      lineHeight: 15,
+      letterSpacing: 0.25,
+      color: 'white',
+      fontWeight: 'bold',
+    },
 });
 
 export default EventCard;
