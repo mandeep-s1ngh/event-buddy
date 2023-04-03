@@ -31,9 +31,9 @@ export default function EventsList({
         setErrorMessage(err);
       });
   }, [eventName, userLocation]);
-  console.log ('isLoading ->', isLoading);
-  console.log ('isError ->', isError)
-  console.log ('error ->', errorMessage)
+  // console.log ('isLoading ->', isLoading);
+  // console.log ('isError ->', isError)
+  // console.log ('error ->', errorMessage)
 
     ticketmaster_list = eventsList.map((event) => {
       let location = event._embedded.venues[0].city.name;
@@ -44,7 +44,8 @@ export default function EventsList({
         location += ', ' + event._embedded.venues[0].country.name;
       }
       let genre = '';
-      if (event.classifications[0].genre.name !== 'Undefined') {
+      if (event.classifications[0].genre &&
+          event.classifications[0].genre.name !== 'Undefined') { 
         genre += event.classifications[0].genre.name;
         if (
           event.classifications[1] &&
@@ -68,22 +69,28 @@ export default function EventsList({
       };
     });
 
-  const filtered_ticket_options = ticketmaster_list.filter(event => !event.title.includes('Ticket' || 'ticket'))
-  
-  const uniqueNames = new Set();
-  const events_list = filtered_ticket_options.filter(event => {
-    if (uniqueNames.has(event.title)) {
-      return false;
-    } else {
-      uniqueNames.add(event.title);
-      return true;
-    }
-  });
+    const tooManyLeedses = ticketmaster_list.reduce((acc, curr) => { //removes Festivals with first two words matching
+      const titleWords = curr.title.split(' ');
+      const firstTwoWords = titleWords.slice(0, 2).join(' ');
+      const isDuplicate = acc.some((item) => {
+        const itemTitleWords = item.title.split(' ');
+        const itemFirstTwoWords = itemTitleWords.slice(0, 2).join(' ');
+        return itemFirstTwoWords === firstTwoWords;
+      });
+    
+      if (!isDuplicate) {
+        acc.push(curr);
+      }
+    
+      return acc;
+    }, []);
+
+  const filtered_events_list = tooManyLeedses.filter(event => !event.title.includes('Ticket' || 'ticket'))
 
   return (
     <ScrollView>
       <View>
-        {events_list.map((event) => {
+        {filtered_events_list.map((event) => {
           return (
             <View key={event.key}>
               <EventCard

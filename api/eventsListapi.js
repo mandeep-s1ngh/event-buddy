@@ -6,17 +6,16 @@ export const getTicketMasterEvents = (eventName, userLocation) => {
   let path='/events.json?apikey=bP1t2OXaOv6BYhMGG65SCwVnoAGRd3zJ'
 
   if (eventName) {  
-    console.log(eventName);
+  
     path += `&keyword=${eventName+' festival'}&classificationName=Music`;
 
   } else {
-    path ='/events.json?keyword=festival&classificationName=Music&apikey=bP1t2OXaOv6BYhMGG65SCwVnoAGRd3zJ';
+    path +='/&keyword=festival&classificationName=Music';
   }
-  console.log(path);
+ 
   return ticketMasterApi
   .get(path)
   .then((response) => {
-    console.log(response.data);
     return response.data._embedded.events;
   })
   }
