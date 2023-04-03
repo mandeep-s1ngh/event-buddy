@@ -3,11 +3,10 @@
 // import { Card, Badge, Button, Icon, View } from '@rneui/themed';
 //import { Badge, View } from "react-native-elements";
 //import styles from "../styles";
-import { useState} from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Card, Button} from "@rneui/themed";
-import { useNavigation } from "@react-navigation/native";
-
+import { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Card, Button } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
 
 function EventCard({
   //sorted by date ascending by default?
@@ -18,69 +17,93 @@ function EventCard({
   event_img_URL_preview,
   event_buddies, //from our 'users' DB
   event_talks, //from our 'messages' DB
+  setEventNameForBuddies,
 }) {
   const navigation = useNavigation();
 
+  const goToBuddyList = () => {
+    setEventNameForBuddies(event_title);
+    navigation.navigate('Buddies');
+  };
+
   const goToMessageBoard = () => {
-    navigation.navigate("MessageBoard");
+    navigation.navigate('MessageBoard');
   };
 
   const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
   const [joined, setJoined] = useState(0);
-  
-  const updateBuddies = () =>{
+
+  const updateBuddies = () => {
     setBuddiesDisplay((number) => {
-    if (!joined) {setJoined(1); return number + 1;}
-      else {setJoined(0); return number - 1;}})
-  }     
+      if (!joined) {
+        setJoined(1);
+        return number + 1;
+      } else {
+        setJoined(0);
+        return number - 1;
+      }
+    });
+  };
 
   return (
     <Card>
-    <View style={styles.mainContainer}>
-
-      <View style={styles.titleContainer}>
-        <Text style={styles.date}>&nbsp;{event_date}</Text>
-        <Text style={styles.title}>{event_title}</Text>
-        <Text style={styles.location}>{event_place}</Text>
-      </View>
-
-      <View style={styles.bodyContainer}>
-
-        <View style={styles.imageContainer}>
-          <Card.Image
-            style={styles.image}
-            resizeMode="cover"
-            source={{ uri: event_img_URL_preview }}
-          />
+      <View style={styles.mainContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.date}>&nbsp;{event_date}</Text>
+          <Text style={styles.title}>{event_title}</Text>
+          <Text style={styles.location}>{event_place}</Text>
         </View>
 
-        {/* <View style={styles.detailsContainer}> */}
-        {/* <View style={styles.buddiesContainer}>
+        <View style={styles.bodyContainer}>
+          <View style={styles.imageContainer}>
+            <Card.Image
+              style={styles.image}
+              resizeMode="cover"
+              source={{ uri: event_img_URL_preview }}
+            />
+          </View>
+
+          {/* <View style={styles.detailsContainer}> */}
+          {/* <View style={styles.buddiesContainer}>
           <Text style={styles.genreLabel}>Starts:&nbsp;</Text>
           <Text style={styles.genre}>{event_date}</Text> 
         </View> */}
 
-        <View style={styles.textContainer}>
-          <Text style={styles.buddiesContainer}>Event genre: {event_genre}</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.buddiesContainer}>
+              Event genre: {event_genre}
+            </Text>
             {/* <Text style={styles.genre}>{event_genre}</Text>  */}
-          
-          <View style={styles.buddiesContainer}>
-            <Text style={styles.genreLabel}>Buddies going: {buddiesDisplay} </Text>
-            {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
-            <Button style={styles.button} onPress={updateBuddies} title={(!joined) ? 'Join the event' : 'Not in the mood'}></Button>
-          </View>    
 
-          <View style={styles.buddiesContainer}>
-            <Text style={styles.genreLabel}>Talks about event: {event_talks}</Text>
-                {/* <Text style={styles.genre}>{event_talks}</Text> */}
-            <Button style={styles.button} onPress={goToMessageBoard} title={'Message board'}></Button>
-                    {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
+            <View style={styles.buddiesContainer}>
+              <Text style={styles.genreLabel}>
+                Buddies going: {buddiesDisplay}{' '}
+              </Text>
+              {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
+              <Button
+                style={styles.button}
+                onPress={updateBuddies}
+                title={!joined ? 'Join the event' : 'Not in the mood'}
+              ></Button>
+            </View>
+
+            <View style={styles.buddiesContainer}>
+              <Text style={styles.genreLabel}>
+                Talks about event: {event_talks}
+              </Text>
+              {/* <Text style={styles.genre}>{event_talks}</Text> */}
+              <Button
+                style={styles.button}
+                onPress={goToMessageBoard}
+                title={'Message board'}
+              ></Button>
+              {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
                   <Text >Message board</Text>
                 </TouchableHighlight> */}
+            </View>
           </View>
         </View>
       </View>
-    </View>
     </Card>
   );
 }
@@ -88,7 +111,6 @@ function EventCard({
 // position: "absolute" ?
 
 const styles = StyleSheet.create({
-
   mainContainer: {
     width: '100%',
     flexDirection: 'column',
@@ -103,8 +125,8 @@ const styles = StyleSheet.create({
   },
   date: {
     textAlign: 'center',
-   fontWeight: 'bold',
-    },
+    fontWeight: 'bold',
+  },
   title: {
     fontSize: 14,
     textAlign: 'center',
@@ -116,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 10,
   },
-    bodyContainer: {
+  bodyContainer: {
     //flex: 1,
     //borderRadius: 80,
     //justifyContent: 'space-between',
@@ -145,7 +167,7 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: 'space-between',
     fontWeight: 'bold',
-   },
+  },
   genreLabel: {
     fontWeight: 'bold',
     marginRight: 5,

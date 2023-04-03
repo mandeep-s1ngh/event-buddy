@@ -5,7 +5,7 @@ import getCommonScreens from './getCommonScreens';
 const Stack = createNativeStackNavigator();
 const commonScreens = getCommonScreens(Stack);
 
-function BuddiesStack() {
+function BuddiesStack({ eventNameForBuddies }) {
   return (
     <Stack.Navigator
       initialRouteName="BuddyList"
@@ -15,10 +15,7 @@ function BuddiesStack() {
     >
       <Stack.Screen name="BuddyList">
         {(props) => (
-          <BuddyList
-            {...props}
-            // exampleProp={exampleVariable}
-          />
+          <BuddyList {...props} eventNameForBuddies={eventNameForBuddies} />
         )}
       </Stack.Screen>
       {commonScreens}

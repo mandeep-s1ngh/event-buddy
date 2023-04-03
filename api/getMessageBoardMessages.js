@@ -6,8 +6,6 @@ export const getMessageBoardMessages = (eventName) => {
   return axios
     .get(getMessageBoardMessagesURL)
     .then((response) => {
-      console.log(response.data, '<<<<RES');
-
       return response.data;
     })
     .catch((err) => {

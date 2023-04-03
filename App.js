@@ -17,6 +17,7 @@ import MessagesStack from './components/navigation-stacks/MessagesStack.jsx';
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
   const [eventName, setEventName] = useState('');
+  const [eventNameForBuddies, setEventNameForBuddies] = useState('');
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState('Theo');
@@ -68,7 +69,7 @@ export default function App() {
               {(props) => (
                 <BuddiesStack
                   {...props}
-                  //exampleProp={exampleVariable}
+                  eventNameForBuddies={eventNameForBuddies}
                 />
               )}
             </Tab.Screen>
@@ -86,6 +87,7 @@ export default function App() {
                   {...props}
                   eventName={eventName}
                   userLocation={userLocation}
+                  setEventNameForBuddies={setEventNameForBuddies}
                 />
               )}
             </Tab.Screen>
