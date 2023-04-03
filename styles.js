@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     color: navBarText,
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: '1%', //use 33% when there is a left navbar icon e.g. home
+    marginRight: '10%', //use 33% when there is a left navbar icon e.g. home
     // marginRight: 'auto',
   },
   NavBar_RightButtons: {
@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
     paddingTop: 100,
   },
   Location_TextInfo: {
-    fontSize:15,
+    fontSize: 15,
     paddingBottom: 15,
-    width: 250
+    width: 250,
   },
   Location_TextInput: {
     height: 30,
@@ -98,15 +98,15 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: '#ec8e2f',
     width: 250,
-    },
+  },
 
   Location_Buttons_Text: {
-      fontSize: 13,
-      lineHeight: 15,
-      letterSpacing: 0.25,
-      color: 'white',
-      fontWeight: 'bold',
-    },
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 
   // ------------- Landing page styling ------------- //
   LandingPage_View: {
@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
   LandingPage_Image: {
     height: 200,
     width: 370,
+    marginTop: 20,
   },
   LandingPage_Buttons: {
     alignItems: 'center',
@@ -131,10 +132,10 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white',
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-medium'
+    fontFamily: 'sans-serif-medium',
   },
   LandingPage_TextInfo: {
-    paddingBottom: 15
+    paddingBottom: 15,
   },
   LandingPage_TextInput: {
     height: 35,
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
   },
 
   BuddyCard_Text: {
-    marginLeft: 10,
+    marginLeft: 5,
   },
 
   BuddyCard_Interests: {
