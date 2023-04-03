@@ -22,12 +22,12 @@ function EventCard({
   const navigation = useNavigation();
 
   const goToBuddyList = () => {
-    setEventNameForBuddies(event_title);
+   setEventNameForBuddies(event_title);
     navigation.navigate('Buddies');
   };
 
   const goToMessageBoard = () => {
-    navigation.navigate('MessageBoard');
+    navigation.navigate('Messages');
   };
 
   const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
@@ -63,27 +63,31 @@ function EventCard({
             />
           </View>
 
-          {/* <View style={styles.detailsContainer}> */}
-          {/* <View style={styles.buddiesContainer}>
-          <Text style={styles.genreLabel}>Starts:&nbsp;</Text>
-          <Text style={styles.genre}>{event_date}</Text> 
-        </View> */}
-
           <View style={styles.textContainer}>
-            <Text style={styles.buddiesContainer}>
+            <View style={styles.buddiesContainer}>
+            <Text style={styles.genreLabel}>
               Event genre: {event_genre}
             </Text>
             {/* <Text style={styles.genre}>{event_genre}</Text>  */}
-
+          </View>
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
                 Buddies going: {buddiesDisplay}{' '}
               </Text>
-              {/* <Text style={styles.genre}>{event_buddies}</Text>  */}
               <Button
                 style={styles.button}
                 onPress={updateBuddies}
                 title={!joined ? 'Join the event' : 'Not in the mood'}
+              ></Button>
+            </View>
+
+            <View style={styles.buddiesContainer}>
+              <Text style={styles.genreLabel}>
+              {' '}
+              </Text>
+              <Button
+                onPress={goToBuddyList}
+                title={'See who is going'}
               ></Button>
             </View>
 
@@ -116,6 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     borderRadius: 80,
+    fontSize: 18,
   },
   titleContainer: {
     width: '100%',
@@ -128,7 +133,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   title: {
-    fontSize: 14,
     textAlign: 'center',
     fontSize: 24,
     fontWeight: 'bold',
@@ -139,6 +143,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   bodyContainer: {
+    
     //flex: 1,
     //borderRadius: 80,
     //justifyContent: 'space-between',
@@ -152,12 +157,14 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   textContainer: {
+     fontSize: 18,
     //backgroundColor: 'red',
     flexDirection: 'column',
     marginTop: 5,
     justifyContent: 'space-between',
   },
   genreContainer: {
+    
     //flexDirection: 'row',
     fontWeight: 'bold',
     marginBottom: 5,
@@ -169,6 +176,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   genreLabel: {
+    fontSize: 18,
     fontWeight: 'bold',
     marginRight: 5,
   },
