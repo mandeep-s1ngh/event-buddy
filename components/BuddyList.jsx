@@ -7,8 +7,10 @@ import styles from '../styles';
 
 const BuddyList = ({ eventNameForBuddies }) => {
   const [attendees, setAttendees] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getAttendees(eventNameForBuddies)
       .then((result) => {
         if (!result) return Promise.resolve(false);
@@ -19,10 +21,11 @@ const BuddyList = ({ eventNameForBuddies }) => {
       })
       .then((userProfiles) => {
         setAttendees(userProfiles);
+        setIsLoading(false);
       });
   }, [eventNameForBuddies]);
 
-  if (!attendees) return <ActivityIndicator />;
+  if (isLoading) return <ActivityIndicator />;
 
   const buddyCards = attendees.map((attendee, index) => {
     const {
@@ -45,7 +48,7 @@ const BuddyList = ({ eventNameForBuddies }) => {
   });
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.BuddyList}>
       <Text style={styles.BuddyList_Text}>
         {attendees.length} people attending {eventNameForBuddies}:
       </Text>

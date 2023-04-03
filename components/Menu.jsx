@@ -1,5 +1,4 @@
 import { Text, TouchableHighlight, View } from 'react-native';
-import { patchUserProfile } from '../api/patchUserProfile';
 import styles from '../styles';
 
 function Menu({ loggedIn, setLoggedIn, user }) {

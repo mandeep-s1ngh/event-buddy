@@ -2,7 +2,7 @@ import { Card, ListItem, Avatar } from "@rneui/themed";
 import { ScrollView } from "react-native";
 import styles from "../styles.js";
 
-const MessageBoard = () => {
+const MessageBoard = ({eventNameForMessages}) => {
   return (
     <>
       <ScrollView>
