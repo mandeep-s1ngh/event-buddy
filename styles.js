@@ -89,8 +89,15 @@ const styles = StyleSheet.create({
     width: 300,
   },
 
-  Location_SubmitButton: {
-    color: 'orange'
+  Location_Buttons: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 9,
+    // paddingHorizontal: 25,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#ec8e2f',
+    width: 130,
     },
 
   // ------------- Landing page styling ------------- //
