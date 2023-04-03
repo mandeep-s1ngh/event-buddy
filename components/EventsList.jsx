@@ -57,7 +57,7 @@ export default function EventsList({ setEventNameForBuddies, setEventNameForMess
     };
   });
 
-  const filtered_ticket_options = ticketmaster_list.filter(event => !event.title.includes('Ticket'))
+  const filtered_ticket_options = ticketmaster_list.filter(event => !event.title.includes('Ticket' || 'ticket'))
   
   const uniqueNames = new Set();
   const events_list = filtered_ticket_options.filter(event => {
