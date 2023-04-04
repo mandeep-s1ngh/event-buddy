@@ -67,7 +67,7 @@ export default function App() {
                 />
               )}
             </Tab.Screen>
-
+{/* 
             <Tab.Screen
               name="Buddies"
               options={{
@@ -84,7 +84,7 @@ export default function App() {
                   setUsernameForProfile={setUsernameForProfile}
                 />
               )}
-            </Tab.Screen>
+            </Tab.Screen> */}
 
             <Tab.Screen
               name="Events"
