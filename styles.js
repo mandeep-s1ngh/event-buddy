@@ -289,6 +289,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#ec8e2f",
     width: 250,
   },
+  MessageBoard_CloseButton: {
+    position: "absolute",
+    marginTop: 14,
+    marginLeft: 250,
+  },
 });
 
 export default styles;
