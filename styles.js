@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "flex-end",
-    marginHorizontal: "5%",
+    marginHorizontal: "12%",
   },
 
   BuddyCard_CategoryText: {
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     width: 250,
   },
   MessageBoard_Buttons: {
-    alignItems: "center",
+    // alignItems: "center", UNCOMMENTING THIS WILL MAKE ONLY THE TEXT PRESSABLE and not entire button
     justifyContent: "center",
     paddingVertical: 4,
     // paddingHorizontal: 25,
