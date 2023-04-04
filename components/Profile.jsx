@@ -1,4 +1,4 @@
-import { Button, Icon } from "@rneui/themed";
+import { Button, Icon } from '@rneui/themed';
 import {
   TextInput,
   View,
@@ -9,28 +9,31 @@ import {
   TouchableHighlight,
   ActivityIndicator,
   TouchableOpacity,
-} from "react-native";
-import styles from "../styles.js";
-import { useState, useEffect } from "react";
-import { getUserProfile } from "../api/getUserProfile.js";
-import { patchUserProfile } from "../api/patchUserProfile.js";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+} from 'react-native';
+import styles from '../styles.js';
+import { useState, useEffect } from 'react';
+import { getUserProfile } from '../api/getUserProfile.js';
+import { patchUserProfile } from '../api/patchUserProfile.js';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Profile = ({ usernameForProfile }) => {
-  usernameToDisplay = usernameForProfile || "Carces";
-  const [newUserTag, setNewUserTag] = useState("");
-  const [currentUserName, setCurrentUserName] = useState("");
-  const [currentUserAge, setCurrentUserAge] = useState("");
-  const [currentUserGender, setCurrentUserGender] = useState("");
-  const [currentUserInterests, setCurrentUserInterests] = useState("");
+  usernameToDisplay = usernameForProfile || 'Carces';
+  const [newUserTag, setNewUserTag] = useState('');
+  const [currentUserName, setCurrentUserName] = useState('');
+  const [currentUserAge, setCurrentUserAge] = useState('');
+  const [currentUserGender, setCurrentUserGender] = useState('');
+  const [currentUserInterests, setCurrentUserInterests] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const clearTextInput = () => {
-    setNewUserTag("");
+    setNewUserTag('');
   };
 
   function addInterest() {
-    setCurrentUserInterests((previous) => [...previous, newUserTag]);
+    const updatedInterests = [...currentUserInterests];
+    updatedInterests.push(newUserTag);
+    setCurrentUserInterests(updatedInterests);
+    setNewUserTag('');
     patchUserProfile(usernameToDisplay, null, null, null, [newUserTag]);
   }
 
@@ -50,7 +53,7 @@ const Profile = ({ usernameForProfile }) => {
       const nameValue = name ? name.S : null;
       const ageValue = age ? age.N : null;
       const genderValue = gender ? gender.S : null;
-      const interestsValue = interests ? interests.S.split(",") : null;
+      const interestsValue = interests ? interests.S.split(',') : null;
       if (name) setCurrentUserName(nameValue);
       if (age) setCurrentUserAge(ageValue);
       if (gender) setCurrentUserGender(genderValue);
@@ -82,12 +85,12 @@ const Profile = ({ usernameForProfile }) => {
       scrollEnabled={true}
     >
       <View style={styles.Profile_View}>
-        <Text style={{ fontWeight: "bold", fontSize: 15, paddingBottom: 20 }}>
+        <Text style={{ fontWeight: 'bold', fontSize: 15, paddingBottom: 20 }}>
           Filling out your profile helps you match with more buddies. Get
           started now!
         </Text>
         <Image
-          source={{ uri: "https://source.unsplash.com/random" }}
+          source={{ uri: 'https://source.unsplash.com/random' }}
           style={styles.Profile_Image}
         />
         <Text style={styles.Profile_username}>{usernameToDisplay}</Text>
@@ -96,7 +99,7 @@ const Profile = ({ usernameForProfile }) => {
         {currentUserName ? <Text>Name: {currentUserName} </Text> : null}
         {currentUserGender ? <Text>Gender: {currentUserGender}</Text> : null}
         <Text style={styles.Profile_CurrentUserInterests}>
-          Interests: {interestsButtons || "none"}
+          Interests: {interestsButtons || 'none'}
         </Text>
         <Text style={styles.Profile_AddToUserInterests}>
           Add to your interests:
