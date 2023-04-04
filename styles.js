@@ -146,10 +146,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: 250,
   },
-  closeButton: {
+  LandingPage_CloseButton: {
     position: "absolute",
-    marginTop: 9,
-    marginLeft: 230,
+    marginTop: 8,
+    marginLeft: 228,
   },
   // ------------- Profile styling ------------- //
   Profile_View: {
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
 
   BuddyCard: {
     minHeight: 175,
-    backgroundColor: '#f7e0c9'
+    backgroundColor: "#f7e0c9",
   },
 
   BuddyCard_Button: {

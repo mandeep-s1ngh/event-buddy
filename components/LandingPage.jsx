@@ -22,8 +22,8 @@ const LandingPage = (props) => {
     const pattern = /^[a-zA-Z0-9\s]*$/;
     if (!pattern.test(userInput)) {
       Alert.alert(
-        "Found invalid characters",
-        "Please try again.",
+        "Event name contains invalid characters",
+        "Please enter a different event name.",
         [{ text: "OK", onPress: () => {} }],
         { cancelable: true }
       );
@@ -75,9 +75,14 @@ const LandingPage = (props) => {
           placeholder="Coachella, Leeds, Evolution ..."
           onBlur={handleValidation}
         />
-        <TouchableOpacity style={styles.closeButton} onPress={clearTextInput}>
-          <Icon name="close" size={15} />
-        </TouchableOpacity>
+        {userInput.length > 0 && (
+          <TouchableOpacity
+            style={styles.LandingPage_CloseButton}
+            onPress={clearTextInput}
+          >
+            <Icon name="close" size={20} />
+          </TouchableOpacity>
+        )}
       </View>
 
       <View style={{ paddingTop: 10 }}>
