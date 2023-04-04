@@ -15,16 +15,16 @@ export default function EventsList({
   if (userLocation) {
     const precision = 9;
     // precision is maximum X axis error index:
-    // 4   ± 20 km - not true! gives Leeds for 'London'
-    // 5   ± 2.4 km - still gives Leeds
-    // 9 - still Leeds, 10 - nothing
+    // 4   ± 20 km 
+    // 5   ± 2.4 km 
+    // 10 - gives nothing
 
     geohash = Geohash.encode(
       userLocation.geolocation.latitude,
       userLocation.geolocation.longitude,
       precision
     );
-    // console.log(geohash);
+  
   }
 
   const [eventsList, setEventsList] = useState([]);
@@ -38,8 +38,7 @@ export default function EventsList({
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    getEvents(eventName, geohash) //crushes the app, geohash does not exist at start - but so is with userLocation and eventName
-      //getEvents(eventName, userLocation)
+    getEvents(eventName, geohash)
       .then((events) => {
         setEventsList(events);
         setIsLoading(false);
@@ -49,7 +48,7 @@ export default function EventsList({
         setIsError(true);
         setErrorMessage(err);
       });
-  }, [eventName, userLocation]); //not updating with changes ?
+  }, [eventName, userLocation]); 
   // console.log ('isLoading ->', isLoading);
   // console.log ('isError ->', isError)
   // console.log ('error ->', errorMessage)
@@ -100,7 +99,7 @@ export default function EventsList({
     });
 
     if (!isDuplicate 
-      && !(titleWords[0] === 'Leeds' && (eventName !== 'Leeds' || geohash !== 'gcwfhcebd'))
+      && !(titleWords[0] === 'Leeds' && eventName !== 'Leeds' && geohash !== 'gcwfhcebd')
       ) {
       acc.push(curr);
     }
