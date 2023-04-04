@@ -98,13 +98,16 @@ export default function App() {
                   eventName={eventName}
                   userLocation={userLocation}
                   usernameForProfile={usernameForProfile}
+                  setUsernameForProfile={setUsernameForProfile}
                   setEventNameForBuddies={setEventNameForBuddies}
+                  eventNameForMessages={eventNameForMessages}
                   setEventNameForMessages={setEventNameForMessages}
+                  currentUser={currentUser}
                 />
               )}
             </Tab.Screen>
 
-            <Tab.Screen
+            {/* <Tab.Screen
               name="Messages"
               options={{
                 tabBarIcon: ({ color, size }) => (
@@ -121,7 +124,7 @@ export default function App() {
                   currentUser={currentUser}
                 />
               )}
-            </Tab.Screen>
+            </Tab.Screen> */}
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>

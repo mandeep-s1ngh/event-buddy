@@ -35,7 +35,7 @@ function EventCard({
 
   const goToMessageBoard = () => {
     setEventNameForMessages(event_title);
-    navigation.navigate('Messages');
+    navigation.navigate('MessageBoard');
   };
 
   const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
