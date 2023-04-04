@@ -146,6 +146,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: 250,
   },
+  LandingPage_CloseButton: {
+    position: "absolute",
+    marginTop: 8,
+    marginLeft: 228,
+  },
   // ------------- Profile styling ------------- //
   Profile_View: {
     textAlignVertical: "center",
@@ -207,7 +212,7 @@ const styles = StyleSheet.create({
 
   BuddyCard: {
     minHeight: 175,
-    backgroundColor: '#f7e0c9'
+    backgroundColor: "#f7e0c9",
   },
 
   BuddyCard_Button: {
@@ -261,7 +266,7 @@ const styles = StyleSheet.create({
 
   // ------------- MessageCard styling ------------- //
   MessageCard_Reply: {
-    backgroundColor: '#dbd7d7',
+    backgroundColor: "#dbd7d7",
   },
   MessageBoard_TextInput: {
     height: 30,
@@ -279,7 +284,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: "#ec8e2f",
     width: 250,
-  }
+  },
 });
 
 export default styles;

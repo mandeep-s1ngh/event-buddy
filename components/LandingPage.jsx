@@ -1,5 +1,5 @@
-import { Button } from '@rneui/themed';
-import { useState } from 'react';
+import { Button } from "@rneui/themed";
+import { useState } from "react";
 import {
   TextInput,
   View,
@@ -7,22 +7,24 @@ import {
   Text,
   Image,
   Alert,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import styles from '../styles.js';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+  TouchableOpacity,
+} from "react-native";
+import { Icon } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
+import styles from "../styles.js";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LandingPage = (props) => {
   const { eventName, setEventName } = props;
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState("");
 
   const handleValidation = () => {
     const pattern = /^[a-zA-Z0-9\s]*$/;
     if (!pattern.test(userInput)) {
       Alert.alert(
-        'Found invalid characters',
-        'Please try again.',
-        [{ text: 'OK', onPress: () => {} }],
+        "Event name contains invalid characters",
+        "Please enter a different event name.",
+        [{ text: "OK", onPress: () => {} }],
         { cancelable: true }
       );
     }
@@ -32,12 +34,16 @@ const LandingPage = (props) => {
 
   const searchEventByName = () => {
     setEventName(userInput);
-    setUserInput('');
-    navigation.navigate('Events');
+    setUserInput("");
+    navigation.navigate("Events");
+  };
+
+  const clearTextInput = () => {
+    setUserInput("");
   };
 
   function navigateToLocation() {
-    navigation.navigate('Location');
+    navigation.navigate("Location");
   }
 
   return (
@@ -48,7 +54,7 @@ const LandingPage = (props) => {
     >
       <View style={{ paddingBottom: 30, marginTop: 20 }}>
         <Image
-          source={require('../images/Landing_Page_Concert.jpeg')}
+          source={require("../images/Landing_Page_Concert.jpeg")}
           style={styles.LandingPage_Image}
         />
       </View>
@@ -61,13 +67,23 @@ const LandingPage = (props) => {
 
       <Text style={styles.LandingPage_TextInfo}>Search events by name:</Text>
 
-      <TextInput
-        value={userInput}
-        onChangeText={(text) => setUserInput(text)}
-        style={styles.LandingPage_TextInput}
-        placeholder="Coachella, Leeds, Evolution ..."
-        onBlur={handleValidation}
-      />
+      <View>
+        <TextInput
+          value={userInput}
+          onChangeText={(text) => setUserInput(text)}
+          style={styles.LandingPage_TextInput}
+          placeholder="Coachella, Leeds, Evolution ..."
+          onBlur={handleValidation}
+        />
+        {userInput.length > 0 && (
+          <TouchableOpacity
+            style={styles.LandingPage_CloseButton}
+            onPress={clearTextInput}
+          >
+            <Icon name="close" size={20} />
+          </TouchableOpacity>
+        )}
+      </View>
 
       <View style={{ paddingTop: 10 }}>
         <TouchableHighlight
