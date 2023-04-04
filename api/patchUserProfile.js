@@ -8,17 +8,11 @@ export const patchUserProfile = async (
   gender,
   interests
 ) => {
-  console.log(interests, '<<< interests passed to patch');
   const patchUserProfileURL =
     'https://vnfl72ter74lxtd43wglopvlju0xqmst.lambda-url.us-east-1.on.aws/';
 
   const profile = !interests ? {} : await getUserProfile(username);
-  // let interestsString = !interests
-  //   ? null
-  //   : `${profile.Item.interests.S},${interests.toString()}`;
-  // console.log(interestsString, '<< int string');
   const interestsArr = profile.Item.interests.S.split(',').concat(interests);
-  console.log(interestsArr, '<<< concat arr');
   const interestsFiltered = interestsArr.filter(
     (interest, index) => interestsArr.indexOf(interest) === index
   );
