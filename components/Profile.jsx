@@ -13,6 +13,8 @@ import styles from '../styles.js';
 import { useState, useEffect } from 'react';
 import { getUserProfile } from '../api/getUserProfile.js';
 import { patchUserProfile } from '../api/patchUserProfile.js';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const Profile = ({ usernameForProfile = 'Carces' }) => {
   const [newUserTag, setNewUserTag] = useState('');
@@ -52,6 +54,11 @@ const Profile = ({ usernameForProfile = 'Carces' }) => {
   if (isLoading) return <ActivityIndicator />;
 
   return (
+    <KeyboardAwareScrollView
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      contentContainerStyle={styles.LandingPage_View}
+      scrollEnabled={true}
+    >
     <View style={styles.Profile_View}>
       <Text style={{ fontWeight: 'bold', fontSize: 15, paddingBottom: 20 }}>
         Filling out your profile helps you match with more buddies. Get started
@@ -88,6 +95,7 @@ const Profile = ({ usernameForProfile = 'Carces' }) => {
         </TouchableHighlight>
       </View>
     </View>
+    </KeyboardAwareScrollView>
   );
 };
 
