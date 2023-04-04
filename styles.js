@@ -207,6 +207,7 @@ const styles = StyleSheet.create({
 
   BuddyCard: {
     minHeight: 175,
+    backgroundColor: '#f7e0c9'
   },
 
   BuddyCard_Button: {
