@@ -1,3 +1,8 @@
+//import React, { useState, useRef } from 'react';
+import AnimatedHeader from './components/AnimatedHeader';
+import { SafeAreaView, Animated, StyleSheet } from 'react-native';
+
+
 import { View, ScrollView, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
@@ -6,6 +11,48 @@ import { getTicketMasterEvents } from '../api/eventsListapi';
 import EventCard from './EventCard';
 
 export default function EventsList({
+
+ // const scrollOffsetY = useRef(new Animated.Value(0)).current;
+//  const Max_Header_Height = 200;
+// const Min_Header_Height = 70;
+// const Scroll_Distance = Max_Header_Height - Min_Header_Height
+
+// const Header = ({scrollOffsetY}) => {
+//   return null;
+// };
+
+// const animatedHeaderHeight =  animatedValue.interpolate({
+//   inputRange: [0, Scroll_Distance],
+//   outputRange: [Header_Max_Height , Header_Min_Height],
+//   extrapolate: 'clamp'
+// })
+
+// const animateHeaderBackgroundColor = animHeaderValue.interpolate({
+//   inputRange: [0, Header_Max_Height - Header_Min_Height],
+//   outputRange: ['blue', 'red'],
+//   extrapolate: 'clamp'
+// })
+
+// const AnimatedHeader = ({ animatedValue }) => {
+//   // ...
+//   return (
+//     <Animated.View 
+//         style={[
+//           styles.header,
+//           {
+//             height: animateHeaderHeight,
+//             backgroundColor: animateHeaderBackgroundColor
+//           }
+
+//         ]}
+//       >
+//         <Text style={styles.headerText}>
+//           A List of Books
+//         </Text>         
+//     </Animated.View>
+//   );
+// };
+
   eventName,
   userLocation,
   setEventNameForBuddies,
@@ -112,29 +159,38 @@ export default function EventsList({
   if (isLoading) return (<View><Text title="Is loading..."></Text></View>);
   else
   return (
-    <View style={{flex: 1}}>
-    <View style={{flex: .1}}><Text title="HEADER"></Text></View>
-    <ScrollView style={{flex: .16}}>
-      <View>
-        {filtered_events_list.map((event) => {
-          return (
-            <View key={event.key}>
-              <EventCard
-                event_title={event.title}
-                event_place={event.location}
-                event_date={event.date}
-                event_genre={event.genre}
-                event_img_URL_preview={event.img}
-                event_buddies={event.buddies}
-                event_talks={event.talks}
-                setEventNameForBuddies={setEventNameForBuddies}
-                setEventNameForMessages={setEventNameForMessages}
-              />
-            </View>
-          );
-        })}
-      </View>
-    </ScrollView>
+    // <View style={{flex: 1}}>
+    // <View style={{flex: .1}}><Text title="HEADER"></Text></View>
+    // <ScrollView style={{flex: .16}}>
+    //   <View>
+    //     {filtered_events_list.map((event) => {
+    //       return (
+    //         <View key={event.key}>
+    //           <EventCard
+    //             event_title={event.title}
+    //             event_place={event.location}
+    //             event_date={event.date}
+    //             event_genre={event.genre}
+    //             event_img_URL_preview={event.img}
+    //             event_buddies={event.buddies}
+    //             event_talks={event.talks}
+    //             setEventNameForBuddies={setEventNameForBuddies}
+    //             setEventNameForMessages={setEventNameForMessages}
+    //           />
+    //         </View>
+    //       );
+    //     })}
+    //   </View>
+    // </ScrollView>
+    // </View>
+
+
+    <SafeAreaView style={{ flex: 1 }} forceInset={{ top: 'always' }}>       
+    <DynamicHeader animHeaderValue={useRef(new Animated.Value(0)).current} />
+    <View style={{ flex: 1, alignItems: 'center' }}>
+      <Text>Open up App.js to start working on your app!</Text>
     </View>
+  </SafeAreaView>   
+
   );
 }
