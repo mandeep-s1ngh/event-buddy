@@ -26,8 +26,6 @@ export default function App() {
 
   const Tab = createBottomTabNavigator();
 
-  console.log(usernameForProfile, '<<< un prof');
-
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
@@ -67,7 +65,7 @@ export default function App() {
                 />
               )}
             </Tab.Screen>
-{/* 
+
             <Tab.Screen
               name="Buddies"
               options={{
@@ -84,7 +82,7 @@ export default function App() {
                   setUsernameForProfile={setUsernameForProfile}
                 />
               )}
-            </Tab.Screen> */}
+            </Tab.Screen>
 
             <Tab.Screen
               name="Events"
