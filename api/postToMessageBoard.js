@@ -13,6 +13,7 @@ export const postToMessageBoard = (
     'https://errc6j276lrp5jeqb6rmhom4bi0hgdmw.lambda-url.us-east-1.on.aws/';
 
   eventName = eventName.replaceAll(' ', '_');
+  if (!message) return false;
   return axios
     .post(createMessageBoardTableIfNotExistsURL, { eventName })
     .then((response) => {
