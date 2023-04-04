@@ -1,3 +1,10 @@
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Text, Card, Badge, Button} from '@rneui/themed';
+import { FlatList,
+        // ScrollView, SafeAreaView , ListItem 
+        } from 'react-native'
+
+
 import { View, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
@@ -111,27 +118,50 @@ export default function EventsList({
     (event) => !event.title.includes('Ticket' || 'ticket')
   );
 
-  return (
-    <ScrollView>
-      <View>
-        {filtered_events_list.map((event) => {
-          return (
-            <View key={event.key}>
-              <EventCard
-                event_title={event.title}
-                event_place={event.location}
-                event_date={event.date}
-                event_genre={event.genre}
-                event_img_URL_preview={event.img}
-                event_buddies={event.buddies}
-                event_talks={event.talks}
-                setEventNameForBuddies={setEventNameForBuddies}
-                setEventNameForMessages={setEventNameForMessages}
-              />
-            </View>
-          );
-        })}
-      </View>
-    </ScrollView>
+  const renderItem = ({ item }) => (
+    <View>
+    <EventCard		
+    event_title={item.title} 		 
+    event_place={item.location}	
+    event_date={item.date}	 
+    event_genre={item.genre}		 
+    event_img_URL_preview={item.img}	
+    event_buddies={item.buddies}
+    event_talks={item.talks}
+     />		 
+    </View>
   );
+
+  return( 
+    // <SafeAreaProvider>
+    //   <Text>
+        <FlatList data={filtered_events_list} renderItem={renderItem} />
+  //     </Text>
+  //  </SafeAreaProvider>
+)
 }
+
+//   return (
+//     <ScrollView>
+//       <View>
+//         {filtered_events_list.map((event) => {
+//           return (
+//             <View key={event.key}>
+//               <EventCard
+//                 event_title={event.title}
+//                 event_place={event.location}
+//                 event_date={event.date}
+//                 event_genre={event.genre}
+//                 event_img_URL_preview={event.img}
+//                 event_buddies={event.buddies}
+//                 event_talks={event.talks}
+//                 setEventNameForBuddies={setEventNameForBuddies}
+//                 setEventNameForMessages={setEventNameForMessages}
+//               />
+//             </View>
+//           );
+//         })}
+//       </View>
+//     </ScrollView>
+//   );
+// }
