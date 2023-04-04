@@ -4,7 +4,13 @@
 //import { Badge, View } from "react-native-elements";
 //import styles from "../styles";
 import { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableHighlight,
+} from 'react-native';
 import { Card, Button } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,12 +24,12 @@ function EventCard({
   event_buddies, //from our 'users' DB
   event_talks, //from our 'messages' DB
   setEventNameForBuddies,
-  setEventNameForMessages
+  setEventNameForMessages,
 }) {
   const navigation = useNavigation();
 
   const goToBuddyList = () => {
-   setEventNameForBuddies(event_title);
+    setEventNameForBuddies(event_title);
     navigation.navigate('Buddies');
   };
 
@@ -48,7 +54,7 @@ function EventCard({
   };
 
   return (
-    <Card containerStyle={{ backgroundColor: '#f7e0c9'}}>
+    <Card containerStyle={{ backgroundColor: '#f7e0c9' }}>
       <View style={styles.mainContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{event_title}</Text>
@@ -67,63 +73,51 @@ function EventCard({
 
           <View style={styles.textContainer}>
             <View style={styles.buddiesContainer}>
-            <Text style={styles.genreLabel}>
-              Genre: {event_genre}
-            </Text>
-            {/* <Text style={styles.genre}>{event_genre}</Text>  */}
-          </View>
+              <Text style={styles.genreLabel}>Genre: {event_genre}</Text>
+              {/* <Text style={styles.genre}>{event_genre}</Text>  */}
+            </View>
 
-          <View style={styles.buddiesContainer}>
-              <Text style={styles.genreLabel}>
-              {event_talks} talks 
-              </Text>
+            <View style={styles.buddiesContainer}>
+              <Text style={styles.genreLabel}>{event_talks} talks</Text>
               {/* <Text style={styles.genre}>{event_talks}</Text> */}
-              
+
               {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
                   <Text >Message board</Text>
                 </TouchableHighlight> */}
             </View>
 
-            
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
                 {buddiesDisplay} buddies going
               </Text>
               <View style={styles.buddiesContainer}>
-              <Button
-                // style={styles.button}
-                onPress={updateBuddies}
-                color='#ec8e2f'
-                title={!joined ? 'Join the event' : 'Not in the mood'}
-              ></Button>
+                <Button
+                  // style={styles.button}
+                  onPress={updateBuddies}
+                  color="#ec8e2f"
+                  title={!joined ? 'Join the event' : 'Not in the mood'}
+                ></Button>
               </View>
               <View style={styles.buddiesContainer}>
-              <Button
-                style={styles.button}
-                onPress={goToMessageBoard}
-                title={'Message board'}
-                color='#ec8e2f'
-              ></Button>
+                <Button
+                  style={styles.button}
+                  onPress={goToMessageBoard}
+                  title={'Message board'}
+                  color="#ec8e2f"
+                ></Button>
               </View>
               <View style={styles.buddiesContainer}>
-
-              {/* <Text style={styles.genreLabel}>
+                {/* <Text style={styles.genreLabel}>
               {' '}
               </Text> */}
-              
-              <Button
-                onPress={goToBuddyList}
-                title={'See who is going'}
-                color='#ec8e2f'
-              ></Button>
 
+                <Button
+                  onPress={goToBuddyList}
+                  title={'See who is going'}
+                  color="#ec8e2f"
+                ></Button>
+              </View>
             </View>
-            </View>
-            
-
-            
-
-            
           </View>
         </View>
       </View>
@@ -177,14 +171,13 @@ const styles = StyleSheet.create({
     borderRadius: 11,
   },
   textContainer: {
-     fontSize: 18,
+    fontSize: 18,
     //backgroundColor: 'red',
     // flexDirection: 'column',
     // marginTop: 5,
     // justifyContent: 'space-between',
   },
   genreContainer: {
-    
     // flexDirection: 'row',
     fontWeight: 'bold',
     marginBottom: 5,
@@ -203,7 +196,6 @@ const styles = StyleSheet.create({
   button: {
     //marginLeft: 10,
     //justifyContent: 'center',
-    
   },
   Event_Card_Buttons: {
     alignItems: 'center',
@@ -213,15 +205,15 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: '#ec8e2f',
     width: 110,
-    },
+  },
 
   Event_Card_Buttons_Text: {
-      fontSize: 13,
-      lineHeight: 15,
-      letterSpacing: 0.25,
-      color: 'white',
-      fontWeight: 'bold',
-    },
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });
 
 export default EventCard;

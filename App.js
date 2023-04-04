@@ -22,11 +22,9 @@ export default function App() {
   const [usernameForProfile, setUsernameForProfile] = useState('');
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState('Theo');
+  const [currentUser, setCurrentUser] = useState('');
 
   const Tab = createBottomTabNavigator();
-
-  console.log(usernameForProfile, '<<< un prof');
 
   return (
     <SafeAreaProvider>
@@ -36,14 +34,19 @@ export default function App() {
           <NavBar menuShown={menuShown} setMenuShown={setMenuShown} />
 
           {menuShown ? (
-            <Menu loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
+            <Menu
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
           ) : null}
 
           <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
               headerShown: false,
-              tabBarActiveTintColor: 'orange'
+              tabBarActiveTintColor: 'orange',
             }}
           >
             <Tab.Screen
@@ -62,7 +65,7 @@ export default function App() {
                 />
               )}
             </Tab.Screen>
-{/* 
+
             <Tab.Screen
               name="Buddies"
               options={{
@@ -79,7 +82,7 @@ export default function App() {
                   setUsernameForProfile={setUsernameForProfile}
                 />
               )}
-            </Tab.Screen> */}
+            </Tab.Screen>
 
             <Tab.Screen
               name="Events"
@@ -112,6 +115,8 @@ export default function App() {
                 <MessagesStack
                   {...props}
                   eventNameForMessages={eventNameForMessages}
+                  setUsernameForProfile={setUsernameForProfile}
+                  currentUser={currentUser}
                 />
               )}
             </Tab.Screen>

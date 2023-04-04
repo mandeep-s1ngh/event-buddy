@@ -257,6 +257,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     overflow: "hidden",
   },
+
+  // ------------- MessageCard styling ------------- //
+  MessageCard_Reply: {
+    backgroundColor: '#dbd7d7',
+  },
 });
 
 export default styles;
