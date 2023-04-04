@@ -18,6 +18,7 @@ export const getTicketMasterEvents = (eventName, geohash) => {
   return ticketMasterApi
   .get(path)
   .then((response) => {
+    console.log (response.data._embedded.events);
     return response.data._embedded.events;
   })
   }
