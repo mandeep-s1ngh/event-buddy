@@ -1,9 +1,11 @@
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
 
 import { getTicketMasterEvents } from '../api/eventsListapi';
 import EventCard from './EventCard';
+import StickyHeader from './StickyHeader';
 
 export default function EventsList({
   eventName,
@@ -15,8 +17,8 @@ export default function EventsList({
   if (userLocation) {
     const precision = 9;
     // precision is maximum X axis error index:
-    // 4   ± 20 km 
-    // 5   ± 2.4 km 
+    // 4   ± 20 km
+    // 5   ± 2.4 km
     // 10 - gives nothing
 
     geohash = Geohash.encode(
@@ -24,7 +26,6 @@ export default function EventsList({
       userLocation.geolocation.longitude,
       precision
     );
-  
   }
 
   const [eventsList, setEventsList] = useState([]);
@@ -48,7 +49,7 @@ export default function EventsList({
         setIsError(true);
         setErrorMessage(err);
       });
-  }, [eventName, userLocation]); 
+  }, [eventName, userLocation]);
   // console.log ('isLoading ->', isLoading);
   // console.log ('isError ->', isError)
   // console.log ('error ->', errorMessage)
@@ -98,9 +99,14 @@ export default function EventsList({
       return itemFirstTwoWords === firstTwoWords;
     });
 
-    if (!isDuplicate 
-      && !(titleWords[0] === 'Leeds' && eventName !== 'Leeds' && geohash !== 'gcwfhcebd')
-      ) {
+    if (
+      !isDuplicate &&
+      !(
+        titleWords[0] === 'Leeds' &&
+        eventName !== 'Leeds' &&
+        geohash !== 'gcwfhcebd'
+      )
+    ) {
       acc.push(curr);
     }
 
@@ -112,26 +118,59 @@ export default function EventsList({
   );
 
   return (
-    <ScrollView>
-      <View>
-        {filtered_events_list.map((event) => {
-          return (
-            <View key={event.key}>
-              <EventCard
-                event_title={event.title}
-                event_place={event.location}
-                event_date={event.date}
-                event_genre={event.genre}
-                event_img_URL_preview={event.img}
-                event_buddies={event.buddies}
-                event_talks={event.talks}
-                setEventNameForBuddies={setEventNameForBuddies}
-                setEventNameForMessages={setEventNameForMessages}
-              />
+    <SafeAreaProvider>
+      <View style={styles.mainView}>
+        <StickyHeader style={styles.stickyHeader} />
+        <View style={styles.listView}>
+          <ScrollView>
+            <View>
+              {filtered_events_list.map((event) => {
+                return (
+                  <View key={event.key}>
+                    <EventCard
+                      event_title={event.title}
+                      event_place={event.location}
+                      event_date={event.date}
+                      event_genre={event.genre}
+                      event_img_URL_preview={event.img}
+                      event_buddies={event.buddies}
+                      event_talks={event.talks}
+                    />
+                  </View>
+                );
+              })}
             </View>
-          );
-        })}
+          </ScrollView>
+        </View>
       </View>
-    </ScrollView>
+    </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  mainView: {
+    height: '100%',
+    flexDirection: 'column',
+    flex: 1,
+    borderRadius: 80,
+    //flexWrap: 'wrap',
+    //rowGap: 10,
+  },
+  stickyHeader: {
+    minheight: 50,
+    // height: '100%',
+    // flexDirection: 'column',
+    flex: 2,
+    // borderRadius: 80,
+  },
+  listView: {
+    height: '90%',
+    // height: '30%',
+    // flexDirection: 'column',
+    flex: 3,
+    position: 'relative',
+    top: 48,
+    marginBottom: 48,
+    // borderRadius: 80,
+  },
+});
