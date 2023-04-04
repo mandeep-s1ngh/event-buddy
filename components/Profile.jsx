@@ -13,6 +13,7 @@ import styles from "../styles.js";
 import { useState, useEffect } from "react";
 import { getUserProfile } from "../api/getUserProfile.js";
 import { patchUserProfile } from "../api/patchUserProfile.js";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Profile = ({ usernameForProfile = "Carces" }) => {
   const [newUserTag, setNewUserTag] = useState("");
@@ -52,44 +53,50 @@ const Profile = ({ usernameForProfile = "Carces" }) => {
   if (isLoading) return <ActivityIndicator />;
 
   return (
-    <View style={styles.Profile_View}>
-      <Text style={{ fontWeight: "bold", fontSize: 15, paddingBottom: 20 }}>
-        Filling out your profile helps you match with more buddies. Get started
-        now!
-      </Text>
-      <Image
-        source={{ uri: "https://source.unsplash.com/random" }}
-        style={styles.Profile_Image}
-      />
-      <Text style={styles.Profile_username}>{usernameForProfile}</Text>
+    <KeyboardAwareScrollView
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      contentContainerStyle={styles.LandingPage_View}
+      scrollEnabled={true}
+    >
+      <View style={styles.Profile_View}>
+        <Text style={{ fontWeight: "bold", fontSize: 15, paddingBottom: 20 }}>
+          Filling out your profile helps you match with more buddies. Get
+          started now!
+        </Text>
+        <Image
+          source={{ uri: "https://source.unsplash.com/random" }}
+          style={styles.Profile_Image}
+        />
+        <Text style={styles.Profile_username}>{usernameForProfile}</Text>
 
-      {currentUserAge ? <Text>Age: {currentUserAge} </Text> : null}
-      {currentUserName ? <Text>Name: {currentUserName} </Text> : null}
-      {currentUserGender ? <Text>Gender: {currentUserGender}</Text> : null}
-      <Text style={styles.Profile_CurrentUserInterests}>
-        Interests: {currentUserInterests || "none"}
-      </Text>
-      <Text style={styles.Profile_AddToUserInterests}>
-        Add to your interests:
-      </Text>
-      <TextInput
-        value={newUserTag}
-        onChangeText={(newUserTag) => {
-          setNewUserTag(newUserTag);
-        }}
-        style={styles.Profile_TextInput}
-        placeholder="Type here ... e.g. food-lover, travellor, Spanish  "
-      />
+        {currentUserAge ? <Text>Age: {currentUserAge} </Text> : null}
+        {currentUserName ? <Text>Name: {currentUserName} </Text> : null}
+        {currentUserGender ? <Text>Gender: {currentUserGender}</Text> : null}
+        <Text style={styles.Profile_CurrentUserInterests}>
+          Interests: {currentUserInterests || "none"}
+        </Text>
+        <Text style={styles.Profile_AddToUserInterests}>
+          Add to your interests:
+        </Text>
+        <TextInput
+          value={newUserTag}
+          onChangeText={(newUserTag) => {
+            setNewUserTag(newUserTag);
+          }}
+          style={styles.Profile_TextInput}
+          placeholder="Type here ... e.g. food-lover, travellor, Spanish  "
+        />
 
-      <View style={{ paddingTop: 10 }}>
-        <TouchableHighlight
-          style={styles.Profile_Buttons}
-          onPress={updateInterests}
-        >
-          <Text style={styles.Profile_Buttons_Text}>Add interest</Text>
-        </TouchableHighlight>
+        <View style={{ paddingTop: 10 }}>
+          <TouchableHighlight
+            style={styles.Profile_Buttons}
+            onPress={updateInterests}
+          >
+            <Text style={styles.Profile_Buttons_Text}>Add interest</Text>
+          </TouchableHighlight>
+        </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 

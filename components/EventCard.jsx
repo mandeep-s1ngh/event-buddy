@@ -48,12 +48,12 @@ function EventCard({
   };
 
   return (
-    <Card>
+    <Card containerStyle={{ backgroundColor: '#f7e0c9'}}>
       <View style={styles.mainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.date}>&nbsp;{event_date}</Text>
           <Text style={styles.title}>{event_title}</Text>
           <Text style={styles.location}>{event_place}</Text>
+          <Text style={styles.date}>&nbsp;{event_date}</Text>
         </View>
 
         <View style={styles.bodyContainer}>
@@ -68,28 +68,48 @@ function EventCard({
           <View style={styles.textContainer}>
             <View style={styles.buddiesContainer}>
             <Text style={styles.genreLabel}>
-              Event genre: {event_genre}
+              Genre: {event_genre}
             </Text>
             {/* <Text style={styles.genre}>{event_genre}</Text>  */}
           </View>
+
+          <View style={styles.buddiesContainer}>
+              <Text style={styles.genreLabel}>
+              {event_talks} talks 
+              </Text>
+              {/* <Text style={styles.genre}>{event_talks}</Text> */}
+              
+              {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
+                  <Text >Message board</Text>
+                </TouchableHighlight> */}
+            </View>
+
+            
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
-                Buddies going: {buddiesDisplay}{' '}
+                {buddiesDisplay} buddies going
               </Text>
-
+              <View style={styles.buddiesContainer}>
               <Button
-                style={styles.button}
+                // style={styles.button}
                 onPress={updateBuddies}
                 color='#ec8e2f'
                 title={!joined ? 'Join the event' : 'Not in the mood'}
               ></Button>
-            </View>
+              </View>
+              <View style={styles.buddiesContainer}>
+              <Button
+                style={styles.button}
+                onPress={goToMessageBoard}
+                title={'Message board'}
+                color='#ec8e2f'
+              ></Button>
+              </View>
+              <View style={styles.buddiesContainer}>
 
-            <View style={styles.buddiesContainer}>
-
-              <Text style={styles.genreLabel}>
+              {/* <Text style={styles.genreLabel}>
               {' '}
-              </Text>
+              </Text> */}
               
               <Button
                 onPress={goToBuddyList}
@@ -98,22 +118,12 @@ function EventCard({
               ></Button>
 
             </View>
-
-            <View style={styles.buddiesContainer}>
-              <Text style={styles.genreLabel}>
-                Talks about event: {event_talks}
-              </Text>
-              {/* <Text style={styles.genre}>{event_talks}</Text> */}
-              <Button
-                style={styles.button}
-                onPress={goToMessageBoard}
-                title={'Message board'}
-                color='#ec8e2f'
-              ></Button>
-              {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
-                  <Text >Message board</Text>
-                </TouchableHighlight> */}
             </View>
+            
+
+            
+
+            
           </View>
         </View>
       </View>
@@ -139,20 +149,20 @@ const styles = StyleSheet.create({
   },
   date: {
     textAlign: 'center',
-    fontWeight: 'bold',
+    marginBottom: 5,
+    // fontWeight: 'bold',
   },
   title: {
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
   },
   location: {
     textAlign: 'center',
     fontSize: 14,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   bodyContainer: {
-    
     //flex: 1,
     //borderRadius: 80,
     //justifyContent: 'space-between',
@@ -169,25 +179,25 @@ const styles = StyleSheet.create({
   textContainer: {
      fontSize: 18,
     //backgroundColor: 'red',
-    flexDirection: 'column',
-    marginTop: 5,
-    justifyContent: 'space-between',
+    // flexDirection: 'column',
+    // marginTop: 5,
+    // justifyContent: 'space-between',
   },
   genreContainer: {
     
-    //flexDirection: 'row',
+    // flexDirection: 'row',
     fontWeight: 'bold',
     marginBottom: 5,
   },
   buddiesContainer: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     margin: 5,
     justifyContent: 'space-between',
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
   genreLabel: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+    // fontWeight: 'bold',
     marginRight: 5,
   },
   button: {
