@@ -199,7 +199,11 @@ const styles = StyleSheet.create({
   Profile_AddToUserInterests: {
     paddingBottom: 5,
   },
-
+  Profile_CloseButton: {
+    position: "absolute",
+    marginTop: 5,
+    marginLeft: 277,
+  },
   // ------------- BuddyList styling ------------- //
   BuddyList_Text: {
     textAlign: "center",
