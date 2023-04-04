@@ -1,4 +1,4 @@
-import { Button } from "@rneui/themed";
+import { Button } from '@rneui/themed';
 import {
   TextInput,
   View,
@@ -8,26 +8,31 @@ import {
   SafeAreaView,
   TouchableHighlight,
   ActivityIndicator,
-} from "react-native";
-import styles from "../styles.js";
-import { useState, useEffect } from "react";
-import { getUserProfile } from "../api/getUserProfile.js";
-import { patchUserProfile } from "../api/patchUserProfile.js";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+} from 'react-native';
+import styles from '../styles.js';
+import { useState, useEffect } from 'react';
+import { getUserProfile } from '../api/getUserProfile.js';
+import { patchUserProfile } from '../api/patchUserProfile.js';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const Profile = ({ usernameForProfile = "Carces" }) => {
-  const [newUserTag, setNewUserTag] = useState("");
-  const [currentUserName, setCurrentUserName] = useState("");
-  const [currentUserAge, setCurrentUserAge] = useState("");
-  const [currentUserGender, setCurrentUserGender] = useState("");
-  const [currentUserInterests, setCurrentUserInterests] = useState("");
+const Profile = ({ usernameForProfile = 'Carces' }) => {
+  const [newUserTag, setNewUserTag] = useState('');
+  const [currentUserName, setCurrentUserName] = useState('');
+  const [currentUserAge, setCurrentUserAge] = useState('');
+  const [currentUserGender, setCurrentUserGender] = useState('');
+  const [currentUserInterests, setCurrentUserInterests] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  function updateInterests() {
-    setCurrentUserInterests((previous) =>
-      previous ? previous + ", " + newUserTag : newUserTag
-    );
+  function addInterest() {
+    setCurrentUserInterests((previous) => [...previous, newUserTag]);
     patchUserProfile(usernameForProfile, null, null, null, [newUserTag]);
+  }
+
+  function removeInterest(interest) {
+    const updatedInterests = [...currentUserInterests];
+    updatedInterests.splice(updatedInterests.indexOf(interest), 1);
+    setCurrentUserInterests(updatedInterests);
+    patchUserProfile(usernameForProfile, null, null, null, [`-${interest}`]);
   }
 
   useEffect(() => {
@@ -39,9 +44,7 @@ const Profile = ({ usernameForProfile = "Carces" }) => {
       const nameValue = name ? name.S : null;
       const ageValue = age ? age.N : null;
       const genderValue = gender ? gender.S : null;
-      const interestsValue = interests
-        ? interests.S.replaceAll(",", ", ")
-        : null;
+      const interestsValue = interests ? interests.S.split(',') : null;
       if (name) setCurrentUserName(nameValue);
       if (age) setCurrentUserAge(ageValue);
       if (gender) setCurrentUserGender(genderValue);
@@ -52,6 +55,20 @@ const Profile = ({ usernameForProfile = "Carces" }) => {
 
   if (isLoading) return <ActivityIndicator />;
 
+  const interestsButtons = !currentUserInterests
+    ? null
+    : currentUserInterests.map((interest, index) => {
+        return (
+          <Button
+            key={index}
+            style={styles.Profile_InterestButton}
+            onPress={() => removeInterest(interest)}
+          >
+            {interest}
+          </Button>
+        );
+      });
+
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -59,12 +76,12 @@ const Profile = ({ usernameForProfile = "Carces" }) => {
       scrollEnabled={true}
     >
       <View style={styles.Profile_View}>
-        <Text style={{ fontWeight: "bold", fontSize: 15, paddingBottom: 20 }}>
+        <Text style={{ fontWeight: 'bold', fontSize: 15, paddingBottom: 20 }}>
           Filling out your profile helps you match with more buddies. Get
           started now!
         </Text>
         <Image
-          source={{ uri: "https://source.unsplash.com/random" }}
+          source={{ uri: 'https://source.unsplash.com/random' }}
           style={styles.Profile_Image}
         />
         <Text style={styles.Profile_username}>{usernameForProfile}</Text>
@@ -73,7 +90,7 @@ const Profile = ({ usernameForProfile = "Carces" }) => {
         {currentUserName ? <Text>Name: {currentUserName} </Text> : null}
         {currentUserGender ? <Text>Gender: {currentUserGender}</Text> : null}
         <Text style={styles.Profile_CurrentUserInterests}>
-          Interests: {currentUserInterests || "none"}
+          Interests: {interestsButtons || 'none'}
         </Text>
         <Text style={styles.Profile_AddToUserInterests}>
           Add to your interests:
@@ -90,7 +107,7 @@ const Profile = ({ usernameForProfile = "Carces" }) => {
         <View style={{ paddingTop: 10 }}>
           <TouchableHighlight
             style={styles.Profile_Buttons}
-            onPress={updateInterests}
+            onPress={addInterest}
           >
             <Text style={styles.Profile_Buttons_Text}>Add interest</Text>
           </TouchableHighlight>
