@@ -1,5 +1,5 @@
-import { Button } from "@rneui/themed";
-import { useState } from "react";
+import { Button } from '@rneui/themed';
+import { useState } from 'react';
 import {
   TextInput,
   View,
@@ -7,22 +7,22 @@ import {
   Text,
   Image,
   Alert,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import styles from "../styles.js";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import styles from '../styles.js';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const LandingPage = (props) => {
   const { eventName, setEventName } = props;
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState('');
 
   const handleValidation = () => {
     const pattern = /^[a-zA-Z0-9\s]*$/;
     if (!pattern.test(userInput)) {
       Alert.alert(
-        "Found invalid characters",
-        "Please try again.",
-        [{ text: "OK", onPress: () => {} }],
+        'Found invalid characters',
+        'Please try again.',
+        [{ text: 'OK', onPress: () => {} }],
         { cancelable: true }
       );
     }
@@ -32,11 +32,12 @@ const LandingPage = (props) => {
 
   const searchEventByName = () => {
     setEventName(userInput);
-    navigation.navigate("Events");
+    setUserInput('');
+    navigation.navigate('Events');
   };
 
   function navigateToLocation() {
-    navigation.navigate("Location");
+    navigation.navigate('Location');
   }
 
   return (
@@ -47,7 +48,7 @@ const LandingPage = (props) => {
     >
       <View style={{ paddingBottom: 30, marginTop: 20 }}>
         <Image
-          source={require("../images/Landing_Page_Concert.jpeg")}
+          source={require('../images/Landing_Page_Concert.jpeg')}
           style={styles.LandingPage_Image}
         />
       </View>
