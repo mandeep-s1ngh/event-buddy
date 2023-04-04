@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   },
   genreLabel: {
     fontSize: 16,
-    // fontWeight: 'bold',
+    fontWeight: 'bold',
     marginRight: 5,
   },
   button: {

@@ -262,6 +262,23 @@ const styles = StyleSheet.create({
   MessageCard_Reply: {
     backgroundColor: '#dbd7d7',
   },
+  MessageBoard_TextInput: {
+    height: 30,
+    backgroundColor: "#f7e0c9",
+    fontSize: 12,
+    paddingLeft: 10,
+    width: 250,
+  },
+  MessageBoard_Buttons: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 4,
+    // paddingHorizontal: 25,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: "#ec8e2f",
+    width: 250,
+  }
 });
 
 export default styles;
