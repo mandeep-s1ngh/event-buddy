@@ -2,14 +2,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MessageBoard from '../MessageBoard';
 import getCommonScreens from './getCommonScreens';
 
-const Stack = createNativeStackNavigator();
-const commonScreens = getCommonScreens(Stack);
-
 function MessagesStack({
   eventNameForMessages,
+  usernameForProfile,
   setUsernameForProfile,
   currentUser,
 }) {
+  const Stack = createNativeStackNavigator();
+  const commonScreens = getCommonScreens(Stack, null, usernameForProfile);
   return (
     <Stack.Navigator
       initialRouteName="MessageBoard"

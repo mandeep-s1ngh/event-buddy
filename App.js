@@ -97,6 +97,7 @@ export default function App() {
                   {...props}
                   eventName={eventName}
                   userLocation={userLocation}
+                  usernameForProfile={usernameForProfile}
                   setEventNameForBuddies={setEventNameForBuddies}
                   setEventNameForMessages={setEventNameForMessages}
                 />
@@ -115,6 +116,7 @@ export default function App() {
                 <MessagesStack
                   {...props}
                   eventNameForMessages={eventNameForMessages}
+                  usernameForProfile={usernameForProfile}
                   setUsernameForProfile={setUsernameForProfile}
                   currentUser={currentUser}
                 />

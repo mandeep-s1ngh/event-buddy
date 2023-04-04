@@ -37,7 +37,11 @@ const MessageCard = ({
       }
       titleStyle={styles.BuddyCard_Username}
     >
-      <Button color="#ec8e2f" title={'Connect'} containerStyle={styles.BuddyCard_Button} />
+      <Button
+        color="#ec8e2f"
+        title={'Connect'}
+        containerStyle={styles.BuddyCard_Button}
+      />
       <Button
         color="#ec8e2f"
         title={'View Profile'}
