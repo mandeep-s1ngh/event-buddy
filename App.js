@@ -85,7 +85,7 @@ export default function App() {
               name="Events"
               options={{
                 tabBarIcon: ({ color, size }) => (
-                  <Icon name="event" color={color} size={size} />
+                  <Icon name="event" color={color} size={size}/>
                 ),
               }}
             >
@@ -93,6 +93,7 @@ export default function App() {
                 <EventsStack
                   {...props}
                   eventName={eventName}
+                  setEventName={setEventName}
                   userLocation={userLocation}
                   setEventNameForBuddies={setEventNameForBuddies}
                   setEventNameForMessages={setEventNameForMessages}

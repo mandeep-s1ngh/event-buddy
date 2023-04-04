@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white',
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-medium',
+    //fontFamily: 'sans-serif-medium',
   },
   LandingPage_TextInfo: {
     fontSize: 15,
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     paddingLeft: 10,
     width: 250,
-    fontFamily: 'sans-serif-medium',
+    //fontFamily: 'sans-serif-medium',
   },
   // ------------- Profile styling ------------- //
   Profile_View: {

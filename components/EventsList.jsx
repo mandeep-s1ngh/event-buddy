@@ -1,4 +1,4 @@
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
 
@@ -7,6 +7,7 @@ import EventCard from './EventCard';
 
 export default function EventsList({ 
   eventName,
+  setEventName,
   userLocation,
   setEventNameForBuddies, 
   setEventNameForMessages
@@ -14,15 +15,13 @@ export default function EventsList({
 
   let geohash = '';
   if (userLocation) {
-  console.log (userLocation);
-  const precision = 5;
+  const precision = 8;
   // precision is maximum X axis error index:     
   // 4   ± 20 km - not true! gives Leeds for 'London'
   // 5   ± 2.4 km - still gives Leeds
   // 9 - still Leeds, 10 - nothing
   
   geohash = Geohash.encode(userLocation.geolocation.latitude, userLocation.geolocation.longitude, precision); 
-  console.log(geohash);
   }
 
   const [eventsList, setEventsList] = useState([]);
@@ -46,10 +45,7 @@ export default function EventsList({
         setIsError(true);
         setErrorMessage(err);
       });
-  }, [eventName, userLocation]); //not updating with changes ?
-  // console.log ('isLoading ->', isLoading);
-  // console.log ('isError ->', isError)
-  // console.log ('error ->', errorMessage)
+  }, [eventName, userLocation]);
 
     ticketmaster_list = eventsList.map((event) => {
       let location = event._embedded.venues[0].city.name;
@@ -93,17 +89,16 @@ export default function EventsList({
         const itemFirstTwoWords = itemTitleWords.slice(0, 2).join(' ');
         return itemFirstTwoWords === firstTwoWords;
       });
-    
       if (!isDuplicate) {
         acc.push(curr);
       }
-    
       return acc;
     }, []);
 
   const filtered_events_list = tooManyLeedses.filter(event => !event.title.includes('Ticket' || 'ticket' || 'payment' || 'Payment'))
-
-  return (
+  
+  if (isLoading) return (<View><Text>Is loading!</Text></View>);
+  else return (
     <ScrollView>
       <View>
         {filtered_events_list.map((event) => {
@@ -119,7 +114,7 @@ export default function EventsList({
                 event_talks={event.talks}
                 setEventNameForBuddies = { setEventNameForBuddies }
                 setEventNameForMessages = {setEventNameForMessages}
-              />
+              /> 
             </View>
           );
         })}

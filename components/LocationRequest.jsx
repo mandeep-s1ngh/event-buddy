@@ -16,20 +16,24 @@ const LocationRequest = (props) => {
     (async () => {
       
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
-      }
+      // if (status !== 'granted') {
+      //   setErrorMsg('Permission to access location was denied');
+      //   return;
+      // }
 
       let location = await Location.getCurrentPositionAsync({});
+      //console.log(location);
 
       const latitude = location["coords"]["latitude"]
       const longitude = location["coords"]["longitude"]
-
+        console.log('before async: ', {'geolocation': {latitude, longitude}, 'address': address} );
       const address = await getAddressFromGeolocation(latitude, longitude)
-      setUserLocation({geolocation: {latitude, longitude}, address: address});
+        console.log('after async: ', {'geolocation': {latitude, longitude}, 'address': address} );
+      setUserLocation({'geolocation': {latitude, longitude}, 'address': address});
     })();
-  }, []);
+  }, [
+   locationInput
+  ]);
 
   // ----------------------------------------------------------------------------
   const navigation = useNavigation();
