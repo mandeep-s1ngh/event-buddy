@@ -1,19 +1,13 @@
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
 
 import { getTicketMasterEvents } from '../api/eventsListapi';
 import EventCard from './EventCard';
 
-import { StyleSheet } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context'
-import StickyHeader from './StickyHeader';
-
-
 export default function EventsList({
   eventName,
   userLocation,
-  setEventName,
   setEventNameForBuddies,
   setEventNameForMessages,
 }) {
@@ -30,7 +24,7 @@ export default function EventsList({
       userLocation.geolocation.longitude,
       precision
     );
-    // console.log(geohash);
+  
   }
 
   const [eventsList, setEventsList] = useState([]);
@@ -44,7 +38,7 @@ export default function EventsList({
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    getEvents(eventName, geohash) 
+    getEvents(eventName, geohash)
       .then((events) => {
         setEventsList(events);
         setIsLoading(false);
@@ -103,97 +97,41 @@ export default function EventsList({
       const itemFirstTwoWords = itemTitleWords.slice(0, 2).join(' ');
       return itemFirstTwoWords === firstTwoWords;
     });
-    if (!isDuplicate & !(titleWords[0] === 'Leeds')) {
+
+    if (!isDuplicate 
+      && !(titleWords[0] === 'Leeds' && eventName !== 'Leeds' && geohash !== 'gcwfhcebd')
+      ) {
       acc.push(curr);
     }
+
     return acc;
   }, []);
 
   const filtered_events_list = tooManyLeedses.filter(
-    (event) => !event.title.includes('Ticket' || 'ticket' || 'payment' || 'Payment')
+    (event) => !event.title.includes('Ticket' || 'ticket')
   );
 
-  if (isLoading) return (<View><Text title='Is loading...'></Text></View>);
-  else console.log ('hello')
-
-//   return (
-//     <ScrollView>
-//       <View>
-//         {filtered_events_list.map((event) => {
-//           return (
-//             <View key={event.key}>
-//               <EventCard
-//                 event_title={event.title}
-//                 event_place={event.location}
-//                 event_date={event.date}
-//                 event_genre={event.genre}
-//                 event_img_URL_preview={event.img}
-//                 event_buddies={event.buddies}
-//                 event_talks={event.talks}
-//                 setEventNameForBuddies={setEventNameForBuddies}
-//                 setEventNameForMessages={setEventNameForMessages}
-//               />
-//             </View>
-//           );
-//         })}
-//       </View>
-//     </ScrollView>
-//   );
-// }
-
-
-    return( 
-        <SafeAreaProvider>
-    <View style={styles.mainView}>
-        <StickyHeader style={styles.stickyHeader}/>
-        <View style={styles.listView}>
-        <ScrollView >
-            <View >
-            {filtered_events_list.map((event) => {
-              return (
-                <View key={event.key}>
-                    <EventCard 	
-                    event_title={event.title} 		 
-                    event_place={event.location}	
-                    event_date={event.date}	 
-                    event_genre={event.genre}		 
-                    event_img_URL_preview={event.img}	
-                    event_buddies={event.buddies}
-                    event_talks={event.talks}
-                    />	
-               </View>
-            );
-            })}
+  return (
+    <ScrollView>
+      <View>
+        {filtered_events_list.map((event) => {
+          return (
+            <View key={event.key}>
+              <EventCard
+                event_title={event.title}
+                event_place={event.location}
+                event_date={event.date}
+                event_genre={event.genre}
+                event_img_URL_preview={event.img}
+                event_buddies={event.buddies}
+                event_talks={event.talks}
+                setEventNameForBuddies={setEventNameForBuddies}
+                setEventNameForMessages={setEventNameForMessages}
+              />
             </View>
-        </ScrollView>
-        </View>
-    </View>
-    </SafeAreaProvider>
-    )
+          );
+        })}
+      </View>
+    </ScrollView>
+  );
 }
-
-const styles = StyleSheet.create({
-
-    mainView: {
-      height: '100%',
-      flexDirection: 'column',
-      flex: 1,
-      borderRadius: 80,
-      //flexWrap: 'wrap',
-      //rowGap: 10,
-    },
-    stickyHeader: {
-        minheight: 50,
-       // height: '100%',
-        // flexDirection: 'column',
-       flex: 2,
-        // borderRadius: 80,
-    },
-    listView: {
-        height: '90%',
-       // height: '30%',
-        // flexDirection: 'column',
-        flex: 3,
-        // borderRadius: 80,
-    },
-});
