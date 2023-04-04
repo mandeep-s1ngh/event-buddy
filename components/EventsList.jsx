@@ -1,4 +1,4 @@
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
 
@@ -109,9 +109,12 @@ export default function EventsList({
   const filtered_events_list = tooManyLeedses.filter(
     (event) => !event.title.includes('Ticket' || 'ticket')
   );
-
+  if (isLoading) return (<View><Text title="Is loading..."></Text></View>);
+  else
   return (
-    <ScrollView>
+    <View style={{flex: 1}}>
+    <View style={{flex: .1}}><Text title="HEADER"></Text></View>
+    <ScrollView style={{flex: .16}}>
       <View>
         {filtered_events_list.map((event) => {
           return (
@@ -132,5 +135,6 @@ export default function EventsList({
         })}
       </View>
     </ScrollView>
+    </View>
   );
 }
