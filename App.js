@@ -46,7 +46,7 @@ export default function App() {
             initialRouteName="Home"
             screenOptions={{
               headerShown: false,
-              tabBarActiveTintColor: 'orange',
+              tabBarActiveTintColor: '#ec8e2f',
             }}
           >
             <Tab.Screen
