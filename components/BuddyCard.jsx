@@ -23,8 +23,9 @@ const BuddyCard = ({
       containerStyle={styles.BuddyCard}
       titleStyle={styles.BuddyCard_Username}
     >
-      <Button title={'Connect'} containerStyle={styles.BuddyCard_Button} />
+      <Button color="#ec8e2f" title={'Connect'} containerStyle={styles.BuddyCard_Button} />
       <Button
+        color="#ec8e2f"
         title={'View Profile'}
         onPress={goToProfile}
         containerStyle={[
