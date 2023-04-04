@@ -6,28 +6,46 @@ import { getUserProfile } from '../api/getUserProfile';
 import styles from '../styles';
 
 const BuddyList = ({ eventNameForBuddies, setUsernameForProfile }) => {
-  const [attendees, setAttendees] = useState([]);
+  const [buddies, setBuddies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    getAttendees(eventNameForBuddies)
-      .then((result) => {
-        if (!result) return Promise.resolve(false);
-        const usernames = result.Items;
-        return Promise.all(
-          usernames.map(({ username }) => getUserProfile(username.S))
-        );
-      })
-      .then((userProfiles) => {
-        setAttendees(userProfiles);
-        setIsLoading(false);
-      });
+    if (eventNameForBuddies) {
+      setIsLoading(true);
+      getAttendees(eventNameForBuddies)
+        .then((result) => {
+          if (!result) return Promise.resolve(false);
+          const usernames = result.Items;
+          return Promise.all(
+            usernames.map(({ username }) => getUserProfile(username.S))
+          );
+        })
+        .then((userProfiles) => {
+          setBuddies(userProfiles);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      getUserProfile('Carces')
+        .then((result) => {
+          if (!result) return Promise.resolve(false);
+          const usernames = result.Item.buddies
+            ? result.Item.buddies.S.split(',')
+            : [];
+          return Promise.all(
+            usernames.map((username) => getUserProfile(username))
+          );
+        })
+        .then((userProfiles) => {
+          setBuddies(userProfiles);
+          setIsLoading(false);
+        });
+    }
   }, [eventNameForBuddies]);
 
   if (isLoading) return <ActivityIndicator />;
 
-  const buddyCards = attendees.map((attendee, index) => {
+  const buddyCards = buddies.map((attendee, index) => {
     const {
       Item: { username, name, age, gender, interests },
     } = attendee;
@@ -44,6 +62,7 @@ const BuddyList = ({ eventNameForBuddies, setUsernameForProfile }) => {
         gender={genderValue}
         interests={interestsValue}
         setUsernameForProfile={setUsernameForProfile}
+        isAttendeeList={!!eventNameForBuddies}
       />
     );
   });
@@ -51,7 +70,9 @@ const BuddyList = ({ eventNameForBuddies, setUsernameForProfile }) => {
   return (
     <ScrollView style={styles.BuddyList}>
       <Text style={styles.BuddyList_Text}>
-        {attendees.length} people attending {eventNameForBuddies}:
+        {eventNameForBuddies
+          ? `${buddies.length} people attending ${eventNameForBuddies}:`
+          : 'Your connected buddies:'}
       </Text>
       {buddyCards}
     </ScrollView>

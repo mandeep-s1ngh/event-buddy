@@ -1,4 +1,4 @@
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, ActivityIndicator } from 'react-native';
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
 
@@ -15,8 +15,8 @@ export default function EventsList({
   if (userLocation) {
     const precision = 9;
     // precision is maximum X axis error index:
-    // 4   ± 20 km 
-    // 5   ± 2.4 km 
+    // 4   ± 20 km
+    // 5   ± 2.4 km
     // 10 - gives nothing
 
     geohash = Geohash.encode(
@@ -24,7 +24,6 @@ export default function EventsList({
       userLocation.geolocation.longitude,
       precision
     );
-  
   }
 
   const [eventsList, setEventsList] = useState([]);
@@ -48,10 +47,12 @@ export default function EventsList({
         setIsError(true);
         setErrorMessage(err);
       });
-  }, [eventName, userLocation]); 
+  }, [eventName, userLocation]);
   // console.log ('isLoading ->', isLoading);
   // console.log ('isError ->', isError)
   // console.log ('error ->', errorMessage)
+
+  if (isLoading) return <ActivityIndicator />;
 
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
@@ -98,9 +99,14 @@ export default function EventsList({
       return itemFirstTwoWords === firstTwoWords;
     });
 
-    if (!isDuplicate 
-      && !(titleWords[0] === 'Leeds' && eventName !== 'Leeds' && geohash !== 'gcwfhcebd')
-      ) {
+    if (
+      !isDuplicate &&
+      !(
+        titleWords[0] === 'Leeds' &&
+        eventName !== 'Leeds' &&
+        geohash !== 'gcwfhcebd'
+      )
+    ) {
       acc.push(curr);
     }
 

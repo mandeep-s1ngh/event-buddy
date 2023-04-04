@@ -3,16 +3,16 @@
 // import { Card, Badge, Button, Icon, View } from '@rneui/themed';
 //import { Badge, View } from "react-native-elements";
 //import styles from "../styles";
-import { useState } from "react";
+import { useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableHighlight,
-} from "react-native";
-import { Card, Button } from "@rneui/themed";
-import { useNavigation } from "@react-navigation/native";
+} from 'react-native';
+import { Card, Button } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
 
 function EventCard({
   //sorted by date ascending by default?
@@ -30,12 +30,12 @@ function EventCard({
 
   const goToBuddyList = () => {
     setEventNameForBuddies(event_title);
-    navigation.navigate("Buddies");
+    navigation.navigate('BuddyList');
   };
 
   const goToMessageBoard = () => {
     setEventNameForMessages(event_title);
-    navigation.navigate("MessageBoard");
+    navigation.navigate('MessageBoard');
   };
 
   const [buddiesDisplay, setBuddiesDisplay] = useState(event_buddies);
@@ -54,7 +54,7 @@ function EventCard({
   };
 
   return (
-    <Card containerStyle={{ backgroundColor: "#f7e0c9" }}>
+    <Card containerStyle={{ backgroundColor: '#f7e0c9' }}>
       <View style={styles.mainContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{event_title}</Text>
@@ -97,14 +97,14 @@ function EventCard({
                   // style={styles.button}
                   onPress={updateBuddies}
                   color="#ec8e2f"
-                  title={!joined ? "Join the event" : "Not in the mood"}
+                  title={!joined ? 'Join the event' : 'Not in the mood'}
                 ></Button>
               </View>
               <View style={styles.buddiesContainer}>
                 <Button
                   style={styles.button}
                   onPress={goToMessageBoard}
-                  title={"Message board"}
+                  title={'Message board'}
                   color="#ec8e2f"
                 ></Button>
               </View>
@@ -115,7 +115,7 @@ function EventCard({
 
                 <Button
                   onPress={goToBuddyList}
-                  title={"See who is going"}
+                  title={'See who is going'}
                   color="#ec8e2f"
                 ></Button>
               </View>
@@ -131,30 +131,30 @@ function EventCard({
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: "100%",
-    flexDirection: "column",
+    width: '100%',
+    flexDirection: 'column',
     flex: 1,
     borderRadius: 80,
     fontSize: 18,
   },
   titleContainer: {
-    width: "100%",
-    flexDirection: "column",
+    width: '100%',
+    flexDirection: 'column',
     flex: 1,
     borderRadius: 80,
   },
   date: {
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: 5,
     // fontWeight: 'bold',
   },
   title: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 22,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   location: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 14,
     marginBottom: 5,
   },
@@ -164,10 +164,10 @@ const styles = StyleSheet.create({
     //justifyContent: 'space-between',
   },
   imageContainer: {
-    width: "100%",
+    width: '100%',
   },
   image: {
-    width: "100%",
+    width: '100%',
     height: 150,
     marginBottom: 5,
     borderRadius: 11,
@@ -181,18 +181,18 @@ const styles = StyleSheet.create({
   },
   genreContainer: {
     // flexDirection: 'row',
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 5,
   },
   buddiesContainer: {
     // flexDirection: 'row',
     margin: 5,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     // fontWeight: 'bold',
   },
   genreLabel: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginRight: 5,
   },
   button: {
@@ -200,12 +200,12 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
   },
   Event_Card_Buttons: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 9,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: "#ec8e2f",
+    backgroundColor: '#ec8e2f',
     width: 110,
   },
 
@@ -213,8 +213,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
-    color: "white",
-    fontWeight: "bold",
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 

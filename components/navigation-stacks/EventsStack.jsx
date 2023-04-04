@@ -2,10 +2,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import EventsList from '../EventsList';
 import getCommonScreens from './getCommonScreens';
 import MessageBoard from '../MessageBoard';
+import BuddyList from '../BuddyList';
 
 function EventsStack({
   eventName,
   userLocation,
+  eventNameForBuddies,
   setEventNameForBuddies,
   eventNameForMessages,
   setEventNameForMessages,
@@ -40,6 +42,16 @@ function EventsStack({
             eventNameForMessages={eventNameForMessages}
             setUsernameForProfile={setUsernameForProfile}
             currentUser={currentUser}
+          />
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="BuddyList">
+        {(props) => (
+          <BuddyList
+            {...props}
+            eventNameForBuddies={eventNameForBuddies}
+            setUsernameForProfile={setUsernameForProfile}
+            usernameForProfile={usernameForProfile}
           />
         )}
       </Stack.Screen>
