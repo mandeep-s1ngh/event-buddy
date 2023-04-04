@@ -70,7 +70,6 @@ function EventCard({
             <Text style={styles.genreLabel}>
               Event genre: {event_genre}
             </Text>
-            {/* <Text style={styles.genre}>{event_genre}</Text>  */}
           </View>
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
@@ -86,33 +85,26 @@ function EventCard({
             </View>
 
             <View style={styles.buddiesContainer}>
-
               <Text style={styles.genreLabel}>
               {' '}
               </Text>
-              
               <Button
                 onPress={goToBuddyList}
                 title={'See who is going'}
                 color='#ec8e2f'
               ></Button>
-
             </View>
 
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
                 Talks about event: {event_talks}
               </Text>
-              {/* <Text style={styles.genre}>{event_talks}</Text> */}
               <Button
                 style={styles.button}
                 onPress={goToMessageBoard}
                 title={'Message board'}
                 color='#ec8e2f'
               ></Button>
-              {/* <TouchableHighlight  style={styles.button} onPress={() => {setCurrentUserTags(`${currentUserTags} #${NewUserTag} `)}}>
-                  <Text >Message board</Text>
-                </TouchableHighlight> */}
             </View>
           </View>
         </View>
@@ -152,7 +144,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   bodyContainer: {
-    
     //flex: 1,
     //borderRadius: 80,
     //justifyContent: 'space-between',

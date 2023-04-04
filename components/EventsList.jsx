@@ -15,7 +15,7 @@ export default function EventsList({
   let geohash = '';
   if (userLocation) {
   console.log (userLocation);
-  const precision = 9;
+  const precision = 5;
   // precision is maximum X axis error index:     
   // 4   ± 20 km - not true! gives Leeds for 'London'
   // 5   ± 2.4 km - still gives Leeds
@@ -36,8 +36,7 @@ export default function EventsList({
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    getEvents(eventName, geohash) //crushes the app, geohash does not exist at start - but so is with userLocation and eventName
-    //getEvents(eventName, userLocation)
+    getEvents(eventName, geohash)
       .then((events) => {
         setEventsList(events);
         setIsLoading(false);
@@ -102,7 +101,7 @@ export default function EventsList({
       return acc;
     }, []);
 
-  const filtered_events_list = tooManyLeedses.filter(event => !event.title.includes('Ticket' || 'ticket'))
+  const filtered_events_list = tooManyLeedses.filter(event => !event.title.includes('Ticket' || 'ticket' || 'payment' || 'Payment'))
 
   return (
     <ScrollView>

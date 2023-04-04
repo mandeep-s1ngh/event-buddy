@@ -15,6 +15,7 @@ const LandingPage = (props) => {
   const searchEventByName = () => {
     setEventName(userInput);
     navigation.navigate("Events");
+    setUserInput('');
   };
 
   function navigateToLocation() {
