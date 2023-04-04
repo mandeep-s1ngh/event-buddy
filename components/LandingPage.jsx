@@ -1,3 +1,4 @@
+import { Button } from "@rneui/themed";
 import { useState } from "react";
 import {
   TextInput,
@@ -33,6 +34,7 @@ const LandingPage = (props) => {
 
   const searchEventByName = () => {
     setEventName(userInput);
+    setUserInput("");
     navigation.navigate("Events");
   };
 

@@ -13,7 +13,6 @@ export default function EventsList({
 }) {
   let geohash = '';
   if (userLocation) {
-    console.log(userLocation);
     const precision = 9;
     // precision is maximum X axis error index:
     // 4   ± 20 km - not true! gives Leeds for 'London'
@@ -25,7 +24,7 @@ export default function EventsList({
       userLocation.geolocation.longitude,
       precision
     );
-    console.log(geohash);
+    // console.log(geohash);
   }
 
   const [eventsList, setEventsList] = useState([]);

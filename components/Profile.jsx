@@ -15,7 +15,8 @@ import { getUserProfile } from '../api/getUserProfile.js';
 import { patchUserProfile } from '../api/patchUserProfile.js';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const Profile = ({ usernameForProfile = 'Carces' }) => {
+const Profile = ({ usernameForProfile }) => {
+  usernameToDisplay = usernameForProfile || 'Carces';
   const [newUserTag, setNewUserTag] = useState('');
   const [currentUserName, setCurrentUserName] = useState('');
   const [currentUserAge, setCurrentUserAge] = useState('');
@@ -25,19 +26,19 @@ const Profile = ({ usernameForProfile = 'Carces' }) => {
 
   function addInterest() {
     setCurrentUserInterests((previous) => [...previous, newUserTag]);
-    patchUserProfile(usernameForProfile, null, null, null, [newUserTag]);
+    patchUserProfile(usernameToDisplay, null, null, null, [newUserTag]);
   }
 
   function removeInterest(interest) {
     const updatedInterests = [...currentUserInterests];
     updatedInterests.splice(updatedInterests.indexOf(interest), 1);
     setCurrentUserInterests(updatedInterests);
-    patchUserProfile(usernameForProfile, null, null, null, [`-${interest}`]);
+    patchUserProfile(usernameToDisplay, null, null, null, [`-${interest}`]);
   }
 
   useEffect(() => {
     setIsLoading(true);
-    getUserProfile(usernameForProfile).then((fetchedProfile) => {
+    getUserProfile(usernameToDisplay).then((fetchedProfile) => {
       const {
         Item: { name, age, gender, interests },
       } = fetchedProfile;
@@ -51,7 +52,7 @@ const Profile = ({ usernameForProfile = 'Carces' }) => {
       if (interests) setCurrentUserInterests(interestsValue);
       setIsLoading(false);
     });
-  }, [usernameForProfile]);
+  }, [usernameToDisplay]);
 
   if (isLoading) return <ActivityIndicator />;
 
@@ -84,7 +85,7 @@ const Profile = ({ usernameForProfile = 'Carces' }) => {
           source={{ uri: 'https://source.unsplash.com/random' }}
           style={styles.Profile_Image}
         />
-        <Text style={styles.Profile_username}>{usernameForProfile}</Text>
+        <Text style={styles.Profile_username}>{usernameToDisplay}</Text>
 
         {currentUserAge ? <Text>Age: {currentUserAge} </Text> : null}
         {currentUserName ? <Text>Name: {currentUserName} </Text> : null}

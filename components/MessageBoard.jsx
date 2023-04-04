@@ -104,6 +104,7 @@ const MessageBoard = ({
         .map((reply) => {
           return (
             <MessageCard
+            
               key={reply.timestamp.S}
               username={reply.username.S}
               timestamp={reply.timestamp.S}
@@ -139,7 +140,8 @@ const MessageBoard = ({
             />
           </View>
         
-        <View style={{paddingTop: 5, paddingLeft: 20, paddingBottom: 15} }>
+        <View style={{marginTop: 5, marginLeft: 20, marginBottom: 15} }>
+          {/* {marginTop: 5, marginLeft: 20, marginBottom: 15} */}
         <View style={styles.MessageBoard_Buttons}>
           <Button onPress={submitNewMessage} color="#ec8e2f" >Submit</Button>
           </View>
