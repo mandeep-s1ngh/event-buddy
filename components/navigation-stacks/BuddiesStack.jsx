@@ -2,11 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BuddyList from '../BuddyList';
 import getCommonScreens from './getCommonScreens';
 
-function BuddiesStack({
-  eventNameForBuddies,
-  setUsernameForProfile,
-  usernameForProfile,
-}) {
+function BuddiesStack({ setUsernameForProfile, usernameForProfile }) {
   const Stack = createNativeStackNavigator();
   const commonScreens = getCommonScreens(Stack, null, usernameForProfile);
   return (
@@ -20,7 +16,6 @@ function BuddiesStack({
         {(props) => (
           <BuddyList
             {...props}
-            eventNameForBuddies={eventNameForBuddies}
             setUsernameForProfile={setUsernameForProfile}
             usernameForProfile={usernameForProfile}
           />

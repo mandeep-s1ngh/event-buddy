@@ -2,6 +2,8 @@ import { Avatar, Card, Button, Image, Icon } from '@rneui/themed';
 import { View, Text, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles.js';
+import { addBuddy } from '../api/addBuddy.js';
+import { useState } from 'react';
 
 const BuddyCard = ({
   username,
@@ -10,12 +12,23 @@ const BuddyCard = ({
   gender,
   interests,
   setUsernameForProfile,
+  isAttendeeList,
 }) => {
   const navigation = useNavigation();
+  const [buddyAdded, setBuddyAdded] = useState(false);
 
   function goToProfile() {
     setUsernameForProfile(username);
     navigation.navigate('Profile');
+  }
+
+  function connectWithBuddy() {
+    setBuddyAdded(true);
+    addBuddy('Carces', username);
+  }
+
+  function startChat() {
+    //
   }
 
   return (
@@ -23,7 +36,18 @@ const BuddyCard = ({
       containerStyle={styles.BuddyCard}
       titleStyle={styles.BuddyCard_Username}
     >
-      <Button color="#ec8e2f" title={'Connect'} containerStyle={styles.BuddyCard_Button} />
+      <Button
+        onPress={isAttendeeList ? connectWithBuddy : startChat}
+        color="#ec8e2f"
+        title={
+          !isAttendeeList ? 'Message' : buddyAdded ? 'Connected' : 'Connect'
+        }
+        containerStyle={
+          buddyAdded
+            ? [styles.BuddyCard_Button, styles.BuddyCard_ButtonAdded]
+            : styles.BuddyCard_Button
+        }
+      />
       <Button
         color="#ec8e2f"
         title={'View Profile'}
