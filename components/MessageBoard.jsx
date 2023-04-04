@@ -130,17 +130,31 @@ const MessageBoard = ({
           {isInvalidSubmit ? (
             <Text>Please enter a message before submitting</Text>
           ) : null}
-          <TextInput
+          <View style={{paddingTop: 10, paddingLeft: 20, paddingBottom: 15} }>
+            <TextInput
+            style={styles.MessageBoard_TextInput}
+            placeholder="Write your message here ..."
             value={newMessageInput}
             onChangeText={(text) => setNewMessageInput(text)}
-          />
-          <Button onPress={submitNewMessage}>Submit</Button>
+            />
+          </View>
+        
+        <View style={{paddingTop: 5, paddingLeft: 20, paddingBottom: 15} }>
+        <View style={styles.MessageBoard_Buttons}>
+          <Button onPress={submitNewMessage} color="#ec8e2f" >Submit</Button>
+          </View>
+        </View>
+          
         </View>
       ) : null}
       <ScrollView>
-        <Button onPress={toggleInput}>
+      <View style={{paddingTop: 5, paddingLeft: 20, paddingBottom: 15} }>
+      <View style={[styles.MessageBoard_Buttons, {paddingTop: 1}]}>
+        <Button color="#ec8e2f" onPress={toggleInput} >
           {inputShown ? 'Hide' : threadToView ? 'New reply' : 'New message'}
         </Button>
+        </View>
+        </View>
         {threadToView ? thread : messageCards}
       </ScrollView>
     </View>
