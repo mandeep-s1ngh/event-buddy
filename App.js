@@ -13,6 +13,7 @@ import HomeStack from './components/navigation-stacks/HomeStack.jsx';
 import BuddiesStack from './components/navigation-stacks/BuddiesStack.jsx';
 import EventsStack from './components/navigation-stacks/EventsStack.jsx';
 import MessagesStack from './components/navigation-stacks/MessagesStack.jsx';
+import Registration from './components/Registration.jsx';
 
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
@@ -106,6 +107,16 @@ export default function App() {
                 />
               )}
             </Tab.Screen>
+
+            <Tab.Screen
+              name="Registration"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="push-pin" color={color} size={size} />
+                ),
+              }}
+              component={Registration}
+            ></Tab.Screen>
 
             {/* <Tab.Screen
               name="Messages"

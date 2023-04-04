@@ -1,7 +1,7 @@
-import { cognitoPool } from '../cognito/cognito-pool';
 import { useState, useEffect, useCallback } from 'react';
 import {
   View,
+  Button,
   Text,
   Alert,
   TextInput,
@@ -9,66 +9,68 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@react-navigation/native';
-import { ScaleHook } from 'react-native-design-to-component';
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-
-import { useStyle } from '../../hooks/styles';
-import { emailRegex } from '../../utils/regex';
-import { useLoading } from '../../hooks/loading';
-import { dictionary } from '../../hooks/dictionary';
-import { cognitoPool } from '../../utils/cognito-pool';
-
-import { DefaultButton } from '../../components/buttons/default-button';
-import { OnboardingButton } from '../../components/buttons/onboarding-button';
-
-const sigma = require('../../../assets/images/sigma.png');
+import { emailRegex } from '../cognito/regex';
+import { cognitoPool } from '../cognito/cognito-pool';
 
 function Registration() {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-  function logIn()
+  function onPressLogin() {
     navigation.goBack();
-  };
+  }
 
   const onPressRegister = () => {
+    console.log(email, '<<< email before test');
     if (!email || !password || !confirmPassword) {
-      return Alert.alert("Error", "Please fill out all fields");
+      return Alert.alert('Error', 'Please fill out all fields');
     }
 
     if (!emailRegex.test(email)) {
-      return Alert.alert("Error", "Invalid email address");
+      console.log('test failed');
+      return Alert.alert('Error', 'Invalid email address');
     }
 
     if (password?.length < 6) {
-      return Alert.alert("Error","Invalid password");
+      return Alert.alert('Error', 'Invalid password');
     }
 
-    cognitoPool.signUp(email, password, [], null, (err, data) => {
-      if (err) {
-        switch (err.name) {
-          case 'InvalidParameterException':
-            return Alert.alert("Error", "Invalid email address");
-          case 'InvalidPasswordException':
-            return Alert.alert("Error", "Invalid password");
-          case 'UsernameExistsException':
-            return Alert.alert("Error", "An account with this email address already exists");
-          default:
-            return Alert.alert("Error", "Something went wrong");
+    cognitoPool.signUp(
+      email,
+      password,
+      [
+        {
+          Name: 'preferred_username' /* required */,
+          Value: 'Carces',
+        },
+      ],
+      null,
+      (err, data) => {
+        if (err) {
+          console.log(err, '<<< err from signup');
+          switch (err.name) {
+            case 'InvalidParameterException':
+              return Alert.alert('Error', 'Invalid email address');
+            case 'InvalidPasswordException':
+              return Alert.alert('Error', 'Invalid password');
+            case 'UsernameExistsException':
+              return Alert.alert(
+                'Error',
+                'An account with this email address already exists'
+              );
+            default:
+              return Alert.alert('Error', 'Something went wrong');
+          }
         }
-      }
 
-      // Alert.alert("Success", Auth.ConfirmEmail, [
-      //   { text: 'OK', onPress: () => navigation.navigate('login') },
-      // ]);
-    });
+        // Alert.alert("Success", Auth.ConfirmEmail, [
+        //   { text: 'OK', onPress: () => navigation.navigate('login') },
+        // ]);
+      }
+    );
   };
 
   // -------------------- FIELDS -------------------- //
@@ -76,23 +78,23 @@ function Registration() {
     email: {
       autoCapitalize: 'none',
       onChange: (e) => setEmail(e.nativeEvent.text),
-      placeholder: Auth.Email,
-      placeholderTextColor: colors.paleSilver,
+      placeholder: 'enter email...',
+      placeholderTextColor: 'grey',
       value: email,
     },
     password: {
       autoCapitalize: 'none',
       onChange: (e) => setPassword(e.nativeEvent.text),
-      placeholder: Auth.Password,
+      placeholder: 'enter password...',
       secureTextEntry: true,
-      placeholderTextColor: colors.paleSilver,
+      placeholderTextColor: 'grey',
       value: password,
     },
     confirmPassword: {
       autoCapitalize: 'none',
       onChange: (e) => setConfirmPassword(e.nativeEvent.text),
-      placeholder: Auth.ConfirmPassword,
-      placeholderTextColor: colors.paleSilver,
+      placeholder: 'confirm password...',
+      placeholderTextColor: 'grey',
       secureTextEntry: true,
       value: confirmPassword,
     },
@@ -104,72 +106,62 @@ function Registration() {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      paddingHorizontal: getWidth(40),
-      backgroundColor: colors.alabaster,
+      paddingHorizontal: 40,
+      backgroundColor: 'white',
     },
     logoContainer: {
       position: 'absolute',
       width: '100%',
       alignItems: 'center',
-      top: topMargin,
+      top: 20,
     },
     logo: {
-      height: getHeight(60),
+      height: 60,
       aspectRatio: 1,
     },
     loginContainer: {
       position: 'absolute',
-      top: topMargin,
+      top: 20,
       right: 0,
     },
     title: {
-      ...textStyles.semiBold28_bistre,
       width: '100%',
-    },
-    input: {
-      ...formStyles.textInput,
-      ...textStyles.medium16_bistre,
     },
   });
 
   // -------------------- RENDER -------------------- //
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ height: getHeight(32) }} />
+    <View style={styles.container}>
+      <View style={{ height: 32 }} />
 
       {/* Title */}
-      <Text style={styles.title}>{Auth.CreateAccount}</Text>
-      <View style={{ height: getHeight(32) }} />
+      <Text style={styles.title}>{'Create account'}</Text>
+      <View style={{ height: 32 }} />
 
       {/* Email */}
       <TextInput style={styles.input} {...fields.email}></TextInput>
-      <View style={{ height: getHeight(12) }} />
+      <View style={{ height: 12 }} />
 
       {/* Password */}
       <TextInput style={styles.input} {...fields.password}></TextInput>
-      <View style={{ height: getHeight(12) }} />
+      <View style={{ height: 12 }} />
 
       {/* Confirm password */}
       <TextInput style={styles.input} {...fields.confirmPassword}></TextInput>
-      <View style={{ height: getHeight(32) }} />
+      <View style={{ height: 32 }} />
 
       {/* Register button */}
-      <DefaultButton
-        text={Auth.Register}
-        bgColor={colors.yellowOrange}
-        onPress={onPressRegister}
-      />
+      <Button onPress={onPressRegister} title="Register">
+        Register
+      </Button>
 
       {/* Create account button */}
       <View style={styles.loginContainer}>
-        <OnboardingButton
-          text={Auth.LoginToAccount}
-          darkMode={true}
-          arrow={false}
-          onPress={onPressLogin}
-        />
+        <Button onPress={onPressLogin} title="Log in">
+          Log in
+        </Button>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
