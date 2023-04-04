@@ -9,7 +9,6 @@ export const getTicketMasterEvents = (eventName, geohash) => {
     path += `&keyword=${eventName+' festival'}&classificationName=Music`;
 
   } if (geohash) {  
-    console.log (geohash)
     path += `&geoPoint=${geohash}&keyword=festival&classificationName=Music`;
 
   } else {
