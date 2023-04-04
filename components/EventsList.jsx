@@ -99,7 +99,9 @@ export default function EventsList({
       return itemFirstTwoWords === firstTwoWords;
     });
 
-    if (!isDuplicate) {
+    if (!isDuplicate 
+      && !(titleWords[0] === 'Leeds' && (eventName !== 'Leeds' || geohash !== 'gcwfhcebd'))
+      ) {
       acc.push(curr);
     }
 
