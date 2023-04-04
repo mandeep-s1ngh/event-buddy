@@ -1,4 +1,3 @@
-import { Button } from "@rneui/themed";
 import { useState } from "react";
 import {
   TextInput,
@@ -7,7 +6,9 @@ import {
   Text,
   Image,
   Alert,
+  TouchableOpacity,
 } from "react-native";
+import { Icon } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles.js";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -35,6 +36,10 @@ const LandingPage = (props) => {
     navigation.navigate("Events");
   };
 
+  const clearTextInput = () => {
+    setUserInput("");
+  };
+
   function navigateToLocation() {
     navigation.navigate("Location");
   }
@@ -60,13 +65,18 @@ const LandingPage = (props) => {
 
       <Text style={styles.LandingPage_TextInfo}>Search events by name:</Text>
 
-      <TextInput
-        value={userInput}
-        onChangeText={(text) => setUserInput(text)}
-        style={styles.LandingPage_TextInput}
-        placeholder="Coachella, Leeds, Evolution ..."
-        onBlur={handleValidation}
-      />
+      <View>
+        <TextInput
+          value={userInput}
+          onChangeText={(text) => setUserInput(text)}
+          style={styles.LandingPage_TextInput}
+          placeholder="Coachella, Leeds, Evolution ..."
+          onBlur={handleValidation}
+        />
+        <TouchableOpacity style={styles.closeButton} onPress={clearTextInput}>
+          <Icon name="close" size={15} />
+        </TouchableOpacity>
+      </View>
 
       <View style={{ paddingTop: 10 }}>
         <TouchableHighlight

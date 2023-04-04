@@ -146,6 +146,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: 250,
   },
+  closeButton: {
+    position: "absolute",
+    marginTop: 9,
+    marginLeft: 230,
+  },
   // ------------- Profile styling ------------- //
   Profile_View: {
     textAlignVertical: "center",
@@ -260,7 +265,7 @@ const styles = StyleSheet.create({
 
   // ------------- MessageCard styling ------------- //
   MessageCard_Reply: {
-    backgroundColor: '#dbd7d7',
+    backgroundColor: "#dbd7d7",
   },
   MessageBoard_TextInput: {
     height: 30,
@@ -278,7 +283,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: "#ec8e2f",
     width: 250,
-  }
+  },
 });
 
 export default styles;
