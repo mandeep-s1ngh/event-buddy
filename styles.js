@@ -107,6 +107,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
   },
+  Location_CloseButton: {
+    position: "absolute",
+    marginTop: 5,
+    marginLeft: 228,
+  },
 
   // ------------- Landing page styling ------------- //
   LandingPage_View: {
