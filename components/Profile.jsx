@@ -70,20 +70,16 @@ const Profile = ({ usernameForProfile }) => {
     ? null
     : currentUserInterests.map((interest, index) => {
         return (
-          // <Button
-          //   key={index}
-          //   style={styles.Profile_InterestButton}
-          //   onPress={() => removeInterest(interest)}
-          // >
-          //   {interest}
-          // </Button>
-          <View key={index} style={{ paddingTop: 5, paddingBottom: 5, paddingRight: 5 }}>
+          <View key={index} style={{ paddingTop: 5, paddingBottom: 5, paddingRight: 25 }}>
+          
           <TouchableHighlight
             style={styles.Profile_Each_Interest_button}
-            onPress={() => removeInterest(interest)}
+            
           >
-
             <Text style={styles.Profile_Each_Interest_button_Text}>{interest}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => removeInterest(interest)} style={styles.Profile_Each_Interest_button_X}>
+            <Text style={styles.Profile_Each_Interest_button_Text_X}>X</Text>
           </TouchableHighlight>
         </View>
           

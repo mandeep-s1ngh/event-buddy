@@ -226,6 +226,22 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white',
   },
+  Profile_Each_Interest_button_X: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    elevation: 3,
+    width: 10,
+    position: 'absolute',
+    right: 10,
+  },
+  Profile_Each_Interest_button_Text_X: {
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'black',
+  },
   // ------------- BuddyList styling ------------- //
   BuddyList_Text: {
     textAlign: 'center',
