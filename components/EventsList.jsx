@@ -142,6 +142,7 @@ export default function EventsList({
           style={styles.stickyHeader}
           eventName={eventName}
           found={found}
+          isError={isError}
           setEventName={setEventName}
         />
         <View style={styles.listView}>
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     //rowGap: 10,
   },
   stickyHeader: {
-    minheight: 50,
+    minheight: 60,
     // height: '100%',
     // flexDirection: 'column',
     flex: 2,
@@ -194,8 +195,8 @@ const styles = StyleSheet.create({
     // flexDirection: 'column',
     flex: 3,
     position: 'relative',
-    top: 48,
-    marginBottom: 48,
+    top: 56,
+    marginBottom: 55,
     // borderRadius: 80,
   },
 });

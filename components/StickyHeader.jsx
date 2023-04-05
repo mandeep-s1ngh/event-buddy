@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from 'react';
 
-function StickyHeader  ({eventName, setEventName, found}){
+function StickyHeader  ({eventName, setEventName, found, isError}){
 
   const navigation = useNavigation();
   const goToLanding = () => {
@@ -20,7 +20,7 @@ function StickyHeader  ({eventName, setEventName, found}){
         <Text style={styles.paragraph}>
           {
           !found ?
-          `SORRY THERE'S NO EVENTS FOR '${eventName.toUpperCase()}' UPCOMING PLEASE TRY ANOTHER SEARCH ` 
+          `SORRY THERE'S NO EVENTS FOR '${eventName.toUpperCase()}' FOUND PLEASE TRY ANOTHER SEARCH ` 
           : eventName ?
           `SHOWING ALL EVENTS FOR '${eventName.toUpperCase()}'` 
           : `SHOWING ALL EVENTS` 
