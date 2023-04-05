@@ -68,19 +68,30 @@ const Profile = ({ usernameForProfile }) => {
 
   const interestsButtons = !currentUserInterests
     ? null
+    : usernameForProfile !== currentUser
+    ? currentUserInterests.join(', ')
     : currentUserInterests.map((interest, index) => {
         return (
-          <View key={index} style={{ paddingTop: 5, paddingBottom: 5, paddingRight: 25}}>
-          <TouchableHighlight
-            style={styles.Profile_Each_Interest_button}
+          // <Button
+          //   key={index}
+          //   style={styles.Profile_InterestButton}
+          //   onPress={() => removeInterest(interest)}
+          // >
+          //   {interest}
+          // </Button>
+          <View
+            key={index}
+            style={{ paddingTop: 5, paddingBottom: 5, paddingRight: 5 }}
           >
-            <Text style={styles.Profile_Each_Interest_button_Text}>{interest}</Text>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={() => removeInterest(interest)} style={styles.Profile_Each_Interest_button_X}>
-            <Text style={styles.Profile_Each_Interest_button_Text_X}>X</Text>
-          </TouchableHighlight>
-        </View>
-          
+            <TouchableHighlight
+              style={styles.Profile_Each_Interest_button}
+              onPress={() => removeInterest(interest)}
+            >
+              <Text style={styles.Profile_Each_Interest_button_Text}>
+                {interest}
+              </Text>
+            </TouchableHighlight>
+          </View>
         );
       });
 
@@ -91,10 +102,12 @@ const Profile = ({ usernameForProfile }) => {
       scrollEnabled={true}
     >
       <View style={styles.Profile_View}>
-        <Text style={{ fontWeight: 'bold', fontSize: 15, paddingBottom: 20 }}>
-          Filling out your profile helps you match with more buddies. Get
-          started now!
-        </Text>
+        {usernameForProfile === currentUser ? (
+          <Text style={{ fontWeight: 'bold', fontSize: 15, paddingBottom: 20 }}>
+            Filling out your profile helps you match with more buddies. Get
+            started now!
+          </Text>
+        ) : null}
         <Image
           source={{ uri: 'https://source.unsplash.com/random' }}
           style={styles.Profile_Image}
@@ -107,37 +120,46 @@ const Profile = ({ usernameForProfile }) => {
         <Text style={styles.Profile_CurrentUserInterests}>
           Interests: {'\n'} {interestsButtons || 'none'}
         </Text>
-        <Text style={styles.Profile_AddToUserInterests}>
-          Add to your interests (press on interest to remove):
-        </Text>
+        {usernameForProfile === currentUser ? (
+          <Text style={styles.Profile_AddToUserInterests}>
+            Add to your interests{' '}
+            {usernameForProfile === currentUser
+              ? '(press on interest to remove):'
+              : null}
+          </Text>
+        ) : null}
 
-        <View>
-          <TextInput
-            value={newUserTag}
-            onChangeText={(newUserTag) => {
-              setNewUserTag(newUserTag);
-            }}
-            style={styles.Profile_TextInput}
-            placeholder="Type here ... e.g. food-lover, hip-hop, Spanish  "
-          />
-          {newUserTag.length > 0 && (
-            <TouchableOpacity
-              style={styles.Profile_CloseButton}
-              onPress={clearTextInput}
+        {usernameForProfile === currentUser ? (
+          <View>
+            <TextInput
+              value={newUserTag}
+              onChangeText={(newUserTag) => {
+                setNewUserTag(newUserTag);
+              }}
+              style={styles.Profile_TextInput}
+              placeholder="Type here ... e.g. food-lover, hip-hop, Spanish  "
+            />
+            {newUserTag.length > 0 && (
+              <TouchableOpacity
+                style={styles.Profile_CloseButton}
+                onPress={clearTextInput}
+              >
+                <Icon name="close" size={20} />
+              </TouchableOpacity>
+            )}
+          </View>
+        ) : null}
+
+        {usernameForProfile === currentUser ? (
+          <View style={{ paddingTop: 10 }}>
+            <TouchableHighlight
+              style={styles.Profile_Buttons}
+              onPress={addInterest}
             >
-              <Icon name="close" size={20} />
-            </TouchableOpacity>
-          )}
-        </View>
-
-        <View style={{ paddingTop: 10 }}>
-          <TouchableHighlight
-            style={styles.Profile_Buttons}
-            onPress={addInterest}
-          >
-            <Text style={styles.Profile_Buttons_Text}>Add interest</Text>
-          </TouchableHighlight>
-        </View>
+              <Text style={styles.Profile_Buttons_Text}>Add interest</Text>
+            </TouchableHighlight>
+          </View>
+        ) : null}
       </View>
     </KeyboardAwareScrollView>
   );
