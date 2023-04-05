@@ -52,7 +52,8 @@ const BuddyList = ({
     }
   }, [eventNameForBuddies, newlyAddedBuddy]);
 
-  if (isLoading) return <ActivityIndicator />;
+  if (isLoading)
+    return <ActivityIndicator size="large" style={styles.ActivityIndicator} />;
 
   let buddyCards = [];
   if (buddies.length) {

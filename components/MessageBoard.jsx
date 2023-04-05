@@ -80,7 +80,8 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
       .catch((err) => console.log(err));
   }, [eventNameForMessages]);
 
-  if (isLoading || !messages) return <ActivityIndicator />;
+  if (isLoading || !messages)
+    return <ActivityIndicator size="large" style={styles.ActivityIndicator} />;
 
   const messageCards = [];
   const fetchedReplies = [];

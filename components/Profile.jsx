@@ -64,7 +64,8 @@ const Profile = ({ usernameForProfile }) => {
     });
   }, [usernameToDisplay]);
 
-  if (isLoading) return <ActivityIndicator />;
+  if (isLoading)
+    return <ActivityIndicator size="large" style={styles.ActivityIndicator} />;
 
   const interestsButtons = !currentUserInterests
     ? null

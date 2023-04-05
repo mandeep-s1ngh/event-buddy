@@ -2,13 +2,17 @@ import { StyleSheet, StatusBar, Platform } from 'react-native';
 
 // Colours: set as variables here for easier changes later
 const appBackground = '#f0eae6';
-const navBarBackground = '#2b2b2b';
+const navBarBackground = '#8a766f';
 const navBarText = '#fff';
 //////////////////////////////////////////////////////////
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  ActivityIndicator: {
+    position: 'relative',
+    top: '50%',
   },
   // ------------- App styling ------------- //
   AppView: {
@@ -28,7 +32,7 @@ const styles = StyleSheet.create({
     height: 10,
   },
   NavBar_View: {
-    backgroundColor: '#8a766f',
+    backgroundColor: navBarBackground,
     // backgroundColor: navBarBackground,
     flex: 0,
     flexDirection: 'row',
@@ -296,6 +300,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '60%',
     left: '25%',
+    maxWidth: 150,
   },
 
   BuddyCard_Image: {
@@ -390,15 +395,15 @@ const styles = StyleSheet.create({
   },
   Message_Card_Reply_From: {
     fontSize: 13,
-    marginLeft: 0
+    marginLeft: 0,
   },
 
   // ------------- Message BOARD file styling ------------- //
   allMessagesThread: {
     alignItems: 'left',
     textAlign: 'left',
-    alignContent: 'center'
-  }
+    alignContent: 'center',
+  },
 });
 
 export default styles;
