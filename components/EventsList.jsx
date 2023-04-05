@@ -68,8 +68,8 @@ export default function EventsList({
   // console.log ('isError ->', isError)
   // console.log ('error ->', errorMessage)
 
-  if (isLoading) return <ActivityIndicator />;
-
+  if (isLoading)
+    return <ActivityIndicator size="large" style={styles.ActivityIndicator} />;
 
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
