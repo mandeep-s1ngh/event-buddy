@@ -45,15 +45,6 @@ export default function EventsList({
     setIsLoading(false);
     setFound(false);
   }
-  
-  const [eventsList, setEventsList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [found, setFound] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const [source, setSource] = useState({ api: getTicketMasterEvents });
-  const getEvents = source.api;
 
   useEffect(() => {
     if (!invalidLocation) {
