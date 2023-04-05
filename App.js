@@ -25,6 +25,7 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState('');
   const [buddyAddedToggle, setBuddyAddedToggle] = useState('a');
+  const [newlyAddedBuddy, setNewlyAddedBuddy] = useState(null);
 
   const Tab = createBottomTabNavigator();
 
@@ -83,6 +84,7 @@ export default function App() {
                     usernameForProfile={usernameForProfile}
                     setUsernameForProfile={setUsernameForProfile}
                     buddyAddedToggle={buddyAddedToggle}
+                    newlyAddedBuddy={newlyAddedBuddy}
                   />
                 )}
               </Tab.Screen>
@@ -108,6 +110,7 @@ export default function App() {
                     setEventNameForMessages={setEventNameForMessages}
                     currentUser={currentUser}
                     setBuddyAddedToggle={setBuddyAddedToggle}
+                    setNewlyAddedBuddy={setNewlyAddedBuddy}
                   />
                 )}
               </Tab.Screen>

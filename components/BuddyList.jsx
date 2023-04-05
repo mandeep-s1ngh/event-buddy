@@ -9,8 +9,8 @@ import { CurrentUserContext } from '../context/CurrentUserContext';
 const BuddyList = ({
   eventNameForBuddies,
   setUsernameForProfile,
-  buddyAddedToggle,
-  setBuddyAddedToggle,
+  newlyAddedBuddy,
+  setNewlyAddedBuddy,
 }) => {
   const [buddies, setBuddies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,38 +44,42 @@ const BuddyList = ({
           );
         })
         .then((userProfiles) => {
-          setBuddies(userProfiles);
+          setBuddies(
+            newlyAddedBuddy ? [newlyAddedBuddy, ...userProfiles] : userProfiles
+          );
           setIsLoading(false);
         });
     }
-  }, [eventNameForBuddies, buddyAddedToggle]);
+  }, [eventNameForBuddies, newlyAddedBuddy]);
 
   if (isLoading) return <ActivityIndicator />;
 
-  const buddyCards = !buddies
-    ? []
-    : buddies.map((attendee, index) => {
-        const {
-          Item: { username, name, age, gender, interests },
-        } = attendee;
-        const nameValue = name ? name.S : null;
-        const ageValue = age ? age.N : null;
-        const genderValue = gender ? gender.S : null;
-        const interestsValue = interests ? interests.S : null;
-        return (
-          <BuddyCard
-            key={index}
-            username={username.S}
-            name={nameValue}
-            age={ageValue}
-            gender={genderValue}
-            interests={interestsValue}
-            setUsernameForProfile={setUsernameForProfile}
-            isAttendeeList={!!eventNameForBuddies}
-            setBuddyAddedToggle={setBuddyAddedToggle}
-          />
-        );
-      });
+  let buddyCards = [];
+  if (buddies.length) {
+    buddyCards = buddies.map((attendee, index) => {
+      const {
+        Item: { username, name, age, gender, interests },
+      } = attendee;
+      const nameValue = name ? name.S : null;
+      const ageValue = age ? age.N : null;
+      const genderValue = gender ? gender.S : null;
+      const interestsValue = interests ? interests.S : null;
+      return (
+        <BuddyCard
+          key={index}
+          username={username.S}
+          name={nameValue}
+          age={ageValue}
+          gender={genderValue}
+          interests={interestsValue}
+          setUsernameForProfile={setUsernameForProfile}
+          isAttendeeList={!!eventNameForBuddies}
+          buddies={attendee.buddies ? attendee.buddies.S : null}
+          setNewlyAddedBuddy={setNewlyAddedBuddy}
+        />
+      );
+    });
+  }
 
   return (
     <ScrollView style={styles.BuddyList}>
