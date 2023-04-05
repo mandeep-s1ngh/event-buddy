@@ -1,5 +1,6 @@
-import { View, ScrollView, StyleSheet} from 'react-native';
+import { View, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
 
@@ -53,6 +54,8 @@ export default function EventsList({
   // console.log ('isLoading ->', isLoading);
   // console.log ('isError ->', isError)
   // console.log ('error ->', errorMessage)
+
+  if (isLoading) return <ActivityIndicator />;
 
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
