@@ -2,7 +2,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BuddyList from '../BuddyList';
 import getCommonScreens from './getCommonScreens';
 
-function BuddiesStack({ setUsernameForProfile, usernameForProfile }) {
+function BuddiesStack({
+  setUsernameForProfile,
+  usernameForProfile,
+  buddyAddedToggle,
+}) {
   const Stack = createNativeStackNavigator();
   const commonScreens = getCommonScreens(Stack, null, usernameForProfile);
   return (
@@ -18,6 +22,7 @@ function BuddiesStack({ setUsernameForProfile, usernameForProfile }) {
             {...props}
             setUsernameForProfile={setUsernameForProfile}
             usernameForProfile={usernameForProfile}
+            buddyAddedToggle={buddyAddedToggle}
           />
         )}
       </Stack.Screen>

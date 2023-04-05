@@ -1,12 +1,15 @@
 import { Text, TouchableHighlight, View } from 'react-native';
 import styles from '../styles';
+import { CurrentUserContext } from '../context/CurrentUserContext';
+import { useContext } from 'react';
 
-function Menu({ loggedIn, setLoggedIn, currentUser, setCurrentUser }) {
+function Menu({ loggedIn, setLoggedIn }) {
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const loggedInText = `Logged in as ${currentUser}`;
 
   function toggleLoggedIn() {
     setLoggedIn(!loggedIn);
-    setCurrentUser(loggedIn ? '' : 'Carces');
+    setCurrentUser(loggedIn ? '' : currentUser);
   }
 
   return (

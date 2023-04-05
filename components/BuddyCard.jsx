@@ -3,7 +3,8 @@ import { View, Text, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles.js';
 import { addBuddy } from '../api/addBuddy.js';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 const BuddyCard = ({
   username,
@@ -13,9 +14,12 @@ const BuddyCard = ({
   interests,
   setUsernameForProfile,
   isAttendeeList,
+  buddyAddedToggle,
+  setBuddyAddedToggle,
 }) => {
   const navigation = useNavigation();
   const [buddyAdded, setBuddyAdded] = useState(false);
+  const { currentUser } = useContext(CurrentUserContext);
 
   function goToProfile() {
     setUsernameForProfile(username);
@@ -24,7 +28,8 @@ const BuddyCard = ({
 
   function connectWithBuddy() {
     setBuddyAdded(true);
-    addBuddy('Carces', username);
+    setBuddyAddedToggle(buddyAddedToggle === 'a' ? 'b' : 'a');
+    addBuddy(currentUser, username);
   }
 
   function startChat() {
