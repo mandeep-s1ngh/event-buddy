@@ -209,6 +209,23 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 277,
   },
+  Profile_Each_Interest_button: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    // paddingHorizontal: 25,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#8a766f',
+    width: 100,
+  },
+  Profile_Each_Interest_button_Text: {
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+  },
   // ------------- BuddyList styling ------------- //
   BuddyList_Text: {
     textAlign: 'center',
@@ -321,6 +338,17 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white',
     fontWeight: 'bold',
+  },
+  Message_Card_Reply_Button_Zero_Replies: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    // paddingHorizontal: 25,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#8a766f',
+    width: 110,
+    fontSize: 6,
   },
   Message_Card_Date: {
     fontSize: 12,
