@@ -1,9 +1,12 @@
-import { View, ScrollView, ActivityIndicator } from 'react-native';
+import { View, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
 
 import { getTicketMasterEvents } from '../api/eventsListapi';
 import EventCard from './EventCard';
+import StickyHeader from './StickyHeader';
 
 export default function EventsList({
   eventName,
@@ -12,8 +15,8 @@ export default function EventsList({
   setEventNameForMessages,
 }) {
   let geohash = '';
-  if (userLocation) {
-    const precision = 9;
+  if (userLocation.geolocation.latitude&&userLocation.geolocation.longitude) {
+    const precision = 5;
     // precision is maximum X axis error index:
     // 4   ± 20 km
     // 5   ± 2.4 km
@@ -28,6 +31,7 @@ export default function EventsList({
 
   const [eventsList, setEventsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [found, setFound] = useState(true);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -41,6 +45,7 @@ export default function EventsList({
       .then((events) => {
         setEventsList(events);
         setIsLoading(false);
+        if (events.length) setFound(true);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -53,6 +58,8 @@ export default function EventsList({
   // console.log ('error ->', errorMessage)
 
   if (isLoading) return <ActivityIndicator />;
+  
+  //if (eventsList.length) setFound(true);
 
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
@@ -114,30 +121,63 @@ export default function EventsList({
   }, []);
 
   const filtered_events_list = tooManyLeedses.filter(
-    (event) => !event.title.includes('Ticket' || 'ticket')
+    (event) => !event.title.includes('Ticket' || 'ticket' ||'payment' || 'Payment')
   );
 
   return (
-    <ScrollView>
-      <View>
-        {filtered_events_list.map((event) => {
-          return (
-            <View key={event.key}>
-              <EventCard
-                event_title={event.title}
-                event_place={event.location}
-                event_date={event.date}
-                event_genre={event.genre}
-                event_img_URL_preview={event.img}
-                event_buddies={event.buddies}
-                event_talks={event.talks}
-                setEventNameForBuddies={setEventNameForBuddies}
-                setEventNameForMessages={setEventNameForMessages}
-              />
+    <SafeAreaProvider>
+      <View style={styles.mainView}>
+        <StickyHeader style={styles.stickyHeader} eventName={eventName} found={found}/>
+        <View style={styles.listView}>
+          <ScrollView>
+            <View>
+              {filtered_events_list.map((event) => {
+                return (
+                  <View key={event.key}>
+                    <EventCard
+                      event_title={event.title}
+                      event_place={event.location}
+                      event_date={event.date}
+                      event_genre={event.genre}
+                      event_img_URL_preview={event.img}
+                      event_buddies={event.buddies}
+                      event_talks={event.talks}
+                    />
+                  </View>
+                );
+              })}
             </View>
-          );
-        })}
+          </ScrollView>
+        </View>
       </View>
-    </ScrollView>
+    </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  mainView: {
+    height: '100%',
+    flexDirection: 'column',
+    flex: 1,
+    borderRadius: 80,
+    //flexWrap: 'wrap',
+    //rowGap: 10,
+  },
+  stickyHeader: {
+    minheight: 50,
+    // height: '100%',
+    // flexDirection: 'column',
+    flex: 2,
+    // borderRadius: 80,
+  },
+  listView: {
+    height: '90%',
+    // height: '30%',
+    // flexDirection: 'column',
+    flex: 3,
+    position: 'relative',
+    top: 48,
+    marginBottom: 48,
+    // borderRadius: 80,
+  },
+});
