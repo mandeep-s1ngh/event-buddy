@@ -1,4 +1,4 @@
-import { View, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
+import { View, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useEffect, useState } from 'react';
@@ -15,7 +15,11 @@ export default function EventsList({
   setEventNameForMessages,
 }) {
   let geohash = '';
-  if (userLocation.geolocation.latitude&&userLocation.geolocation.longitude) {
+  if (
+    userLocation &&
+    userLocation.geolocation.latitude &&
+    userLocation.geolocation.longitude
+  ) {
     const precision = 5;
     // precision is maximum X axis error index:
     // 4   ± 20 km
@@ -58,7 +62,7 @@ export default function EventsList({
   // console.log ('error ->', errorMessage)
 
   if (isLoading) return <ActivityIndicator />;
-  
+
   //if (eventsList.length) setFound(true);
 
   ticketmaster_list = eventsList.map((event) => {
@@ -121,13 +125,18 @@ export default function EventsList({
   }, []);
 
   const filtered_events_list = tooManyLeedses.filter(
-    (event) => !event.title.includes('Ticket' || 'ticket' ||'payment' || 'Payment')
+    (event) =>
+      !event.title.includes('Ticket' || 'ticket' || 'payment' || 'Payment')
   );
 
   return (
     <SafeAreaProvider>
       <View style={styles.mainView}>
-        <StickyHeader style={styles.stickyHeader} eventName={eventName} found={found}/>
+        <StickyHeader
+          style={styles.stickyHeader}
+          eventName={eventName}
+          found={found}
+        />
         <View style={styles.listView}>
           <ScrollView>
             <View>
