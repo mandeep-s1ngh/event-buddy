@@ -6,6 +6,7 @@ function BuddiesStack({
   setUsernameForProfile,
   usernameForProfile,
   buddyAddedToggle,
+  newlyAddedBuddy,
 }) {
   const Stack = createNativeStackNavigator();
   const commonScreens = getCommonScreens(Stack, null, usernameForProfile);
@@ -23,6 +24,7 @@ function BuddiesStack({
             setUsernameForProfile={setUsernameForProfile}
             usernameForProfile={usernameForProfile}
             buddyAddedToggle={buddyAddedToggle}
+            newlyAddedBuddy={newlyAddedBuddy}
           />
         )}
       </Stack.Screen>
