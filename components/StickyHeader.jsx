@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 
-export default class HeaderExample extends React.Component {
-  render() {
+function StickyHeader  ({eventName}){
+ 
+
     return (
       <View style={styles.header}>
         <Text style={styles.paragraph}>
-          SEE ALL EVENTS
+          {{eventName} ? `SEE ALL ${eventName.toUpperCase()} EVENTS` : `SEE ALL EVENTS`}
         </Text>
       </View>
     );
   }
-}
+export default StickyHeader;
 
 const styles = StyleSheet.create({
   header: {

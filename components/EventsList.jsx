@@ -1,4 +1,4 @@
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet} from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
@@ -114,13 +114,13 @@ export default function EventsList({
   }, []);
 
   const filtered_events_list = tooManyLeedses.filter(
-    (event) => !event.title.includes('Ticket' || 'ticket')
+    (event) => !event.title.includes('Ticket' || 'ticket' ||'payment' || 'Payment')
   );
 
   return (
     <SafeAreaProvider>
       <View style={styles.mainView}>
-        <StickyHeader style={styles.stickyHeader} />
+        <StickyHeader style={styles.stickyHeader} eventName={eventName}/>
         <View style={styles.listView}>
           <ScrollView>
             <View>
