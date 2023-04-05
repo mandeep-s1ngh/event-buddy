@@ -92,8 +92,20 @@ export default function EventsList({
     } else {
       genre += 'Various';
     }
-    let buddies = Math.floor(Math.random() * 18 + 3);
-    let talks = Math.floor(Math.random() * 9 + 1);
+    let buddies = Math.floor(
+      event.name === 'Tortuga Music Festival'
+        ? 2
+        : event.name === 'Kaleidoscope Festival 2023'
+        ? 0
+        : Math.random() * 18 + 3
+    );
+    let talks = Math.floor(
+      event.name === 'Tortuga Music Festival'
+        ? 2
+        : event.name === 'Kaleidoscope Festival 2023'
+        ? 0
+        : Math.random() * 9 + 1
+    );
     return {
       title: event.name,
       location: location,
