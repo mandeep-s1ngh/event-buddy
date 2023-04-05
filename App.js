@@ -57,7 +57,7 @@ export default function App() {
                 name="Home"
                 options={{
                   tabBarIcon: ({ color, size }) => (
-                    <Icon name="home" color={color} size={size} />
+                    <Icon name="home" color={color} size={size}/>
                   ),
                 }}
               >

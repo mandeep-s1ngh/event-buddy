@@ -31,7 +31,7 @@ export default function EventsList({
     userLocation.geolocation.latitude &&
     userLocation.geolocation.longitude
   ) {
-    const precision = 5;
+    const precision = 7;
     // precision is maximum X axis error index:
     // 4   ± 20 km
     // 5   ± 2.4 km
@@ -115,18 +115,15 @@ export default function EventsList({
       const itemFirstTwoWords = itemTitleWords.slice(0, 2).join(' ');
       return itemFirstTwoWords === firstTwoWords;
     });
-
     if (
-      !isDuplicate &&
-      !(
+      !isDuplicate 
+       && !(
         titleWords[0] === 'Leeds' &&
-        eventName !== 'Leeds' &&
-        geohash !== 'gcwfhcebd'
-      )
+        (!/\b(leeds)\b/i.test(eventName) && !(geohash.startsWith("gcwf"))) //seems like works well but I think there should be || here
+       )
     ) {
       acc.push(curr);
     }
-
     return acc;
   }, []);
 

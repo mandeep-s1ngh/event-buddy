@@ -6,15 +6,15 @@ import {
   View,
   TouchableHighlight,
   TouchableOpacity,
-} from "react-native";
-import styles from "../styles";
-import { useState, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
-import * as Location from "expo-location";
-import { getGeolocationFromAddress } from "../api/getGeolocationFromAddress";
-import { getAddressFromGeolocation } from "../api/getAddressFromGeolocation";
+  } from "react-native";
+  import styles from "../styles";
+  import { useState, useEffect } from "react";
+  import { useNavigation } from "@react-navigation/native";
+  import * as Location from "expo-location";
+  import { getGeolocationFromAddress } from "../api/getGeolocationFromAddress";
+  import { getAddressFromGeolocation } from "../api/getAddressFromGeolocation";
 
-const LocationRequest = (props) => {
+  const LocationRequest = (props) => {
   const { setUserLocation } = props;
   const [errorMsg, setErrorMsg] = useState(null);
   const [locationInput, setLocationInput] = useState("");
@@ -71,7 +71,7 @@ const LocationRequest = (props) => {
       <View style={{ paddingTop: 1, paddingBottom: 60 }}>
         <TouchableHighlight
           style={styles.Location_Buttons}
-          onPress={showEventsByLocationPermission}
+          onPress={() => showEventsByLocationPermission}
         >
           <Text style={styles.Location_Buttons_Text}>Use my location 📍</Text>
         </TouchableHighlight>
@@ -103,7 +103,7 @@ const LocationRequest = (props) => {
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
         <TouchableHighlight
           style={styles.Location_Buttons}
-          onPress={showEventsByLocationInput}
+          onPress={() => showEventsByLocationInput}
         >
           <Text style={styles.Location_Buttons_Text}>Submit</Text>
         </TouchableHighlight>

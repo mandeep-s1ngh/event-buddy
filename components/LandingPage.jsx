@@ -15,7 +15,7 @@ import styles from "../styles.js";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LandingPage = (props) => {
-  const { eventName, setEventName } = props;
+  const { eventName, setEventName, setUserLocation } = props;
   const [userInput, setUserInput] = useState("");
 
   const handleValidation = () => {
@@ -34,6 +34,7 @@ const LandingPage = (props) => {
 
   const searchEventByName = () => {
     setEventName(userInput);
+    setUserLocation('')
     setUserInput("");
     navigation.navigate("Events");
   };
@@ -43,6 +44,7 @@ const LandingPage = (props) => {
   };
 
   function navigateToLocation() {
+    setEventName('')
     navigation.navigate("Location");
   }
 
