@@ -112,6 +112,7 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
         .map((reply) => {
           return (
             <MessageCard
+              style={styles.allMessagesThread}
               key={reply.timestamp.S}
               username={reply.username.S}
               timestamp={reply.timestamp.S}
@@ -125,7 +126,7 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
 
   if (threadToView)
     thread.unshift(
-      <Button key={Math.random()} onPress={exitThread}>
+      <Button color='#ec8e2f' key={Math.random()} onPress={exitThread}>
         Exit thread
       </Button>,
       messageCards[threadToView.index]
