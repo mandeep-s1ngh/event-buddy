@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   },
 
   BuddyCard_Username: {
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
 
   BuddyCard_TextView: {
@@ -304,6 +304,60 @@ const styles = StyleSheet.create({
     marginTop: 14,
     marginLeft: 250,
   },
+  Message_Card_Reply_Button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    // paddingHorizontal: 25,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#8a766f',
+    width: 60,
+    fontSize: 6,
+  },
+  Message_Card_Buttons_Text: {
+    fontSize: 12,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  Message_Card_Date: {
+    fontSize: 12,
+    paddingTop: 5,
+    paddingLeft: 4,
+    paddingBottom: 8,
+  },
+  Message_Card_Username: {
+    paddingLeft: 4,
+    fontWeight: 'bold',
+  },
+  MessageCard: {
+    minHeight: 175,
+    backgroundColor: '#f7e0c9',
+  },
+  MessageCard_Text: {
+    fontSize: 15,
+    marginLeft: 5,
+    width: 180,
+    // fontWeight: 'bold'
+    // backgroundColor: '#8a766f'
+  },
+  Message_Card_Reply_Box: {
+    minHeight: 175,
+    backgroundColor: '#dde1e4',
+  },
+  Message_Card_Reply_From: {
+    fontSize: 13,
+    marginLeft: 0
+  },
+
+  // ------------- Message BOARD file styling ------------- //
+  allMessagesThread: {
+    alignItems: 'left',
+    textAlign: 'left',
+    alignContent: 'center'
+  }
 });
 
 export default styles;
