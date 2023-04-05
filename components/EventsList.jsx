@@ -47,7 +47,6 @@ export default function EventsList({
     setIsLoading(false);
     setFound(false);
   }
-  
   useEffect(() => {
     if (!invalidLocation) {
       setIsLoading(true);
