@@ -158,6 +158,7 @@ export default function EventsList({
                       event_buddies={event.buddies}
                       event_talks={event.talks}
                       setEventNameForMessages={setEventNameForMessages}
+                      setEventNameForBuddies={setEventNameForBuddies}
                     />
                   </View>
                 );
