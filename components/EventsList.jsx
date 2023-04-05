@@ -157,6 +157,7 @@ export default function EventsList({
                       event_img_URL_preview={event.img}
                       event_buddies={event.buddies}
                       event_talks={event.talks}
+                      setEventNameForMessages={setEventNameForMessages}
                     />
                   </View>
                 );
