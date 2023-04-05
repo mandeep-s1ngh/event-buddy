@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   },
 
   BuddyCard_Username: {
-    // fontWeight: 'bold',
+    fontWeight: 'bold',
   },
 
   BuddyCard_TextView: {
