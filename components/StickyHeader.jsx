@@ -1,20 +1,31 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from 'react';
 
-function StickyHeader  ({eventName, found}){
- 
+function StickyHeader  ({eventName, setEventName, found}){
+
+  const navigation = useNavigation();
+  const goToLanding = () => {
+    //setEventName('');
+    navigation.navigate("Home");
+  };
 
     return (
       <View style={styles.header}>
+         <TouchableHighlight
+          style={styles.LandingPage_Buttons}
+          onPress={goToLanding}
+        >
         <Text style={styles.paragraph}>
           {
           !found ?
-          `SORRY THERE'S NO ${eventName.toUpperCase()} EVENTS UPCOMING PLEASE TRY ANOTHER SEARCH ` 
+          `SORRY THERE'S NO EVENTS FOR '${eventName.toUpperCase()}' UPCOMING PLEASE TRY ANOTHER SEARCH ` 
           : eventName ?
-          `SEE ALL ${eventName.toUpperCase()} EVENTS` 
-          : `SEE ALL EVENTS` 
+          `SHOWING ALL EVENTS FOR '${eventName.toUpperCase()}'` 
+          : `SHOWING ALL EVENTS` 
           }
-        </Text>
+        </Text></TouchableHighlight>
       </View>
     );
 }
@@ -36,5 +47,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     flex: 1
-  }
+  },
+  LandingPage_Buttons: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 20,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: '#ec8e2f',
+   width: '100%',
+  },
+  Landing_Page_Buttons_Text: {
+    fontSize: 15,
+    lineHeight: 15,
+    letterSpacing: 0.25,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });
