@@ -32,10 +32,10 @@ const MessageCard = ({
     <Card
       containerStyle={
         isReply
-          ? [styles.BuddyCard, styles.MessageCard_Reply]
-          : styles.BuddyCard
+          ? [styles.Message_Card_Reply_Box, styles.Message_Card_Reply_Box]
+          : styles.MessageCard
       }
-      titleStyle={styles.BuddyCard_Username}
+      // titleStyle={styles.BuddyCard_Username}
     >
       <Button
         color="#ec8e2f"
@@ -51,17 +51,20 @@ const MessageCard = ({
           styles.BuddyCard_ProfileButton,
         ]}
       />
-      <Card.Title>{isReply ? `Reply from ${username}` : username}</Card.Title>
-      <Text style={styles.BuddyCard_CategoryText}>
+      <Card.Title  style={styles.Message_Card_Reply_From}>{isReply ? `Reply from ${username}` : username}</Card.Title>
+      <Text style={styles.MessageCard_Text}>{message}</Text>
+      <Text style={styles.Message_Card_Date}>
         {new Date(+timestamp).toDateString()}
       </Text>
-      <Text style={styles.BuddyCard_Text}>{message}</Text>
+      
       {replyCount ? (
-        <TouchableHighlight onPress={goToMessageThread}>
-          <Text style={styles.BuddyCard_Text}>
+        <View style={{paddingLeft: 4 }}>
+        <TouchableHighlight style={styles.Message_Card_Reply_Button} onPress={goToMessageThread}>
+          <Text style={styles.Message_Card_Buttons_Text}>
             {replyCount} {replyCount === 1 ? 'reply' : 'replies'}
           </Text>
         </TouchableHighlight>
+        </View>
       ) : null}
     </Card>
   );
