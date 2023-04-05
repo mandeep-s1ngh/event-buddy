@@ -68,13 +68,23 @@ const Profile = ({ usernameForProfile }) => {
     ? null
     : currentUserInterests.map((interest, index) => {
         return (
-          <Button
-            key={index}
-            style={styles.Profile_InterestButton}
+          // <Button
+          //   key={index}
+          //   style={styles.Profile_InterestButton}
+          //   onPress={() => removeInterest(interest)}
+          // >
+          //   {interest}
+          // </Button>
+          <View key={index} style={{ paddingTop: 5, paddingBottom: 5, paddingRight: 5 }}>
+          <TouchableHighlight
+            style={styles.Profile_Each_Interest_button}
             onPress={() => removeInterest(interest)}
           >
-            {interest}
-          </Button>
+
+            <Text style={styles.Profile_Each_Interest_button_Text}>{interest}</Text>
+          </TouchableHighlight>
+        </View>
+          
         );
       });
 
@@ -99,10 +109,10 @@ const Profile = ({ usernameForProfile }) => {
         {currentUserName ? <Text>Name: {currentUserName} </Text> : null}
         {currentUserGender ? <Text>Gender: {currentUserGender}</Text> : null}
         <Text style={styles.Profile_CurrentUserInterests}>
-          Interests: {interestsButtons || 'none'}
+          Interests: {'\n'} {interestsButtons || 'none'}
         </Text>
         <Text style={styles.Profile_AddToUserInterests}>
-          Add to your interests:
+          Add to your interests (press on interest to remove):
         </Text>
 
         <View>
