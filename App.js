@@ -13,6 +13,7 @@ import HomeStack from './components/navigation-stacks/HomeStack.jsx';
 import BuddiesStack from './components/navigation-stacks/BuddiesStack.jsx';
 import EventsStack from './components/navigation-stacks/EventsStack.jsx';
 import MessagesStack from './components/navigation-stacks/MessagesStack.jsx';
+import { CurrentUserProvider } from './context/CurrentUserContext.js';
 
 export default function App() {
   const [userLocation, setUserLocation] = useState('');
@@ -23,91 +24,95 @@ export default function App() {
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState('');
+  const [buddyAddedToggle, setBuddyAddedToggle] = useState('a');
 
   const Tab = createBottomTabNavigator();
 
   return (
     <SafeAreaProvider>
-      <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <StatusBar />
-          <NavBar menuShown={menuShown} setMenuShown={setMenuShown} />
+      <CurrentUserProvider>
+        <ThemeProvider theme={theme}>
+          <NavigationContainer>
+            <StatusBar />
+            <NavBar menuShown={menuShown} setMenuShown={setMenuShown} />
 
-          {menuShown ? (
-            <Menu
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
-            />
-          ) : null}
+            {menuShown ? (
+              <Menu
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+              />
+            ) : null}
 
-          <Tab.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-              headerShown: false,
-              tabBarActiveTintColor: '#ec8e2f',
-            }}
-          >
-            <Tab.Screen
-              name="Home"
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="home" color={color} size={size} />
-                ),
+            <Tab.Navigator
+              initialRouteName="Home"
+              screenOptions={{
+                headerShown: false,
+                tabBarActiveTintColor: '#ec8e2f',
               }}
             >
-              {(props) => (
-                <HomeStack
-                  {...props}
-                  setEventName={setEventName}
-                  setUserLocation={setUserLocation}
-                />
-              )}
-            </Tab.Screen>
+              <Tab.Screen
+                name="Home"
+                options={{
+                  tabBarIcon: ({ color, size }) => (
+                    <Icon name="home" color={color} size={size} />
+                  ),
+                }}
+              >
+                {(props) => (
+                  <HomeStack
+                    {...props}
+                    setEventName={setEventName}
+                    setUserLocation={setUserLocation}
+                  />
+                )}
+              </Tab.Screen>
 
-            <Tab.Screen
-              name="Buddies"
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="face" color={color} size={size} />
-                ),
-              }}
-            >
-              {(props) => (
-                <BuddiesStack
-                  {...props}
-                  usernameForProfile={usernameForProfile}
-                  setUsernameForProfile={setUsernameForProfile}
-                />
-              )}
-            </Tab.Screen>
+              <Tab.Screen
+                name="Buddies"
+                options={{
+                  tabBarIcon: ({ color, size }) => (
+                    <Icon name="face" color={color} size={size} />
+                  ),
+                }}
+              >
+                {(props) => (
+                  <BuddiesStack
+                    {...props}
+                    usernameForProfile={usernameForProfile}
+                    setUsernameForProfile={setUsernameForProfile}
+                    buddyAddedToggle={buddyAddedToggle}
+                  />
+                )}
+              </Tab.Screen>
 
-            <Tab.Screen
-              name="Events"
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="event" color={color} size={size} />
-                ),
-              }}
-            >
-              {(props) => (
-                <EventsStack
-                  {...props}
-                  eventName={eventName}
-                  userLocation={userLocation}
-                  usernameForProfile={usernameForProfile}
-                  setUsernameForProfile={setUsernameForProfile}
-                  eventNameForBuddies={eventNameForBuddies}
-                  setEventNameForBuddies={setEventNameForBuddies}
-                  eventNameForMessages={eventNameForMessages}
-                  setEventNameForMessages={setEventNameForMessages}
-                  currentUser={currentUser}
-                />
-              )}
-            </Tab.Screen>
+              <Tab.Screen
+                name="Events"
+                options={{
+                  tabBarIcon: ({ color, size }) => (
+                    <Icon name="event" color={color} size={size} />
+                  ),
+                }}
+              >
+                {(props) => (
+                  <EventsStack
+                    {...props}
+                    eventName={eventName}
+                    userLocation={userLocation}
+                    usernameForProfile={usernameForProfile}
+                    setUsernameForProfile={setUsernameForProfile}
+                    eventNameForBuddies={eventNameForBuddies}
+                    setEventNameForBuddies={setEventNameForBuddies}
+                    eventNameForMessages={eventNameForMessages}
+                    setEventNameForMessages={setEventNameForMessages}
+                    currentUser={currentUser}
+                    setBuddyAddedToggle={setBuddyAddedToggle}
+                  />
+                )}
+              </Tab.Screen>
 
-            {/* <Tab.Screen
+              {/* <Tab.Screen
               name="Messages"
               options={{
                 tabBarIcon: ({ color, size }) => (
@@ -125,9 +130,10 @@ export default function App() {
                 />
               )}
             </Tab.Screen> */}
-          </Tab.Navigator>
-        </NavigationContainer>
-      </ThemeProvider>
+            </Tab.Navigator>
+          </NavigationContainer>
+        </ThemeProvider>
+      </CurrentUserProvider>
     </SafeAreaProvider>
   );
 }

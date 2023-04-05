@@ -11,13 +11,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from '../styles.js';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { getUserProfile } from '../api/getUserProfile.js';
 import { patchUserProfile } from '../api/patchUserProfile.js';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 const Profile = ({ usernameForProfile }) => {
-  usernameToDisplay = usernameForProfile || 'Carces';
+  const { currentUser } = useContext(CurrentUserContext);
+  usernameToDisplay = usernameForProfile || currentUser;
   const [newUserTag, setNewUserTag] = useState('');
   const [currentUserName, setCurrentUserName] = useState('');
   const [currentUserAge, setCurrentUserAge] = useState('');
@@ -112,7 +114,7 @@ const Profile = ({ usernameForProfile }) => {
               setNewUserTag(newUserTag);
             }}
             style={styles.Profile_TextInput}
-            placeholder="Type here ... e.g. food-lover, travellor, Spanish  "
+            placeholder="Type here ... e.g. food-lover, hip-hop, Spanish  "
           />
           {newUserTag.length > 0 && (
             <TouchableOpacity

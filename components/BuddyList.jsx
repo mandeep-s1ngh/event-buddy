@@ -1,13 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { ActivityIndicator, ScrollView, Text } from 'react-native';
 import BuddyCard from './BuddyCard';
 import { getAttendees } from '../api/getAttendees';
 import { getUserProfile } from '../api/getUserProfile';
 import styles from '../styles';
+import { CurrentUserContext } from '../context/CurrentUserContext';
 
-const BuddyList = ({ eventNameForBuddies, setUsernameForProfile }) => {
+const BuddyList = ({
+  eventNameForBuddies,
+  setUsernameForProfile,
+  buddyAddedToggle,
+  setBuddyAddedToggle,
+}) => {
   const [buddies, setBuddies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { currentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     if (eventNameForBuddies) {
@@ -26,7 +33,7 @@ const BuddyList = ({ eventNameForBuddies, setUsernameForProfile }) => {
         });
     } else {
       setIsLoading(true);
-      getUserProfile('Carces')
+      getUserProfile(currentUser)
         .then((result) => {
           if (!result) return Promise.resolve(false);
           const usernames = result.Item.buddies
@@ -41,7 +48,7 @@ const BuddyList = ({ eventNameForBuddies, setUsernameForProfile }) => {
           setIsLoading(false);
         });
     }
-  }, [eventNameForBuddies]);
+  }, [eventNameForBuddies, buddyAddedToggle]);
 
   if (isLoading) return <ActivityIndicator />;
 
@@ -63,6 +70,7 @@ const BuddyList = ({ eventNameForBuddies, setUsernameForProfile }) => {
         interests={interestsValue}
         setUsernameForProfile={setUsernameForProfile}
         isAttendeeList={!!eventNameForBuddies}
+        setBuddyAddedToggle={setBuddyAddedToggle}
       />
     );
   });

@@ -1,29 +1,27 @@
-import { useEffect, useState } from "react";
-import { Card, Text, ListItem, Avatar, Button, Icon } from "@rneui/themed";
+import { useEffect, useState, useContext } from 'react';
+import { Card, Text, ListItem, Avatar, Button, Icon } from '@rneui/themed';
 import {
   ActivityIndicator,
   ScrollView,
   TextInput,
   View,
   TouchableOpacity,
-} from "react-native";
-import { getMessageBoardMessages } from "../api/getMessageBoardMessages.js";
-import { postToMessageBoard } from "../api/postToMessageBoard";
-import styles from "../styles.js";
-import MessageCard from "./MessageCard.jsx";
+} from 'react-native';
+import { getMessageBoardMessages } from '../api/getMessageBoardMessages.js';
+import { postToMessageBoard } from '../api/postToMessageBoard';
+import styles from '../styles.js';
+import MessageCard from './MessageCard.jsx';
+import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
-const MessageBoard = ({
-  eventNameForMessages,
-  setUsernameForProfile,
-  currentUser,
-}) => {
+const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
   const [messages, setMessages] = useState([]);
-  const [newMessageInput, setNewMessageInput] = useState("");
+  const [newMessageInput, setNewMessageInput] = useState('');
   const [newMessage, setNewMessage] = useState({});
   const [isInvalidSubmit, setIsInvalidSubmit] = useState(false);
   const [threadToView, setThreadToView] = useState(false);
   const [inputShown, setInputShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { currentUser } = useContext(CurrentUserContext);
 
   function exitThread() {
     setThreadToView(false);
@@ -37,7 +35,7 @@ const MessageBoard = ({
       return;
     }
     const messageToSubmit = {
-      eventName: eventNameForMessages.replaceAll(" ", "_"),
+      eventName: eventNameForMessages.replaceAll(' ', '_'),
       username: currentUser,
       timestamp: Date.now().toString(),
       message: newMessageInput,
@@ -49,7 +47,7 @@ const MessageBoard = ({
       messageToSubmit;
     setNewMessage(newMessageInput);
     setInputShown(false);
-    setNewMessageInput("");
+    setNewMessageInput('');
     postToMessageBoard(eventName, username, timestamp, message, replyTo);
   }
 
@@ -58,14 +56,14 @@ const MessageBoard = ({
   }
 
   const clearTextInput = () => {
-    setNewMessageInput("");
+    setNewMessageInput('');
   };
 
   useEffect(() => {
     setIsLoading(true);
     getMessageBoardMessages(eventNameForMessages)
       .then((result) => {
-        if (result !== "none") setMessages(result.Items);
+        if (result !== 'none') setMessages(result.Items);
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
@@ -171,7 +169,7 @@ const MessageBoard = ({
         <View style={{ paddingTop: 5, paddingLeft: 20, paddingBottom: 15 }}>
           <View style={[styles.MessageBoard_Buttons, { paddingTop: 1 }]}>
             <Button color="#ec8e2f" onPress={toggleInput}>
-              {inputShown ? "Hide" : threadToView ? "New reply" : "New message"}
+              {inputShown ? 'Hide' : threadToView ? 'New reply' : 'New message'}
             </Button>
           </View>
         </View>

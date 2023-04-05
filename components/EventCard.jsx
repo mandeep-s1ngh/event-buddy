@@ -90,14 +90,14 @@ function EventCard({
 
             <View style={styles.buddiesContainer}>
               <Text style={styles.genreLabel}>
-                {buddiesDisplay} buddies going
+                {buddiesDisplay} people going
               </Text>
               <View style={styles.buddiesContainer}>
                 <Button
                   // style={styles.button}
                   onPress={updateBuddies}
                   color="#ec8e2f"
-                  title={!joined ? 'Join the event' : 'Not in the mood'}
+                  title={!joined ? 'Join the event' : 'Joined'}
                 ></Button>
               </View>
               <View style={styles.buddiesContainer}>
@@ -115,7 +115,7 @@ function EventCard({
 
                 <Button
                   onPress={goToBuddyList}
-                  title={'See who is going'}
+                  title={"See who's going"}
                   color="#ec8e2f"
                 ></Button>
               </View>
