@@ -14,8 +14,8 @@ const BuddyCard = ({
   interests,
   setUsernameForProfile,
   isAttendeeList,
-  buddyAddedToggle,
-  setBuddyAddedToggle,
+  buddies,
+  setNewlyAddedBuddy,
 }) => {
   const navigation = useNavigation();
   const [buddyAdded, setBuddyAdded] = useState(false);
@@ -28,7 +28,13 @@ const BuddyCard = ({
 
   function connectWithBuddy() {
     setBuddyAdded(true);
-    setBuddyAddedToggle(buddyAddedToggle === 'a' ? 'b' : 'a');
+    const buddyToAdd = { Item: { username: { S: username } } };
+    if (name) buddyToAdd.Item.name = { S: name };
+    if (age) buddyToAdd.Item.age = { N: age };
+    if (gender) buddyToAdd.Item.gender = { S: gender };
+    if (interests) buddyToAdd.Item.interests = { S: interests };
+    if (buddies) buddyToAdd.Item.buddies = { S: buddies };
+    setNewlyAddedBuddy(buddyToAdd);
     addBuddy(currentUser, username);
   }
 

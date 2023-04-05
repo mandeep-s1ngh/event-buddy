@@ -14,6 +14,7 @@ function EventsStack({
   usernameForProfile,
   setUsernameForProfile,
   setBuddyAddedToggle,
+  setNewlyAddedBuddy,
 }) {
   const Stack = createNativeStackNavigator();
   const commonScreens = getCommonScreens(Stack, null, usernameForProfile);
@@ -52,6 +53,7 @@ function EventsStack({
             setUsernameForProfile={setUsernameForProfile}
             usernameForProfile={usernameForProfile}
             setBuddyAddedToggle={setBuddyAddedToggle}
+            setNewlyAddedBuddy={setNewlyAddedBuddy}
           />
         )}
       </Stack.Screen>
