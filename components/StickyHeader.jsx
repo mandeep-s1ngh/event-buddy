@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     flexDirection: 'row',
     flex: 1,
-    backgroundColor: 'red'
+    backgroundColor: '#ec8e2f'
   },
   paragraph: {
     fontSize: 14,
