@@ -99,6 +99,7 @@ export default function App() {
                   <EventsStack
                     {...props}
                     eventName={eventName}
+                    setEventName={setEventName}
                     userLocation={userLocation}
                     usernameForProfile={usernameForProfile}
                     setUsernameForProfile={setUsernameForProfile}

@@ -10,6 +10,7 @@ import StickyHeader from './StickyHeader';
 
 export default function EventsList({
   eventName,
+  setEventName,
   userLocation,
   setEventNameForBuddies,
   setEventNameForMessages,
@@ -23,6 +24,7 @@ export default function EventsList({
 
   const [source, setSource] = useState({ api: getTicketMasterEvents });
   const getEvents = source.api;
+
   let geohash = '';
   if (
     userLocation &&
@@ -45,7 +47,6 @@ export default function EventsList({
     setIsLoading(false);
     setFound(false);
   }
-
   useEffect(() => {
     if (!invalidLocation) {
       setIsLoading(true);
@@ -69,7 +70,6 @@ export default function EventsList({
 
   if (isLoading) return <ActivityIndicator />;
 
-  //if (eventsList.length) setFound(true);
 
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
@@ -142,6 +142,7 @@ export default function EventsList({
           style={styles.stickyHeader}
           eventName={eventName}
           found={found}
+          setEventName={setEventName}
         />
         <View style={styles.listView}>
           <ScrollView>
