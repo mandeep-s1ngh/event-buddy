@@ -6,6 +6,7 @@ export const getGeolocationFromAddress = (address) => {
   return axios
     .get(geocodingURL)
     .then((response) => {
+      if (!response.data[0]) return false;
       return {
         latitude: response.data[0].lat,
         longitude: response.data[0].lon,

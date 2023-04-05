@@ -14,6 +14,15 @@ export default function EventsList({
   setEventNameForBuddies,
   setEventNameForMessages,
 }) {
+  const [eventsList, setEventsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [found, setFound] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [invalidLocation, setInvalidLocation] = useState(false);
+
+  const [source, setSource] = useState({ api: getTicketMasterEvents });
+  const getEvents = source.api;
   let geohash = '';
   if (
     userLocation &&
@@ -31,8 +40,12 @@ export default function EventsList({
       userLocation.geolocation.longitude,
       precision
     );
+  } else if (userLocation && !invalidLocation) {
+    setInvalidLocation(true);
+    setIsLoading(false);
+    setFound(false);
   }
-
+  
   const [eventsList, setEventsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [found, setFound] = useState(false);
@@ -43,19 +56,21 @@ export default function EventsList({
   const getEvents = source.api;
 
   useEffect(() => {
-    setIsLoading(true);
-    setIsError(false);
-    getEvents(eventName, geohash)
-      .then((events) => {
-        setEventsList(events);
-        setIsLoading(false);
-        if (events.length) setFound(true);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setIsError(true);
-        setErrorMessage(err);
-      });
+    if (!invalidLocation) {
+      setIsLoading(true);
+      setIsError(false);
+      getEvents(eventName, geohash)
+        .then((events) => {
+          setEventsList(events);
+          setIsLoading(false);
+          if (events.length) setFound(true);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setIsError(true);
+          setErrorMessage(err);
+        });
+    }
   }, [eventName, userLocation]);
   // console.log ('isLoading ->', isLoading);
   // console.log ('isError ->', isError)
@@ -151,6 +166,8 @@ export default function EventsList({
                       event_img_URL_preview={event.img}
                       event_buddies={event.buddies}
                       event_talks={event.talks}
+                      setEventNameForMessages={setEventNameForMessages}
+                      setEventNameForBuddies={setEventNameForBuddies}
                     />
                   </View>
                 );
