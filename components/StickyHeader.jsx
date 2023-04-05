@@ -8,7 +8,7 @@ function StickyHeader  ({eventName, found}){
       <View style={styles.header}>
         <Text style={styles.paragraph}>
           {
-          {found} ?
+          found ?
           //{eventName} ?
           `SEE ALL ${eventName.toUpperCase()} EVENTS` 
           : `SEE ALL EVENTS` 

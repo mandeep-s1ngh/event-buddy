@@ -35,7 +35,7 @@ export default function EventsList({
 
   const [eventsList, setEventsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [found, setFound] = useState(true);
+  const [found, setFound] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
