@@ -15,8 +15,8 @@ export default function EventsList({
   setEventNameForMessages,
 }) {
   let geohash = '';
-  if (userLocation) {
-    const precision = 9;
+  if (userLocation.geolocation.latitude&&userLocation.geolocation.longitude) {
+    const precision = 5;
     // precision is maximum X axis error index:
     // 4   ± 20 km
     // 5   ± 2.4 km
@@ -31,6 +31,7 @@ export default function EventsList({
 
   const [eventsList, setEventsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [found, setFound] = useState(true);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -44,6 +45,7 @@ export default function EventsList({
       .then((events) => {
         setEventsList(events);
         setIsLoading(false);
+        if (events.length) setFound(true);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -56,6 +58,8 @@ export default function EventsList({
   // console.log ('error ->', errorMessage)
 
   if (isLoading) return <ActivityIndicator />;
+  
+  //if (eventsList.length) setFound(true);
 
   ticketmaster_list = eventsList.map((event) => {
     let location = event._embedded.venues[0].city.name;
@@ -123,7 +127,7 @@ export default function EventsList({
   return (
     <SafeAreaProvider>
       <View style={styles.mainView}>
-        <StickyHeader style={styles.stickyHeader} eventName={eventName}/>
+        <StickyHeader style={styles.stickyHeader} eventName={eventName} found={found}/>
         <View style={styles.listView}>
           <ScrollView>
             <View>

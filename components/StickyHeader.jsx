@@ -1,17 +1,23 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 
-function StickyHeader  ({eventName}){
+function StickyHeader  ({eventName, found}){
  
 
     return (
       <View style={styles.header}>
         <Text style={styles.paragraph}>
-          {{eventName} ? `SEE ALL ${eventName.toUpperCase()} EVENTS` : `SEE ALL EVENTS`}
+          {
+          {found} ?
+          //{eventName} ?
+          `SEE ALL ${eventName.toUpperCase()} EVENTS` 
+          : `SEE ALL EVENTS` 
+         //: `SORRY THERE'S NO ${eventName} EVENTS UPCOMING PLEASE TRY ANOTHER SEARCH ` 
+          }
         </Text>
       </View>
     );
-  }
+}
 export default StickyHeader;
 
 const styles = StyleSheet.create({
