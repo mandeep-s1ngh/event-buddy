@@ -8,11 +8,11 @@ function StickyHeader  ({eventName, found}){
       <View style={styles.header}>
         <Text style={styles.paragraph}>
           {
-          {found} ?
-          //{eventName} ?
+          !found ?
+          `SORRY THERE'S NO ${eventName.toUpperCase()} EVENTS UPCOMING PLEASE TRY ANOTHER SEARCH ` 
+          : eventName ?
           `SEE ALL ${eventName.toUpperCase()} EVENTS` 
           : `SEE ALL EVENTS` 
-         //: `SORRY THERE'S NO ${eventName} EVENTS UPCOMING PLEASE TRY ANOTHER SEARCH ` 
           }
         </Text>
       </View>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     flexDirection: 'row',
     flex: 1,
-    backgroundColor: 'red'
+    backgroundColor: '#ec8e2f'
   },
   paragraph: {
     fontSize: 14,

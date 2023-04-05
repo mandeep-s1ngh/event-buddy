@@ -52,33 +52,37 @@ const BuddyList = ({
 
   if (isLoading) return <ActivityIndicator />;
 
-  const buddyCards = buddies.map((attendee, index) => {
-    const {
-      Item: { username, name, age, gender, interests },
-    } = attendee;
-    const nameValue = name ? name.S : null;
-    const ageValue = age ? age.N : null;
-    const genderValue = gender ? gender.S : null;
-    const interestsValue = interests ? interests.S : null;
-    return (
-      <BuddyCard
-        key={index}
-        username={username.S}
-        name={nameValue}
-        age={ageValue}
-        gender={genderValue}
-        interests={interestsValue}
-        setUsernameForProfile={setUsernameForProfile}
-        isAttendeeList={!!eventNameForBuddies}
-        setBuddyAddedToggle={setBuddyAddedToggle}
-      />
-    );
-  });
+  const buddyCards = !buddies
+    ? []
+    : buddies.map((attendee, index) => {
+        const {
+          Item: { username, name, age, gender, interests },
+        } = attendee;
+        const nameValue = name ? name.S : null;
+        const ageValue = age ? age.N : null;
+        const genderValue = gender ? gender.S : null;
+        const interestsValue = interests ? interests.S : null;
+        return (
+          <BuddyCard
+            key={index}
+            username={username.S}
+            name={nameValue}
+            age={ageValue}
+            gender={genderValue}
+            interests={interestsValue}
+            setUsernameForProfile={setUsernameForProfile}
+            isAttendeeList={!!eventNameForBuddies}
+            setBuddyAddedToggle={setBuddyAddedToggle}
+          />
+        );
+      });
 
   return (
     <ScrollView style={styles.BuddyList}>
       <Text style={styles.BuddyList_Text}>
-        {eventNameForBuddies
+        {eventNameForBuddies && !buddies.length
+          ? `No one has joined ${eventNameForBuddies} yet.`
+          : eventNameForBuddies
           ? `${buddies.length} people attending ${eventNameForBuddies}:`
           : 'Your connected buddies:'}
       </Text>
