@@ -139,7 +139,7 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
           {isInvalidSubmit ? (
             <Text>Please enter a message before submitting</Text>
           ) : null}
-          <View style={{ paddingTop: 10, paddingLeft: 20, paddingBottom: 15 }}>
+          <View style={{ paddingTop: 10, paddingBottom: 15, alignItems: 'center' }}>
             <TextInput
               style={styles.MessageBoard_TextInput}
               placeholder="Write your message here ..."
@@ -156,7 +156,7 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
             )}
           </View>
 
-          <View style={{ marginTop: 5, marginLeft: 20, marginBottom: 15 }}>
+          <View style={{ marginTop: 5, marginBottom: 15, alignItems: 'center' }}>
             {/* {marginTop: 5, marginLeft: 20, marginBottom: 15} */}
             <View style={styles.MessageBoard_Buttons}>
               <Button onPress={submitNewMessage} color="#ec8e2f">
@@ -167,8 +167,8 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
         </View>
       ) : null}
       <ScrollView>
-        <View style={{ paddingTop: 5, paddingLeft: 20, paddingBottom: 15 }}>
-          <View style={[styles.MessageBoard_Buttons, { paddingTop: 1 }]}>
+        <View style={{ paddingTop: 5, paddingBottom: 15, alignItems: 'center' }}>
+          <View style={[styles.MessageBoard_Buttons, { paddingTop: 1, alignItems: 'center' }]}>
             <Button color="#ec8e2f" onPress={toggleInput}>
               {inputShown ? 'Hide' : threadToView ? 'New reply' : 'New message'}
             </Button>

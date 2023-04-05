@@ -65,7 +65,13 @@ const MessageCard = ({
           </Text>
         </TouchableHighlight>
         </View>
-      ) : null}
+      ) : 
+      <TouchableHighlight style={styles.Message_Card_Reply_Button_Zero_Replies} onPress={goToMessageThread}>
+       <Text style={styles.Message_Card_Buttons_Text}>
+         {replyCount === 0 ? 'Be first to reply!' : null}
+       </Text>
+     </TouchableHighlight>
+        }
     </Card>
   );
 };
