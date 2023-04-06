@@ -51,29 +51,35 @@ const MessageCard = ({
           styles.BuddyCard_ProfileButton,
         ]}
       />
-      <Card.Title  style={styles.Message_Card_Reply_From}>{isReply ? `Reply from ${username}` : username}</Card.Title>
+      <Card.Title style={styles.Message_Card_Reply_From}>
+        {isReply ? `Reply from ${username}` : username}
+      </Card.Title>
       <Text style={styles.MessageCard_Text}>{message}</Text>
       <Text style={styles.Message_Card_Date}>
         {new Date(+timestamp).toDateString()}
       </Text>
-      
-      {replyCount && !isReply ? (
-        <View style={{paddingLeft: 4 }}>
-        <TouchableHighlight style={styles.Message_Card_Reply_Button} onPress={goToMessageThread}>
+
+      {replyCount ? (
+        <View style={{ paddingLeft: 4 }}>
+          <TouchableHighlight
+            style={styles.Message_Card_Reply_Button}
+            onPress={goToMessageThread}
+          >
+            <Text style={styles.Message_Card_Buttons_Text}>
+              {replyCount} {replyCount === 1 ? 'reply' : 'replies'}
+            </Text>
+          </TouchableHighlight>
+        </View>
+      ) : !isReply ? (
+        <TouchableHighlight
+          style={styles.Message_Card_Reply_Button_Zero_Replies}
+          onPress={goToMessageThread}
+        >
           <Text style={styles.Message_Card_Buttons_Text}>
-            {replyCount} {replyCount === 1 ? 'reply' : 'replies'}
+            {replyCount === 0 ? 'Be first to reply!' : null}
           </Text>
         </TouchableHighlight>
-        </View>
-      ) : !isReply ?
-      <TouchableHighlight style={styles.Message_Card_Reply_Button_Zero_Replies} onPress={goToMessageThread}>
-       <Text style={styles.Message_Card_Buttons_Text}>
-         Be first to reply!
-       </Text>
-     </TouchableHighlight>
-     :
-     null
-        }
+      ) : null}
     </Card>
   );
 };

@@ -46,6 +46,8 @@ const Profile = ({ usernameForProfile }) => {
     patchUserProfile(usernameToDisplay, null, null, null, [`-${interest}`]);
   }
 
+  if (!usernameForProfile) usernameForProfile = currentUser;
+
   useEffect(() => {
     setIsLoading(true);
     getUserProfile(usernameToDisplay).then((fetchedProfile) => {

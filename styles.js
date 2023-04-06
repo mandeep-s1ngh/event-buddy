@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   Menu_ViewLoggedIn: {
-    height: '25%',
+    height: '27%',
   },
   Menu_Text: {
     color: navBarText,
