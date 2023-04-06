@@ -57,7 +57,7 @@ const MessageCard = ({
         {new Date(+timestamp).toDateString()}
       </Text>
       
-      {replyCount ? (
+      {replyCount && !isReply ? (
         <View style={{paddingLeft: 4 }}>
         <TouchableHighlight style={styles.Message_Card_Reply_Button} onPress={goToMessageThread}>
           <Text style={styles.Message_Card_Buttons_Text}>
@@ -65,12 +65,14 @@ const MessageCard = ({
           </Text>
         </TouchableHighlight>
         </View>
-      ) : 
+      ) : !isReply ?
       <TouchableHighlight style={styles.Message_Card_Reply_Button_Zero_Replies} onPress={goToMessageThread}>
        <Text style={styles.Message_Card_Buttons_Text}>
-         {replyCount === 0 ? 'Be first to reply!' : null}
+         Be first to reply!
        </Text>
      </TouchableHighlight>
+     :
+     null
         }
     </Card>
   );
