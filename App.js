@@ -1,30 +1,28 @@
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Icon, ThemeProvider } from '@rneui/themed';
-import { useState } from 'react';
-import { StatusBar } from 'react-native';
-//import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import theme from './theme.js';
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Icon, ThemeProvider } from "@rneui/themed";
+import { useState } from "react";
+import { StatusBar } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import theme from "./theme.js";
 
-import NavBar from './components/NavBar';
-import Menu from './components/Menu';
-import HomeStack from './components/navigation-stacks/HomeStack.jsx';
-import BuddiesStack from './components/navigation-stacks/BuddiesStack.jsx';
-import EventsStack from './components/navigation-stacks/EventsStack.jsx';
-import MessagesStack from './components/navigation-stacks/MessagesStack.jsx';
-import { CurrentUserProvider } from './context/CurrentUserContext.js';
+import NavBar from "./components/NavBar";
+import Menu from "./components/Menu";
+import HomeStack from "./components/navigation-stacks/HomeStack.jsx";
+import BuddiesStack from "./components/navigation-stacks/BuddiesStack.jsx";
+import EventsStack from "./components/navigation-stacks/EventsStack.jsx";
+import { CurrentUserProvider } from "./context/CurrentUserContext.js";
 
 export default function App() {
-  const [userLocation, setUserLocation] = useState('');
-  const [eventName, setEventName] = useState('');
-  const [eventNameForBuddies, setEventNameForBuddies] = useState('');
-  const [eventNameForMessages, setEventNameForMessages] = useState('');
-  const [usernameForProfile, setUsernameForProfile] = useState('');
+  const [userLocation, setUserLocation] = useState("");
+  const [eventName, setEventName] = useState("");
+  const [eventNameForBuddies, setEventNameForBuddies] = useState("");
+  const [eventNameForMessages, setEventNameForMessages] = useState("");
+  const [usernameForProfile, setUsernameForProfile] = useState("");
   const [menuShown, setMenuShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState('');
-  const [buddyAddedToggle, setBuddyAddedToggle] = useState('a');
+  const [currentUser, setCurrentUser] = useState("");
+  const [buddyAddedToggle, setBuddyAddedToggle] = useState("a");
   const [newlyAddedBuddy, setNewlyAddedBuddy] = useState(null);
 
   const Tab = createBottomTabNavigator();
@@ -50,7 +48,7 @@ export default function App() {
               initialRouteName="Home"
               screenOptions={{
                 headerShown: false,
-                tabBarActiveTintColor: '#ec8e2f',
+                tabBarActiveTintColor: "#ec8e2f",
               }}
             >
               <Tab.Screen
@@ -115,25 +113,6 @@ export default function App() {
                   />
                 )}
               </Tab.Screen>
-
-              {/* <Tab.Screen
-              name="Messages"
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="email" color={color} size={size} />
-                ),
-              }}
-            >
-              {(props) => (
-                <MessagesStack
-                  {...props}
-                  eventNameForMessages={eventNameForMessages}
-                  usernameForProfile={usernameForProfile}
-                  setUsernameForProfile={setUsernameForProfile}
-                  currentUser={currentUser}
-                />
-              )}
-            </Tab.Screen> */}
             </Tab.Navigator>
           </NavigationContainer>
         </ThemeProvider>
@@ -141,5 +120,3 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
-
-// Set StatusBar colour - done through a direct prop, not style: <StatusBar backgroundColor="#2403fc" />

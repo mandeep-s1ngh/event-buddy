@@ -1,7 +1,7 @@
-import { Avatar, Card, Button, Image, Icon } from '@rneui/themed';
-import { View, Text, ScrollView, TouchableHighlight } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import styles from '../styles.js';
+import { Card, Button } from "@rneui/themed";
+import { View, Text, TouchableHighlight } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import styles from "../styles.js";
 
 const MessageCard = ({
   index,
@@ -19,7 +19,7 @@ const MessageCard = ({
 
   function goToProfile() {
     setUsernameForProfile(username);
-    navigation.navigate('Profile');
+    navigation.navigate("Profile");
   }
 
   function goToMessageThread() {
@@ -35,16 +35,15 @@ const MessageCard = ({
           ? [styles.Message_Card_Reply_Box, styles.Message_Card_Reply_Box]
           : styles.MessageCard
       }
-      // titleStyle={styles.BuddyCard_Username}
     >
       <Button
         color="#ec8e2f"
-        title={'Connect'}
+        title={"Connect"}
         containerStyle={styles.BuddyCard_Button}
       />
       <Button
         color="#ec8e2f"
-        title={'View Profile'}
+        title={"View Profile"}
         onPress={goToProfile}
         containerStyle={[
           styles.BuddyCard_Button,
@@ -66,7 +65,7 @@ const MessageCard = ({
             onPress={goToMessageThread}
           >
             <Text style={styles.Message_Card_Buttons_Text}>
-              {replyCount} {replyCount === 1 ? 'reply' : 'replies'}
+              {replyCount} {replyCount === 1 ? "reply" : "replies"}
             </Text>
           </TouchableHighlight>
         </View>
@@ -76,7 +75,7 @@ const MessageCard = ({
           onPress={goToMessageThread}
         >
           <Text style={styles.Message_Card_Buttons_Text}>
-            {replyCount === 0 ? 'Be first to reply!' : null}
+            {replyCount === 0 ? "Be first to reply!" : null}
           </Text>
         </TouchableHighlight>
       ) : null}

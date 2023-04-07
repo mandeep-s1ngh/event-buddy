@@ -1,41 +1,22 @@
-import axios from 'axios';
+import axios from "axios";
 
-const ticketMasterApi = axios.create({baseURL: "https://app.ticketmaster.com/discovery/v2"});
+const ticketMasterApi = axios.create({
+  baseURL: "https://app.ticketmaster.com/discovery/v2",
+});
 
 export const getTicketMasterEvents = (eventName, geohash) => {
-  let path='/events.json?apikey=bP1t2OXaOv6BYhMGG65SCwVnoAGRd3zJ'
+  let path = "/events.json?apikey=bP1t2OXaOv6BYhMGG65SCwVnoAGRd3zJ";
 
-  if (eventName) {  
-    path += `&keyword=${eventName+' festival'}&classificationName=Music`;
-
-  } if (geohash) {  
+  if (eventName) {
+    path += `&keyword=${eventName + " festival"}&classificationName=Music`;
+  }
+  if (geohash) {
     path += `&geoPoint=${geohash}&keyword=festival&classificationName=Music`;
-
   } else {
-    path +='&keyword=festival&classificationName=Music';
+    path += "&keyword=festival&classificationName=Music";
   }
 
-  return ticketMasterApi
-  .get(path)
-  .then((response) => {
+  return ticketMasterApi.get(path).then((response) => {
     return response.data._embedded.events;
-  })
-  }
-  
-// https://app.ticketmaster.com/discovery/v2/events.json?keyword=festival&classificationName=Music&apikey=bP1t2OXaOv6BYhMGG65SCwVnoAGRd3zJ
- 
-
-// const seatgeekapi = axios.create({baseURL: "https://api.seatgeek.com/2"});
-
-// export const getSeatGeekEvents = () => {
-//   return seatgeekapi
-//   .get('/events?client_id=MzI2NjYwMjJ8MTY3OTkxMzYyNS43MzI4MTAz&type=concert')
-//   .then((response) => {
-//     return response.data.events;
-//   })
-// }
-//       //https://api.seatgeek.com/2/events?client_id=MzI2NjYwMjJ8MTY3OTkxMzYyNS43MzI4MTAz&type=concert
-
-
-
-
+  });
+};

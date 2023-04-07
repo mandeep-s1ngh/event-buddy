@@ -1,5 +1,4 @@
-import { Button } from '@rneui/themed';
-import { useState } from 'react';
+import { useState } from "react";
 import {
   TextInput,
   View,
@@ -8,23 +7,23 @@ import {
   Image,
   Alert,
   TouchableOpacity,
-} from 'react-native';
-import { Icon } from '@rneui/themed';
-import { useNavigation } from '@react-navigation/native';
-import styles from '../styles.js';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+} from "react-native";
+import { Icon } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
+import styles from "../styles.js";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LandingPage = (props) => {
   const { eventName, setEventName } = props;
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState("");
 
   const handleValidation = () => {
     const pattern = /^[a-zA-Z0-9\s]*$/;
     if (!pattern.test(userInput)) {
       Alert.alert(
-        'Event name contains invalid characters',
-        'Please enter a different event name.',
-        [{ text: 'OK', onPress: () => {} }],
+        "Event name contains invalid characters",
+        "Please enter a different event name.",
+        [{ text: "OK", onPress: () => {} }],
         { cancelable: true }
       );
     }
@@ -34,16 +33,16 @@ const LandingPage = (props) => {
 
   const searchEventByName = () => {
     setEventName(userInput);
-    setUserInput('');
-    navigation.navigate('Events', { screen: 'EventsList' });
+    setUserInput("");
+    navigation.navigate("Events", { screen: "EventsList" });
   };
 
   const clearTextInput = () => {
-    setUserInput('');
+    setUserInput("");
   };
 
   function navigateToLocation() {
-    navigation.navigate('Location');
+    navigation.navigate("Location");
   }
 
   return (
@@ -54,7 +53,7 @@ const LandingPage = (props) => {
     >
       <View style={{ paddingBottom: 30, marginTop: 20 }}>
         <Image
-          source={require('../images/Landing_Page_Concert.jpeg')}
+          source={require("../images/Landing_Page_Concert.jpeg")}
           style={styles.LandingPage_Image}
         />
       </View>
@@ -106,21 +105,8 @@ const LandingPage = (props) => {
           </Text>
         </TouchableHighlight>
       </View>
-
-      {/* </View> */}
     </KeyboardAwareScrollView>
   );
 };
 
 export default LandingPage;
-
-/*
-
-<View style={{paddingTop: 10, paddingBottom: 10, paddingLeft: 20}}>
-        <TouchableHighlight  style={styles.LandingPage_Buttons} onPress={searchEventByName} >
-          <Text style={styles.Landing_Page_Buttons_Text}>Search for events</Text>
-        </TouchableHighlight>
-    </View>
-
-
-*/

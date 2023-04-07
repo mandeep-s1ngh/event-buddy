@@ -1,85 +1,76 @@
-import { StyleSheet, StatusBar, Platform } from 'react-native';
+import { StyleSheet } from "react-native";
 
-// Colours: set as variables here for easier changes later
-const appBackground = '#f0eae6';
-const navBarBackground = '#8a766f';
-const navBarText = '#fff';
-//////////////////////////////////////////////////////////
+const appBackground = "#f0eae6";
+const navBarBackground = "#8a766f";
+const navBarText = "#fff";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   ActivityIndicator: {
-    position: 'relative',
-    top: '50%',
+    position: "relative",
+    top: "50%",
   },
-  // ------------- App styling ------------- //
+
   AppView: {
     backgroundColor: appBackground,
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, // make sure the content doesn't overlay the StatusBar, only needed if using expo-status-bar instead of react-native one
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "center",
   },
-  // ------------- NavBar styling ------------- //
+
   NavBar: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // alignItems: 'center',
-    // justifyContent: 'center',
     height: 10,
   },
   NavBar_View: {
     backgroundColor: navBarBackground,
-    // backgroundColor: navBarBackground,
     flex: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     gap: 10,
     padding: 15,
   },
   NavBar_Text: {
     color: navBarText,
     fontSize: 20,
-    fontWeight: 'bold',
-    marginRight: '10%', //use 33% when there is a left navbar icon e.g. home
-    // marginRight: 'auto',
+    fontWeight: "bold",
+    marginRight: "10%",
   },
   NavBar_RightButtons: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 15,
   },
-  // ------------- Menu styling ------------- //
+
   Menu_View: {
     backgroundColor: navBarBackground,
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     top: 55,
     zIndex: 5,
-    height: '10%',
-    width: '50%',
+    height: "10%",
+    width: "50%",
     maxWidth: 150,
     flex: 0,
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    flexDirection: "column",
+    alignItems: "flex-start",
     gap: 10,
     paddingTop: 15,
   },
   Menu_ViewLoggedIn: {
-    height: '27%',
+    height: "27%",
   },
   Menu_Text: {
     color: navBarText,
     fontSize: 14,
-    fontWeight: 'bold',
-    marginHorizontal: '10%',
+    fontWeight: "bold",
+    marginHorizontal: "10%",
     marginVertical: 0,
   },
-  // ------------- LocationRequest styling ------------- //
+
   Location_Request: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingTop: 100,
   },
   Location_TextInfo: {
@@ -89,18 +80,18 @@ const styles = StyleSheet.create({
   },
   Location_TextInput: {
     height: 30,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: "#f7e0c9",
     fontSize: 12,
     paddingLeft: 10,
     width: 250,
   },
   Location_Buttons: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 9,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: "#ec8e2f",
     width: 250,
   },
 
@@ -108,18 +99,17 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   Location_CloseButton: {
-    position: 'absolute',
+    position: "absolute",
     marginTop: 5,
     marginLeft: 228,
   },
 
-  // ------------- Landing page styling ------------- //
   LandingPage_View: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   LandingPage_Image: {
     height: 200,
@@ -127,45 +117,45 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   LandingPage_Buttons: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 20,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: "#ec8e2f",
     width: 250,
   },
   Landing_Page_Buttons_Text: {
     fontSize: 15,
     lineHeight: 15,
     letterSpacing: 0.25,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   LandingPage_TextInfo: {
     fontSize: 15,
     paddingBottom: 15,
     width: 250,
-    alignContent: 'center',
+    alignContent: "center",
   },
   LandingPage_TextInput: {
     height: 35,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: "#f7e0c9",
     fontSize: 13,
     paddingLeft: 10,
     width: 250,
   },
   LandingPage_CloseButton: {
-    position: 'absolute',
+    position: "absolute",
     marginTop: 8,
     marginLeft: 228,
   },
-  // ------------- Profile styling ------------- //
+
   Profile_View: {
-    textAlignVertical: 'center',
-    alignContent: 'center',
+    textAlignVertical: "center",
+    alignContent: "center",
     flex: 0.8,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     padding: 20,
     margin: 10,
   },
@@ -175,32 +165,31 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   Profile_username: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
   },
   Profile_TextInput: {
     height: 30,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: "#f7e0c9",
     fontSize: 12,
     paddingLeft: 10,
     width: 300,
   },
   Profile_Buttons: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 9,
-    // paddingHorizontal: 25,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: "#ec8e2f",
     width: 300,
   },
   Profile_Buttons_Text: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   Profile_CurrentUserInterests: {
     paddingTop: 20,
@@ -209,65 +198,62 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   Profile_CloseButton: {
-    position: 'absolute',
+    position: "absolute",
     marginTop: 5,
     marginLeft: 277,
   },
   Profile_Each_Interest_button: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 5,
-    // paddingHorizontal: 25,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#8a766f',
+    backgroundColor: "#8a766f",
     width: 100,
   },
   Profile_Each_Interest_button_Text: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
-    color: 'white',
+    color: "white",
   },
   Profile_Each_Interest_button_X: {
-    position: 'relative',
-    alignItems: 'center',
+    position: "relative",
+    alignItems: "center",
     paddingVertical: 5,
     width: 12,
-    position: 'absolute',
+    position: "absolute",
     right: 10,
   },
   Profile_Each_Interest_button_Text_X: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
-    color: 'black',
-  },
-  // ------------- BuddyList styling ------------- //
-  BuddyList_Text: {
-    textAlign: 'center',
-    marginVertical: 20,
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: "black",
   },
 
-  // ------------- BuddyCard styling ------------- //
+  BuddyList_Text: {
+    textAlign: "center",
+    marginVertical: 20,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 
   BuddyCard: {
     minHeight: 175,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: "#f7e0c9",
   },
 
   BuddyCard_Button: {
-    position: 'absolute',
+    position: "absolute",
     top: 10,
     right: 10,
     marginLeft: 30,
   },
 
   BuddyCard_ButtonAdded: {
-    backgroundColor: 'pink',
-    color: 'pink',
+    backgroundColor: "pink",
+    color: "pink",
   },
 
   BuddyCard_ProfileButton: {
@@ -276,20 +262,20 @@ const styles = StyleSheet.create({
   },
 
   BuddyCard_Username: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 
   BuddyCard_TextView: {
     flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-end',
-    marginHorizontal: '12%',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "flex-end",
+    marginHorizontal: "12%",
   },
 
   BuddyCard_CategoryText: {
-    fontWeight: 'bold',
-    marginLeft: '25%',
+    fontWeight: "bold",
+    marginLeft: "25%",
   },
 
   BuddyCard_Text: {
@@ -297,56 +283,52 @@ const styles = StyleSheet.create({
   },
 
   BuddyCard_Interests: {
-    position: 'absolute',
-    top: '60%',
-    left: '25%',
+    position: "absolute",
+    top: "60%",
+    left: "25%",
     maxWidth: 150,
   },
 
   BuddyCard_Image: {
-    position: 'absolute',
-    top: '28%',
+    position: "absolute",
+    top: "28%",
     left: 10,
-    borderColor: '#aba9a9',
+    borderColor: "#aba9a9",
     borderWidth: 1,
     borderRadius: 5,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
 
-  // ------------- MessageCard styling ------------- //
   MessageCard_Reply: {
-    backgroundColor: '#dbd7d7',
+    backgroundColor: "#dbd7d7",
   },
   MessageBoard_TextInput: {
     height: 30,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: "#f7e0c9",
     fontSize: 12,
     paddingLeft: 10,
     width: 250,
   },
   MessageBoard_Buttons: {
-    // alignItems: "center", UNCOMMENTING THIS WILL MAKE ONLY THE TEXT PRESSABLE and not entire button
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingVertical: 4,
-    // paddingHorizontal: 25,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: "#ec8e2f",
     width: 250,
   },
   MessageBoard_CloseButton: {
-    position: 'absolute',
+    position: "absolute",
     marginTop: 14,
     marginLeft: 250,
   },
   Message_Card_Reply_Button: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 5,
-    // paddingHorizontal: 25,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#8a766f',
+    backgroundColor: "#8a766f",
     width: 60,
     fontSize: 6,
   },
@@ -354,17 +336,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 15,
     letterSpacing: 0.25,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   Message_Card_Reply_Button_Zero_Replies: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 5,
-    // paddingHorizontal: 25,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#8a766f',
+    backgroundColor: "#8a766f",
     width: 110,
     fontSize: 6,
   },
@@ -376,33 +357,30 @@ const styles = StyleSheet.create({
   },
   Message_Card_Username: {
     paddingLeft: 4,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   MessageCard: {
     minHeight: 175,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: "#f7e0c9",
   },
   MessageCard_Text: {
     fontSize: 15,
     marginLeft: 5,
     width: 180,
-    // fontWeight: 'bold'
-    // backgroundColor: '#8a766f'
   },
   Message_Card_Reply_Box: {
     minHeight: 175,
-    backgroundColor: '#dde1e4',
+    backgroundColor: "#dde1e4",
   },
   Message_Card_Reply_From: {
     fontSize: 13,
     marginLeft: 0,
   },
 
-  // ------------- Message BOARD file styling ------------- //
   allMessagesThread: {
-    alignItems: 'left',
-    textAlign: 'left',
-    alignContent: 'center',
+    alignItems: "left",
+    textAlign: "left",
+    alignContent: "center",
   },
 });
 

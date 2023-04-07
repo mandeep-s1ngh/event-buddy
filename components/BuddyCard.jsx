@@ -1,10 +1,10 @@
-import { Avatar, Card, Button, Image, Icon } from '@rneui/themed';
-import { View, Text, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import styles from '../styles.js';
-import { addBuddy } from '../api/addBuddy.js';
-import { useState, useContext } from 'react';
-import { CurrentUserContext } from '../context/CurrentUserContext.js';
+import { Avatar, Card, Button } from "@rneui/themed";
+import { View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import styles from "../styles.js";
+import { addBuddy } from "../api/addBuddy.js";
+import { useState, useContext } from "react";
+import { CurrentUserContext } from "../context/CurrentUserContext.js";
 
 const BuddyCard = ({
   username,
@@ -23,7 +23,7 @@ const BuddyCard = ({
 
   function goToProfile() {
     setUsernameForProfile(username);
-    navigation.navigate('Profile');
+    navigation.navigate("Profile");
   }
 
   function connectWithBuddy() {
@@ -38,9 +38,7 @@ const BuddyCard = ({
     addBuddy(currentUser, username);
   }
 
-  function startChat() {
-    //
-  }
+  function startChat() {}
 
   return (
     <Card
@@ -51,7 +49,7 @@ const BuddyCard = ({
         onPress={isAttendeeList ? connectWithBuddy : startChat}
         color="#ec8e2f"
         title={
-          !isAttendeeList ? 'Message' : buddyAdded ? 'Connected' : 'Connect'
+          !isAttendeeList ? "Message" : buddyAdded ? "Connected" : "Connect"
         }
         containerStyle={
           buddyAdded
@@ -61,7 +59,7 @@ const BuddyCard = ({
       />
       <Button
         color="#ec8e2f"
-        title={'View Profile'}
+        title={"View Profile"}
         onPress={goToProfile}
         containerStyle={[
           styles.BuddyCard_Button,
@@ -70,7 +68,7 @@ const BuddyCard = ({
       />
       <Avatar
         size="large"
-        source={{ uri: 'https://source.unsplash.com/random  ' }}
+        source={{ uri: "https://source.unsplash.com/random  " }}
         containerStyle={styles.BuddyCard_Image}
       />
       <Card.Title>{username}</Card.Title>
@@ -94,7 +92,7 @@ const BuddyCard = ({
       ) : null}
       {interests ? (
         <View style={styles.BuddyCard_TextView}>
-          <Text style={styles.BuddyCard_CategoryText}>Interests:{'\n'}</Text>
+          <Text style={styles.BuddyCard_CategoryText}>Interests:{"\n"}</Text>
           <Text style={styles.BuddyCard_Interests}>{interests}</Text>
         </View>
       ) : null}
