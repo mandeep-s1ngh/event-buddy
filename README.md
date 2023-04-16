@@ -23,9 +23,11 @@ You can search for events (this uses the [Ticketmaster Discovery API](https://de
 - submit new message threads
 - see who has already marked themselves as going. From within there, you can view the profile of those users as well as connect with them where they will be added to the buddies section of the app.
 
-## <ins>How to use</ins>
+A demo video of the app (visuals only) is available [here](https://bit.ly/3L1TK8M) if you would like to view all its functionality.
 
-**Please note: The app is still a W.I.P and not hosted anywhere yet or completely optimized for iOS but you can follow this guide to view the app on your smartphone or an emulator. I would recommend using an Android smartphone or the Android emulator if possible so you can get the best possible experience of the app.**
+## <ins>Local Setup</ins>
+
+**Please note: The app is not hosted anywhere or completely optimized for iOS but you can follow this guide to view the app on your smartphone or an emulator. I would recommend using an Android smartphone or the Android emulator if possible so you can get the best possible experience of the app.**
 
 - First, please fork and clone this repository.
 - Open the repo in the code editor of your choice.
