@@ -1,23 +1,27 @@
-import { useEffect, useState } from 'react';
-import { Card, Text, ListItem, Avatar, Button } from '@rneui/themed';
-import { ActivityIndicator, ScrollView, TextInput, View } from 'react-native';
-import { getMessageBoardMessages } from '../api/getMessageBoardMessages.js';
-import { postToMessageBoard } from '../api/postToMessageBoard';
-import styles from '../styles.js';
-import MessageCard from './MessageCard.jsx';
+import { useEffect, useState, useContext } from "react";
+import { Text, Button, Icon } from "@rneui/themed";
+import {
+  ActivityIndicator,
+  ScrollView,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from "react-native";
+import { getMessageBoardMessages } from "../api/getMessageBoardMessages.js";
+import { postToMessageBoard } from "../api/postToMessageBoard";
+import styles from "../styles.js";
+import MessageCard from "./MessageCard.jsx";
+import { CurrentUserContext } from "../context/CurrentUserContext.js";
 
-const MessageBoard = ({
-  eventNameForMessages,
-  setUsernameForProfile,
-  currentUser,
-}) => {
+const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
   const [messages, setMessages] = useState([]);
-  const [newMessageInput, setNewMessageInput] = useState('');
+  const [newMessageInput, setNewMessageInput] = useState("");
   const [newMessage, setNewMessage] = useState({});
   const [isInvalidSubmit, setIsInvalidSubmit] = useState(false);
   const [threadToView, setThreadToView] = useState(false);
   const [inputShown, setInputShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { currentUser } = useContext(CurrentUserContext);
 
   function exitThread() {
     setThreadToView(false);
@@ -31,7 +35,7 @@ const MessageBoard = ({
       return;
     }
     const messageToSubmit = {
-      eventName: eventNameForMessages.replaceAll(' ', '_'),
+      eventName: eventNameForMessages.replaceAll(" ", "_"),
       username: currentUser,
       timestamp: Date.now().toString(),
       message: newMessageInput,
@@ -41,9 +45,17 @@ const MessageBoard = ({
     }
     const { eventName, username, timestamp, message, replyTo } =
       messageToSubmit;
-    setNewMessage(newMessageInput);
+    const updatedMessages = [
+      {
+        message: { S: message },
+        timestamp: { S: timestamp },
+        username: { S: username },
+      },
+      ...messages,
+    ];
+    setMessages(updatedMessages);
     setInputShown(false);
-    setNewMessageInput('');
+    setNewMessageInput("");
     postToMessageBoard(eventName, username, timestamp, message, replyTo);
   }
 
@@ -51,17 +63,25 @@ const MessageBoard = ({
     setInputShown(!inputShown);
   }
 
+  const clearTextInput = () => {
+    setNewMessageInput("");
+  };
+
   useEffect(() => {
     setIsLoading(true);
     getMessageBoardMessages(eventNameForMessages)
       .then((result) => {
-        if (result !== 'none') setMessages(result.Items);
+        if (result !== "none")
+          setMessages(
+            result.Items.sort((a, b) => b.timestamp.S - a.timestamp.S)
+          );
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [eventNameForMessages]);
 
-  if (isLoading || !messages) return <ActivityIndicator />;
+  if (isLoading || !messages)
+    return <ActivityIndicator size="large" style={styles.ActivityIndicator} />;
 
   const messageCards = [];
   const fetchedReplies = [];
@@ -104,7 +124,7 @@ const MessageBoard = ({
         .map((reply) => {
           return (
             <MessageCard
-            
+              style={styles.allMessagesThread}
               key={reply.timestamp.S}
               username={reply.username.S}
               timestamp={reply.timestamp.S}
@@ -118,7 +138,7 @@ const MessageBoard = ({
 
   if (threadToView)
     thread.unshift(
-      <Button key={Math.random()} onPress={exitThread}>
+      <Button color="#ec8e2f" key={Math.random()} onPress={exitThread}>
         Exit thread
       </Button>,
       messageCards[threadToView.index]
@@ -131,31 +151,50 @@ const MessageBoard = ({
           {isInvalidSubmit ? (
             <Text>Please enter a message before submitting</Text>
           ) : null}
-          <View style={{paddingTop: 10, paddingLeft: 20, paddingBottom: 15} }>
+          <View
+            style={{ paddingTop: 10, paddingBottom: 15, alignItems: "center" }}
+          >
             <TextInput
-            style={styles.MessageBoard_TextInput}
-            placeholder="Write your message here ..."
-            value={newMessageInput}
-            onChangeText={(text) => setNewMessageInput(text)}
+              style={styles.MessageBoard_TextInput}
+              placeholder="Write your message here ..."
+              value={newMessageInput}
+              onChangeText={(text) => setNewMessageInput(text)}
             />
+            {newMessageInput.length > 0 && (
+              <TouchableOpacity
+                style={styles.MessageBoard_CloseButton}
+                onPress={clearTextInput}
+              >
+                <Icon name="close" size={20} />
+              </TouchableOpacity>
+            )}
           </View>
-        
-        <View style={{marginTop: 5, marginLeft: 20, marginBottom: 15} }>
-          {/* {marginTop: 5, marginLeft: 20, marginBottom: 15} */}
-        <View style={styles.MessageBoard_Buttons}>
-          <Button onPress={submitNewMessage} color="#ec8e2f" >Submit</Button>
+
+          <View
+            style={{ marginTop: 5, marginBottom: 15, alignItems: "center" }}
+          >
+            <View style={styles.MessageBoard_Buttons}>
+              <Button onPress={submitNewMessage} color="#ec8e2f">
+                Submit
+              </Button>
+            </View>
           </View>
-        </View>
-          
         </View>
       ) : null}
       <ScrollView>
-      <View style={{paddingTop: 5, paddingLeft: 20, paddingBottom: 15} }>
-      <View style={[styles.MessageBoard_Buttons, {paddingTop: 1}]}>
-        <Button color="#ec8e2f" onPress={toggleInput} >
-          {inputShown ? 'Hide' : threadToView ? 'New reply' : 'New message'}
-        </Button>
-        </View>
+        <View
+          style={{ paddingTop: 5, paddingBottom: 15, alignItems: "center" }}
+        >
+          <View
+            style={[
+              styles.MessageBoard_Buttons,
+              { paddingTop: 1, alignItems: "center" },
+            ]}
+          >
+            <Button color="#ec8e2f" onPress={toggleInput}>
+              {inputShown ? "Hide" : threadToView ? "New reply" : "New message"}
+            </Button>
+          </View>
         </View>
         {threadToView ? thread : messageCards}
       </ScrollView>

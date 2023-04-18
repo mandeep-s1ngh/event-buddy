@@ -1,29 +1,35 @@
-import { Button } from '@rneui/base';
-import { Text, TextInput, View, TouchableHighlight } from 'react-native';
-import styles from '../styles';
-import { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import * as Location from 'expo-location';
-import { getGeolocationFromAddress } from '../api/getGeolocationFromAddress';
-import { getAddressFromGeolocation } from '../api/getAddressFromGeolocation';
+import { Icon } from "@rneui/themed";
+import {
+  Text,
+  TextInput,
+  View,
+  TouchableHighlight,
+  TouchableOpacity,
+} from "react-native";
+import styles from "../styles";
+import { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import * as Location from "expo-location";
+import { getGeolocationFromAddress } from "../api/getGeolocationFromAddress";
+import { getAddressFromGeolocation } from "../api/getAddressFromGeolocation";
 
 const LocationRequest = (props) => {
   const { setUserLocation } = props;
   const [errorMsg, setErrorMsg] = useState(null);
-  const [locationInput, setLocationInput] = useState('');
+  const [locationInput, setLocationInput] = useState("");
 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
         return;
       }
 
       let location = await Location.getCurrentPositionAsync({});
 
-      const latitude = location['coords']['latitude'];
-      const longitude = location['coords']['longitude'];
+      const latitude = location["coords"]["latitude"];
+      const longitude = location["coords"]["longitude"];
 
       const address = await getAddressFromGeolocation(latitude, longitude);
       setUserLocation({
@@ -33,7 +39,6 @@ const LocationRequest = (props) => {
     })();
   }, []);
 
-  // ----------------------------------------------------------------------------
   const navigation = useNavigation();
 
   async function showEventsByLocationInput() {
@@ -44,12 +49,16 @@ const LocationRequest = (props) => {
       geolocation: geolocationFromLocationInput,
       address: locationInput,
     });
-    navigation.navigate('Events');
+    navigation.navigate("Events", { screen: "EventsList" });
   }
 
   function showEventsByLocationPermission() {
-    navigation.navigate('Events');
+    navigation.navigate("Events", { screen: "EventsList" });
   }
+
+  const clearTextInput = () => {
+    setLocationInput("");
+  };
 
   return (
     <View style={styles.Location_Request}>
@@ -69,14 +78,25 @@ const LocationRequest = (props) => {
       <Text style={styles.Location_TextInfo}>
         Alternatively, enter your location below:
       </Text>
-      <TextInput
-        value={locationInput}
-        onChangeText={(locationInput) => {
-          setLocationInput(locationInput);
-        }}
-        style={styles.Location_TextInput}
-        placeholder="Venue, city, zip code"
-      />
+
+      <View>
+        <TextInput
+          value={locationInput}
+          onChangeText={(locationInput) => {
+            setLocationInput(locationInput);
+          }}
+          style={styles.Location_TextInput}
+          placeholder="Venue, city, zip code"
+        />
+        {locationInput.length > 0 && (
+          <TouchableOpacity
+            style={styles.Location_CloseButton}
+            onPress={clearTextInput}
+          >
+            <Icon name="close" size={20} />
+          </TouchableOpacity>
+        )}
+      </View>
 
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
         <TouchableHighlight

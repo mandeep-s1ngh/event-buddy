@@ -3,9 +3,10 @@ import BuddyList from '../BuddyList';
 import getCommonScreens from './getCommonScreens';
 
 function BuddiesStack({
-  eventNameForBuddies,
   setUsernameForProfile,
   usernameForProfile,
+  buddyAddedToggle,
+  newlyAddedBuddy,
 }) {
   const Stack = createNativeStackNavigator();
   const commonScreens = getCommonScreens(Stack, null, usernameForProfile);
@@ -20,9 +21,10 @@ function BuddiesStack({
         {(props) => (
           <BuddyList
             {...props}
-            eventNameForBuddies={eventNameForBuddies}
             setUsernameForProfile={setUsernameForProfile}
             usernameForProfile={usernameForProfile}
+            buddyAddedToggle={buddyAddedToggle}
+            newlyAddedBuddy={newlyAddedBuddy}
           />
         )}
       </Stack.Screen>
