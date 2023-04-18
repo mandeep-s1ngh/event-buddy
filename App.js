@@ -27,6 +27,8 @@ export default function App() {
 
   const Tab = createBottomTabNavigator();
 
+  const { signOut } = useAuthenticator();
+
   return (
     <SafeAreaProvider>
       <CurrentUserProvider>
