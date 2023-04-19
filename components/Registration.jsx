@@ -1,41 +1,35 @@
-import { useState, useEffect, useCallback } from 'react';
-import {
-  View,
-  Button,
-  Text,
-  Alert,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-
+import { useContext, useState } from 'react';
+import { View, Text, Alert, TextInput, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { emailRegex } from '../cognito/regex';
 import { cognitoPool } from '../cognito/cognito-pool';
+import styles from '../styles';
+import { MenuShownContext } from '../context/MenuShownContext';
 
 function Registration() {
   const navigation = useNavigation();
   const [email, setEmail] = useState();
+  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const { menuShown, setMenuShown } = useContext(MenuShownContext);
 
-  function onPressLogin() {
-    navigation.goBack();
+  function goToLogIn() {
+    navigation.navigate('LogIn');
   }
 
-  const onPressRegister = () => {
-    console.log(email, '<<< email before test');
-    if (!email || !password || !confirmPassword) {
+  function registerAccount() {
+    if (!email || !username || !password || !confirmPassword) {
       return Alert.alert('Error', 'Please fill out all fields');
     }
-
     if (!emailRegex.test(email)) {
-      console.log('test failed');
       return Alert.alert('Error', 'Invalid email address');
     }
-
     if (password?.length < 6) {
       return Alert.alert('Error', 'Invalid password');
+    }
+    if (password !== confirmPassword) {
+      return Alert.alert('Error', 'Passwords do not match');
     }
 
     cognitoPool.signUp(
@@ -43,8 +37,8 @@ function Registration() {
       password,
       [
         {
-          Name: 'preferred_username' /* required */,
-          Value: 'Carces',
+          Name: 'preferred_username',
+          Value: username,
         },
       ],
       null,
@@ -65,102 +59,64 @@ function Registration() {
               return Alert.alert('Error', 'Something went wrong');
           }
         }
-
-        // Alert.alert("Success", Auth.ConfirmEmail, [
-        //   { text: 'OK', onPress: () => navigation.navigate('login') },
-        // ]);
+        navigation.navigate('Confirm', { newAccountEmail: email });
       }
     );
-  };
+  }
 
-  // -------------------- FIELDS -------------------- //
-  const fields = {
-    email: {
-      autoCapitalize: 'none',
-      onChange: (e) => setEmail(e.nativeEvent.text),
-      placeholder: 'enter email...',
-      placeholderTextColor: 'grey',
-      value: email,
-    },
-    password: {
-      autoCapitalize: 'none',
-      onChange: (e) => setPassword(e.nativeEvent.text),
-      placeholder: 'enter password...',
-      secureTextEntry: true,
-      placeholderTextColor: 'grey',
-      value: password,
-    },
-    confirmPassword: {
-      autoCapitalize: 'none',
-      onChange: (e) => setConfirmPassword(e.nativeEvent.text),
-      placeholder: 'confirm password...',
-      placeholderTextColor: 'grey',
-      secureTextEntry: true,
-      value: confirmPassword,
-    },
-  };
-
-  // // -------------------- STYLES -------------------- //
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingHorizontal: 40,
-      backgroundColor: 'white',
-    },
-    logoContainer: {
-      position: 'absolute',
-      width: '100%',
-      alignItems: 'center',
-      top: 20,
-    },
-    logo: {
-      height: 60,
-      aspectRatio: 1,
-    },
-    loginContainer: {
-      position: 'absolute',
-      top: 20,
-      right: 0,
-    },
-    title: {
-      width: '100%',
-    },
-  });
-
-  // -------------------- RENDER -------------------- //
   return (
-    <View style={styles.container}>
-      <View style={{ height: 32 }} />
+    <View style={styles.Auth_View}>
+      <Text style={styles.Auth_Header}>{'Create account'}</Text>
 
-      {/* Title */}
-      <Text style={styles.title}>{'Create account'}</Text>
-      <View style={{ height: 32 }} />
+      <TextInput
+        style={styles.Auth_Input}
+        value={email}
+        placeholder="Enter email..."
+        onFocus={() => setMenuShown(false)}
+        onChangeText={(emailInput) => {
+          setEmail(emailInput);
+        }}
+      ></TextInput>
+      <TextInput
+        style={styles.Auth_Input}
+        value={username}
+        placeholder="Enter username..."
+        onFocus={() => setMenuShown(false)}
+        onChangeText={(usernameInput) => {
+          setUsername(usernameInput);
+        }}
+      ></TextInput>
+      <TextInput
+        secureTextEntry={true}
+        style={styles.Auth_Input}
+        value={password}
+        placeholder="Enter password..."
+        onFocus={() => setMenuShown(false)}
+        onChangeText={(passwordInput) => {
+          setPassword(passwordInput);
+        }}
+      ></TextInput>
+      <TextInput
+        secureTextEntry={true}
+        style={styles.Auth_Input}
+        value={confirmPassword}
+        placeholder="Confirm password..."
+        onFocus={() => setMenuShown(false)}
+        onChangeText={(confirmPasswordInput) => {
+          setConfirmPassword(confirmPasswordInput);
+        }}
+      ></TextInput>
 
-      {/* Email */}
-      <TextInput style={styles.input} {...fields.email}></TextInput>
-      <View style={{ height: 12 }} />
-
-      {/* Password */}
-      <TextInput style={styles.input} {...fields.password}></TextInput>
-      <View style={{ height: 12 }} />
-
-      {/* Confirm password */}
-      <TextInput style={styles.input} {...fields.confirmPassword}></TextInput>
-      <View style={{ height: 32 }} />
-
-      {/* Register button */}
-      <Button onPress={onPressRegister} title="Register">
-        Register
-      </Button>
-
-      {/* Create account button */}
-      <View style={styles.loginContainer}>
-        <Button onPress={onPressLogin} title="Log in">
-          Log in
-        </Button>
-      </View>
+      <TouchableHighlight style={styles.Auth_Button} onPress={registerAccount}>
+        <Text style={styles.Auth_ButtonText}>Create Account</Text>
+      </TouchableHighlight>
+      <Text style={styles.Auth_Text}>Already have an account?</Text>
+      <TouchableHighlight
+        style={[styles.Auth_Button, styles.Auth_BottomButton]}
+        onPress={goToLogIn}
+      >
+        <Text style={styles.Auth_ButtonText}>Log In</Text>
+      </TouchableHighlight>
     </View>
   );
 }

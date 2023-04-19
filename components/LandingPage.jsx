@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from 'react';
 import {
   TextInput,
   View,
@@ -7,23 +7,25 @@ import {
   Image,
   Alert,
   TouchableOpacity,
-} from "react-native";
-import { Icon } from "@rneui/themed";
-import { useNavigation } from "@react-navigation/native";
-import styles from "../styles.js";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+} from 'react-native';
+import { Icon } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
+import styles from '../styles.js';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { MenuShownContext } from '../context/MenuShownContext.js';
 
 const LandingPage = (props) => {
   const { eventName, setEventName } = props;
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState('');
+  const { menuShown, setMenuShown } = useContext(MenuShownContext);
 
   const handleValidation = () => {
     const pattern = /^[a-zA-Z0-9\s]*$/;
     if (!pattern.test(userInput)) {
       Alert.alert(
-        "Event name contains invalid characters",
-        "Please enter a different event name.",
-        [{ text: "OK", onPress: () => {} }],
+        'Event name contains invalid characters',
+        'Please enter a different event name.',
+        [{ text: 'OK', onPress: () => {} }],
         { cancelable: true }
       );
     }
@@ -33,16 +35,16 @@ const LandingPage = (props) => {
 
   const searchEventByName = () => {
     setEventName(userInput);
-    setUserInput("");
-    navigation.navigate("Events", { screen: "EventsList" });
+    setUserInput('');
+    navigation.navigate('Events', { screen: 'EventsList' });
   };
 
   const clearTextInput = () => {
-    setUserInput("");
+    setUserInput('');
   };
 
   function navigateToLocation() {
-    navigation.navigate("Location");
+    navigation.navigate('Location');
   }
 
   return (
@@ -53,7 +55,7 @@ const LandingPage = (props) => {
     >
       <View style={{ paddingBottom: 30, marginTop: 20 }}>
         <Image
-          source={require("../images/Landing_Page_Concert.jpeg")}
+          source={require('../images/Landing_Page_Concert.jpeg')}
           style={styles.LandingPage_Image}
         />
       </View>
@@ -73,6 +75,7 @@ const LandingPage = (props) => {
           style={styles.LandingPage_TextInput}
           placeholder="Coachella, Leeds, Evolution ..."
           onBlur={handleValidation}
+          onFocus={() => setMenuShown(false)}
         />
         {userInput.length > 0 && (
           <TouchableOpacity

@@ -42,6 +42,7 @@ function EventsStack({
             {...props}
             eventNameForMessages={eventNameForMessages}
             setUsernameForProfile={setUsernameForProfile}
+            setNewlyAddedBuddy={setNewlyAddedBuddy}
           />
         )}
       </Stack.Screen>
