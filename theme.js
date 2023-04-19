@@ -1,6 +1,8 @@
 import { createTheme } from "@rneui/themed";
 
 export default theme = createTheme({
+  mode: "light",
+
   components: {
     Button: {
       titleStyle: {
@@ -9,7 +11,12 @@ export default theme = createTheme({
       },
 
       buttonStyle: {
-        borderRadius: 20,
+        borderRadius: 3,
+      },
+    },
+    Card: {
+      Image: {
+        padding: 0,
       },
     },
   },
