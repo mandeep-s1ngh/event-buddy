@@ -1,7 +1,9 @@
-import { Card, Button } from "@rneui/themed";
-import { View, Text, TouchableHighlight } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import styles from "../styles.js";
+import { Card, Button } from '@rneui/themed';
+import { View, Text, TouchableHighlight } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import styles from '../styles.js';
+import { useContext, useState } from 'react';
+import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 const MessageCard = ({
   index,
@@ -13,19 +15,33 @@ const MessageCard = ({
   setUsernameForProfile,
   setIsInvalidSubmit,
   setInputShown,
+  setNewlyAddedBuddy,
   isReply,
 }) => {
+  const [buddyAdded, setBuddyAdded] = useState(false);
+  const { currentUser } = useContext(CurrentUserContext);
   const navigation = useNavigation();
 
   function goToProfile() {
     setUsernameForProfile(username);
-    navigation.navigate("Profile");
+    navigation.navigate('Profile');
   }
-
   function goToMessageThread() {
     setThreadToView({ timestamp, index });
     setIsInvalidSubmit(false);
     setInputShown(false);
+  }
+  function connectWithBuddy() {
+    if (!currentUser) return navigation.navigate('LogIn');
+    setBuddyAdded(true);
+    const buddyToAdd = { Item: { username: { S: username } } };
+    // if (name) buddyToAdd.Item.name = { S: name };
+    // if (age) buddyToAdd.Item.age = { N: age };
+    // if (gender) buddyToAdd.Item.gender = { S: gender };
+    // if (interests) buddyToAdd.Item.interests = { S: interests };
+    // if (buddies) buddyToAdd.Item.buddies = { S: buddies };
+    setNewlyAddedBuddy(buddyToAdd);
+    addBuddy(currentUser.username, username);
   }
 
   return (
@@ -38,12 +54,17 @@ const MessageCard = ({
     >
       <Button
         color="#ec8e2f"
-        title={"Connect"}
-        containerStyle={styles.BuddyCard_Button}
+        title={buddyAdded ? 'Connected' : 'Connect'}
+        onPress={connectWithBuddy}
+        containerStyle={
+          buddyAdded
+            ? [styles.BuddyCard_Button, styles.BuddyCard_ButtonAdded]
+            : styles.BuddyCard_Button
+        }
       />
       <Button
         color="#ec8e2f"
-        title={"View Profile"}
+        title={'View Profile'}
         onPress={goToProfile}
         containerStyle={[
           styles.BuddyCard_Button,
@@ -65,7 +86,7 @@ const MessageCard = ({
             onPress={goToMessageThread}
           >
             <Text style={styles.Message_Card_Buttons_Text}>
-              {replyCount} {replyCount === 1 ? "reply" : "replies"}
+              {replyCount} {replyCount === 1 ? 'reply' : 'replies'}
             </Text>
           </TouchableHighlight>
         </View>
@@ -75,7 +96,7 @@ const MessageCard = ({
           onPress={goToMessageThread}
         >
           <Text style={styles.Message_Card_Buttons_Text}>
-            {replyCount === 0 ? "Be first to reply!" : null}
+            {replyCount === 0 ? 'Be first to reply!' : null}
           </Text>
         </TouchableHighlight>
       ) : null}

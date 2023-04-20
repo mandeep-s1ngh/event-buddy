@@ -1,35 +1,37 @@
-import { Icon } from "@rneui/themed";
+import { Icon } from '@rneui/themed';
 import {
   Text,
   TextInput,
   View,
   TouchableHighlight,
   TouchableOpacity,
-} from "react-native";
-import styles from "../styles";
-import { useState, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
-import * as Location from "expo-location";
-import { getGeolocationFromAddress } from "../api/getGeolocationFromAddress";
-import { getAddressFromGeolocation } from "../api/getAddressFromGeolocation";
+} from 'react-native';
+import styles from '../styles';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import * as Location from 'expo-location';
+import { getGeolocationFromAddress } from '../api/getGeolocationFromAddress';
+import { getAddressFromGeolocation } from '../api/getAddressFromGeolocation';
+import { MenuShownContext } from '../context/MenuShownContext';
 
 const LocationRequest = (props) => {
   const { setUserLocation } = props;
   const [errorMsg, setErrorMsg] = useState(null);
-  const [locationInput, setLocationInput] = useState("");
+  const [locationInput, setLocationInput] = useState('');
+  const { menuShown, setMenuShown } = useContext(MenuShownContext);
 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
         return;
       }
 
       let location = await Location.getCurrentPositionAsync({});
 
-      const latitude = location["coords"]["latitude"];
-      const longitude = location["coords"]["longitude"];
+      const latitude = location['coords']['latitude'];
+      const longitude = location['coords']['longitude'];
 
       const address = await getAddressFromGeolocation(latitude, longitude);
       setUserLocation({
@@ -49,15 +51,15 @@ const LocationRequest = (props) => {
       geolocation: geolocationFromLocationInput,
       address: locationInput,
     });
-    navigation.navigate("Events", { screen: "EventsList" });
+    navigation.navigate('Events', { screen: 'EventsList' });
   }
 
   function showEventsByLocationPermission() {
-    navigation.navigate("Events", { screen: "EventsList" });
+    navigation.navigate('Events', { screen: 'EventsList' });
   }
 
   const clearTextInput = () => {
-    setLocationInput("");
+    setLocationInput('');
   };
 
   return (
@@ -87,6 +89,7 @@ const LocationRequest = (props) => {
           }}
           style={styles.Location_TextInput}
           placeholder="Venue, city, zip code"
+          onFocus={() => setMenuShown(false)}
         />
         {locationInput.length > 0 && (
           <TouchableOpacity

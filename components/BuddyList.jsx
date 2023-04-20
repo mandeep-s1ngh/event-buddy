@@ -11,12 +11,23 @@ const BuddyList = ({
   setUsernameForProfile,
   newlyAddedBuddy,
   setNewlyAddedBuddy,
+  navigation,
 }) => {
   const [buddies, setBuddies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
+    const forceLogIn = navigation.addListener('focus', () => {
+      if (!currentUser) navigation.navigate('LogIn');
+    });
+    return forceLogIn;
+  }, [navigation]);
+
+  useEffect(() => {
+    console.log('hi');
+    if (!currentUser && !eventNameForBuddies)
+      return navigation.navigate('LogIn');
     if (eventNameForBuddies) {
       setIsLoading(true);
       getAttendees(eventNameForBuddies)
@@ -33,7 +44,7 @@ const BuddyList = ({
         });
     } else {
       setIsLoading(true);
-      getUserProfile(currentUser)
+      getUserProfile(currentUser.username)
         .then((result) => {
           if (!result) return Promise.resolve(false);
           const usernames = result.Item.buddies
