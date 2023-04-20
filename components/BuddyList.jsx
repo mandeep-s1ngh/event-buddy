@@ -25,7 +25,6 @@ const BuddyList = ({
   }, [navigation]);
 
   useEffect(() => {
-    console.log('hi');
     if (!currentUser && !eventNameForBuddies)
       return navigation.navigate('LogIn');
     if (eventNameForBuddies) {
