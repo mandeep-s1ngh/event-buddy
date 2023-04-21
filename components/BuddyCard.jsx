@@ -16,8 +16,8 @@ const BuddyCard = ({
   isAttendeeList,
   buddies,
   setNewlyAddedBuddy,
+  navigation,
 }) => {
-  const navigation = useNavigation();
   const [buddyAdded, setBuddyAdded] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -37,6 +37,8 @@ const BuddyCard = ({
     setNewlyAddedBuddy(buddyToAdd);
     addBuddy(currentUser.username, username);
   }
+
+  function startChat() {}
 
   return (
     <Card

@@ -21,7 +21,7 @@ import { useNavigation } from '@react-navigation/native';
 const Profile = ({ usernameForProfile }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const { menuShown, setMenuShown } = useContext(MenuShownContext);
-  usernameToDisplay = usernameForProfile || currentUser;
+  usernameToDisplay = usernameForProfile || currentUser.username;
   const navigation = useNavigation();
   const [newUserTag, setNewUserTag] = useState('');
   const [currentUserName, setCurrentUserName] = useState('');
@@ -73,7 +73,7 @@ const Profile = ({ usernameForProfile }) => {
       if (interests) setCurrentUserInterests(interestsValue);
       setIsLoading(false);
     });
-  }, [usernameToDisplay]);
+  }, [currentUser, usernameToDisplay]);
 
   if (isLoading)
     return <ActivityIndicator size="large" style={styles.ActivityIndicator} />;

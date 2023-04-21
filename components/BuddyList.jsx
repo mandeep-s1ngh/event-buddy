@@ -17,12 +17,12 @@ const BuddyList = ({
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    const forceLogIn = navigation.addListener('focus', () => {
-      if (!currentUser) navigation.navigate('LogIn');
-    });
-    return forceLogIn;
-  }, [navigation]);
+  // useEffect(() => {
+  //   const forceLogIn = navigation.addListener('focus', () => {
+  //     if (!currentUser) navigation.navigate('LogIn');
+  //   });
+  //   return forceLogIn;
+  // }, [navigation]);
 
   useEffect(() => {
     if (!currentUser && !eventNameForBuddies)
@@ -60,7 +60,7 @@ const BuddyList = ({
           setIsLoading(false);
         });
     }
-  }, [eventNameForBuddies, newlyAddedBuddy]);
+  }, [currentUser, eventNameForBuddies, newlyAddedBuddy]);
 
   if (isLoading)
     return <ActivityIndicator size="large" style={styles.ActivityIndicator} />;

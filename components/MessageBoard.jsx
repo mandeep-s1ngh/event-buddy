@@ -157,7 +157,7 @@ const MessageBoard = ({
     );
 
   return (
-    <View style={styles.fixedHeaderContainer}>
+    <View>
       {inputShown ? (
         <View>
           {isInvalidSubmit ? (

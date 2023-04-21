@@ -37,7 +37,7 @@ function LogIn() {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
         const resultUserData = result.idToken.payload;
-        console.log('Authentication successful:', result);
+        // console.log('Authentication successful:', result);
         setCurrentUser({
           email: resultUserData.email,
           username: resultUserData.preferred_username,

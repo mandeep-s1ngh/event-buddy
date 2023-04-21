@@ -8,6 +8,7 @@ import NavBar from './NavBar';
 import Menu from './Menu';
 import HomeStack from './navigation-stacks/HomeStack.jsx';
 import BuddiesStack from './navigation-stacks/BuddiesStack.jsx';
+import MessagesStack from './navigation-stacks/MessagesStack.jsx';
 import EventsStack from './navigation-stacks/EventsStack.jsx';
 
 function Main() {
@@ -85,6 +86,23 @@ function Main() {
                 setUsernameForProfile={setUsernameForProfile}
                 buddyAddedToggle={buddyAddedToggle}
                 newlyAddedBuddy={newlyAddedBuddy}
+              />
+            )}
+          </Tab.Screen>
+
+          <Tab.Screen
+            name="Messages"
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Icon name="chat" color={color} size={size} />
+              ),
+            }}
+          >
+            {(props) => (
+              <MessagesStack
+                {...props}
+                usernameForProfile={usernameForProfile}
+                setUsernameForProfile={setUsernameForProfile}
               />
             )}
           </Tab.Screen>
