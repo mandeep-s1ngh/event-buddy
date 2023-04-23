@@ -3,7 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useEffect, useState } from 'react';
 import Geohash from 'latlon-geohash';
-
+import styles from '../utils/styles';
 import { getTicketMasterEvents } from '../api/eventsListapi';
 import EventCard from './EventCard';
 import StickyHeader from './StickyHeader';
@@ -14,6 +14,7 @@ export default function EventsList({
   userLocation,
   setEventNameForBuddies,
   setEventNameForMessages,
+  setMenuShown,
 }) {
   const [eventsList, setEventsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -141,16 +142,16 @@ export default function EventsList({
 
   return (
     <SafeAreaProvider>
-      <View style={styles.mainView}>
+      <View style={styles.EventsList}>
         <StickyHeader
-          style={styles.stickyHeader}
+          style={styles.StickyHeader}
           eventName={eventName}
           found={found}
           setEventName={setEventName}
         />
-        <View style={styles.listView}>
-          <ScrollView>
-            <View>
+        <View style={styles.EventsList__listView}>
+          <ScrollView onScroll={() => setMenuShown(false)}>
+            <View onStartShouldSetResponder={() => true}>
               {filtered_events_list.map((event) => {
                 return (
                   <View key={event.key}>
@@ -175,23 +176,3 @@ export default function EventsList({
     </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  mainView: {
-    height: '100%',
-    flexDirection: 'column',
-    flex: 1,
-    borderRadius: 80,
-  },
-  stickyHeader: {
-    minheight: 50,
-    flex: 2,
-  },
-  listView: {
-    height: '90%',
-    flex: 3,
-    position: 'relative',
-    top: 48,
-    marginBottom: 48,
-  },
-});

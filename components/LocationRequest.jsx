@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
-import styles from '../styles';
+import styles from '../utils/styles';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
@@ -63,21 +63,23 @@ const LocationRequest = (props) => {
   };
 
   return (
-    <View style={styles.Location_Request}>
-      <Text style={styles.Location_TextInfo}>
+    <View style={styles.LocationRequest}>
+      <Text style={styles.LocationRequest__Text}>
         We use your location to find events near you.
       </Text>
 
       <View style={{ paddingTop: 1, paddingBottom: 60 }}>
         <TouchableHighlight
-          style={styles.Location_Buttons}
+          style={styles.LocationRequest__Button}
           onPress={showEventsByLocationPermission}
         >
-          <Text style={styles.Location_Buttons_Text}>Use my location 📍</Text>
+          <Text style={styles.LocationRequest__ButtonText}>
+            Use my location 📍
+          </Text>
         </TouchableHighlight>
       </View>
 
-      <Text style={styles.Location_TextInfo}>
+      <Text style={styles.LocationRequest__Text}>
         Alternatively, enter your location below:
       </Text>
 
@@ -87,13 +89,13 @@ const LocationRequest = (props) => {
           onChangeText={(locationInput) => {
             setLocationInput(locationInput);
           }}
-          style={styles.Location_TextInput}
+          style={styles.LocationRequest__TextInput}
           placeholder="Venue, city, zip code"
           onFocus={() => setMenuShown(false)}
         />
         {locationInput.length > 0 && (
           <TouchableOpacity
-            style={styles.Location_CloseButton}
+            style={styles.LocationRequest__closeInputButton}
             onPress={clearTextInput}
           >
             <Icon name="close" size={20} />
@@ -103,10 +105,10 @@ const LocationRequest = (props) => {
 
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
         <TouchableHighlight
-          style={styles.Location_Buttons}
+          style={styles.LocationRequest__Button}
           onPress={showEventsByLocationInput}
         >
-          <Text style={styles.Location_Buttons_Text}>Submit</Text>
+          <Text style={styles.LocationRequest__ButtonText}>Submit</Text>
         </TouchableHighlight>
       </View>
     </View>

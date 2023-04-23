@@ -3,7 +3,7 @@ import { View, Text, Alert, TextInput, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { cognitoPool } from '../cognito/cognito-pool';
 import { AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
-import styles from '../styles';
+import styles from '../utils/styles';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 import { MenuShownContext } from '../context/MenuShownContext';
 
@@ -53,11 +53,11 @@ function LogIn() {
   }
 
   return (
-    <View style={styles.Auth_View}>
-      <Text style={styles.Auth_Header}>{'Log in'}</Text>
+    <View style={styles.Auth__View}>
+      <Text style={styles.Auth__header}>{'Log in'}</Text>
 
       <TextInput
-        style={styles.Auth_Input}
+        style={styles.Auth__TextInput}
         value={email}
         placeholder="Enter email..."
         onFocus={() => setMenuShown(false)}
@@ -67,7 +67,7 @@ function LogIn() {
       ></TextInput>
       <TextInput
         secureTextEntry={true}
-        style={styles.Auth_Input}
+        style={styles.Auth__TextInput}
         value={password}
         placeholder="Enter password..."
         onFocus={() => setMenuShown(false)}
@@ -76,15 +76,15 @@ function LogIn() {
         }}
       ></TextInput>
 
-      <TouchableHighlight style={styles.Auth_Button} onPress={logInAsUser}>
-        <Text style={styles.Auth_ButtonText}>Log in</Text>
+      <TouchableHighlight style={styles.Auth__Button} onPress={logInAsUser}>
+        <Text style={styles.Auth__ButtonText}>Log in</Text>
       </TouchableHighlight>
-      <Text style={styles.Auth_Text}>Don't have an account?</Text>
+      <Text style={styles.Auth__Text}>Don't have an account?</Text>
       <TouchableHighlight
-        style={[styles.Auth_Button, styles.Auth_BottomButton]}
+        style={[styles.Auth__Button, styles.Auth__bottomButton]}
         onPress={goToRegistration}
       >
-        <Text style={styles.Auth_ButtonText}>Create Account</Text>
+        <Text style={styles.Auth__ButtonText}>Create Account</Text>
       </TouchableHighlight>
     </View>
   );

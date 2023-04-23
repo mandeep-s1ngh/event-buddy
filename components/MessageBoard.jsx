@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { getMessageBoardMessages } from '../api/getMessageBoardMessages.js';
 import { postToMessageBoard } from '../api/postToMessageBoard';
-import styles from '../styles.js';
+import styles from '../utils/styles.js';
 import MessageCard from './MessageCard.jsx';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 import { MenuShownContext } from '../context/MenuShownContext.js';
@@ -135,7 +135,7 @@ const MessageBoard = ({
         .map((reply) => {
           return (
             <MessageCard
-              style={styles.allMessagesThread}
+              style={styles.MessageCard}
               key={reply.timestamp.S}
               username={reply.username.S}
               timestamp={reply.timestamp.S}
@@ -167,7 +167,7 @@ const MessageBoard = ({
             style={{ paddingTop: 10, paddingBottom: 15, alignItems: 'center' }}
           >
             <TextInput
-              style={styles.MessageBoard_TextInput}
+              style={styles.MessageBoard__TextInput}
               placeholder="Write your message here ..."
               value={newMessageInput}
               onFocus={() => setMenuShown(false)}
@@ -175,7 +175,7 @@ const MessageBoard = ({
             />
             {newMessageInput.length > 0 && (
               <TouchableOpacity
-                style={styles.MessageBoard_CloseButton}
+                style={styles.MessageBoard__closeInputButton}
                 onPress={clearTextInput}
               >
                 <Icon name="close" size={20} />
@@ -186,7 +186,7 @@ const MessageBoard = ({
           <View
             style={{ marginTop: 5, marginBottom: 15, alignItems: 'center' }}
           >
-            <View style={styles.MessageBoard_Buttons}>
+            <View style={styles.MessageBoard__Button}>
               <Button onPress={submitNewMessage} color="#ec8e2f">
                 Submit
               </Button>
@@ -200,7 +200,7 @@ const MessageBoard = ({
         >
           <View
             style={[
-              styles.MessageBoard_Buttons,
+              styles.MessageBoard__Button,
               { paddingTop: 1, alignItems: 'center' },
             ]}
           >

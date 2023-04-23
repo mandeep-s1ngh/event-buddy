@@ -3,7 +3,7 @@ import { ActivityIndicator, ScrollView, Text } from 'react-native';
 import BuddyCard from './BuddyCard';
 import { getAttendees } from '../api/getAttendees';
 import { getUserProfile } from '../api/getUserProfile';
-import styles from '../styles';
+import styles from '../utils/styles';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
 const BuddyList = ({
@@ -94,7 +94,7 @@ const BuddyList = ({
 
   return (
     <ScrollView style={styles.BuddyList}>
-      <Text style={styles.BuddyList_Text}>
+      <Text style={styles.BuddyList__Text}>
         {eventNameForBuddies && !buddies.length
           ? `No one has joined ${eventNameForBuddies} yet.`
           : eventNameForBuddies

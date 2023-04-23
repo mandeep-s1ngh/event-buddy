@@ -39,6 +39,7 @@ function Main() {
             setLoggedIn={setLoggedIn}
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
+            setMenuShown={setMenuShown}
           />
         ) : null}
 
@@ -130,6 +131,7 @@ function Main() {
                 currentUser={currentUser}
                 setBuddyAddedToggle={setBuddyAddedToggle}
                 setNewlyAddedBuddy={setNewlyAddedBuddy}
+                setMenuShown={setMenuShown}
               />
             )}
           </Tab.Screen>

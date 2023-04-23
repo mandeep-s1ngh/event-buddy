@@ -3,8 +3,13 @@ import { StyleSheet } from 'react-native';
 const appBackground = '#f0eae6';
 const navBarBackground = '#8a766f';
 const navBarText = '#fff';
+const cardBackground = '#f7e0c9';
+const ButtonBackground = '#ec8e2f';
+const ButtonBackgroundDark = '#8a766f';
+const TextInputBackground = '#f7e0c9';
 
 const styles = StyleSheet.create({
+  ///////////// General styling //////////////
   container: {
     flex: 1,
   },
@@ -12,7 +17,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     top: '50%',
   },
-
   AppView: {
     backgroundColor: appBackground,
     flex: 1,
@@ -21,10 +25,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+  ///////////// NavBar //////////////
   NavBar: {
     height: 10,
   },
-  NavBar_View: {
+  NavBar__View: {
     backgroundColor: navBarBackground,
     flex: 0,
     flexDirection: 'row',
@@ -32,18 +37,19 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 15,
   },
-  NavBar_Text: {
+  NavBar__Text: {
     color: navBarText,
     fontSize: 20,
     fontWeight: 'bold',
     marginRight: '10%',
   },
-  NavBar_RightButtons: {
+  NavBar__rightButtons: {
     flexDirection: 'row',
     gap: 15,
   },
 
-  Menu_View: {
+  ///////////// Menu //////////////
+  Menu__View: {
     backgroundColor: navBarBackground,
     position: 'absolute',
     right: 0,
@@ -58,10 +64,10 @@ const styles = StyleSheet.create({
     gap: 10,
     paddingVertical: 15,
   },
-  Menu_ViewLoggedIn: {
+  'Menu__View--loggedIn': {
     // height: '27%',
   },
-  Menu_Text: {
+  Menu__Text: {
     color: navBarText,
     fontSize: 14,
     fontWeight: 'bold',
@@ -69,89 +75,91 @@ const styles = StyleSheet.create({
     marginVertical: 0,
   },
 
-  Location_Request: {
+  ///////////// LocationRequest //////////////
+  LocationRequest: {
     alignItems: 'center',
     paddingTop: 100,
   },
-  Location_TextInfo: {
+  LocationRequest__Text: {
     fontSize: 15,
     paddingBottom: 15,
     width: 250,
   },
-  Location_TextInput: {
+  LocationRequest__TextInput: {
     height: 30,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: TextInputBackground,
     fontSize: 12,
     paddingLeft: 10,
     width: 250,
   },
-  Location_Buttons: {
+  LocationRequest__Button: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 9,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: ButtonBackground,
     width: 250,
   },
-
-  Location_Buttons_Text: {
+  LocationRequest__ButtonText: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
     color: 'white',
     fontWeight: 'bold',
   },
-  Location_CloseButton: {
+  LocationRequest__closeInputButton: {
     position: 'absolute',
     marginTop: 5,
     marginLeft: 228,
   },
 
-  LandingPage_View: {
+  ///////////// LandingPage //////////////
+  LandingPage__View: {
     alignItems: 'center',
   },
-  LandingPage_Image: {
+  LandingPage__Image: {
     height: 200,
     width: 370,
     marginTop: 20,
   },
-  LandingPage_Buttons: {
+  LandingPage__Button: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 20,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: ButtonBackground,
     width: 250,
   },
-  Landing_Page_Buttons_Text: {
+  LandingPage__ButtonText: {
     fontSize: 15,
     lineHeight: 15,
     letterSpacing: 0.25,
     color: 'white',
     fontWeight: 'bold',
   },
-  LandingPage_TextInfo: {
+  LandingPage__Text: {
     fontSize: 15,
     paddingBottom: 15,
     width: 250,
     alignContent: 'center',
   },
-  LandingPage_TextInput: {
+  LandingPage__TextInput: {
     height: 35,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: TextInputBackground,
     fontSize: 13,
     paddingLeft: 10,
     width: 250,
   },
-  LandingPage_CloseButton: {
+  LandingPage__closeInputButton: {
     position: 'absolute',
     marginTop: 8,
     marginLeft: 228,
   },
 
-  Profile_View: {
+  ///////////// Profile //////////////
+  Profile__View: {
     textAlignVertical: 'center',
     alignContent: 'center',
     flex: 0.8,
@@ -159,137 +167,116 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 10,
   },
-  Profile_Image: {
+  Profile__Image: {
     height: 150,
     width: 300,
     borderRadius: 8,
   },
-  Profile_username: {
+  Profile__username: {
     fontWeight: 'bold',
     fontSize: 20,
   },
-  Profile_TextInput: {
+  Profile__TextInput: {
     height: 30,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: TextInputBackground,
     fontSize: 12,
     paddingLeft: 10,
     width: 300,
   },
-  Profile_Buttons: {
+  Profile__Button: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 9,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: ButtonBackground,
     width: 300,
   },
-  Profile_Buttons_Text: {
+  Profile__ButtonText: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
     color: 'white',
     fontWeight: 'bold',
   },
-  Profile_CurrentUserInterests: {
+  Profile__currentUserInterests: {
     paddingTop: 20,
   },
-  Profile_AddToUserInterests: {
+  Profile__addToUserInterests: {
     paddingBottom: 5,
   },
-  Profile_CloseButton: {
+  Profile__closeInputButton: {
     position: 'absolute',
     marginTop: 5,
     marginLeft: 277,
   },
-  Profile_Each_Interest_button: {
+  Profile__interestButton: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 5,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#8a766f',
+    backgroundColor: ButtonBackgroundDark,
     width: 100,
   },
-  Profile_Each_Interest_button_Text: {
+  Profile__interestButtonText: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: 0.25,
     color: 'white',
   },
-  Profile_Each_Interest_button_X: {
-    position: 'relative',
-    alignItems: 'center',
-    paddingVertical: 5,
-    width: 12,
-    position: 'absolute',
-    right: 10,
-  },
-  Profile_Each_Interest_button_Text_X: {
-    fontSize: 13,
-    lineHeight: 15,
-    letterSpacing: 0.25,
-    color: 'black',
-  },
 
-  BuddyList_Text: {
+  ///////////// BuddyList //////////////
+  BuddyList__Text: {
     textAlign: 'center',
     marginVertical: 20,
     fontSize: 16,
     fontWeight: 'bold',
   },
 
+  ///////////// BuddyCard //////////////
   BuddyCard: {
     minHeight: 175,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: cardBackground,
   },
-
-  BuddyCard_Button: {
+  BuddyCard__Button: {
     position: 'absolute',
     top: 10,
     right: 10,
     marginLeft: 30,
   },
-
-  BuddyCard_ButtonAdded: {
+  'BuddyCard__Button--buddyAdded': {
     backgroundColor: 'pink',
     color: 'pink',
   },
-
-  BuddyCard_ProfileButton: {
+  BuddyCard__profileButton: {
     top: 70,
     right: -2,
   },
-
-  BuddyCard_Username: {
+  BuddyCard__username: {
     fontWeight: 'bold',
   },
-
-  BuddyCard_TextView: {
+  BuddyCard__TextView: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-end',
     marginHorizontal: '12%',
   },
-
-  BuddyCard_CategoryText: {
+  BuddyCard__categoryText: {
     fontWeight: 'bold',
     marginLeft: '25%',
   },
-
-  BuddyCard_Text: {
+  BuddyCard__Text: {
     marginLeft: 5,
   },
-
-  BuddyCard_Interests: {
+  BuddyCard__interests: {
     position: 'absolute',
     top: '60%',
     left: '25%',
     maxWidth: 150,
   },
-
-  BuddyCard_Image: {
+  BuddyCard__Image: {
     position: 'absolute',
     top: '28%',
     left: 10,
@@ -299,125 +286,233 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
-  MessageCard_Reply: {
-    backgroundColor: '#dbd7d7',
-  },
-  MessageBoard_TextInput: {
+  ///////////// MessageBoard //////////////
+  MessageBoard__TextInput: {
     height: 30,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: TextInputBackground,
     fontSize: 12,
     paddingLeft: 10,
     width: 250,
   },
-  MessageBoard_Buttons: {
+  MessageBoard__Button: {
     justifyContent: 'center',
     paddingVertical: 4,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: ButtonBackground,
     width: 250,
   },
-  MessageBoard_CloseButton: {
+  MessageBoard__closeInputButton: {
     position: 'absolute',
     marginTop: 14,
     marginLeft: 250,
   },
-  Message_Card_Reply_Button: {
+
+  ///////////// MessageCard //////////////
+  MessageCard__reply: {
+    backgroundColor: '#dbd7d7',
+  },
+  MessageCard__replyButton: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 5,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#8a766f',
+    backgroundColor: ButtonBackgroundDark,
     width: 60,
     fontSize: 6,
   },
-  Message_Card_Buttons_Text: {
+  'MessageCard__replyButton--zeroReplies': {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    borderRadius: 3,
+    elevation: 3,
+    backgroundColor: ButtonBackgroundDark,
+    width: 110,
+    fontSize: 6,
+  },
+  MessageCard__ButtonText: {
     fontSize: 12,
     lineHeight: 15,
     letterSpacing: 0.25,
     color: 'white',
     fontWeight: 'bold',
   },
-  Message_Card_Reply_Button_Zero_Replies: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 5,
-    borderRadius: 3,
-    elevation: 3,
-    backgroundColor: '#8a766f',
-    width: 110,
-    fontSize: 6,
-  },
-  Message_Card_Date: {
+  MessageCard__date: {
     fontSize: 12,
     paddingTop: 5,
     paddingLeft: 4,
     paddingBottom: 8,
   },
-  Message_Card_Username: {
+  MessageCard__username: {
     paddingLeft: 4,
     fontWeight: 'bold',
   },
   MessageCard: {
     minHeight: 175,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: TextInputBackground,
   },
-  MessageCard_Text: {
+  MessageCard__Text: {
     fontSize: 15,
     marginLeft: 5,
     width: 180,
   },
-  Message_Card_Reply_Box: {
+  MessageCard__reply: {
     minHeight: 175,
     backgroundColor: '#dde1e4',
   },
-  Message_Card_Reply_From: {
+  MessageCard__replyFromText: {
     fontSize: 13,
     marginLeft: 0,
   },
 
-  allMessagesThread: {
-    alignItems: 'left',
-    textAlign: 'left',
-    alignContent: 'center',
-  },
-  Auth_View: {
+  ///////////// Auth (LogIn, Registration, Confirm) //////////////
+  Auth__View: {
     alignItems: 'center',
   },
-  Auth_Header: {
+  Auth__header: {
     fontSize: 28,
     fontWeight: 'bold',
     margin: 20,
   },
-  Auth_Button: {
+  Auth__Button: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 20,
     borderRadius: 3,
     elevation: 3,
-    backgroundColor: '#ec8e2f',
+    backgroundColor: ButtonBackground,
     width: 250,
     marginTop: 50,
     marginBottom: 25,
   },
-  Auth_BottomButton: {
+  Auth__bottomButton: {
     marginTop: 5,
   },
-  Auth_ButtonText: {
+  Auth__ButtonText: {
     fontSize: 15,
     lineHeight: 15,
     letterSpacing: 0.25,
     color: 'white',
     fontWeight: 'bold',
   },
-  Auth_Input: {
+  Auth__TextInput: {
     height: 35,
-    backgroundColor: '#f7e0c9',
+    backgroundColor: TextInputBackground,
     fontSize: 13,
     paddingLeft: 10,
     width: 250,
     margin: 5,
+  },
+
+  ///////////// EventsList //////////////
+  EventsList: {
+    height: '100%',
+    flexDirection: 'column',
+    flex: 1,
+    borderRadius: 80,
+  },
+  EventsList__listView: {
+    height: '90%',
+    flex: 3,
+    position: 'relative',
+    top: 48,
+    marginBottom: 48,
+  },
+
+  ///////////// StickyHeader //////////////
+  minheight: 50,
+  flex: 2,
+
+  ///////////// MessagesOverview //////////////
+  MessagesOverview: {},
+  MessagesOverview__header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 15,
+    textAlign: 'center',
+  },
+  MessagesOverview__conversationCard: {
+    position: 'relative',
+    margin: 10,
+    marginHorizontal: 20,
+    padding: 20,
+    paddingTop: 10,
+    borderRadius: 10,
+    backgroundColor: cardBackground,
+  },
+  MessagesOverview__TextInfoBar: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  'MessagesOverview__conversationCard--read': {},
+  MessagesOverview__conversationCardUsername: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  MessagesOverview__conversationCardTime: {
+    fontStyle: 'italic',
+    fontSize: 10,
+  },
+  MessagesOverview__conversationCardMessage: {
+    paddingRight: '10%',
+  },
+  MessagesOverview__unreadIndicator: {
+    backgroundColor: ButtonBackground,
+    fontSize: 12,
+    fontWeight: 'bold',
+    paddingTop: 1.5,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: '50%',
+    right: '7.5%',
+  },
+  MessagesOverview__conversationCardButton: {
+    position: 'absolute',
+    right: '2%',
+    top: '15%',
+    backgroundColor: ButtonBackgroundDark,
+    padding: 6,
+    paddingTop: 2,
+    paddingBottom: 3,
+    borderRadius: 10,
+  },
+  MessagesOverview__conversationCardButtonText: {
+    fontWeight: 'bold',
+    color: 'white',
+  },
+
+  ///////////// Chat //////////////
+  Chat__newMessageView: {
+    backgroundColor: cardBackground,
+    margin: 20,
+    borderRadius: 10,
+    position: 'relative',
+  },
+  Chat__TextInput: {
+    padding: 10,
+    paddingRight: '25%',
+  },
+  Chat__Button: {
+    backgroundColor: ButtonBackground,
+    borderRadius: 10,
+    paddingHorizontal: 8,
+    paddingBottom: 3,
+    marginRight: '3%',
+    position: 'absolute',
+    right: 0,
+    top: '26%',
+  },
+  Chat__ButtonText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 

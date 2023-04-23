@@ -2,7 +2,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon, ThemeProvider } from '@rneui/themed';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import theme from './theme.js';
+import theme from './utils/theme.js';
 
 import Main from './components/Main.jsx';
 import { CurrentUserProvider } from './context/CurrentUserContext.js';

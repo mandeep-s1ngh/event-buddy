@@ -1,7 +1,7 @@
 import { Card, Button } from '@rneui/themed';
 import { View, Text, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import styles from '../styles.js';
+import styles from '../utils/styles.js';
 import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
@@ -48,7 +48,7 @@ const MessageCard = ({
     <Card
       containerStyle={
         isReply
-          ? [styles.Message_Card_Reply_Box, styles.Message_Card_Reply_Box]
+          ? [styles.MessageCard, styles['MessageCard--isReply']]
           : styles.MessageCard
       }
     >
@@ -58,8 +58,11 @@ const MessageCard = ({
         onPress={connectWithBuddy}
         containerStyle={
           buddyAdded
-            ? [styles.BuddyCard_Button, styles.BuddyCard_ButtonAdded]
-            : styles.BuddyCard_Button
+            ? [
+                styles.BuddyCard__Button,
+                styles['BuddyCard__Button--buddyAdded'],
+              ]
+            : styles.BuddyCard__Button
         }
       />
       <Button
@@ -67,35 +70,35 @@ const MessageCard = ({
         title={'View Profile'}
         onPress={goToProfile}
         containerStyle={[
-          styles.BuddyCard_Button,
-          styles.BuddyCard_ProfileButton,
+          styles.BuddyCard__Button,
+          styles.BuddyCard__profileButton,
         ]}
       />
-      <Card.Title style={styles.Message_Card_Reply_From}>
+      <Card.Title style={styles.MessageCard__replyFromText}>
         {isReply ? `Reply from ${username}` : username}
       </Card.Title>
-      <Text style={styles.MessageCard_Text}>{message}</Text>
-      <Text style={styles.Message_Card_Date}>
+      <Text style={styles.MessageCard__Text}>{message}</Text>
+      <Text style={styles.MessageCard__date}>
         {new Date(+timestamp).toDateString()}
       </Text>
 
       {replyCount ? (
         <View style={{ paddingLeft: 4 }}>
           <TouchableHighlight
-            style={styles.Message_Card_Reply_Button}
+            style={styles.MessageCard__replyButton}
             onPress={goToMessageThread}
           >
-            <Text style={styles.Message_Card_Buttons_Text}>
+            <Text style={styles.MessageCard__ButtonText}>
               {replyCount} {replyCount === 1 ? 'reply' : 'replies'}
             </Text>
           </TouchableHighlight>
         </View>
       ) : !isReply ? (
         <TouchableHighlight
-          style={styles.Message_Card_Reply_Button_Zero_Replies}
+          style={styles['MessageCard__replyButton--zeroReplies']}
           onPress={goToMessageThread}
         >
-          <Text style={styles.Message_Card_Buttons_Text}>
+          <Text style={styles.MessageCard__ButtonText}>
             {replyCount === 0 ? 'Be first to reply!' : null}
           </Text>
         </TouchableHighlight>

@@ -3,7 +3,7 @@ import { View, Text, Alert, TextInput, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { emailRegex } from '../cognito/regex';
 import { cognitoPool } from '../cognito/cognito-pool';
-import styles from '../styles';
+import styles from '../utils/styles';
 import { MenuShownContext } from '../context/MenuShownContext';
 
 function Registration() {
@@ -65,11 +65,11 @@ function Registration() {
   }
 
   return (
-    <View style={styles.Auth_View}>
-      <Text style={styles.Auth_Header}>{'Create account'}</Text>
+    <View style={styles.Auth__View}>
+      <Text style={styles.Auth__header}>{'Create account'}</Text>
 
       <TextInput
-        style={styles.Auth_Input}
+        style={styles.Auth__TextInput}
         value={email}
         placeholder="Enter email..."
         onFocus={() => setMenuShown(false)}
@@ -78,7 +78,7 @@ function Registration() {
         }}
       ></TextInput>
       <TextInput
-        style={styles.Auth_Input}
+        style={styles.Auth__TextInput}
         value={username}
         placeholder="Enter username..."
         onFocus={() => setMenuShown(false)}
@@ -88,7 +88,7 @@ function Registration() {
       ></TextInput>
       <TextInput
         secureTextEntry={true}
-        style={styles.Auth_Input}
+        style={styles.Auth__TextInput}
         value={password}
         placeholder="Enter password..."
         onFocus={() => setMenuShown(false)}
@@ -98,7 +98,7 @@ function Registration() {
       ></TextInput>
       <TextInput
         secureTextEntry={true}
-        style={styles.Auth_Input}
+        style={styles.Auth__TextInput}
         value={confirmPassword}
         placeholder="Confirm password..."
         onFocus={() => setMenuShown(false)}
@@ -107,15 +107,15 @@ function Registration() {
         }}
       ></TextInput>
 
-      <TouchableHighlight style={styles.Auth_Button} onPress={registerAccount}>
-        <Text style={styles.Auth_ButtonText}>Create Account</Text>
+      <TouchableHighlight style={styles.Auth__Button} onPress={registerAccount}>
+        <Text style={styles.Auth__ButtonText}>Create Account</Text>
       </TouchableHighlight>
-      <Text style={styles.Auth_Text}>Already have an account?</Text>
+      <Text style={styles.Auth__Text}>Already have an account?</Text>
       <TouchableHighlight
-        style={[styles.Auth_Button, styles.Auth_BottomButton]}
+        style={[styles.Auth__Button, styles.Auth__bottomButton]}
         onPress={goToLogIn}
       >
-        <Text style={styles.Auth_ButtonText}>Log In</Text>
+        <Text style={styles.Auth__ButtonText}>Log In</Text>
       </TouchableHighlight>
     </View>
   );

@@ -1,7 +1,7 @@
 import { Avatar, Card, Button } from '@rneui/themed';
 import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import styles from '../styles.js';
+import styles from '../utils/styles.js';
 import { addBuddy } from '../api/addBuddy.js';
 import { useState, useContext } from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
@@ -43,7 +43,7 @@ const BuddyCard = ({
   return (
     <Card
       containerStyle={styles.BuddyCard}
-      titleStyle={styles.BuddyCard_Username}
+      titleStyle={styles.BuddyCard__username}
     >
       <Button
         onPress={isAttendeeList ? connectWithBuddy : startChat}
@@ -53,8 +53,11 @@ const BuddyCard = ({
         }
         containerStyle={
           buddyAdded
-            ? [styles.BuddyCard_Button, styles.BuddyCard_ButtonAdded]
-            : styles.BuddyCard_Button
+            ? [
+                styles.BuddyCard__Button,
+                styles['BuddyCard__Button--buddyAdded'],
+              ]
+            : styles.BuddyCard__Button
         }
       />
       <Button
@@ -62,38 +65,38 @@ const BuddyCard = ({
         title={'View Profile'}
         onPress={goToProfile}
         containerStyle={[
-          styles.BuddyCard_Button,
-          styles.BuddyCard_ProfileButton,
+          styles.BuddyCard__Button,
+          styles.BuddyCard__profileButton,
         ]}
       />
       <Avatar
         size="large"
         source={{ uri: 'https://source.unsplash.com/random  ' }}
-        containerStyle={styles.BuddyCard_Image}
+        containerStyle={styles.BuddyCard__Image}
       />
       <Card.Title>{username}</Card.Title>
       {name ? (
-        <View style={styles.BuddyCard_TextView}>
-          <Text style={styles.BuddyCard_CategoryText}>Name:</Text>
-          <Text style={styles.BuddyCard_Text}>{name}</Text>
+        <View style={styles.BuddyCard__TextView}>
+          <Text style={styles.BuddyCard__categoryText}>Name:</Text>
+          <Text style={styles.BuddyCard__Text}>{name}</Text>
         </View>
       ) : null}
       {age ? (
-        <View style={styles.BuddyCard_TextView}>
-          <Text style={styles.BuddyCard_CategoryText}>Age:</Text>
-          <Text style={styles.BuddyCard_Text}>{age}</Text>
+        <View style={styles.BuddyCard__TextView}>
+          <Text style={styles.BuddyCard__categoryText}>Age:</Text>
+          <Text style={styles.BuddyCard__Text}>{age}</Text>
         </View>
       ) : null}
       {gender ? (
-        <View style={styles.BuddyCard_TextView}>
-          <Text style={styles.BuddyCard_CategoryText}>Gender:</Text>
-          <Text style={styles.BuddyCard_Text}>{gender}</Text>
+        <View style={styles.BuddyCard__TextView}>
+          <Text style={styles.BuddyCard__categoryText}>Gender:</Text>
+          <Text style={styles.BuddyCard__Text}>{gender}</Text>
         </View>
       ) : null}
       {interests ? (
-        <View style={styles.BuddyCard_TextView}>
-          <Text style={styles.BuddyCard_CategoryText}>Interests:{'\n'}</Text>
-          <Text style={styles.BuddyCard_Interests}>{interests}</Text>
+        <View style={styles.BuddyCard__TextView}>
+          <Text style={styles.BuddyCard__categoryText}>Interests:{'\n'}</Text>
+          <Text style={styles.BuddyCard__interests}>{interests}</Text>
         </View>
       ) : null}
     </Card>

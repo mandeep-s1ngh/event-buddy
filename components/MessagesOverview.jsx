@@ -5,9 +5,10 @@ import {
   ScrollView,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 import { getConversations } from '../api/getConversations';
-import styles from '../styles';
+import styles from '../utils/styles';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
 const MessagesOverview = ({ setUsernameForProfile, navigation }) => {
@@ -84,39 +85,55 @@ const MessagesOverview = ({ setUsernameForProfile, navigation }) => {
       mostRecentIsRead,
       messages,
     } = conversation;
+    const timestampDate = new Date(+mostRecentTimestamp);
+    const currentDate = new Date();
+    const messageTimeDisplay =
+      timestampDate.getFullYear() === currentDate.getFullYear() &&
+      timestampDate.getMonth() === currentDate.getMonth() &&
+      timestampDate.getDate() === currentDate.getDate()
+        ? timestampDate.toTimeString().slice(0, 5)
+        : `${timestampDate.toDateString().slice(8, 10)} ${timestampDate
+            .toDateString()
+            .slice(4, 7)}`;
+    let unreadCount = 0;
+    messages.forEach((message) => {
+      if (!message.isRead && message.username !== currentUser.username)
+        unreadCount++;
+    });
     return (
-      <View
+      <TouchableOpacity
         key={index}
-        style={
-          mostRecentIsRead
-            ? styles.MessagesOverview_ConversationCard
-            : [
-                styles.MessagesOverview_ConversationCard,
-                styles.MessagesOverview_ConversationCardRead,
-              ]
-        }
+        onPress={() => goToChat(buddyUsername, messages)}
       >
-        <Text style={styles.MessagesOverview_ConversationCardUsername}>
-          {buddyUsername}
-        </Text>
-        <Text style={styles.MessagesOverview_ConversationCardTime}>
-          {new Date(+mostRecentTimestamp).toDateString()}
-        </Text>
-        <Text style={styles.MessagesOverview_ConversationCardMessage}>
-          {mostRecentMessageText}
-        </Text>
-        <TouchableHighlight
-          style={styles.MessagesOverview_ConversationCardButton}
-          onPress={() => goToChat(buddyUsername, messages)}
-        >
-          <Text>View Chat</Text>
-        </TouchableHighlight>
-      </View>
+        <View style={styles.MessagesOverview__conversationCard}>
+          <View>
+            <View style={styles.MessagesOverview__TextInfoBar}>
+              <Text style={styles.MessagesOverview__conversationCardUsername}>
+                {buddyUsername}
+              </Text>
+              <Text style={styles.MessagesOverview__conversationCardTime}>
+                {messageTimeDisplay}
+              </Text>
+            </View>
+            <Text style={styles.MessagesOverview__conversationCardMessage}>
+              {mostRecentMessageText}
+            </Text>
+          </View>
+          {!mostRecentIsRead ? (
+            <Text style={styles.MessagesOverview__unreadIndicator}>
+              {unreadCount}
+            </Text>
+          ) : null}
+        </View>
+      </TouchableOpacity>
     );
   });
 
   return (
-    <ScrollView style={styles.MessagesOverview}>{conversationCards}</ScrollView>
+    <ScrollView style={styles.MessagesOverview}>
+      <Text style={styles.MessagesOverview__header}>Your conversations:</Text>
+      {conversationCards}
+    </ScrollView>
   );
 };
 

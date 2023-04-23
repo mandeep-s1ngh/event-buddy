@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import styles from '../styles.js';
+import styles from '../utils/styles.js';
 import { useState, useEffect, useContext } from 'react';
 import { getUserProfile } from '../api/getUserProfile.js';
 import { patchUserProfile } from '../api/patchUserProfile.js';
@@ -33,10 +33,9 @@ const Profile = ({ usernameForProfile }) => {
   );
   const [isLoading, setIsLoading] = useState(false);
 
-  const clearTextInput = () => {
+  function clearTextInput() {
     setNewUserTag('');
-  };
-
+  }
   function addInterest() {
     const updatedInterests = [...currentUserInterests];
     updatedInterests.push(newUserTag);
@@ -44,7 +43,6 @@ const Profile = ({ usernameForProfile }) => {
     setNewUserTag('');
     patchUserProfile(usernameToDisplay, null, null, null, [newUserTag]);
   }
-
   function removeInterest(interest) {
     const updatedInterests = [...currentUserInterests];
     updatedInterests.splice(updatedInterests.indexOf(interest), 1);
@@ -89,12 +87,10 @@ const Profile = ({ usernameForProfile }) => {
             style={{ paddingTop: 5, paddingBottom: 5, paddingRight: 5 }}
           >
             <TouchableHighlight
-              style={styles.Profile_Each_Interest_button}
+              style={styles.Profile__interestButton}
               onPress={() => removeInterest(interest)}
             >
-              <Text style={styles.Profile_Each_Interest_button_Text}>
-                {interest}
-              </Text>
+              <Text style={styles.Profile__interestButtonText}>{interest}</Text>
             </TouchableHighlight>
           </View>
         );
@@ -103,10 +99,10 @@ const Profile = ({ usernameForProfile }) => {
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
-      contentContainerStyle={styles.LandingPage_View}
+      contentContainerStyle={styles.LandingPage__View}
       scrollEnabled={true}
     >
-      <View style={styles.Profile_View}>
+      <View style={styles.Profile__View}>
         {isCurrentUserProfile ? (
           <Text style={{ fontWeight: 'bold', fontSize: 15, paddingBottom: 20 }}>
             Filling out your profile helps you match with more buddies. Get
@@ -115,19 +111,19 @@ const Profile = ({ usernameForProfile }) => {
         ) : null}
         <Image
           source={{ uri: 'https://source.unsplash.com/random' }}
-          style={styles.Profile_Image}
+          style={styles.Profile__Image}
         />
-        <Text style={styles.Profile_username}>{usernameToDisplay}</Text>
+        <Text style={styles.Profile__username}>{usernameToDisplay}</Text>
 
         {currentUserAge ? <Text>Age: {currentUserAge} </Text> : null}
         {currentUserName ? <Text>Name: {currentUserName} </Text> : null}
         {currentUserGender ? <Text>Gender: {currentUserGender}</Text> : null}
-        <Text style={styles.Profile_CurrentUserInterests}>
+        <Text style={styles.Profile__currentUserInterests}>
           Interests: {'\n'} {interestsButtons || 'none'}
         </Text>
         {isCurrentUserProfile ? (
           <>
-            <Text style={styles.Profile_AddToUserInterests}>
+            <Text style={styles.Profile__addToUserInterests}>
               Add to your interests (press on interest to remove):
             </Text>
             <View>
@@ -137,12 +133,12 @@ const Profile = ({ usernameForProfile }) => {
                 onChangeText={(newUserTag) => {
                   setNewUserTag(newUserTag);
                 }}
-                style={styles.Profile_TextInput}
+                style={styles.Profile__TextInput}
                 placeholder="Type here ... e.g. food-lover, hip-hop, Spanish  "
               />
               {newUserTag.length > 0 && (
                 <TouchableOpacity
-                  style={styles.Profile_CloseButton}
+                  style={styles.Profile__closeInputButton}
                   onPress={clearTextInput}
                 >
                   <Icon name="close" size={20} />
@@ -152,10 +148,10 @@ const Profile = ({ usernameForProfile }) => {
 
             <View style={{ paddingTop: 10 }}>
               <TouchableHighlight
-                style={styles.Profile_Buttons}
+                style={styles.Profile__Button}
                 onPress={addInterest}
               >
-                <Text style={styles.Profile_Buttons_Text}>Add interest</Text>
+                <Text style={styles.Profile__ButtonText}>Add interest</Text>
               </TouchableHighlight>
             </View>
           </>
