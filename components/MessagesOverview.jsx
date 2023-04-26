@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 import {
   View,
   ActivityIndicator,
@@ -10,34 +10,38 @@ import {
 import { getConversations } from '../api/getConversations';
 import styles from '../utils/styles';
 import { CurrentUserContext } from '../context/CurrentUserContext';
+import { configureAbly, useChannel } from '@ably-labs/react-hooks';
 
-const MessagesOverview = ({ setUsernameForProfile, navigation }) => {
-  const [chatMessages, setChatMessages] = useState([]);
-  const [messagesForChat, setMessagesForChat] = useState([]);
+const MessagesOverview = ({
+  setUsernameForProfile,
+  navigation,
+  chatMessages,
+  setChatMessages,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
+  configureAbly({
+    key: 'kLUCaw.ca3a5Q:pBcLgZPFJBJ_7w2-IaOMmc_tBXF7GYsm3mKAzpgvyKM',
+  });
+  const [channel] = useChannel('liveChatMessages', ({ data }) => {
+    setChatMessages((prev) => [...prev, data]);
+  });
 
   function goToChat(buddyUsername, messages) {
-    // set state necessary, or possible to just pass down vars?
-    navigation.navigate('Chat', { buddyUsername, messages });
+    navigation.navigate('Chat', {
+      buddyUsername,
+      messages,
+    });
+  }
+  function goToBuddyList() {
+    navigation.navigate('Buddies');
+  }
+  function goToEventsList() {
+    navigation.navigate('Events');
   }
 
-  //   useEffect(() => {
-  //     const forceLogIn = navigation.addListener('focus', () => {
-  //       console.log(currentUser, '<<< CURR USER FROM LISTEN');
-  //       if (!currentUser) {
-  //         console.log('NO USER IN UE 1 NAV LISTENER');
-  //         navigation.navigate('LogIn');
-  //       }
-  //     });
-  //     console.log(currentUser, '<<< CURR USER FROM UE1');
-  //     return forceLogIn;
-  //   }, [navigation]);
-
   useEffect(() => {
-    if (!currentUser) {
-      return navigation.navigate('LogIn');
-    }
+    if (!currentUser) return navigation.navigate('LogIn');
     setIsLoading(true);
     getConversations(currentUser.username).then((result) => {
       setChatMessages(result);
@@ -45,12 +49,20 @@ const MessagesOverview = ({ setUsernameForProfile, navigation }) => {
     });
   }, [currentUser]);
 
+  // automatically scroll to bottom to see latest messages first
+  const scrollViewRef = useRef();
+  useEffect(() => {
+    if (scrollViewRef.current)
+      scrollViewRef.current.scrollToEnd({ animated: false });
+  }, [chatMessages]);
+  //////
+
   if (isLoading)
     return <ActivityIndicator size="large" style={styles.ActivityIndicator} />;
 
   let conversations = [];
   const conversationIndexLookup = {};
-  if (chatMessages.length) {
+  if (chatMessages.length && currentUser) {
     chatMessages
       .sort((a, b) => b.timestamp - a.timestamp)
       .forEach((chatMessage) => {
@@ -77,6 +89,35 @@ const MessagesOverview = ({ setUsernameForProfile, navigation }) => {
       });
   }
 
+  if (!conversations.length)
+    return (
+      <View style={styles.MessagesOverview__noConversations}>
+        <Text style={styles.MessagesOverview__noConversationsText}>
+          You haven't messaged anyone yet.{'\n\n'}Choose one of your buddies to
+          message, or view events to start connecting with new buddies.
+        </Text>
+        <View style={styles.MessagesOverview__noConversationsChoices}>
+          <TouchableOpacity
+            style={[
+              styles.LandingPage__Button,
+              styles.MessagesOverview__Button,
+            ]}
+            onPress={goToBuddyList}
+          >
+            <Text style={styles.LandingPage__ButtonText}>My buddies</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.LandingPage__Button,
+              styles.MessagesOverview__Button,
+            ]}
+            onPress={goToEventsList}
+          >
+            <Text style={styles.LandingPage__ButtonText}>Events</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   const conversationCards = conversations.map((conversation, index) => {
     const {
       buddyUsername,
@@ -105,7 +146,16 @@ const MessagesOverview = ({ setUsernameForProfile, navigation }) => {
         key={index}
         onPress={() => goToChat(buddyUsername, messages)}
       >
-        <View style={styles.MessagesOverview__conversationCard}>
+        <View
+          style={
+            unreadCount
+              ? styles.MessagesOverview__conversationCard
+              : [
+                  styles.MessagesOverview__conversationCard,
+                  styles['MessagesOverview__conversationCard--read'],
+                ]
+          }
+        >
           <View>
             <View style={styles.MessagesOverview__TextInfoBar}>
               <Text style={styles.MessagesOverview__conversationCardUsername}>
@@ -119,7 +169,7 @@ const MessagesOverview = ({ setUsernameForProfile, navigation }) => {
               {mostRecentMessageText}
             </Text>
           </View>
-          {!mostRecentIsRead ? (
+          {unreadCount ? (
             <Text style={styles.MessagesOverview__unreadIndicator}>
               {unreadCount}
             </Text>
@@ -130,9 +180,9 @@ const MessagesOverview = ({ setUsernameForProfile, navigation }) => {
   });
 
   return (
-    <ScrollView style={styles.MessagesOverview}>
+    <ScrollView ref={scrollViewRef} style={styles.MessagesOverview}>
       <Text style={styles.MessagesOverview__header}>Your conversations:</Text>
-      {conversationCards}
+      <View onStartShouldSetResponder={() => true}>{conversationCards}</View>
     </ScrollView>
   );
 };

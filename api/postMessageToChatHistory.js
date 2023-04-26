@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const postMessageToChatHistory = (
+  uuid,
   username,
   recipient,
   timestamp,
@@ -11,6 +12,7 @@ export const postMessageToChatHistory = (
 
   return axios
     .post(postMessageToChatHistoryURL, {
+      uuid,
       username,
       recipient,
       timestamp,

@@ -4,6 +4,7 @@ const appBackground = '#f0eae6';
 const navBarBackground = '#8a766f';
 const navBarText = '#fff';
 const cardBackground = '#f7e0c9';
+const cardBackgroundGrey = '#e0ddda';
 const ButtonBackground = '#ec8e2f';
 const ButtonBackgroundDark = '#8a766f';
 const TextInputBackground = '#f7e0c9';
@@ -449,7 +450,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 5,
   },
-  'MessagesOverview__conversationCard--read': {},
+  'MessagesOverview__conversationCard--read': {
+    backgroundColor: cardBackgroundGrey,
+  },
   MessagesOverview__conversationCardUsername: {
     fontWeight: 'bold',
     fontSize: 16,
@@ -488,6 +491,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  MessagesOverview__noConversations: {
+    margin: 20,
+  },
+  MessagesOverview__noConversationsChoices: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 20,
+    marginTop: 40,
+  },
+  MessagesOverview__noConversationsText: {
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  MessagesOverview__Button: {
+    width: 150,
+  },
 
   ///////////// Chat //////////////
   Chat__newMessageView: {
@@ -496,23 +517,59 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'relative',
   },
+  Chat__stickyHeader: {
+    backgroundColor: cardBackgroundGrey,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  Chat__header: {
+    marginRight: '30%',
+  },
+  Chat__backIcon: {
+    marginRight: '20%',
+  },
+  Chat__otherUserMessageCard: {
+    backgroundColor: cardBackgroundGrey,
+    width: '80%',
+  },
+  Chat__currentUserMessageCard: {
+    width: '80%',
+    alignSelf: 'flex-end',
+  },
   Chat__TextInput: {
     padding: 10,
     paddingRight: '25%',
   },
   Chat__Button: {
     backgroundColor: ButtonBackground,
+    height: 35,
+    width: 35,
     borderRadius: 10,
     paddingHorizontal: 8,
-    paddingBottom: 3,
-    marginRight: '3%',
+    marginRight: '1.5%',
     position: 'absolute',
     right: 0,
-    top: '26%',
+    top: '12%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  Chat__ButtonText: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+  // Chat__ButtonText: {
+  //   textAlign: 'center',
+  //   fontWeight: 'bold',
+  //   fontSize: 16,
+  //   paddingTop: '10%',
+  // },
+  Chat__unreadIndicator: {
+    backgroundColor: ButtonBackground,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    position: 'absolute',
+    bottom: '50%',
+    right: '7.5%',
   },
 });
 

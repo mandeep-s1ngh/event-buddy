@@ -45,7 +45,7 @@ const BuddyList = ({
       setIsLoading(true);
       getUserProfile(currentUser.username)
         .then((result) => {
-          if (!result) return Promise.resolve(false);
+          if (!result || !result.Item.buddies.S) return Promise.resolve(false);
           const usernames = result.Item.buddies
             ? result.Item.buddies.S.split(',')
             : [];
@@ -54,9 +54,12 @@ const BuddyList = ({
           );
         })
         .then((userProfiles) => {
-          setBuddies(
-            newlyAddedBuddy ? [newlyAddedBuddy, ...userProfiles] : userProfiles
-          );
+          if (userProfiles)
+            setBuddies(
+              newlyAddedBuddy
+                ? [newlyAddedBuddy, ...userProfiles]
+                : userProfiles
+            );
           setIsLoading(false);
         });
     }
@@ -99,6 +102,8 @@ const BuddyList = ({
           ? `No one has joined ${eventNameForBuddies} yet.`
           : eventNameForBuddies
           ? `${buddies.length} people attending ${eventNameForBuddies}:`
+          : !buddies.length
+          ? 'No buddies added yet.\nBrowse events to find new buddies to connect with'
           : 'Your connected buddies:'}
       </Text>
       {buddyCards}

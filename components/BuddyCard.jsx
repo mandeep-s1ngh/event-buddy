@@ -16,10 +16,10 @@ const BuddyCard = ({
   isAttendeeList,
   buddies,
   setNewlyAddedBuddy,
-  navigation,
 }) => {
   const [buddyAdded, setBuddyAdded] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
+  const navigation = useNavigation();
 
   function goToProfile() {
     setUsernameForProfile(username);
@@ -38,7 +38,12 @@ const BuddyCard = ({
     addBuddy(currentUser.username, username);
   }
 
-  function startChat() {}
+  function goToChat(buddyUsername) {
+    navigation.navigate('Messages', {
+      screen: 'Chat',
+      params: { buddyUsername },
+    });
+  }
 
   return (
     <Card
@@ -46,7 +51,9 @@ const BuddyCard = ({
       titleStyle={styles.BuddyCard__username}
     >
       <Button
-        onPress={isAttendeeList ? connectWithBuddy : startChat}
+        onPress={
+          !isAttendeeList ? () => goToChat(username, []) : connectWithBuddy
+        }
         color="#ec8e2f"
         title={
           !isAttendeeList ? 'Message' : buddyAdded ? 'Connected' : 'Connect'

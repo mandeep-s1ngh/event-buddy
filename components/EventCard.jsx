@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Card, Button } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { CurrentUserContext } from '../context/CurrentUserContext';
+import { setUserAttending } from '../api/setUserAttending';
 
 function EventCard({
   event_title,
@@ -39,6 +40,7 @@ function EventCard({
         return number - 1;
       }
     });
+    setUserAttending(currentUser.username, event_title);
   }
 
   return (
