@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const setUserAttending = (username, eventName) => {
+  eventName = eventName.replaceAll(' ', '_');
   const createEventTableIfNotExistsURL =
     'https://qfwyzgbbjjus6dccn5g3hc7kwu0kcxom.lambda-url.us-east-1.on.aws/';
   const postUserToEventURL =

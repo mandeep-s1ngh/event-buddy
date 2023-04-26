@@ -1,5 +1,8 @@
 import Profile from '../Profile';
 import LocationRequest from '../LocationRequest';
+import Registration from '../Registration';
+import LogIn from '../LogIn';
+import Confirm from '../Confirm';
 
 function getCommonScreens(Stack, setUserLocation, usernameForProfile) {
   return [
@@ -12,6 +15,15 @@ function getCommonScreens(Stack, setUserLocation, usernameForProfile) {
       {(props) => (
         <LocationRequest {...props} setUserLocation={setUserLocation} />
       )}
+    </Stack.Screen>,
+    <Stack.Screen key="Registration" name="Registration">
+      {(props) => <Registration {...props} />}
+    </Stack.Screen>,
+    <Stack.Screen key="LogIn" name="LogIn">
+      {(props) => <LogIn {...props} />}
+    </Stack.Screen>,
+    <Stack.Screen key="Confirm" name="Confirm">
+      {(props) => <Confirm {...props} />}
     </Stack.Screen>,
   ];
 }

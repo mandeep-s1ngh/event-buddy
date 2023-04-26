@@ -1,29 +1,38 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MessageBoard from '../MessageBoard';
+import Chat from '../Chat';
+import MessagesOverview from '../MessagesOverview';
 import getCommonScreens from './getCommonScreens';
+import { useState } from 'react';
 
-function MessagesStack({
-  eventNameForMessages,
-  usernameForProfile,
-  setUsernameForProfile,
-  currentUser,
-}) {
+function MessagesStack({ setUsernameForProfile, usernameForProfile }) {
   const Stack = createNativeStackNavigator();
   const commonScreens = getCommonScreens(Stack, null, usernameForProfile);
+  const [chatMessages, setChatMessages] = useState([]);
+
   return (
     <Stack.Navigator
-      initialRouteName="MessageBoard"
+      initialRouteName="MessagesOverview"
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="MessageBoard">
+      <Stack.Screen name="MessagesOverview">
         {(props) => (
-          <MessageBoard
+          <MessagesOverview
             {...props}
-            eventNameForMessages={eventNameForMessages}
             setUsernameForProfile={setUsernameForProfile}
-            currentUser={currentUser}
+            chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
+          />
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="Chat">
+        {(props) => (
+          <Chat
+            {...props}
+            setUsernameForProfile={setUsernameForProfile}
+            chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
           />
         )}
       </Stack.Screen>

@@ -1,27 +1,35 @@
-import { useEffect, useState, useContext } from "react";
-import { Text, Button, Icon } from "@rneui/themed";
+import { useEffect, useState, useContext } from 'react';
+import { Text, Button, Icon } from '@rneui/themed';
 import {
   ActivityIndicator,
   ScrollView,
   TextInput,
   View,
   TouchableOpacity,
-} from "react-native";
-import { getMessageBoardMessages } from "../api/getMessageBoardMessages.js";
-import { postToMessageBoard } from "../api/postToMessageBoard";
-import styles from "../styles.js";
-import MessageCard from "./MessageCard.jsx";
-import { CurrentUserContext } from "../context/CurrentUserContext.js";
+} from 'react-native';
+import { getMessageBoardMessages } from '../api/getMessageBoardMessages.js';
+import { postToMessageBoard } from '../api/postToMessageBoard';
+import styles from '../utils/styles.js';
+import MessageCard from './MessageCard.jsx';
+import { CurrentUserContext } from '../context/CurrentUserContext.js';
+import { MenuShownContext } from '../context/MenuShownContext.js';
+import { useNavigation } from '@react-navigation/native';
 
-const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
+const MessageBoard = ({
+  eventNameForMessages,
+  setUsernameForProfile,
+  setNewlyAddedBuddy,
+}) => {
   const [messages, setMessages] = useState([]);
-  const [newMessageInput, setNewMessageInput] = useState("");
+  const [newMessageInput, setNewMessageInput] = useState('');
   const [newMessage, setNewMessage] = useState({});
   const [isInvalidSubmit, setIsInvalidSubmit] = useState(false);
   const [threadToView, setThreadToView] = useState(false);
   const [inputShown, setInputShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
+  const { menuShown, setMenuShown } = useContext(MenuShownContext);
+  const navigation = useNavigation();
 
   function exitThread() {
     setThreadToView(false);
@@ -30,13 +38,14 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
   }
 
   function submitNewMessage() {
+    if (!currentUser) return navigation.navigate('LogIn');
     if (!newMessageInput) {
       setIsInvalidSubmit(true);
       return;
     }
     const messageToSubmit = {
-      eventName: eventNameForMessages.replaceAll(" ", "_"),
-      username: currentUser,
+      eventName: eventNameForMessages.replaceAll(' ', '_'),
+      username: currentUser.username,
       timestamp: Date.now().toString(),
       message: newMessageInput,
     };
@@ -55,23 +64,24 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
     ];
     setMessages(updatedMessages);
     setInputShown(false);
-    setNewMessageInput("");
+    setNewMessageInput('');
     postToMessageBoard(eventName, username, timestamp, message, replyTo);
   }
 
   function toggleInput() {
+    if (!currentUser) return navigation.navigate('LogIn');
     setInputShown(!inputShown);
   }
 
   const clearTextInput = () => {
-    setNewMessageInput("");
+    setNewMessageInput('');
   };
 
   useEffect(() => {
     setIsLoading(true);
     getMessageBoardMessages(eventNameForMessages)
       .then((result) => {
-        if (result !== "none")
+        if (result !== 'none')
           setMessages(
             result.Items.sort((a, b) => b.timestamp.S - a.timestamp.S)
           );
@@ -111,6 +121,7 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
           setUsernameForProfile={setUsernameForProfile}
           setIsInvalidSubmit={setIsInvalidSubmit}
           setInputShown={setInputShown}
+          setNewlyAddedBuddy={setNewlyAddedBuddy}
         />
       );
       messageCardsIndex++;
@@ -124,13 +135,14 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
         .map((reply) => {
           return (
             <MessageCard
-              style={styles.allMessagesThread}
+              style={styles.MessageCard}
               key={reply.timestamp.S}
               username={reply.username.S}
               timestamp={reply.timestamp.S}
               message={reply.message.S}
               setThreadToView={setThreadToView}
               setUsernameForProfile={setUsernameForProfile}
+              setNewlyAddedBuddy={setNewlyAddedBuddy}
               isReply={true}
             />
           );
@@ -145,24 +157,25 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
     );
 
   return (
-    <View style={styles.fixedHeaderContainer}>
+    <View>
       {inputShown ? (
         <View>
           {isInvalidSubmit ? (
             <Text>Please enter a message before submitting</Text>
           ) : null}
           <View
-            style={{ paddingTop: 10, paddingBottom: 15, alignItems: "center" }}
+            style={{ paddingTop: 10, paddingBottom: 15, alignItems: 'center' }}
           >
             <TextInput
-              style={styles.MessageBoard_TextInput}
+              style={styles.MessageBoard__TextInput}
               placeholder="Write your message here ..."
               value={newMessageInput}
+              onFocus={() => setMenuShown(false)}
               onChangeText={(text) => setNewMessageInput(text)}
             />
             {newMessageInput.length > 0 && (
               <TouchableOpacity
-                style={styles.MessageBoard_CloseButton}
+                style={styles.MessageBoard__closeInputButton}
                 onPress={clearTextInput}
               >
                 <Icon name="close" size={20} />
@@ -171,9 +184,9 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
           </View>
 
           <View
-            style={{ marginTop: 5, marginBottom: 15, alignItems: "center" }}
+            style={{ marginTop: 5, marginBottom: 15, alignItems: 'center' }}
           >
-            <View style={styles.MessageBoard_Buttons}>
+            <View style={styles.MessageBoard__Button}>
               <Button onPress={submitNewMessage} color="#ec8e2f">
                 Submit
               </Button>
@@ -183,16 +196,16 @@ const MessageBoard = ({ eventNameForMessages, setUsernameForProfile }) => {
       ) : null}
       <ScrollView>
         <View
-          style={{ paddingTop: 5, paddingBottom: 15, alignItems: "center" }}
+          style={{ paddingTop: 5, paddingBottom: 15, alignItems: 'center' }}
         >
           <View
             style={[
-              styles.MessageBoard_Buttons,
-              { paddingTop: 1, alignItems: "center" },
+              styles.MessageBoard__Button,
+              { paddingTop: 1, alignItems: 'center' },
             ]}
           >
             <Button color="#ec8e2f" onPress={toggleInput}>
-              {inputShown ? "Hide" : threadToView ? "New reply" : "New message"}
+              {inputShown ? 'Hide' : threadToView ? 'New reply' : 'New message'}
             </Button>
           </View>
         </View>
