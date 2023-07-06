@@ -40,5 +40,8 @@
     "metro": "^0.76.0",
     "metro-core": "^0.76.0"
   },
+  "overrides": {
+    "semver": "^7.5.3"
+  },
   "private": true
 }
